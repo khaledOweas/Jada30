@@ -15,7 +15,7 @@ namespace Identity.Infrastructure.Data
             var optionsBuilder = new DbContextOptionsBuilder<IdentityContext>();
 
             // Use the connection string configured for your Azure SQL Database
-            optionsBuilder.UseSqlServer("Data Source=;Initial Catalog=; User ID=;Password=;Integrated Security=False;Trust Server Certificate=True;Encrypt=False");
+            optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=Jada30_Identity; User ID=sa;Password=P@ssw0rd;Integrated Security=False;Trust Server Certificate=True;Encrypt=False");
 
             return new IdentityContext(optionsBuilder.Options, null);
         }
