@@ -1,0 +1,33 @@
+{
+	"identityProviderSettings": {
+		"clients": [
+			{
+				"clientId": "Jada-30.api.development",
+				"clientSecret": "dGVhbS1odWIuYXBpLmRldmVsb3BtZW50QDEyMzQ1Njc4OQ==",
+				"allowedScopes": [ "read", "write", "openid" ],
+				"allowedGrantTypes": [ "client_credentials", "password" ],
+				"accessTokenLifetime": 3600, //one hour =>  60 x 60
+				"refreshTokenLifetime": 86400, //one day => 24 x 60 x 60
+				"allowedCorsOrigins": [ "https://jada30.net" ],
+				"requireClientSecret": true
+			},
+			{
+				"clientId": "Jada-30.angular.development",
+				"allowedScopes": [ "read", "write", "openid" ],
+				"allowedGrantTypes": [ "password", "client_credentials" ],
+				"accessTokenLifetime": 3600, //one hour   =>  60 x 60
+				"refreshTokenLifetime": 86400, //one day => 24 x 60 x 60
+				"allowedCorsOrigins": [ "https://jada30.net" ],
+				"requireClientSecret": false
+			}
+		],
+		"apiResources": [
+			{
+				"name": "Jada30APIGetWay",
+				"apiSecret": "dGVhbS1odWIuYXBpLnN0YWdpbmdAMTIzNA==",
+				"scopes": [ "IdentityServerApi", "read", "write" ],
+				"claims": [ "name", "email", "sub", "role", "address", "confirmation", "email_verified", "id", "profile", "reference_token_id", "data" ]
+			}
+		]
+	}
+}
