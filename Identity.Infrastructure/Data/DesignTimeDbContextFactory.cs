@@ -1,21 +1,26 @@
 ﻿using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
 
 namespace Identity.Infrastructure.Data
 {
     public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<IdentityContext>
     {
+        private readonly string _dbConnStr;
+
+        public DesignTimeDbContextFactory()
+        {
+            _dbConnStr = "Data Source=.;Initial Catalog=Jada30_Identity; User ID=sa;Password=P@ssw0rd;Integrated Security=False;Trust Server Certificate=True;Encrypt=False";
+        }
+        public DesignTimeDbContextFactory(IConfiguration configuration)
+        {
+            _dbConnStr = configuration.GetConnectionString("Default") ?? "";
+        }
         public IdentityContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<IdentityContext>();
 
-            // Use the connection string configured for your Azure SQL Database
-            optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=Jada30_Identity; User ID=sa;Password=P@ssw0rd;Integrated Security=False;Trust Server Certificate=True;Encrypt=False");
+            optionsBuilder.UseSqlServer(_dbConnStr);
 
             return new IdentityContext(optionsBuilder.Options, null);
         }
