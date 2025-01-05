@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Identity.Domain.Entities.System;
+using Identity.Infrastructure.Models;
+
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Identity.Infrastructure.Data
 {
-    public class IdentityContext : IdentityDbContext
+    public class IdentityContext : IdentityDbContext<ApplicationUser, ApplicationRole, long>
     {
         private readonly IHttpContextAccessor _context;
 
@@ -12,9 +15,24 @@ namespace Identity.Infrastructure.Data
         {
             _context = context;
         }
+
+        public DbSet<SysConfig> SysConfigs { get; set; }
         public IdentityContext()
         {
+        }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+
+            modelBuilder.Entity<SysConfig>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Key).IsRequired();
+                entity.Property(e => e.Value).IsRequired();
+            });
         }
     }
+
 }

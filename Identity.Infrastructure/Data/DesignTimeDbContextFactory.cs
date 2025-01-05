@@ -8,6 +8,10 @@ namespace Identity.Infrastructure.Data
     {
         private readonly string _dbConnStr;
 
+        public DesignTimeDbContextFactory()
+        {
+            _dbConnStr = "Data Source=.;Initial Catalog=Jada30_Identity; User ID=sa;Password=P@ssw0rd;Integrated Security=False;Trust Server Certificate=True;Encrypt=False";
+        }
         public DesignTimeDbContextFactory(IConfiguration configuration)
         {
             _dbConnStr = configuration.GetConnectionString("Default") ?? "";

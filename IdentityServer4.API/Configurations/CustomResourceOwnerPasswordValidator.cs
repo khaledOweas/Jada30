@@ -56,7 +56,7 @@ public class CustomResourceOwnerPasswordValidator : IResourceOwnerPasswordValida
                 subject: authenticateResult.Value.UserId.ToString(),
                 claims: new List<Claim>
                 {
-                    new Claim("id", authenticateResult.Value.UserId),
+                    new Claim("id", authenticateResult.Value.UserId.ToString()),
                     new Claim("name", authenticateResult.Value.UserName),
                     new Claim("data", JsonConvert.SerializeObject(authenticateResult.Value)),
                 },
@@ -111,7 +111,7 @@ public class CustomResourceOwnerPasswordValidator : IResourceOwnerPasswordValida
 
 public class AuthenticateResultDto
 {
-    public string UserId { get; set; }
+    public long UserId { get; set; }
     public string PasswordHash { get; set; }
     public string UserName { get; set; }
     public bool isActive { get; set; }
