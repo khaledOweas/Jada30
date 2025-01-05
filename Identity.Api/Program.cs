@@ -1,6 +1,8 @@
 using Identity.Infrastructure.Data;
 using Identity.Infrastructure.Models;
 using Microsoft.AspNetCore.Identity;
+using Jada30.Logging;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +16,12 @@ builder.Services.AddIdentity<ApplicationUser, ApplicationRole>()
     .AddEntityFrameworkStores<IdentityContext>()
     .AddDefaultTokenProviders();
 
+
+#region Logginig service
+builder.Services.AddExceptionLogging();
+LoggingConfigurationExtensions.ConfigureLogging();
+builder.Host.UseSerilog();
+#endregion
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

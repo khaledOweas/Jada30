@@ -13,6 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Identity.Application\Identity.Application.csproj" />
     <ProjectReference Include="..\Identity.Infrastructure\Identity.Infrastructure.csproj" />
+    <ProjectReference Include="..\Jada30.Logging]\Jada30.Logging.csproj" />
   </ItemGroup>
 
 </Project>
