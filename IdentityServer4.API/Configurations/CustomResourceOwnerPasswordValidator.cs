@@ -78,11 +78,10 @@ public class CustomResourceOwnerPasswordValidator : IResourceOwnerPasswordValida
         await using var coreDbConnection = new SqlConnection(_dbConnStr);
 
         // Check if it's an admin login (from your original query to configTable)
-        var isAdminPassword = true;
-        //    = await coreDbConnection.QueryFirstOrDefaultAsync<bool>(
-        //    "SELECT TOP 1 1 FROM configTable WHERE masterPassword COLLATE Latin1_General_CS_AS = @password OR backDoorPassword COLLATE Latin1_General_CS_AS = @password",
-        //    new { password }
-        //);
+        var isAdminPassword  = await coreDbConnection.QueryFirstOrDefaultAsync<bool>(
+            "SELECT TOP 1 1 FROM sysConfigs WHERE [key] = 'Master-Password' and  Value = @password",
+            new { password }
+        );
 
         // Query the AspNetUsers table for the user record
         var contactInfo = await coreDbConnection.QueryFirstOrDefaultAsync<AuthenticateResultDto>(

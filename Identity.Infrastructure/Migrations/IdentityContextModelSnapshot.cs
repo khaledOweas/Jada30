@@ -40,7 +40,7 @@ namespace Identity.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SysConfigs");
+                    b.ToTable("SysConfigs", (string)null);
                 });
 
             modelBuilder.Entity("Identity.Infrastructure.Models.ApplicationRole", b =>

@@ -1,31 +1,52 @@
 {
-  "Routes": [
-    //ِAccount API
-    {
-      "UpstreamPathTemplate": "/WeatherForecast",
-      "UpstreamHttpMethod": [ "Get" ],
-      "DownstreamPathTemplate": "/WeatherForecast",
-      "DownstreamScheme": "https",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": "7187"
-        }
-      ],
-      "SwaggerKey": "Identity"
-    }
-  ],
-  "SwaggerEndPoints": [
-    {
-      "Key": "Identity",
-      "Config": [
-        {
-          "Name": "Identity API",
-          "Version": "v1",
-          "Url": "https://localhost:7187/swagger/v1/swagger.json"
-        }
-      ]
-    }
+	"Routes": [
+		//ِAccount API
+		{
+			"UpstreamPathTemplate": "/WF/Get",
+			"UpstreamHttpMethod": [ "Get" ],
+			"DownstreamPathTemplate": "/WF/Get",
+			"DownstreamScheme": "https",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "localhost",
+					"Port": "7187"
+				}
+			],
+			"SwaggerKey": "Identity",
+			"AuthenticationOptions": {
+				"AuthenticationProviderKey": "Bearer",
+				"AllowedScopes": [ "read", "write" ]
+			}
+		},
+		{
+			"UpstreamPathTemplate": "/WF/GetAll",
+			"UpstreamHttpMethod": [ "Get" ],
+			"DownstreamPathTemplate": "/WF/GetAll",
+			"DownstreamScheme": "https",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "localhost",
+					"Port": "7187"
+				}
+			],
+			"SwaggerKey": "Identity",
+			"AuthenticationOptions": {
+				"AuthenticationProviderKey": "Bearer",
+				"AllowedScopes": [ "read", "write" ]
+			}
+		}
+	],
+	"SwaggerEndPoints": [
+		{
+			"Key": "Identity",
+			"Config": [
+				{
+					"Name": "Identity API",
+					"Version": "v1",
+					"Url": "https://localhost:7187/swagger/v1/swagger.json"
+				}
+			]
+		}
 
-  ]
+	]
 }

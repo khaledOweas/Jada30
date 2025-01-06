@@ -1,10 +1,11 @@
-using System.IO;
+
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
-using System.Text;
 using Newtonsoft.Json.Linq;
+using Microsoft.AspNetCore.Authentication.Cookies;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Load and merge configuration files
@@ -44,35 +45,76 @@ builder.Configuration.AddJsonFile(tempConfigPath, optional: false, reloadOnChang
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
+
 builder.Services.AddSwaggerForOcelot(builder.Configuration);
+
 
 builder.Logging.AddConsole();
 builder.Logging.SetMinimumLevel(LogLevel.Debug);
 
-var key = Encoding.ASCII.GetBytes("SAmTEch@123@21212test123456788987654321");
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer("Bearer", options =>
-    {
-        options.TokenValidationParameters = new TokenValidationParameters
+builder.Services.AddAuthorization();
+#region Authentication Region
+
+ConfigureAuthentication(builder);
+static void ConfigureAuthentication(WebApplicationBuilder builder)
+{
+    string idsUrl = builder.Configuration.GetValue<string>("IdentityProviderUrl") ?? "";
+    string appName = builder.Configuration.GetValue<string>("IdentityAppName") ?? "";
+
+    builder.Services
+        .AddAuthentication(options =>
         {
-            ValidateIssuer = true,
-            ValidateAudience = true,
-            ValidateLifetime = true,
-            ValidateIssuerSigningKey = true,
-            ValidIssuer = "your-issuer",
-            ValidAudience = "your-audience",
-            IssuerSigningKey = new SymmetricSecurityKey(key)
-        };
-    });
+            options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            options.DefaultChallengeScheme = "Bearer";
+        })
+        .AddJwtBearer(
+            "Bearer",
+            options =>
+            {
+                options.Authority = idsUrl; // IdentityServer4 URL
+                options.Audience = appName; // API resource name (api_gateway)
+                options.RequireHttpsMetadata = true; // Disable HTTPS requirement for development
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateAudience = true,
+                    ValidAudience = appName,
+                    ValidateIssuer = true,
+                    ValidIssuer = idsUrl,
+                    ValidateLifetime = true,
+                    ClockSkew = TimeSpan.Zero // Optional: Reduce clock skew for stricter validation,
+
+                };
+                options.Events = new JwtBearerEvents
+                {
+                    OnAuthenticationFailed = context =>
+                    {
+                        Console.WriteLine("Authentication failed: " + context.Exception.Message);
+                        return Task.CompletedTask;
+                    },
+                    OnTokenValidated = context =>
+                    {
+                        Console.WriteLine("Token validated: " + context.SecurityToken);
+                        return Task.CompletedTask;
+                    }
+                };
+            }
+        );
+}
+#endregion
 
 builder.Services.AddOcelot(builder.Configuration);
 
 var app = builder.Build();
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.UseSwaggerForOcelotUI(opt =>
 {
     opt.PathToSwaggerGenerator = "/swagger/docs";
-});
+}, option =>
+{
+    option.DocumentTitle = "Ocelot Gateway";
+}).UseOcelot().Wait();
 
 await app.UseOcelot();
 app.Run();

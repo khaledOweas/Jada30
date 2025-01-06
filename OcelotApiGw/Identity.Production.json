@@ -1,35 +1,35 @@
 {
-  "Routes": [
-    //ِAccount API
-    {
-      "UpstreamPathTemplate": "/api/Account/CreateUser",
-      "UpstreamHttpMethod": [ "POST" ],
-      "DownstreamPathTemplate": "/api/Account/CreateUser",
-      "DownstreamScheme": "https",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": "7158"
-        }
-      ],
-      "SwaggerKey": "Identity",
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      }
-    }
-  ],
-  "SwaggerEndPoints": [
-    {
-      "Key": "Identity",
-      "Config": [
-        {
-          "Name": "Identity API",
-          "Version": "v1",
-          "Url": "https://localhost:7158/swagger/v1/swagger.json"
-        }
-      ]
-    }
+	"Routes": [
+		//ِAccount API
+		{
+			"UpstreamPathTemplate": "/api/Account/CreateUser",
+			"UpstreamHttpMethod": [ "POST" ],
+			"DownstreamPathTemplate": "/api/Account/CreateUser",
+			"DownstreamScheme": "https",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "localhost",
+					"Port": "7158"
+				}
+			],
+			"SwaggerKey": "Identity",
+			"AuthenticationOptions": {
+				"AuthenticationProviderKey": "Bearer",
+				"AllowedScopes": [ "read", "write" ]
+			}
+		}
+	],
+	"SwaggerEndPoints": [
+		{
+			"Key": "Identity",
+			"Config": [
+				{
+					"Name": "Identity API",
+					"Version": "v1",
+					"Url": "https://localhost:7158/swagger/v1/swagger.json"
+				}
+			]
+		}
 
-  ]
+	]
 }
