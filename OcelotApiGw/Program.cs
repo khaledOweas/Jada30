@@ -65,10 +65,10 @@ static void ConfigureAuthentication(WebApplicationBuilder builder)
         .AddAuthentication(options =>
         {
             options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-            options.DefaultChallengeScheme = "Bearer";
+            options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
         })
         .AddJwtBearer(
-            "Bearer",
+            JwtBearerDefaults.AuthenticationScheme,
             options =>
             {
                 options.Authority = idsUrl; // IdentityServer4 URL
@@ -105,8 +105,15 @@ static void ConfigureAuthentication(WebApplicationBuilder builder)
 builder.Services.AddOcelot(builder.Configuration);
 
 var app = builder.Build();
+
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.Use(async (context, next) =>
+{
+    context.Request.Headers["X-Secure-Gateway-Value"] = "qlw34umoWMTYLOQI238FY45O1QTWEf2t412fmwsd1m234";
+    await next.Invoke();
+});
 
 app.UseSwaggerForOcelotUI(opt =>
 {
@@ -117,5 +124,5 @@ app.UseSwaggerForOcelotUI(opt =>
 }).UseOcelot().Wait();
 
 await app.UseOcelot();
-app.Run();
 
+app.Run();

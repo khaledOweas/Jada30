@@ -43,6 +43,99 @@
           "write"
         ]
       }
+    },
+    {
+      "UpstreamPathTemplate": "/api/UserManagement/users",
+      "UpstreamHttpMethod": [
+        "Post",
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/UserManagement/users",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7187"
+        }
+      ],
+      "SwaggerKey": "Identity",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [
+          "read",
+          "write"
+        ]
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/api/UserManagement/users/{id}",
+      "UpstreamHttpMethod": [
+        "Get",
+        "Put",
+        "Delete"
+      ],
+      "DownstreamPathTemplate": "/api/UserManagement/users/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7187"
+        }
+      ],
+      "SwaggerKey": "Identity",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [
+          "read",
+          "write"
+        ]
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/api/UserManagement/users/{userId}/roles/{roleName}",
+      "UpstreamHttpMethod": [
+        "Post",
+        "Delete"
+      ],
+      "DownstreamPathTemplate": "/api/UserManagement/users/{userId}/roles/{roleName}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7187"
+        }
+      ],
+      "SwaggerKey": "Identity",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [
+          "read",
+          "write"
+        ]
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/api/UserManagement/roles",
+      "UpstreamHttpMethod": [
+        "Post",
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/UserManagement/roles",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7187"
+        }
+      ],
+      "SwaggerKey": "Identity",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [
+          "read",
+          "write"
+        ]
+      }
     }
   ],
   "SwaggerEndPoints": [

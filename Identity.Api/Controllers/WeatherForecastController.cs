@@ -18,7 +18,7 @@ public class WeatherForecastController : ControllerBase
     {
         _logger = logger;
     }
-    [Authorize("read")]
+
     [HttpGet]
     public IEnumerable<WeatherForecast> Get()
     {
@@ -32,7 +32,7 @@ public class WeatherForecastController : ControllerBase
         .ToArray();
     }
 
-    [Authorize("write")]
+    [AllowAnonymous]
     [HttpGet]
     public IEnumerable<WeatherForecast> GetAll()
     {
@@ -46,3 +46,4 @@ public class WeatherForecastController : ControllerBase
             .ToArray();
     }
 }
+
