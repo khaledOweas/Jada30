@@ -47,7 +47,28 @@
     {
       "UpstreamPathTemplate": "/api/UserManagement/users",
       "UpstreamHttpMethod": [
-        "Post",
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/UserManagement/users",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7187"
+        }
+      ],
+      "SwaggerKey": "Identity",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [
+          "read",
+          "write"
+        ]
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/api/UserManagement/users",
+      "UpstreamHttpMethod": [
         "Get"
       ],
       "DownstreamPathTemplate": "/api/UserManagement/users",
@@ -70,8 +91,50 @@
     {
       "UpstreamPathTemplate": "/api/UserManagement/users/{id}",
       "UpstreamHttpMethod": [
-        "Get",
-        "Put",
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/UserManagement/users/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7187"
+        }
+      ],
+      "SwaggerKey": "Identity",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [
+          "read",
+          "write"
+        ]
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/api/UserManagement/users/{id}",
+      "UpstreamHttpMethod": [
+        "Put"
+      ],
+      "DownstreamPathTemplate": "/api/UserManagement/users/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7187"
+        }
+      ],
+      "SwaggerKey": "Identity",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [
+          "read",
+          "write"
+        ]
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/api/UserManagement/users/{id}",
+      "UpstreamHttpMethod": [
         "Delete"
       ],
       "DownstreamPathTemplate": "/api/UserManagement/users/{id}",
@@ -94,7 +157,28 @@
     {
       "UpstreamPathTemplate": "/api/UserManagement/users/{userId}/roles/{roleName}",
       "UpstreamHttpMethod": [
-        "Post",
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/UserManagement/users/{userId}/roles/{roleName}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7187"
+        }
+      ],
+      "SwaggerKey": "Identity",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [
+          "read",
+          "write"
+        ]
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/api/UserManagement/users/{userId}/roles/{roleName}",
+      "UpstreamHttpMethod": [
         "Delete"
       ],
       "DownstreamPathTemplate": "/api/UserManagement/users/{userId}/roles/{roleName}",
@@ -117,10 +201,97 @@
     {
       "UpstreamPathTemplate": "/api/UserManagement/roles",
       "UpstreamHttpMethod": [
-        "Post",
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/UserManagement/roles",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7187"
+        }
+      ],
+      "SwaggerKey": "Identity",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [
+          "read",
+          "write"
+        ]
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/api/UserManagement/roles",
+      "UpstreamHttpMethod": [
         "Get"
       ],
       "DownstreamPathTemplate": "/api/UserManagement/roles",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7187"
+        }
+      ],
+      "SwaggerKey": "Identity",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [
+          "read",
+          "write"
+        ]
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/api/UserManagement/permissions",
+      "UpstreamHttpMethod": [
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/UserManagement/permissions",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7187"
+        }
+      ],
+      "SwaggerKey": "Identity",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [
+          "read",
+          "write"
+        ]
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/api/UserManagement/roles/{roleId}/permissions/{permissionId}",
+      "UpstreamHttpMethod": [
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/UserManagement/roles/{roleId}/permissions/{permissionId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7187"
+        }
+      ],
+      "SwaggerKey": "Identity",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [
+          "read",
+          "write"
+        ]
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/api/UserManagement/roles/{roleId}/permissions",
+      "UpstreamHttpMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/UserManagement/roles/{roleId}/permissions",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -149,5 +320,11 @@
         }
       ]
     }
-  ]
+  ],
+  "Logging": {
+    "LogLevel": {
+      "Default": "Debug",
+      "Ocelot": "Debug"
+    }
+  }
 }

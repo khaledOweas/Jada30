@@ -2,6 +2,9 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Identity.Infrastructure.Models;
+using Microsoft.AspNetCore.Authorization;
+using Identity.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Identity.Api.Controllers
 {
@@ -11,34 +14,50 @@ namespace Identity.Api.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<ApplicationRole> _roleManager;
+        private readonly IdentityContext _context;
 
-        public UserManagementController(UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager)
+        public UserManagementController(UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager, IdentityContext context)
         {
             _userManager = userManager;
             _roleManager = roleManager;
+            _context = context;
         }
 
-        // Create a new user
+        //
+        // a new user 
         [HttpPost("users")]
         public async Task<BaseResponse<ApplicationUser>> CreateUser([FromBody] ApplicationUser user, string password)
         {
             var response = new BaseResponse<ApplicationUser>();
-            var result = await _userManager.CreateAsync(user, password);
-            if (result.Succeeded)
+            try
             {
-                response = new SuccessResponse<ApplicationUser>("Create user Successfully Done ", user);
+                var result = await _userManager.CreateAsync(user, password);
+                if (result.Succeeded)
+                {
+                    response = new SuccessResponse<ApplicationUser>("Create user Successfully Done ", user);
+                }
+                else
+                {
+                    var errors = result.Errors.Select(e => new Errors { Key = e.GetHashCode(), Value = e.Description }).ToList();
+                    response = new FailedResponse<ApplicationUser>("Failed While Create User ", errors);
+                }
             }
-            response = new FailedResponse<ApplicationUser>("Failed While Create User ", new List<Errors>());
+            catch (Exception ex)
+            {
+                // Log the exception
+                Console.WriteLine("Exception occurred: " + ex.Message);
+                response = new FailedResponse<ApplicationUser>("An error occurred while creating the user", new List<Errors>());
+            }
 
             return response;
         }
 
         // Get all users
         [HttpGet("users")]
-        public IActionResult GetUsers()
+        public BaseResponse<List<ApplicationUser>> GetUsers()
         {
             var users = _userManager.Users;
-            return Ok(users);
+            return new SuccessResponse<List<ApplicationUser>>("Create user Successfully Done ", users.ToList());
         }
 
         // Get a user by ID
@@ -154,6 +173,60 @@ namespace Identity.Api.Controllers
             var roles = _roleManager.Roles;
             return Ok(roles);
         }
+
+        #region Permissions
+
+        // Create a new permission
+        [HttpPost("permissions")]
+        public async Task<IActionResult> CreatePermission([FromBody] Permission permission)
+        {
+            _context.Permissions.Add(permission);
+            await _context.SaveChangesAsync();
+            return Ok(permission);
+        }
+
+        // Assign a permission to a role
+        [HttpPost("roles/{roleId}/permissions/{permissionId}")]
+        public async Task<IActionResult> AssignPermissionToRole(long roleId, long permissionId)
+        {
+            var role = await _roleManager.FindByIdAsync(roleId.ToString());
+            if (role == null)
+            {
+                return NotFound("Role not found");
+            }
+
+            var permission = await _context.Permissions.FindAsync(permissionId);
+            if (permission == null)
+            {
+                return NotFound("Permission not found");
+            }
+
+            var rolePermission = new RolePermission { RoleId = roleId, PermissionId = permissionId };
+            _context.RolePermissions.Add(rolePermission);
+            await _context.SaveChangesAsync();
+
+            return Ok();
+        }
+
+        // Get all permissions for a role
+        [HttpGet("roles/{roleId}/permissions")]
+        public async Task<IActionResult> GetPermissionsForRole(long roleId)
+        {
+            var role = await _roleManager.FindByIdAsync(roleId.ToString());
+            if (role == null)
+            {
+                return NotFound("Role not found");
+            }
+
+            var permissions = await _context.RolePermissions
+                .Where(rp => rp.RoleId == roleId)
+                .Select(rp => rp.Permission)
+                .ToListAsync();
+
+            return Ok(permissions);
+        }
+
+        #endregion
     }
 
 }

@@ -1,5 +1,6 @@
 using Identity.Infrastructure.Data;
 using Identity.Infrastructure.Models;
+using Identity.Infrastructure.Seeding;
 
 using Jada30.Logging;
 
@@ -23,7 +24,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<IdentityContext>(options =>
 {
-   options.UseSqlServer(builder.Configuration.GetConnectionString("Default"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("Default"));
 });
 
 builder.Services.AddIdentity<ApplicationUser, ApplicationRole>()
@@ -88,6 +89,31 @@ static void ConfigureAuthentication(WebApplicationBuilder builder)
 
 
 var app = builder.Build();
+
+// Seed the database
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    try
+    {
+        var context = services.GetRequiredService<IdentityContext>();
+        var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
+        var roleManager = services.GetRequiredService<RoleManager<ApplicationRole>>();
+
+        // Apply pending migrations (optional, ensures the database is up-to-date)
+        context.Database.Migrate();
+
+        // Seed the database
+        await DataSeeder.SeedAsync(context, userManager, roleManager);
+    }
+    catch (Exception ex)
+    {
+        var logger = services.GetRequiredService<ILogger<Program>>();
+        logger.LogError(ex, "An error occurred while seeding the database.");
+    }
+}
+
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

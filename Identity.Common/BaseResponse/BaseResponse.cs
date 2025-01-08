@@ -69,6 +69,7 @@ public class SuccessResponse<T> : BaseResponse<T>
     }
 }
 
+
 public class FailedResponse<T> : BaseResponse<T>
 {
     public FailedResponse(string message, List<Errors> errors) : base(errors, message)
