@@ -1,5 +1,3 @@
-using System.Configuration;
-
 using Identity.Infrastructure.Data;
 using Identity.Infrastructure.Models;
 

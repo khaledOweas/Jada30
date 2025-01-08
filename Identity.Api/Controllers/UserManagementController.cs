@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Identity.Common.BaseResponse;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Identity.Infrastructure.Models;
 
-namespace IdentityServer4.API.Controllers
+namespace Identity.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
@@ -19,14 +20,17 @@ namespace IdentityServer4.API.Controllers
 
         // Create a new user
         [HttpPost("users")]
-        public async Task<IActionResult> CreateUser([FromBody] ApplicationUser user, string password)
+        public async Task<BaseResponse<ApplicationUser>> CreateUser([FromBody] ApplicationUser user, string password)
         {
+            var response = new BaseResponse<ApplicationUser>();
             var result = await _userManager.CreateAsync(user, password);
             if (result.Succeeded)
             {
-                return Ok(user);
+                response = new SuccessResponse<ApplicationUser>("Create user Successfully Done ", user);
             }
-            return BadRequest(result.Errors);
+            response = new FailedResponse<ApplicationUser>("Failed While Create User ", new List<Errors>());
+
+            return response;
         }
 
         // Get all users
