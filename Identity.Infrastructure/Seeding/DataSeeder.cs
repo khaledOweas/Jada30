@@ -1,4 +1,6 @@
-﻿using Identity.Infrastructure.Data;
+﻿
+using Identity.Domain.Entities.System;
+using Identity.Infrastructure.Data;
 using Identity.Infrastructure.Models;
 
 using Microsoft.AspNetCore.Identity;
@@ -10,72 +12,171 @@ namespace Identity.Infrastructure.Seeding
     {
         public static async Task SeedAsync(IdentityContext context, UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager)
         {
+
             try
             {
-
-                // Clear existing data in the correct order to avoid foreign key conflicts
-                context.RolePermissions.RemoveRange(context.RolePermissions); // Clear RolePermissions first
-                context.Permissions.RemoveRange(context.Permissions); // Clear Permissions
-                context.Users.RemoveRange(context.Users); // Clear Users
-                context.Roles.RemoveRange(context.Roles); // Clear Roles
-
+                await SeedRoles(roleManager);
+                await SeedUsers(userManager);
+                await SeedPermission(context);
+                await SeedSysConfig(context);
             }
             catch (Exception e)
             {
-                await context.SaveChangesAsync(); // Save changes after clearing data
                 Console.WriteLine(e);
                 throw;
             }
 
-            try
-            {
-                // Enable IDENTITY_INSERT only for tables with identity columns
-                await context.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT AspNetRoles ON"); // Enable for Roles
-                await context.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT AspNetUsers ON"); // Enable for Users
+        }
 
-                // Seed Roles
-                if (!await roleManager.Roles.AnyAsync())
+        public static async Task SeedUsers(UserManager<ApplicationUser> userManager)
+        {
+            if (!await userManager.Users.AnyAsync())
+            {
+                var users = DefaultData.GetDefaultUsers();
+                foreach (var user in users)
                 {
-                    var roles = DefaultData.GetDefaultRoles();
-                    foreach (var role in roles)
+                    await userManager.CreateAsync(user);
+                    await userManager.AddToRoleAsync(user, user.UserName!);
+                    // here to add all roles for super admin 
+                    if (user.UserName.ToLower() == "superadmin")
                     {
-                        await roleManager.CreateAsync(role);
+                        var roles = DefaultData.GetDefaultRoles();
+                        foreach (var role in roles)
+                        {
+                            await userManager.AddToRoleAsync(user, role.Name!);
+                        }
+
                     }
                 }
-
-                // Seed Users
-                if (!await userManager.Users.AnyAsync())
-                {
-                    var users = DefaultData.GetDefaultUsers();
-                    foreach (var user in users)
-                    {
-                        await userManager.CreateAsync(user);
-                        await userManager.AddToRoleAsync(user, "Admin"); // Assign Admin role to the default user
-                    }
-                }
-
-                // Seed Permissions (no IDENTITY_INSERT needed if Permissions table doesn't have an identity column)
-                if (!context.Permissions.Any())
-                {
-                    var permissions = DefaultData.GetDefaultPermissions();
-                    await context.Permissions.AddRangeAsync(permissions);
-                    await context.SaveChangesAsync();
-                }
-
-                // Seed RolePermissions (no IDENTITY_INSERT needed if RolePermissions table doesn't have an identity column)
-                if (!context.RolePermissions.Any())
-                {
-                    var rolePermissions = DefaultData.GetDefaultRolePermissions();
-                    await context.RolePermissions.AddRangeAsync(rolePermissions);
-                    await context.SaveChangesAsync();
-                }
-            }
-            finally
-            {
-                // Disable IDENTITY_INSERT for tables with identity columns
-                await context.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT AspNetRoles OFF"); // Disable for Roles
-                await context.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT AspNetUsers OFF"); // Disable for Users
             }
         }
+
+        public static async Task SeedRoles(RoleManager<ApplicationRole> roleManager)
+        {
+            if (!await roleManager.Roles.AnyAsync())
+            {
+                var roles = DefaultData.GetDefaultRoles();
+                foreach (var role in roles)
+                {
+                    await roleManager.CreateAsync(role);
+                }
+            }
+
+        }
+        public static async Task SeedPermission(IdentityContext context)
+        {
+            if (!context.Permissions.Any())
+            {
+                var permissions = DefaultData.GetDefaultPermissions();
+                await context.Permissions.AddRangeAsync(permissions);
+                await context.SaveChangesAsync();
+            }
+
+            if (!context.RolePermissions.Any())
+            {
+                var superAdminRole = await context.Roles.FirstOrDefaultAsync(x => x.Name == "SuperAdmin");
+                var adminRole = await context.Roles.FirstOrDefaultAsync(x => x.Name == "Admin");
+                var userRole = await context.Roles.FirstOrDefaultAsync(x => x.Name == "User");
+                var guestRole = await context.Roles.FirstOrDefaultAsync(x => x.Name == "Guest");
+
+                // Super Admin
+                var allPermissions = context.Permissions.ToList();
+                foreach (var permission in allPermissions)
+                {
+                    await context.RolePermissions.AddAsync(new RolePermission
+                    {
+                        RoleId = superAdminRole.Id,
+                        PermissionId = permission.Id
+                    });
+                }
+
+                // Guest 
+                var guestPermissionsNames = new List<string>
+                        {
+                            "ViewMediaContent",
+                            "ViewFacilities",
+                            "ViewBasicPackages",
+                            "ViewLongTermContracts",
+                            "ViewAvailablePackagesAndContracts",
+                            "ViewEventsAndSubscribe",
+                            "RatePlatformPage",
+                            "ViewFAQ",
+                            "ContactUs",
+                            "RequestBranchTour",
+                            "RegisterAccount"
+
+                        };
+
+                var guestPermissions = allPermissions
+                   .Where(p => guestPermissionsNames.Contains(p.Name))
+                   .ToList();
+
+                foreach (var permission in guestPermissions)
+                {
+                    await context.RolePermissions.AddAsync(new RolePermission
+                    {
+                        RoleId = guestRole.Id,
+                        PermissionId = permission.Id
+                    });
+                }
+
+                // User
+                var userPermissionsNames = new List<string>
+                        {
+                            "Login",
+                            "ChangePassword",
+                            "ForgotPassword",
+                            "SubscribeBasicPackage",
+                            "SubscribeExtendedPackage",
+                            "AddFacility",
+                            "SubscribeVirtualOffice",
+                            "SubscribeFeasibilityPlatform",
+                            "SubscribeTools",
+                            "SubscribePerks",
+                            "SubscribeSupportServices",
+                            "ManageCart",
+                            "CompleteProfileBeforePayment",
+                            "PaymentGateway",
+                            "ViewActiveSubscriptions",
+                            "ViewFacilitiesToReserve",
+                            "ViewPackageConsumption",
+                            "ViewBookingsTimeline",
+                            "ViewBranchEvents",
+                            "ViewOrEditUserData",
+                            "RateJada30Services"
+
+                        };
+
+                var userPermissions = allPermissions
+                    .Where(p => userPermissionsNames.Contains(p.Name))
+                    .ToList();
+
+                foreach (var permission in userPermissions)
+                {
+                    await context.RolePermissions.AddAsync(new RolePermission
+                    {
+                        RoleId = userRole.Id,
+                        PermissionId = permission.Id
+                    });
+                }
+
+                await context.SaveChangesAsync();
+            }
+
+
+        }
+        public static async Task SeedSysConfig(IdentityContext context)
+        {
+            if (!context.SysConfigs.Any())
+            {
+                await context.SysConfigs.AddAsync(new SysConfig
+                {
+                    Key = "Master-Password",
+                    Value = "P@ssw0rd"
+                });
+                await context.SaveChangesAsync();
+            }
+        }
+
     }
 }
