@@ -102,8 +102,6 @@ namespace Identity.Infrastructure.Seeding
         }
     };
 
-            // نضيف هنا الصلاحيات الخاصة بالجدول (جادة30)
-
             var jada30Permissions = new List<Permission>
     {
         new Permission
@@ -184,7 +182,7 @@ namespace Identity.Infrastructure.Seeding
             DescriptionAr = "إمكانية قيام الزائر بتسجيل حساب جديد"
         },
 
-        // من هنا فأنت تبدأ بصلاحيات "المستفيد" (User)
+       
         new Permission
         {
             Name = "Login",
