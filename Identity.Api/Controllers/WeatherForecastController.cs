@@ -7,10 +7,7 @@ namespace Identity.Api.Controllers;
 [Route("WF/[action]")]
 public class WeatherForecastController : ControllerBase
 {
-    private static readonly string[] Summaries = new[]
-    {
-            "Freezing",  "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
+    private static readonly string[] Summaries = new[] { "Freezing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching" };
 
     private readonly ILogger<WeatherForecastController> _logger;
 

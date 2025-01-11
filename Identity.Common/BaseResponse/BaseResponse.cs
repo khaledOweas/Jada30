@@ -16,16 +16,16 @@ public class BaseResponse<T>
     {
         Errors = errors;
         IsSuccess = false;
-        Message = "Validation Error";
-        ResponseData = default;
+        Message = message;
+        ResponseData = responseData;
         Version = 1.0;
     }
     public BaseResponse(string message, List<Errors> errors, T responseData = default)
     {
-        Errors = new List<Errors>();
+        Errors = errors;
         IsSuccess = false;
         Message = message;
-        ResponseData = default;
+        ResponseData = responseData;
         Version = 1.0;
     }
     public BaseResponse(bool isSuccess, T responseData, double version, List<Errors> errors, string message)
@@ -73,6 +73,10 @@ public class SuccessResponse<T> : BaseResponse<T>
 public class FailedResponse<T> : BaseResponse<T>
 {
     public FailedResponse(string message, List<Errors> errors) : base(errors, message)
+    {
+
+    }
+    public FailedResponse(string message) : base(null, message)
     {
 
     }
