@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Identity.Infrastructure.Models;
-using Microsoft.AspNetCore.Authorization;
 using Identity.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Identity.Framework.Cache;
@@ -31,28 +30,21 @@ namespace Identity.Api.Controllers
         [HttpPost("users")]
         public async Task<BaseResponse<ApplicationUser>> CreateUser([FromBody] ApplicationUser user, string password)
         {
-            var response = new BaseResponse<ApplicationUser>();
             try
             {
                 var result = await _userManager.CreateAsync(user, password);
                 if (result.Succeeded)
                 {
-                    response = new SuccessResponse<ApplicationUser>("Create user Successfully Done ", user);
+                    return new SuccessResponse<ApplicationUser>("User created successfully.", user);
                 }
-                else
-                {
-                    var errors = result.Errors.Select(e => new Errors { Key = e.GetHashCode(), Value = e.Description }).ToList();
-                    response = new FailedResponse<ApplicationUser>("Failed While Create User ", errors);
-                }
+
+                var errors = result.Errors.Select(e => new Errors { Key = e.GetHashCode(), Value = e.Description }).ToList();
+                return new FailedResponse<ApplicationUser>("Failed to create user.", errors);
             }
             catch (Exception ex)
             {
-                // Log the exception
-                Console.WriteLine("Exception occurred: " + ex.Message);
-                response = new FailedResponse<ApplicationUser>("An error occurred while creating the user", new List<Errors>());
+                return new FailedResponse<ApplicationUser>("An error occurred while creating the user.", new List<Errors> { new Errors { Key = ex.GetHashCode(), Value = ex.Message } });
             }
-
-            return response;
         }
 
         // Get all users
@@ -71,178 +63,259 @@ namespace Identity.Api.Controllers
 
         // Get all users
         [HttpGet("users")]
-        public BaseResponse<List<ApplicationUser>> GetUsers()
+        public async Task<BaseResponse<List<ApplicationUser>>> GetUsers()
         {
-            var users = _userManager.Users;
-            return new SuccessResponse<List<ApplicationUser>>("Create user Successfully Done ", users.ToList());
+            try
+            {
+                var users = _userManager.Users.ToList();
+                return new SuccessResponse<List<ApplicationUser>>("Users retrieved successfully.", users);
+            }
+            catch (Exception ex)
+            {
+                return new FailedResponse<List<ApplicationUser>>("An error occurred while retrieving users.", new List<Errors> { new Errors { Key = ex.GetHashCode(), Value = ex.Message } });
+            }
         }
 
-        // Get a user by ID
         [HttpGet("users/{id}")]
-        public async Task<IActionResult> GetUser(long id)
+        public async Task<BaseResponse<ApplicationUser>> GetUser(long id)
         {
-            var user = await _userManager.FindByIdAsync(id.ToString());
-            if (user == null)
+            try
             {
-                return NotFound();
+                var user = await _userManager.FindByIdAsync(id.ToString());
+                if (user == null)
+                {
+                    return new FailedResponse<ApplicationUser>("User not found.");
+                }
+
+                return new SuccessResponse<ApplicationUser>("User retrieved successfully.", user);
             }
-            return Ok(user);
+            catch (Exception ex)
+            {
+                return new FailedResponse<ApplicationUser>("An error occurred while retrieving the user.", new List<Errors> { new Errors { Key = ex.GetHashCode(), Value = ex.Message } });
+            }
         }
 
-        // Update a user
+
         [HttpPut("users/{id}")]
-        public async Task<IActionResult> UpdateUser(long id, [FromBody] ApplicationUser user)
+        public async Task<BaseResponse<ApplicationUser>> UpdateUser(long id, [FromBody] ApplicationUser user)
         {
-            var existingUser = await _userManager.FindByIdAsync(id.ToString());
-            if (existingUser == null)
+            try
             {
-                return NotFound();
+                var existingUser = await _userManager.FindByIdAsync(id.ToString());
+                if (existingUser == null)
+                {
+                    return new FailedResponse<ApplicationUser>("User not found.");
+                }
+
+                existingUser.UserName = user.UserName;
+                existingUser.Email = user.Email;
+                // Update other properties as needed
+
+                var result = await _userManager.UpdateAsync(existingUser);
+                if (result.Succeeded)
+                {
+                    return new SuccessResponse<ApplicationUser>("User updated successfully.", existingUser);
+                }
+
+                var errors = result.Errors.Select(e => new Errors { Key = e.GetHashCode(), Value = e.Description }).ToList();
+                return new FailedResponse<ApplicationUser>("Failed to update user.", errors);
             }
-
-            existingUser.UserName = user.UserName;
-            existingUser.Email = user.Email;
-            // Update other properties as needed
-
-            var result = await _userManager.UpdateAsync(existingUser);
-            if (result.Succeeded)
+            catch (Exception ex)
             {
-                return Ok(existingUser);
+                return new FailedResponse<ApplicationUser>("An error occurred while updating the user.", new List<Errors> { new Errors { Key = ex.GetHashCode(), Value = ex.Message } });
             }
-            return BadRequest(result.Errors);
         }
 
-        // Delete a user
         [HttpDelete("users/{id}")]
-        public async Task<IActionResult> DeleteUser(long id)
+        public async Task<BaseResponse<bool>> DeleteUser(long id)
         {
-            var user = await _userManager.FindByIdAsync(id.ToString());
-            if (user == null)
+            try
             {
-                return NotFound();
-            }
+                var user = await _userManager.FindByIdAsync(id.ToString());
+                if (user == null)
+                {
+                    return new FailedResponse<bool>("User not found.");
+                }
 
-            var result = await _userManager.DeleteAsync(user);
-            if (result.Succeeded)
-            {
-                return Ok();
+                var result = await _userManager.DeleteAsync(user);
+                if (result.Succeeded)
+                {
+                    return new SuccessResponse<bool>("User deleted successfully.", true);
+                }
+
+                var errors = result.Errors.Select(e => new Errors { Key = e.GetHashCode(), Value = e.Description }).ToList();
+                return new FailedResponse<bool>("Failed to delete user.", errors);
             }
-            return BadRequest(result.Errors);
+            catch (Exception ex)
+            {
+                return new FailedResponse<bool>("An error occurred while deleting the user.", new List<Errors> { new Errors { Key = ex.GetHashCode(), Value = ex.Message } });
+            }
         }
 
-        // Assign a role to a user
         [HttpPost("users/{userId}/roles/{roleName}")]
-        public async Task<IActionResult> AssignRoleToUser(long userId, string roleName)
+        public async Task<BaseResponse<bool>> AssignRoleToUser(long userId, string roleName)
         {
-            var user = await _userManager.FindByIdAsync(userId.ToString());
-            if (user == null)
+            try
             {
-                return NotFound("User not found");
-            }
+                var user = await _userManager.FindByIdAsync(userId.ToString());
+                if (user == null)
+                {
+                    return new FailedResponse<bool>("User not found.");
+                }
 
-            var roleExists = await _roleManager.RoleExistsAsync(roleName);
-            if (!roleExists)
-            {
-                return NotFound("Role not found");
-            }
+                var roleExists = await _roleManager.RoleExistsAsync(roleName);
+                if (!roleExists)
+                {
+                    return new FailedResponse<bool>("Role not found.");
+                }
 
-            var result = await _userManager.AddToRoleAsync(user, roleName);
-            if (result.Succeeded)
-            {
-                return Ok();
+                var result = await _userManager.AddToRoleAsync(user, roleName);
+                if (result.Succeeded)
+                {
+                    return new SuccessResponse<bool>("Role assigned successfully.", true);
+                }
+
+                var errors = result.Errors.Select(e => new Errors { Key = e.GetHashCode(), Value = e.Description }).ToList();
+                return new FailedResponse<bool>("Failed to assign role.", errors);
             }
-            return BadRequest(result.Errors);
+            catch (Exception ex)
+            {
+                return new FailedResponse<bool>("An error occurred while assigning the role.", new List<Errors> { new Errors { Key = ex.GetHashCode(), Value = ex.Message } });
+            }
         }
 
-        // Remove a role from a user
         [HttpDelete("users/{userId}/roles/{roleName}")]
-        public async Task<IActionResult> RemoveRoleFromUser(long userId, string roleName)
+        public async Task<BaseResponse<bool>> RemoveRoleFromUser(long userId, string roleName)
         {
-            var user = await _userManager.FindByIdAsync(userId.ToString());
-            if (user == null)
+            try
             {
-                return NotFound("User not found");
-            }
+                var user = await _userManager.FindByIdAsync(userId.ToString());
+                if (user == null)
+                {
+                    return new FailedResponse<bool>("User not found.");
+                }
 
-            var result = await _userManager.RemoveFromRoleAsync(user, roleName);
-            if (result.Succeeded)
-            {
-                return Ok();
+                var result = await _userManager.RemoveFromRoleAsync(user, roleName);
+                if (result.Succeeded)
+                {
+                    return new SuccessResponse<bool>("Role removed successfully.", true);
+                }
+
+                var errors = result.Errors.Select(e => new Errors { Key = e.GetHashCode(), Value = e.Description }).ToList();
+                return new FailedResponse<bool>("Failed to remove role.", errors);
             }
-            return BadRequest(result.Errors);
+            catch (Exception ex)
+            {
+                return new FailedResponse<bool>("An error occurred while removing the role.", new List<Errors> { new Errors { Key = ex.GetHashCode(), Value = ex.Message } });
+            }
         }
 
-        // Create a new role
+
         [HttpPost("roles")]
-        public async Task<IActionResult> CreateRole([FromBody] ApplicationRole role)
+        public async Task<BaseResponse<ApplicationRole>> CreateRole([FromBody] ApplicationRole role)
         {
-            var result = await _roleManager.CreateAsync(role);
-            if (result.Succeeded)
+            try
             {
-                return Ok(role);
+                var result = await _roleManager.CreateAsync(role);
+                if (result.Succeeded)
+                {
+                    return new SuccessResponse<ApplicationRole>("Role created successfully.", role);
+                }
+
+                var errors = result.Errors.Select(e => new Errors { Key = e.GetHashCode(), Value = e.Description }).ToList();
+                return new FailedResponse<ApplicationRole>("Failed to create role.", errors);
             }
-            return BadRequest(result.Errors);
+            catch (Exception ex)
+            {
+                return new FailedResponse<ApplicationRole>("An error occurred while creating the role.", new List<Errors> { new Errors { Key = ex.GetHashCode(), Value = ex.Message } });
+            }
         }
 
-        // Get all roles
         [HttpGet("roles")]
-        public IActionResult GetRoles()
+        public BaseResponse<List<ApplicationRole>> GetRoles()
         {
-            var roles = _roleManager.Roles;
-            return Ok(roles);
+            try
+            {
+                var roles = _roleManager.Roles.ToList();
+                return new SuccessResponse<List<ApplicationRole>>("Roles retrieved successfully.", roles);
+            }
+            catch (Exception ex)
+            {
+                return new FailedResponse<List<ApplicationRole>>("An error occurred while retrieving roles.", new List<Errors> { new Errors { Key = ex.GetHashCode(), Value = ex.Message } });
+            }
         }
+
+
 
         #region Permissions
 
-        // Create a new permission
         [HttpPost("permissions")]
-        public async Task<IActionResult> CreatePermission([FromBody] Permission permission)
+        public async Task<BaseResponse<Permission>> CreatePermission([FromBody] Permission permission)
         {
-            _context.Permissions.Add(permission);
-            await _context.SaveChangesAsync();
-            return Ok(permission);
+            try
+            {
+                _context.Permissions.Add(permission);
+                await _context.SaveChangesAsync();
+                return new SuccessResponse<Permission>("Permission created successfully.", permission);
+            }
+            catch (Exception ex)
+            {
+                return new FailedResponse<Permission>("An error occurred while creating the permission.", new List<Errors> { new Errors { Key = ex.GetHashCode(), Value = ex.Message } });
+            }
         }
 
-        // Assign a permission to a role
         [HttpPost("roles/{roleId}/permissions/{permissionId}")]
-        public async Task<IActionResult> AssignPermissionToRole(long roleId, long permissionId)
+        public async Task<BaseResponse<bool>> AssignPermissionToRole(long roleId, long permissionId)
         {
-            var role = await _roleManager.FindByIdAsync(roleId.ToString());
-            if (role == null)
+            try
             {
-                return NotFound("Role not found");
-            }
+                var role = await _roleManager.FindByIdAsync(roleId.ToString());
+                if (role == null)
+                {
+                    return new FailedResponse<bool>("Role not found.");
+                }
 
-            var permission = await _context.Permissions.FindAsync(permissionId);
-            if (permission == null)
+                var permission = await _context.Permissions.FindAsync(permissionId);
+                if (permission == null)
+                {
+                    return new FailedResponse<bool>("Permission not found.");
+                }
+
+                var rolePermission = new RolePermission { RoleId = roleId, PermissionId = permissionId };
+                _context.RolePermissions.Add(rolePermission);
+                await _context.SaveChangesAsync();
+
+                return new SuccessResponse<bool>("Permission assigned to role successfully.", true);
+            }
+            catch (Exception ex)
             {
-                return NotFound("Permission not found");
+                return new FailedResponse<bool>("An error occurred while assigning the permission.", new List<Errors> { new Errors { Key = ex.GetHashCode(), Value = ex.Message } });
             }
-
-            var rolePermission = new RolePermission { RoleId = roleId, PermissionId = permissionId };
-            _context.RolePermissions.Add(rolePermission);
-            await _context.SaveChangesAsync();
-
-            return Ok();
         }
 
-        // Get all permissions for a role
         [HttpGet("roles/{roleId}/permissions")]
-        public async Task<IActionResult> GetPermissionsForRole(long roleId)
+        public async Task<BaseResponse<List<Permission>>> GetPermissionsForRole(long roleId)
         {
-            var role = await _roleManager.FindByIdAsync(roleId.ToString());
-            if (role == null)
+            try
             {
-                return NotFound("Role not found");
+                var role = await _roleManager.FindByIdAsync(roleId.ToString());
+                if (role == null)
+                {
+                    return new FailedResponse<List<Permission>>("Role not found.");
+                }
+
+                var permissions = await _context.RolePermissions
+                    .Where(rp => rp.RoleId == roleId)
+                    .Select(rp => rp.Permission)
+                    .ToListAsync();
+
+                return new SuccessResponse<List<Permission>>("Permissions retrieved successfully.", permissions);
             }
-
-            var permissions = await _context.RolePermissions
-                .Where(rp => rp.RoleId == roleId)
-                .Select(rp => rp.Permission)
-                .ToListAsync();
-
-            return Ok(permissions);
+            catch (Exception ex)
+            {
+                return new FailedResponse<List<Permission>>("An error occurred while retrieving permissions.", new List<Errors> { new Errors { Key = ex.GetHashCode(), Value = ex.Message } });
+            }
         }
-
         #endregion
     }
 

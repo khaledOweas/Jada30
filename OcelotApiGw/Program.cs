@@ -8,39 +8,47 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Load and merge configuration files
-var ocelotConfigPath = $"Identity.{builder.Environment.EnvironmentName}.json";
-if (!File.Exists(ocelotConfigPath))
-{
-    throw new FileNotFoundException($"Configuration file not found: {ocelotConfigPath}");
-}
+// Define microservices
+var microservices = new[] { "Identity", "Lookups" };
+var environment = builder.Environment.EnvironmentName;
+var tempConfigPath = "mergedOcelot.json";
 
-var ocelotConfig1 = JObject.Parse(File.ReadAllText(ocelotConfigPath));
+// Initialize a JObject for merging
+var mergedConfig = new JObject
+{
+    ["Routes"] = new JArray(),
+    ["SwaggerEndPoints"] = new JArray()
+};
 
-// Merge Routes
-if (ocelotConfig1["Routes"] is JArray routes)
+// Iterate through each microservice to load and merge configurations
+foreach (var service in microservices)
 {
-    ocelotConfig1["Routes"] = new JArray(routes /*.Concat(otherRoutes)*/);
-}
-else
-{
-    ocelotConfig1["Routes"] = new JArray(); // Ensure it's at least an empty array
-}
+    var configPath = $"{service}.{environment}.json";
 
-// Merge SwaggerEndPoints
-if (ocelotConfig1["SwaggerEndPoints"] is JArray swaggerEndpoints)
-{
-    ocelotConfig1["SwaggerEndPoints"] = new JArray(swaggerEndpoints /*.Concat(otherSwaggerEndpoints)*/);
-}
-else
-{
-    ocelotConfig1["SwaggerEndPoints"] = new JArray(); // Ensure it's at least an empty array
+    if (!File.Exists(configPath))
+    {
+        throw new FileNotFoundException($"Configuration file not found: {configPath}");
+    }
+
+    var serviceConfig = JObject.Parse(File.ReadAllText(configPath));
+
+    // Merge Routes
+    if (serviceConfig["Routes"] is JArray serviceRoutes)
+    {
+        ((JArray)mergedConfig["Routes"]).Merge(serviceRoutes);
+    }
+
+    // Merge SwaggerEndPoints
+    if (serviceConfig["SwaggerEndPoints"] is JArray serviceSwaggerEndpoints)
+    {
+        ((JArray)mergedConfig["SwaggerEndPoints"]).Merge(serviceSwaggerEndpoints);
+    }
 }
 
 // Write the merged configuration to a temporary file
-var tempConfigPath = "mergedOcelot.json";
-File.WriteAllText(tempConfigPath, ocelotConfig1.ToString());
+File.WriteAllText(tempConfigPath, mergedConfig.ToString());
 
+// Add the merged configuration to the app builder
 builder.Configuration.AddJsonFile(tempConfigPath, optional: false, reloadOnChange: true);
 
 builder.Services.AddControllers();
