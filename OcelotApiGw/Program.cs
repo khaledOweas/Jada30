@@ -131,6 +131,6 @@ app.UseSwaggerForOcelotUI(opt =>
     option.DocumentTitle = "Ocelot Gateway";
 }).UseOcelot().Wait();
 
-await app.UseOcelot();
+//await app.UseOcelot();
 
 app.Run();

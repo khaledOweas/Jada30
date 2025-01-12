@@ -1,0 +1,496 @@
+{
+  "Routes": [
+    {
+      "UpstreamPathTemplate": "/WF/Get",
+      "UpstreamHttpMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/WF/Get",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7187"
+        }
+      ],
+      "SwaggerKey": "Identity",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [
+          "read",
+          "write"
+        ]
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/WF/GetAll",
+      "UpstreamHttpMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/WF/GetAll",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7187"
+        }
+      ],
+      "SwaggerKey": "Identity",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [
+          "read",
+          "write"
+        ]
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/api/UserManagement/users",
+      "UpstreamHttpMethod": [
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/UserManagement/users",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7187"
+        }
+      ],
+      "SwaggerKey": "Identity",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [
+          "read",
+          "write"
+        ]
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/api/UserManagement/test",
+      "UpstreamHttpMethod": [
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/UserManagement/test",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7187"
+        }
+      ],
+      "SwaggerKey": "Identity"
+    },
+    {
+      "UpstreamPathTemplate": "/api/UserManagement/users",
+      "UpstreamHttpMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/UserManagement/users",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7187"
+        }
+      ],
+      "SwaggerKey": "Identity"
+    },
+    {
+      "UpstreamPathTemplate": "/api/UserManagement/users/{id}",
+      "UpstreamHttpMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/UserManagement/users/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7187"
+        }
+      ],
+      "SwaggerKey": "Identity",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [
+          "read",
+          "write"
+        ]
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/api/UserManagement/users/{id}",
+      "UpstreamHttpMethod": [
+        "Put"
+      ],
+      "DownstreamPathTemplate": "/api/UserManagement/users/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7187"
+        }
+      ],
+      "SwaggerKey": "Identity",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [
+          "read",
+          "write"
+        ]
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/api/UserManagement/users/{id}",
+      "UpstreamHttpMethod": [
+        "Delete"
+      ],
+      "DownstreamPathTemplate": "/api/UserManagement/users/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7187"
+        }
+      ],
+      "SwaggerKey": "Identity",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [
+          "read",
+          "write"
+        ]
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/api/UserManagement/users/{userId}/roles/{roleName}",
+      "UpstreamHttpMethod": [
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/UserManagement/users/{userId}/roles/{roleName}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7187"
+        }
+      ],
+      "SwaggerKey": "Identity",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [
+          "read",
+          "write"
+        ]
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/api/UserManagement/users/{userId}/roles/{roleName}",
+      "UpstreamHttpMethod": [
+        "Delete"
+      ],
+      "DownstreamPathTemplate": "/api/UserManagement/users/{userId}/roles/{roleName}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7187"
+        }
+      ],
+      "SwaggerKey": "Identity",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [
+          "read",
+          "write"
+        ]
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/api/UserManagement/roles",
+      "UpstreamHttpMethod": [
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/UserManagement/roles",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7187"
+        }
+      ],
+      "SwaggerKey": "Identity",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [
+          "read",
+          "write"
+        ]
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/api/UserManagement/roles",
+      "UpstreamHttpMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/UserManagement/roles",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7187"
+        }
+      ],
+      "SwaggerKey": "Identity",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [
+          "read",
+          "write"
+        ]
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/api/UserManagement/permissions",
+      "UpstreamHttpMethod": [
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/UserManagement/permissions",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7187"
+        }
+      ],
+      "SwaggerKey": "Identity",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [
+          "read",
+          "write"
+        ]
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/api/UserManagement/roles/{roleId}/permissions/{permissionId}",
+      "UpstreamHttpMethod": [
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/UserManagement/roles/{roleId}/permissions/{permissionId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7187"
+        }
+      ],
+      "SwaggerKey": "Identity",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [
+          "read",
+          "write"
+        ]
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/api/UserManagement/roles/{roleId}/permissions",
+      "UpstreamHttpMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/UserManagement/roles/{roleId}/permissions",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7187"
+        }
+      ],
+      "SwaggerKey": "Identity",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [
+          "read",
+          "write"
+        ]
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/api/Lookup/GetAllCategory",
+      "UpstreamHttpMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/Lookup/GetAllCategory",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7291"
+        }
+      ],
+      "SwaggerKey": "Lookups",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [
+          "read",
+          "write"
+        ]
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/api/Lookup/GetAll",
+      "UpstreamHttpMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/Lookup/GetAll",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7291"
+        }
+      ],
+      "SwaggerKey": "Lookups",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [
+          "read",
+          "write"
+        ]
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/api/Lookup/GetAll/{refCode}",
+      "UpstreamHttpMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/Lookup/GetAll/{refCode}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7291"
+        }
+      ],
+      "SwaggerKey": "Lookups",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [
+          "read",
+          "write"
+        ]
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/api/Lookup/Get/{code}",
+      "UpstreamHttpMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/Lookup/Get/{code}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7291"
+        }
+      ],
+      "SwaggerKey": "Lookups",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [
+          "read",
+          "write"
+        ]
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/api/Lookup/CreateLookup",
+      "UpstreamHttpMethod": [
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/Lookup/CreateLookup",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7291"
+        }
+      ],
+      "SwaggerKey": "Lookups",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [
+          "read",
+          "write"
+        ]
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/api/Lookup/UpdateLookup/{code}",
+      "UpstreamHttpMethod": [
+        "Put"
+      ],
+      "DownstreamPathTemplate": "/api/Lookup/UpdateLookup/{code}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7291"
+        }
+      ],
+      "SwaggerKey": "Lookups",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [
+          "read",
+          "write"
+        ]
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/api/Lookup/DeleteLookup/{code}",
+      "UpstreamHttpMethod": [
+        "Delete"
+      ],
+      "DownstreamPathTemplate": "/api/Lookup/DeleteLookup/{code}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7291"
+        }
+      ],
+      "SwaggerKey": "Lookups",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [
+          "read",
+          "write"
+        ]
+      }
+    }
+  ],
+  "SwaggerEndPoints": [
+    {
+      "Key": "Identity",
+      "Config": [
+        {
+          "Name": "Identity API",
+          "Version": "v1",
+          "Url": "https://localhost:7187/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "Lookups",
+      "Config": [
+        {
+          "Name": "Lookups API",
+          "Version": "v1",
+          "Url": "https://localhost:7291/swagger/v1/swagger.json"
+        }
+      ]
+    }
+  ]
+}

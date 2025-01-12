@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Identity.Framework.Cache
+namespace Redis
 {
-    public interface ICacheService2
+    public interface ICacheService
     {
         Task<string> GetCacheValueAsync(string key);
         Task SetCacheValueAsync(string key, string value);
@@ -17,6 +17,6 @@ namespace Identity.Framework.Cache
         Task KeyDeleteAsync<T>(string key) where T : class;
         Task SetObjectDuration(string key, string value, int duration);
 
-      //  Task SetObjectDuration<T>(string key, T value, int duration) where T : class;
+        //  Task SetObjectDuration<T>(string key, T value, int duration) where T : class;
     }
 }

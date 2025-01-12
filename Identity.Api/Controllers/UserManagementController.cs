@@ -5,6 +5,7 @@ using Identity.Infrastructure.Models;
 using Identity.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Identity.Framework.Cache;
+using Redis;
 
 namespace Identity.Api.Controllers
 {

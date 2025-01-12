@@ -1,6 +1,4 @@
-﻿using Jada30.Logging.Filter;
-using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using StackExchange.Redis;
 using System;
 using System.Collections.Generic;
@@ -8,17 +6,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Identity.Framework.Cache
+namespace Redis
 {
-    public class CacheService2 : ICacheService2
+    public class CacheService : ICacheService
     {
         private readonly IConnectionMultiplexer _connectionMultiplexer;
-        private readonly ILogger<ExceptionLogFilter> _logger;
-        public CacheService2(IConnectionMultiplexer connectionMultiplexer, ILogger<ExceptionLogFilter> logger)
+        public CacheService(IConnectionMultiplexer connectionMultiplexer)
         {
 
             _connectionMultiplexer = connectionMultiplexer;
-            _logger = logger;
         }
 
         public async Task<string> GetCacheValueAsync(string key)
@@ -58,7 +54,6 @@ namespace Identity.Framework.Cache
             }
             catch (Exception ex)
             {
-                _logger.LogError("cacheError: \n{0}", ex.GetBaseException().Message);
                 return null;
             }
 
