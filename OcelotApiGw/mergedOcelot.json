@@ -67,6 +67,21 @@
       }
     },
     {
+      "UpstreamPathTemplate": "/api/UserManagement/test",
+      "UpstreamHttpMethod": [
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/UserManagement/test",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7187"
+        }
+      ],
+      "SwaggerKey": "Identity"
+    },
+    {
       "UpstreamPathTemplate": "/api/UserManagement/users",
       "UpstreamHttpMethod": [
         "Get"
@@ -79,14 +94,7 @@
           "Port": "7187"
         }
       ],
-      "SwaggerKey": "Identity",
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": [
-          "read",
-          "write"
-        ]
-      }
+      "SwaggerKey": "Identity"
     },
     {
       "UpstreamPathTemplate": "/api/UserManagement/users/{id}",
@@ -310,20 +318,23 @@
     }
   ],
   "SwaggerEndPoints": [
-    {
-      "Key": "Identity",
-      "Config": [
-        {
-          "Name": "Identity API",
-          "Version": "v1",
-          "Url": "https://localhost:7187/swagger/v1/swagger.json"
-        }
-      ]
-    }
+    [
+      {
+        "Key": "Identity",
+        "Config": [
+          {
+            "Name": "Identity API",
+            "Version": "v1",
+            "Url": "https://localhost:7187/swagger/v1/swagger.json"
+          }
+        ]
+      }
+    ]
   ],
   "Logging": {
     "LogLevel": {
-      "Default": "Debug",
+      "Default": "Information",
+      "Microsoft": "Warning",
       "Ocelot": "Debug"
     }
   }

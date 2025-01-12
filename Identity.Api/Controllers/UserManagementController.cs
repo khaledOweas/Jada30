@@ -5,6 +5,7 @@ using Identity.Infrastructure.Models;
 using Microsoft.AspNetCore.Authorization;
 using Identity.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
+using Identity.Framework.Cache;
 
 namespace Identity.Api.Controllers
 {
@@ -15,12 +16,14 @@ namespace Identity.Api.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<ApplicationRole> _roleManager;
         private readonly IdentityContext _context;
+        private readonly ICacheService _cacheService;
 
-        public UserManagementController(UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager, IdentityContext context)
+        public UserManagementController(UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager, IdentityContext context, ICacheService cacheService)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _context = context;
+            _cacheService = cacheService;
         }
 
         //
@@ -51,6 +54,20 @@ namespace Identity.Api.Controllers
 
             return response;
         }
+
+        // Get all users
+        [HttpPost("test")]
+        public async Task<IActionResult> test()
+        {
+            var obj = await _cacheService.GetObject<string>("test");
+            if(obj == null)
+            {
+                await _cacheService.SetObject("test", "test");
+            }
+
+            return Ok();
+        }
+
 
         // Get all users
         [HttpGet("users")]

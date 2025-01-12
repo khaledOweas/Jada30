@@ -55,6 +55,22 @@
 				"AllowedScopes": [ "read", "write" ]
 			}
 		},
+
+		{
+			"UpstreamPathTemplate": "/api/UserManagement/test",
+			"UpstreamHttpMethod": [ "Post" ],
+			"DownstreamPathTemplate": "/api/UserManagement/test",
+			"DownstreamScheme": "https",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "localhost",
+					"Port": "7187"
+				}
+			],
+			"SwaggerKey": "Identity"
+
+		},
+
 		// GET /api/UserManagement/users
 		{
 			"UpstreamPathTemplate": "/api/UserManagement/users",
@@ -67,11 +83,7 @@
 					"Port": "7187"
 				}
 			],
-			"SwaggerKey": "Identity",
-			"AuthenticationOptions": {
-				"AuthenticationProviderKey": "Bearer",
-				"AllowedScopes": [ "read", "write" ]
-			}
+			"SwaggerKey": "Identity"
 		},
 		// GET /api/UserManagement/users/{id}
 		{
@@ -268,8 +280,10 @@
 	],
 	"Logging": {
 		"LogLevel": {
-			"Default": "Debug",
+			"Default": "Information",
+			"Microsoft": "Warning",
 			"Ocelot": "Debug"
 		}
 	}
+
 }
