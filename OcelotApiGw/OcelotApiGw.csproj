@@ -13,14 +13,29 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="Ocelot" Version="23.3.3" />
+		<PackageReference Include="Ocelot" Version="23.4.2" />
 		<PackageReference Include="MMLib.SwaggerForOcelot" Version="8.3.2" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="7.2.0" />
 
 	</ItemGroup>
 
 
 	<ItemGroup>
 	  <Folder Include="Routes\" />
+	</ItemGroup>
+
+
+	<ItemGroup>
+	  <Content Update="Lookups.Development.json">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="Lookups.Production.json">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
 	</ItemGroup>
 
 </Project>

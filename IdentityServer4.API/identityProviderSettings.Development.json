@@ -22,8 +22,8 @@
 		],
 		"apiResources": [
 			{
-				"name": "Jada30APIGetWay",
-				"displayName": "Jada 30 API GetWay",
+				"name": "Jada30APIGateWay",
+				"displayName": "Jada 30 API GateWay",
 				"apiSecret": "dGVhbS1odWIuYXBpLmRldmVsb3BtZW50QDEyMzQ=",
 				"scopes": [ "IdentityServerApi", "openid", "read", "write" ],
 				"claims": [ "name", "email", "sub", "role", "address", "cnf", "email_verified", "id", "profile", "reference_token_id", "data" ]
