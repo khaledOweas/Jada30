@@ -10491,6 +10491,7 @@ html.dark .\[html\.dark_\&\]\:hidden {
 .btn {
   margin: 5px;
 }
+
 /* Example RTL styles */
 [dir="rtl"] {
   text-align: right;
