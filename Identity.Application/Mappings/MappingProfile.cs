@@ -1,19 +1,17 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace Identity.Application.Mappings
+using Identity.Common.Role;
+using Identity.Common.User;
+using Identity.Infrastructure.Models;
+
+namespace Identity.Application.Mappings;
+public class MappingProfile : Profile
 {
-    public class MappingProfile : Profile
+    public MappingProfile()
     {
-        public MappingProfile()
-        {
-            CreateMap<AddAssetDto, Asset>().ReverseMap();
+        CreateMap<CreateUserDto, ApplicationUser>().ReverseMap();
+        CreateMap<UpdateUserDto, ApplicationUser>().ReverseMap();
+        CreateMap<CreateRoleDto, ApplicationRole>().ReverseMap();
 
-        }
     }
 }

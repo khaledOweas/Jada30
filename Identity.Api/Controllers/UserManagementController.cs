@@ -37,6 +37,7 @@ namespace Identity.Api.Controllers
         {
             try
             {
+                // TODO :  please use AutoMapper 
                 var userEntity = new ApplicationUser { UserName = user.UserName, Email = user.Email };
                 var result = await _userManager.CreateAsync(userEntity, user.Password);
                 if (result.Succeeded)
@@ -73,6 +74,7 @@ namespace Identity.Api.Controllers
         {
             try
             {
+                // TODO :  please use autoMapper Project to return DTO not applicationUser 
                 var users = _userManager.Users.ToList();
                 return new SuccessResponse<List<ApplicationUser>>("Users retrieved successfully.", users);
             }
