@@ -4,7 +4,7 @@
 var KTAuthI18nDemo = function() {
     // Elements
     var menu;
-	
+
 	var menuObj;
 
 	var translationStrings = {
@@ -32,22 +32,22 @@ var KTAuthI18nDemo = function() {
 			"French" : "Ou",
 		},
 
-		// Sign in	
+		// Sign in
 		"sign-in-head-desc" : {
 			"English" : "Not a Member yet?",
 			"Spanish" : "¿No eres miembro todavía?",
 			"German" : "Noch kein Mitglied?",
 			"Japanese" : "まだメンバーではありませんか？",
 			"French" : "Pas encore membre?",
-		},	
-		 
+		},
+
 		"sign-in-head-link" : {
 			"English" : "Sign Up",
 			"Spanish" : "Inscribirse",
 			"German" : "Anmeldung",
 			"Japanese" : "サインアップ",
 			"French" : "S'S'inscrire",
-		},	 
+		},
 
 		"sign-in-title" : {
 			"English" : "Sign In",
@@ -96,7 +96,7 @@ var KTAuthI18nDemo = function() {
 			"German" : "Schon ein Mitglied ?",
 			"Japanese" : "すでにメンバーですか？",
 			"French" : "Déjà membre ?",
-		},	
+		},
 
 		"sign-up-head-link" : {
 			"English" : "Sign In",
@@ -105,14 +105,14 @@ var KTAuthI18nDemo = function() {
 			"Japanese" : "ログイン",
 			"French" : "S'identifier",
 		},
-		
+
 		"sign-up-title" : {
 			"English" : "Sign Up",
 			"Spanish" : "Inscribirse",
 			"German" : "Anmeldung",
 			"Japanese" : "サインアップ",
 			"French" : "S'S'inscrire",
-		},	
+		},
 
 		"sign-up-input-first-name" : {
 			"English" : "First Name",
@@ -292,14 +292,14 @@ var KTAuthI18nDemo = function() {
 			"French" : "Annuler",
 		},
 
-		// Two steps	
+		// Two steps
 		"two-step-head-desc" : {
 			"English" : "Didn’t get the code ?",
 			"Spanish" : "¿No recibiste el código?",
 			"German" : "Code nicht erhalten?",
 			"Japanese" : "コードを取得できませんでしたか？",
 			"French" : "Vous n'avez pas reçu le code ?",
-		},	
+		},
 
 		"two-step-head-resend" : {
 			"English" : "Resend",
@@ -370,7 +370,7 @@ var KTAuthI18nDemo = function() {
 							labelElement.setAttribute("placeholder", translationStrings[label][lang]);
 						} else {
 							labelElement.innerHTML = translationStrings[label][lang];
-						}						
+						}
 					}
 				}
 			}
@@ -381,8 +381,8 @@ var KTAuthI18nDemo = function() {
 		const selectedLang = menu.querySelector('[data-kt-lang="' + lang + '"]');
 
 		if (selectedLang !== null) {
-			const currentLangName = document.querySelector('[data-kt-element="current-lang-name"]'); 
-			const currentLangFlag = document.querySelector('[data-kt-element="current-lang-flag"]'); 
+			const currentLangName = document.querySelector('[data-kt-element="current-lang-name"]');
+			const currentLangFlag = document.querySelector('[data-kt-element="current-lang-flag"]');
 
 			const selectedLangName = selectedLang.querySelector('[data-kt-element="lang-name"]');
 			const selectedLangFlag = selectedLang.querySelector('[data-kt-element="lang-flag"]');
@@ -397,7 +397,7 @@ var KTAuthI18nDemo = function() {
 	var init = function() {
 		if ( localStorage.getItem("kt_auth_lang") !== null ) {
 			let lang = localStorage.getItem("kt_auth_lang");
-			
+
 			setLanguage(lang);
 			translate(lang);
 		}
@@ -418,10 +418,10 @@ var KTAuthI18nDemo = function() {
 
 			if (menu === null) {
 				return;
-			} 
+			}
 
 			menuObj = KTMenu.getInstance(menu);
-            
+
             init();
         }
     };
