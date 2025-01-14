@@ -13,7 +13,9 @@ export class HeaderBarComponent implements OnInit {
   constructor(private renderer: Renderer2, private el: ElementRef) {}
 
   ngOnInit(): void {
-    this.setLanguage(localStorage.getItem("dir")!);
+    if (typeof localStorage !== "undefined") {
+      this.setLanguage(localStorage.getItem("dir")!);
+    }
   }
 
   changeLanguage(Text: string, path: string) {
@@ -38,6 +40,7 @@ export class HeaderBarComponent implements OnInit {
     const header = document.getElementById("kt_header");
     const side = document.getElementById("kt_aside");
     const side2 = document.getElementById("kt_aside_menu");
+    const content = document.getElementById("kt_content");
     if (isLTR) {
       // Switch to LTR
       this.renderer.setAttribute(htmlElement, "direction", "ltr");
@@ -46,6 +49,7 @@ export class HeaderBarComponent implements OnInit {
       this.renderer.setStyle(header, "direction", "ltr");
       this.renderer.setStyle(side, "direction", "ltr");
       this.renderer.setStyle(side2, "direction", "ltr");
+      this.renderer.setStyle(content, "direction", "ltr");
     } else {
       // Switch to RTL
       this.renderer.setAttribute(htmlElement, "direction", "rtl");
@@ -54,6 +58,7 @@ export class HeaderBarComponent implements OnInit {
       this.renderer.setStyle(header, "direction", "rtl");
       this.renderer.setStyle(side, "direction", "rtl");
       this.renderer.setStyle(side2, "direction", "rtl");
+      this.renderer.setStyle(content, "direction", "rtl");
     }
     // for temp
 
