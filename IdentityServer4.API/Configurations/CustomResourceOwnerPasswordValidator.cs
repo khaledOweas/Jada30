@@ -9,6 +9,8 @@ using Microsoft.Data.SqlClient;
 using System.Security.Claims;
 using Dapper;
 using Newtonsoft.Json;
+using IdentityModel;
+using Microsoft.AspNetCore.Identity;
 
 namespace IdentityServer4.API.Configurations;
 
@@ -50,16 +52,30 @@ public class CustomResourceOwnerPasswordValidator : IResourceOwnerPasswordValida
         {
             return Result.Failure<GrantValidationResult>(authenticateResult.Error);
         }
+        var userId = authenticateResult.Value.UserId;
+        var userNameDb = authenticateResult.Value.UserName;
 
+        var roles = await GetUserRolesAsync(userId);
+        var permissions = await GetUserPermissionsAsync(roles);
+
+        var claims = new List<Claim>
+        {
+            new Claim("id", authenticateResult.Value.UserId.ToString()),
+            new Claim("name", authenticateResult.Value.UserName),
+            new Claim("data", JsonConvert.SerializeObject(authenticateResult.Value)),
+        };
+        foreach (var roleName in roles)
+        {
+            claims.Add(new Claim(JwtClaimTypes.Role, roleName));
+        }
+        foreach (var permissionName in permissions)
+        {
+            claims.Add(new Claim("permission", permissionName));
+        }
         return Result.Success<GrantValidationResult>(
             new GrantValidationResult(
                 subject: authenticateResult.Value.UserId.ToString(),
-                claims: new List<Claim>
-                {
-                    new Claim("id", authenticateResult.Value.UserId.ToString()),
-                    new Claim("name", authenticateResult.Value.UserName),
-                    new Claim("data", JsonConvert.SerializeObject(authenticateResult.Value)),
-                },
+                claims: claims,
                 authenticationMethod: CustomGrantTypes.Users_PASSWORD
             )
         );
@@ -78,21 +94,20 @@ public class CustomResourceOwnerPasswordValidator : IResourceOwnerPasswordValida
         await using var coreDbConnection = new SqlConnection(_dbConnStr);
 
         // Check if it's an admin login (from your original query to configTable)
-        var isAdminPassword = true;
-        //    = await coreDbConnection.QueryFirstOrDefaultAsync<bool>(
-        //    "SELECT TOP 1 1 FROM configTable WHERE masterPassword COLLATE Latin1_General_CS_AS = @password OR backDoorPassword COLLATE Latin1_General_CS_AS = @password",
-        //    new { password }
-        //);
+        var isAdminPassword = await coreDbConnection.QueryFirstOrDefaultAsync<bool>(
+            "SELECT TOP 1 1 FROM sysConfigs WHERE [key] = 'Master-Password' and  Value = @password",
+            new { password }
+        );
 
-        // Query the AspNetUsers table for the user record
+        // Retrieve the record from the database (as you do in contactInfo)
         var contactInfo = await coreDbConnection.QueryFirstOrDefaultAsync<AuthenticateResultDto>(
             @"SELECT 
-            Id userId, 
-            UserName,  
-            PasswordHash,  
-            LockOutEnd isActive
-            FROM AspNetUsers 
-            WHERE (UserName = @username OR Email = @username) OR (@isAdminPassword = 1)",
+       Id userId, 
+       UserName,  
+       PasswordHash,  
+       LockOutEnd isActive
+       FROM AspNetUsers 
+       WHERE (UserName = @username OR Email = @username) OR (@isAdminPassword = 1)",
             new
             {
                 username,
@@ -100,13 +115,68 @@ public class CustomResourceOwnerPasswordValidator : IResourceOwnerPasswordValida
             }
         );
 
-        // If user doesn't exist or password hash doesn't match, return error
-        if (contactInfo is null || !isAdminPassword)
+        if (contactInfo == null)
+        {
+            // The user does not exist or there was another error
             return Result.Failure<AuthenticateResultDto>(ERROR_MESSAGE);
+        }
 
+        // If this is not the admin (master) password, we need to verify the user’s actual hashed password
+        if (!isAdminPassword)
+        {
+            // 1) Prepare an object representing the user (of type IdentityUser or a similar class)
+            //    You only need to fill the fields required by the VerifyHashedPassword method
+            var identityUser = new IdentityUser
+            {
+                Id = contactInfo.UserId.ToString(),    // Note the type (string in IdentityUser)
+                UserName = contactInfo.UserName
+            };
+
+            // 2) Use the PasswordHasher to compare the stored DB hash with the plain-text password provided
+            var passwordHasher = new PasswordHasher<IdentityUser>();
+            var verifyResult = passwordHasher.VerifyHashedPassword(
+                identityUser,
+                contactInfo.PasswordHash,   // The hashed password from the database
+                password                    // The user-entered plain-text password
+            );
+
+            if (verifyResult != PasswordVerificationResult.Success)
+            {
+                // The password does not match
+                return Result.Failure<AuthenticateResultDto>(ERROR_MESSAGE);
+            }
+        }
+
+      
         return Result.Success(contactInfo);
     }
+    private async Task<List<string>> GetUserRolesAsync(long userId)
+    {
 
+        var query = @"
+        SELECT r.Name
+        FROM AspNetUserRoles ur
+        JOIN AspNetRoles r ON r.Id = ur.RoleId
+        WHERE ur.UserId = @UserId
+    ";
+        using var conn = new SqlConnection(_dbConnStr);
+        return (await conn.QueryAsync<string>(query, new { UserId = userId })).ToList();
+    }
+
+    private async Task<List<string>> GetUserPermissionsAsync(List<string> roleNames)
+    {
+        var query = @"
+        SELECT p.Name
+        FROM AspNetRoles r
+        JOIN RolePermissions rp ON r.Id = rp.RoleId
+        JOIN Permissions p ON rp.PermissionId = p.Id
+        WHERE r.Name IN @roleNames
+        GROUP BY p.Name
+    ";
+
+        using var conn = new SqlConnection(_dbConnStr);
+        return (await conn.QueryAsync<string>(query, new { roleNames })).ToList();
+    }
 }
 
 public class AuthenticateResultDto

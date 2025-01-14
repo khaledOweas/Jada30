@@ -1,4 +1,5 @@
-﻿using Identity.Domain.Entities.System;
+﻿
+using Identity.Domain.Entities.System;
 using Identity.Infrastructure.Models;
 
 using Microsoft.AspNetCore.Http;
@@ -17,6 +18,9 @@ namespace Identity.Infrastructure.Data
         }
 
         public DbSet<SysConfig> SysConfigs { get; set; }
+
+        public DbSet<Permission> Permissions { get; set; }
+        public DbSet<RolePermission> RolePermissions { get; set; }
         public IdentityContext()
         {
         }
@@ -32,6 +36,28 @@ namespace Identity.Infrastructure.Data
                 entity.Property(e => e.Key).IsRequired();
                 entity.Property(e => e.Value).IsRequired();
             });
+
+
+            modelBuilder.Entity<SysConfig>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Key).IsRequired();
+                entity.Property(e => e.Value).IsRequired();
+            });
+
+            modelBuilder.Entity<RolePermission>()
+                .HasKey(rp => new { rp.RoleId, rp.PermissionId });
+
+            modelBuilder.Entity<RolePermission>()
+                .HasOne(rp => rp.Role)
+                .WithMany(r => r.RolePermissions)
+                .HasForeignKey(rp => rp.RoleId);
+
+            modelBuilder.Entity<RolePermission>()
+                .HasOne(rp => rp.Permission)
+                .WithMany(p => p.RolePermissions)
+                .HasForeignKey(rp => rp.PermissionId);
+
         }
     }
 
