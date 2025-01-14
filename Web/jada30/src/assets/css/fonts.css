@@ -1,0 +1,140 @@
+/* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: 'tajawal-black';
+  src: url('./../fonts/Tajawal/Tajawal-Medium.ttf') format('truetype');
+}
+
+
+
+p-dropdown ol,
+ul,
+.p-element .p-multiselect-label-container {
+  padding-right: 0rem !important;
+  padding-left: 0rem !important;
+  font-family: "tajawal-black" !important;
+  font-weight: bolder !important;
+
+}
+
+.taj-font,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+form button,
+form input,
+p-datatable,
+ng-template,
+p-multiselect,
+td,
+.p-element .p-dropdown-label,
+.p-dropdown-label,
+button {
+  font-family: "tajawal-black" !important;
+  font-weight: bolder !important;
+}
+
+
+
+i,
+.fa,
+.material-icons,
+.icon .ki-duotone,
+.menu-icon {
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  font-family: Inter, Helvetica, "sans-serif" !important;
+}
+
+
+
+.datatable-url {
+  color: deepskyblue;
+  cursor: pointer;
+  transition: transform .2s;
+}
+
+.datatable-url:hover {
+  color: rgb(0, 106, 141);
+}
+
+.p-datatable .p-datatable-tbody>tr :hover {
+  font-weight: bolder;
+}
+
+
+
+.p-datatable-header input {
+  display: block;
+  width: 100%;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.p-datatable .p-datatable-header {
+  color: #2479cd;
+  background: none !important;
+  border: none !important;
+  border-width: 1px 0 1px 0;
+  padding: 1px 0px 6px 0px;
+}
+
+.p-datatable .p-datatable-tbody>tr {
+  color: black;
+}
+
+.p-datatable-header input {
+  border-radius: 7px;
+}
+
+.p-dropdown ul {
+  padding-left: 0rem !important;
+}
+
+.p-datatable ul {
+  padding-left: 0rem !important;
+}
+
+
+.p-datatable .p-datatable-thead>tr>th {
+  text-align: right !important;
+  font-family: "tajawal-black" !important;
+  background-color: #0D0E12 !important;
+  color: white;
+}
+
+.p-datatable .p-datatable-tbody>tr>td {
+  text-align: right !important;
+  display: table-cell !important;
+  padding: 3px !important;
+  border-bottom: 1px black solid;
+}
+
+.p-datatable .p-paginator-bottom,
+p-splitbutton {
+  direction: ltr;
+}
+
+.p-paginator {
+  direction: ltr;
+}
+
+.p-datatable .p-datatable-thead>tr :first-child {
+
+  border-radius: 0px 9px 9px 0px;
+}
+
+.p-datatable .p-datatable-thead>tr :last-child {
+
+  border-radius: 9px 0px 0px 9px;
+}

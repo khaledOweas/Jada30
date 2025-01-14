@@ -1,23 +1,44 @@
 import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
-import { Router, RouterOutlet, NavigationEnd } from "@angular/router";
+import { RouterOutlet } from "@angular/router";
+import { CustomToasterService } from "./Core/Services/custom-toaster.service";
+import { MessageService } from "primeng/api";
+import { ToastModule, ToastPositionType } from "primeng/toast";
+import { TranslationService } from "./Core/Services/translation.service";
+import { locale as enLang } from "./Core/i18n/vocabs/en";
+import { locale as arLang } from "./Core/i18n/vocabs/ar";
 
 @Component({
   selector: "app-root",
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, ToastModule],
+  providers: [CustomToasterService, MessageService],
   templateUrl: "./app.component.html",
   styleUrl: "./app.component.css",
   changeDetection: ChangeDetectionStrategy.Default
 })
 export class AppComponent implements OnInit {
-  constructor(private router: Router) {}
+  constructor(
+    private ct: CustomToasterService,
+    private messageService: MessageService,
+    private translationService: TranslationService
+  ) {
+    this.translationService.loadTranslations(arLang, enLang);
+  }
 
   ngOnInit(): void {
-    this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd) {
-        this.reinitializeMetronicScripts();
-      }
+    this.subscribeToToasters();
+  }
+
+  subscribeToToasters() {
+    this.ct.toasterListener$.subscribe((msg: any) => {
+      if (msg.message?.length > 5) this.addLogMessage(msg.title, msg.message, msg.style);
     });
   }
-  private reinitializeMetronicScripts() {}
+  addLogMessage(title: string, msg: string, severity: string) {
+    if (localStorage.getItem("dir")! === "ar") {
+      this.messageService.add({ key: "tl", severity: severity, summary: title, detail: msg, life: 8000 });
+    } else {
+      this.messageService.add({ key: "rl", severity: severity, summary: title, detail: msg, life: 8000 });
+    }
+  }
 }

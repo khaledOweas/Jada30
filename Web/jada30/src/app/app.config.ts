@@ -5,6 +5,7 @@ import { HashLocationStrategy, LocationStrategy } from "@angular/common";
 import { provideRouter } from "@angular/router";
 import { provideClientHydration } from "@angular/platform-browser";
 import { provideAnimations } from "@angular/platform-browser/animations";
+import { provideTranslateService } from "@ngx-translate/core";
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -12,7 +13,9 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideClientHydration(),
     { provide: LocationStrategy, useClass: HashLocationStrategy },
-
+    provideTranslateService({
+      defaultLanguage: "ar"
+    }),
     provideAnimations()
   ]
 };
