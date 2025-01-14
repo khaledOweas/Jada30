@@ -6,6 +6,8 @@ using Identity.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Identity.Framework.Cache;
 using Redis;
+using Identity.Common.User;
+using AutoMapper;
 
 namespace Identity.Api.Controllers
 {
@@ -17,26 +19,29 @@ namespace Identity.Api.Controllers
         private readonly RoleManager<ApplicationRole> _roleManager;
         private readonly IdentityContext _context;
         private readonly ICacheService _cacheService;
+        private readonly IMapper _mapper;
 
-        public UserManagementController(UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager, IdentityContext context, ICacheService cacheService)
+        public UserManagementController(UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager, IdentityContext context, ICacheService cacheService, IMapper mapper)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _context = context;
             _cacheService = cacheService;
+            _mapper = mapper;
         }
 
         //
         // a new user 
         [HttpPost("users")]
-        public async Task<BaseResponse<ApplicationUser>> CreateUser([FromBody] ApplicationUser user, string password)
+        public async Task<BaseResponse<ApplicationUser>> CreateUser([FromBody] CreateUserDto user)
         {
             try
             {
-                var result = await _userManager.CreateAsync(user, password);
+                var userEntity = new ApplicationUser { UserName = user.UserName, Email = user.Email };
+                var result = await _userManager.CreateAsync(userEntity, user.Password);
                 if (result.Succeeded)
                 {
-                    return new SuccessResponse<ApplicationUser>("User created successfully.", user);
+                    return new SuccessResponse<ApplicationUser>("User created successfully.", userEntity);
                 }
 
                 var errors = result.Errors.Select(e => new Errors { Key = e.GetHashCode(), Value = e.Description }).ToList();
