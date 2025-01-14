@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace Identity.Common.User
 {
-    internal class CreateUserDto
+    public class UpdateUserDto
     {
+        public string? UserName { get; set; }
+        public string? Email { get; set; }
     }
 }

@@ -8,6 +8,8 @@ using Identity.Framework.Cache;
 using Redis;
 using Identity.Common.User;
 using AutoMapper;
+using Identity.Common.Role;
+using Identity.Common.Permission;
 
 namespace Identity.Api.Controllers
 {
@@ -103,7 +105,7 @@ namespace Identity.Api.Controllers
 
 
         [HttpPut("users/{id}")]
-        public async Task<BaseResponse<ApplicationUser>> UpdateUser(long id, [FromBody] ApplicationUser user)
+        public async Task<BaseResponse<ApplicationUser>> UpdateUser(long id, [FromBody] UpdateUserDto user)
         {
             try
             {
@@ -218,14 +220,15 @@ namespace Identity.Api.Controllers
 
 
         [HttpPost("roles")]
-        public async Task<BaseResponse<ApplicationRole>> CreateRole([FromBody] ApplicationRole role)
+        public async Task<BaseResponse<ApplicationRole>> CreateRole([FromBody] CreateRoleDto role)
         {
             try
             {
-                var result = await _roleManager.CreateAsync(role);
+                var roleEntity = new ApplicationRole { Name = role.RoleName};
+                var result = await _roleManager.CreateAsync(roleEntity);
                 if (result.Succeeded)
                 {
-                    return new SuccessResponse<ApplicationRole>("Role created successfully.", role);
+                    return new SuccessResponse<ApplicationRole>("Role created successfully.", roleEntity);
                 }
 
                 var errors = result.Errors.Select(e => new Errors { Key = e.GetHashCode(), Value = e.Description }).ToList();
@@ -256,13 +259,14 @@ namespace Identity.Api.Controllers
         #region Permissions
 
         [HttpPost("permissions")]
-        public async Task<BaseResponse<Permission>> CreatePermission([FromBody] Permission permission)
+        public async Task<BaseResponse<Permission>> CreatePermission([FromBody] CreatePermissionDto permission)
         {
             try
             {
-                _context.Permissions.Add(permission);
+                var permissionEntity = _mapper.Map<Permission>(permission);
+                _context.Permissions.Add(permissionEntity);
                 await _context.SaveChangesAsync();
-                return new SuccessResponse<Permission>("Permission created successfully.", permission);
+                return new SuccessResponse<Permission>("Permission created successfully.", permissionEntity);
             }
             catch (Exception ex)
             {

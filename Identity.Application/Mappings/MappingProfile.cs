@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Identity.Common.Permission;
+using Identity.Infrastructure.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +14,7 @@ namespace Identity.Application.Mappings
     {
         public MappingProfile()
         {
-            CreateMap<AddAssetDto, Asset>().ReverseMap();
+            CreateMap<CreatePermissionDto, Permission>().ReverseMap();
 
         }
     }

@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Identity.Common.Role
 {
-    internal class CreateRoleDto
+    public class CreateRoleDto
     {
+        public string RoleName { get; set; }
     }
 }
