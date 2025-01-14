@@ -2,10 +2,7 @@ using IdentityModel;
 
 using IdentityServer4.API.Configurations;
 using IdentityServer4.API.Dto;
-using IdentityServer4.Services;
 using IdentityServer4.Validation;
-
-using Microsoft.AspNetCore.Builder;
 
 using NLog;
 using NLog.Web;
@@ -163,13 +160,13 @@ try
                     return;
                 }
 
-                var _tokenValidator = context.RequestServices.GetRequiredService<ITokenValidator>();
+                var tokenValidator = context.RequestServices.GetRequiredService<ITokenValidator>();
 
                 var isValid = false;
 
                 try
                 {
-                    var result = await _tokenValidator.ValidateAccessTokenAsync(token);
+                    var result = await tokenValidator.ValidateAccessTokenAsync(token);
 
                     if (result.IsError)
                     {
