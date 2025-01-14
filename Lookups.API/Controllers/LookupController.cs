@@ -13,9 +13,9 @@ public class LookupController : ControllerBase
     private readonly ILogger<LookupController> _logger;
     private readonly LookupsContext _context;
 
-    public LookupController(LookupsContext _context, ILogger<LookupController> logger)
+    public LookupController(LookupsContext context, ILogger<LookupController> logger)
     {
-        this._context = _context;
+        this._context = context;
         _logger = logger;
     }
 
@@ -112,6 +112,7 @@ public class LookupController : ControllerBase
                 return new FailedResponse<Domain.Entities.Lookup>($"Lookup with code '{code}' not found.");
             }
 
+            // this needs autoMapper . and working with DTO . instead of Entities Class 
             existingLookup.Name = updatedLookup.Name;
             existingLookup.Description = updatedLookup.Description;
             existingLookup.InternalRef = updatedLookup.InternalRef;
