@@ -1,3 +1,5 @@
+using AutoMapper;
+using Lookup.Common;
 using Lookup.Common.BaseResponse;
 
 using Lookups.Infrastructure.Data;
@@ -12,96 +14,121 @@ public class LookupController : ControllerBase
 
     private readonly ILogger<LookupController> _logger;
     private readonly LookupsContext _context;
+    private readonly IMapper _Mapper;
 
-    public LookupController(LookupsContext context, ILogger<LookupController> logger)
+    public LookupController(LookupsContext context, ILogger<LookupController> logger, IMapper mapper)
     {
         this._context = context;
         _logger = logger;
+        _Mapper = mapper;
     }
 
     [HttpGet]
-    public BaseResponse<List<Domain.Entities.Lookup>> GetAllCategory()
+    public BaseResponse<List<GetLookupDto>> GetAllCategory()
     {
         try
         {
             var lookups = _context.Lookups.Where(x => x.InternalRef == null).ToList();
-            return new SuccessResponse<List<Domain.Entities.Lookup>>("Lookups retrieved successfully.", lookups);
+            var mapper = _Mapper.Map<List<GetLookupDto>>(lookups);
+            return new SuccessResponse<List<GetLookupDto>>("Lookups retrieved successfully.", mapper); // Adjusted type here
         }
         catch (Exception ex)
         {
-            return new FailedResponse<List<Domain.Entities.Lookup>>("An error occurred while retrieving lookups.", new List<Errors> { new Errors { Key = ex.GetHashCode(), Value = ex.Message } });
+            return new FailedResponse<List<GetLookupDto>>(
+                "An error occurred while retrieving lookups.",
+                new List<Errors>
+                {
+                new Errors { Key = ex.GetHashCode(), Value = ex.Message }
+                });
         }
     }
+
     [HttpGet]
-    public BaseResponse<List<Domain.Entities.Lookup>> GetAll()
+    public BaseResponse<List<GetLookupDto>> GetAll()
     {
         try
         {
             var lookups = _context.Lookups.ToList();
-            return new SuccessResponse<List<Domain.Entities.Lookup>>("Lookups retrieved successfully.", lookups);
+            var mapper = _Mapper.Map<List<GetLookupDto>>(lookups);
+            return new SuccessResponse<List<GetLookupDto>>("Lookups retrieved successfully.", mapper); // Adjusted type here
         }
         catch (Exception ex)
         {
-            return new FailedResponse<List<Domain.Entities.Lookup>>("An error occurred while retrieving lookups.", new List<Errors> { new Errors { Key = ex.GetHashCode(), Value = ex.Message } });
+            return new FailedResponse<List<GetLookupDto>>(
+                "An error occurred while retrieving lookups.",
+                new List<Errors>
+                {
+                new Errors { Key = ex.GetHashCode(), Value = ex.Message }
+                });
         }
     }
 
     [HttpGet("{refCode}")]
-    public BaseResponse<List<Domain.Entities.Lookup>> GetAll(string refCode)
+    public BaseResponse<List<GetLookupDto>> GetAll(string refCode)
     {
         try
         {
             var lookups = _context.Lookups.Where(x => x.InternalRef == refCode).ToList();
-            return new SuccessResponse<List<Domain.Entities.Lookup>>("Lookups retrieved successfully.", lookups);
+            var mapper = _Mapper.Map<List<GetLookupDto>>(lookups);
+            return new SuccessResponse<List<GetLookupDto>>("Lookups retrieved successfully.", mapper); // Adjusted type here
         }
         catch (Exception ex)
         {
-            return new FailedResponse<List<Domain.Entities.Lookup>>("An error occurred while retrieving lookups by reference code.", new List<Errors> { new Errors { Key = ex.GetHashCode(), Value = ex.Message } });
+            return new FailedResponse<List<GetLookupDto>>(
+                "An error occurred while retrieving lookups.",
+                new List<Errors>
+                {
+                new Errors { Key = ex.GetHashCode(), Value = ex.Message }
+                });
         }
     }
 
     [HttpGet("{code}")]
-    public BaseResponse<Domain.Entities.Lookup> Get(string code)
+    public BaseResponse<GetLookupDto> Get(string code)
     {
         try
         {
             var lookup = _context.Lookups.FirstOrDefault(x => x.InternalCode == code);
-            if (lookup == null)
+            var mapper = _Mapper.Map<GetLookupDto>(lookup);
+
+            if (mapper == null)
             {
-                return new FailedResponse<Domain.Entities.Lookup>($"Lookup with code '{code}' not found.");
+                return new FailedResponse<GetLookupDto>($"Lookup with code '{code}' not found.");
             }
 
-            return new SuccessResponse<Domain.Entities.Lookup>("Lookup retrieved successfully.", lookup);
+            return new SuccessResponse<GetLookupDto>("Lookup retrieved successfully.", mapper);
         }
         catch (Exception ex)
         {
-            return new FailedResponse<Domain.Entities.Lookup>("An error occurred while retrieving the lookup.", new List<Errors> { new Errors { Key = ex.GetHashCode(), Value = ex.Message } });
+            return new FailedResponse<GetLookupDto>("An error occurred while retrieving the lookup.", new List<Errors> { new Errors { Key = ex.GetHashCode(), Value = ex.Message } });
         }
     }
 
     [HttpPost]
-    public BaseResponse<Domain.Entities.Lookup> CreateLookup([FromBody] Domain.Entities.Lookup lookup)
+    public BaseResponse<GetLookupDto> CreateLookup([FromBody] AddLookupDto lookup)
     {
         try
         {
             if (lookup == null)
             {
-                return new FailedResponse<Domain.Entities.Lookup>("Lookup data cannot be null.");
+                return new FailedResponse<GetLookupDto>("Lookup data cannot be null.");
             }
+            var newLookup = _Mapper.Map<Domain.Entities.Lookup>(lookup);
 
-            _context.Lookups.Add(lookup);
+            _context.Lookups.Add(newLookup);
             _context.SaveChanges();
+            var mapper = _Mapper.Map<GetLookupDto>(newLookup);
 
-            return new SuccessResponse<Domain.Entities.Lookup>("Lookup created successfully.", lookup);
+            return new SuccessResponse<GetLookupDto>("Lookup created successfully.", mapper);
         }
         catch (Exception ex)
         {
-            return new FailedResponse<Domain.Entities.Lookup>("An error occurred while creating the lookup.", new List<Errors> { new Errors { Key = ex.GetHashCode(), Value = ex.Message } });
+            return new FailedResponse<GetLookupDto>("An error occurred while creating the lookup.", new List<Errors> { new Errors { Key = ex.GetHashCode(), Value = ex.Message } });
         }
     }
 
     [HttpPut("{code}")]
-    public BaseResponse<Domain.Entities.Lookup> UpdateLookup(string code, [FromBody] Domain.Entities.Lookup updatedLookup)
+    public BaseResponse<GetLookupDto> UpdateLookup(string code, [FromBody] UpdateLookupDto updatedLookup)
     {
         try
         {
@@ -109,7 +136,7 @@ public class LookupController : ControllerBase
 
             if (existingLookup == null)
             {
-                return new FailedResponse<Domain.Entities.Lookup>($"Lookup with code '{code}' not found.");
+                return new FailedResponse<GetLookupDto>($"Lookup with code '{code}' not found.");
             }
 
             // this needs autoMapper . and working with DTO . instead of Entities Class 
@@ -120,11 +147,13 @@ public class LookupController : ControllerBase
 
             _context.SaveChanges();
 
-            return new SuccessResponse<Domain.Entities.Lookup>("Lookup updated successfully.", existingLookup);
+            var mapper = _Mapper.Map<GetLookupDto>(existingLookup);
+
+            return new SuccessResponse<GetLookupDto>("Lookup updated successfully.", mapper);
         }
         catch (Exception ex)
         {
-            return new FailedResponse<Domain.Entities.Lookup>("An error occurred while updating the lookup.", new List<Errors> { new Errors { Key = ex.GetHashCode(), Value = ex.Message } });
+            return new FailedResponse<GetLookupDto>("An error occurred while updating the lookup.", new List<Errors> { new Errors { Key = ex.GetHashCode(), Value = ex.Message } });
         }
     }
 

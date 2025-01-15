@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-
 using Serilog;
 
 
@@ -21,6 +20,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddHttpContextAccessor();
+
+builder.Services.AddAutoMapper(typeof(Lookups.Application.Mappings.MappingProfile));
+
 
 builder.Services.AddDbContext<LookupsContext>(options =>
 {
@@ -144,7 +146,7 @@ app.Use(async (context, next) =>
         await context.Response.WriteAsync($"Access denied: Direct access is not allowed. {forwardedFor}");
         return;
     }
-    await next.Invoke();
+    await next();
 });
 
 app.UseHttpsRedirection();

@@ -14,6 +14,7 @@
     <ItemGroup>
         <ProjectReference Include="..\Jada30.Logging]\Jada30.Logging.csproj" />
         <ProjectReference Include="..\Lookup.Common\Lookup.Common.csproj" />
+        <ProjectReference Include="..\Lookups.Application\Lookups.Application.csproj" />
         <ProjectReference Include="..\Lookups.Infrastructure\Lookups.Infrastructure.csproj" />
     </ItemGroup>
     <ItemGroup>
