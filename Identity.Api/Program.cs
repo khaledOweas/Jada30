@@ -10,8 +10,11 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+
 using Redis;
+
 using Serilog;
+
 using StackExchange.Redis;
 
 
@@ -39,7 +42,9 @@ builder.Services.AddIdentity<ApplicationUser, ApplicationRole>()
     .AddDefaultTokenProviders();
 
 
-builder.Services.AddScoped<ICacheService, CacheService>();      
+builder.Services.AddScoped<ICacheService, CacheService>();
+
+
 #region Logginig service
 builder.Services.AddExceptionLogging();
 LoggingConfigurationExtensions.ConfigureLogging();
@@ -93,18 +98,31 @@ static void ConfigureAuthentication(WebApplicationBuilder builder)
             }
         );
 }
+
+builder.Services.AddCors(x =>
+{
+    x.AddDefaultPolicy(y =>
+    {
+        var allowedCorsOrigin = builder
+            .Configuration.GetSection("allowedCorsOrigin")
+            .Get<List<string>>();
+        if (allowedCorsOrigin == null || allowedCorsOrigin.Count == 0)
+        {
+            y.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+        }
+        else
+        {
+            y.WithOrigins(allowedCorsOrigin.ToArray())
+                .SetIsOriginAllowedToAllowWildcardSubdomains()
+                .AllowAnyMethod()
+                .AllowAnyHeader();
+        }
+    });
+});
+
 #endregion
 
-//builder.Services.AddCors(options =>
-//{
-//    options.AddPolicy("AllowSpecificOrigin", policy =>
-//    {
-//        policy.WithOrigins("*") // Ocelot Gateway URL
-//              .AllowAnyMethod()
-//              .AllowAnyHeader()
-//              .AllowCredentials();
-//    });
-//});
+
 var app = builder.Build();
 
 // Seed the database
@@ -131,26 +149,24 @@ using (var scope = app.Services.CreateScope())
 }
 
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-///app.UseCors("AllowSpecificOrigin");
 
-//app.Use(async (context, next) =>
-//{
-//    var forwardedFor = context.Request.Headers["X-Secure-Gateway-Value"].FirstOrDefault();
-//    var allowedGatewayIp = "qlw34umoWMTYLOQI238FY45O1QTWEf2t412fmwsd1m234";
-//    if (string.IsNullOrEmpty(forwardedFor) || !forwardedFor.Contains(allowedGatewayIp))
-//    {
-//        context.Response.StatusCode = StatusCodes.Status403Forbidden;
-//        await context.Response.WriteAsync($"Access denied: Direct access is not allowed. {forwardedFor}");
-//        return;
-//    }
-//    await next.Invoke();
-//});
+app.Use(async (context, next) =>
+{
+    var forwardedFor = context.Request.Headers["X-Secure-Gateway-Value"].FirstOrDefault();
+    var allowedGatewayIp = "qlw34umoWMTYLOQI238FY45O1QTWEf2t412fmwsd1m234";
+    if (string.IsNullOrEmpty(forwardedFor) || !forwardedFor.Contains(allowedGatewayIp))
+    {
+        context.Response.StatusCode = StatusCodes.Status403Forbidden;
+        await context.Response.WriteAsync($"Access denied: Direct access is not allowed. {forwardedFor}");
+        return;
+    }
+    await next.Invoke();
+});
 
 app.UseHttpsRedirection();
 

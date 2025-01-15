@@ -2,7 +2,7 @@ import { Component } from "@angular/core";
 import { Router } from "@angular/router";
 import { LoginService } from "../services/login.service";
 import { FormsModule } from "@angular/forms";
-import { HttpClient } from "@angular/common/http";
+import { jwtDecode } from "jwt-decode";
 
 @Component({
   selector: "app-auth-sign-in",
@@ -23,7 +23,13 @@ export class AuthSignInComponent {
 
     this.loginService.login(this.email, this.password).subscribe(
       (response) => {
-        console.log("Login successful:", response);
+        localStorage.setItem("token", response.access_token);
+        localStorage.setItem(
+          "user",
+          JSON.stringify({
+            nameAr: JSON.parse(JSON.parse(JSON.stringify(jwtDecode(response.access_token))).data).UserNameAr
+          })
+        );
         // this.router.navigate(["/home/test"]);
         window.location.href = "/home/test";
       },

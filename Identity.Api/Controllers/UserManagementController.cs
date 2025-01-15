@@ -8,6 +8,7 @@ using Identity.Framework.Cache;
 using Redis;
 using Identity.Common.User;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Identity.Api.Controllers
 {
@@ -59,7 +60,7 @@ namespace Identity.Api.Controllers
         public async Task<IActionResult> test()
         {
             var obj = await _cacheService.GetObject<string>("test");
-            if(obj == null)
+            if (obj == null)
             {
                 await _cacheService.SetObject("test", "test");
             }

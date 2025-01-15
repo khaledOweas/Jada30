@@ -61,7 +61,7 @@ public class CustomResourceOwnerPasswordValidator : IResourceOwnerPasswordValida
         var claims = new List<Claim>
         {
             new Claim("id", authenticateResult.Value.UserId.ToString()),
-            new Claim("name", authenticateResult.Value.UserName),
+            new Claim("name", authenticateResult.Value.UserName), 
             new Claim("data", JsonConvert.SerializeObject(authenticateResult.Value)),
         };
         foreach (var roleName in roles)
@@ -102,12 +102,13 @@ public class CustomResourceOwnerPasswordValidator : IResourceOwnerPasswordValida
         // Retrieve the record from the database (as you do in contactInfo)
         var contactInfo = await coreDbConnection.QueryFirstOrDefaultAsync<AuthenticateResultDto>(
             @"SELECT 
-       Id userId, 
-       UserName,  
-       PasswordHash,  
-       LockOutEnd isActive
-       FROM AspNetUsers 
-       WHERE (UserName = @username OR Email = @username) OR (@isAdminPassword = 1)",
+               Id userId, 
+               UserName,        
+               UserNameAr, 
+               PasswordHash,  
+               LockOutEnd isActive
+               FROM AspNetUsers 
+               WHERE (UserName = @username OR Email = @username) and (@isAdminPassword = 1)",
             new
             {
                 username,
@@ -147,7 +148,7 @@ public class CustomResourceOwnerPasswordValidator : IResourceOwnerPasswordValida
             }
         }
 
-      
+
         return Result.Success(contactInfo);
     }
     private async Task<List<string>> GetUserRolesAsync(long userId)
@@ -184,6 +185,7 @@ public class AuthenticateResultDto
     public long UserId { get; set; }
     public string PasswordHash { get; set; }
     public string UserName { get; set; }
+    public string UserNameAr { get; set; }
     public bool isActive { get; set; }
 }
 

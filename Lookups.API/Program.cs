@@ -80,6 +80,29 @@ static void ConfigureAuthentication(WebApplicationBuilder builder)
             }
         );
 }
+
+
+builder.Services.AddCors(x =>
+{
+    x.AddDefaultPolicy(y =>
+    {
+        var allowedCorsOrigin = builder
+            .Configuration.GetSection("allowedCorsOrigin")
+            .Get<List<string>>();
+        if (allowedCorsOrigin == null || allowedCorsOrigin.Count == 0)
+        {
+            y.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+        }
+        else
+        {
+            y.WithOrigins(allowedCorsOrigin.ToArray())
+                .SetIsOriginAllowedToAllowWildcardSubdomains()
+                .AllowAnyMethod()
+                .AllowAnyHeader();
+        }
+    });
+});
+
 #endregion
 
 

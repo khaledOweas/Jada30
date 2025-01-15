@@ -56,4 +56,7 @@ export class TranslationService {
       return localStorage.getItem(LOCALIZATION_LOCAL_STORAGE_KEY) || this.translate.getDefaultLang();
     }
   }
+  get(path: string): string {
+    return this.translate.instant(path);
+  }
 }

@@ -121,6 +121,7 @@ export const locale = {
       }
     },
     SHARED: {
+      Id: "Id Code",
       TEST: "Test For English KeyWords",
       tools: "tools",
       ArabicName: "Arabic Name",
@@ -200,8 +201,6 @@ export const locale = {
     Services: {},
     Users: {
       UserName: "User Name",
-      UserNameorg: "Organization Name",
-      UserNamedoc: "Doctor Name",
       UserNamevis: "Clint Name",
       Mobile: "Mobile Number",
       Type: "Client Type",

@@ -1,41 +1,5 @@
 {
 	"Routes": [
-		// Existing routes
-		{
-			"UpstreamPathTemplate": "/WF/Get",
-			"UpstreamHttpMethod": [ "Get" ],
-			"DownstreamPathTemplate": "/WF/Get",
-			"DownstreamScheme": "https",
-			"DownstreamHostAndPorts": [
-				{
-					"Host": "localhost",
-					"Port": "7187"
-				}
-			],
-			"SwaggerKey": "Identity",
-			"AuthenticationOptions": {
-				"AuthenticationProviderKey": "Bearer",
-				"AllowedScopes": [ "read", "write" ]
-			}
-		},
-		{
-			"UpstreamPathTemplate": "/WF/GetAll",
-			"UpstreamHttpMethod": [ "Get" ],
-			"DownstreamPathTemplate": "/WF/GetAll",
-			"DownstreamScheme": "https",
-			"DownstreamHostAndPorts": [
-				{
-					"Host": "localhost",
-					"Port": "7187"
-				}
-			],
-			"SwaggerKey": "Identity",
-			"AuthenticationOptions": {
-				"AuthenticationProviderKey": "Bearer",
-				"AllowedScopes": [ "read", "write" ]
-			}
-		},
-
 		// UserManagementController routes
 		// POST /api/UserManagement/users
 		{
@@ -278,6 +242,15 @@
 			]
 		}
 	],
+	"GlobalConfiguration": {
+		"RequestIdKey": "Request-Id",
+		"BaseUrl": "https://localhost:7151",
+		"ServiceDiscoveryProvider": {
+			"Type": "ServiceFabric",
+			"Host": "localhost",
+			"Port": 8500
+		}
+	},
 	"Logging": {
 		"LogLevel": {
 			"Default": "Information",

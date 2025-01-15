@@ -1,5 +1,5 @@
 {
-  "apiUrl": "https://localhost:5291",
+  "apiUrl": "https://localhost:7151",
   "authEndpoint": "https://localhost:5291/connect/token",
   "featureFlags": {
     "enableNewFeature": true

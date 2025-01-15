@@ -60,7 +60,7 @@ builder.Services.AddSwaggerForOcelot(builder.Configuration);
 builder.Logging.AddConsole();
 builder.Logging.SetMinimumLevel(LogLevel.Debug);
 
-builder.Services.AddAuthorization();
+
 #region Authentication Region
 
 ConfigureAuthentication(builder);
@@ -108,11 +108,34 @@ static void ConfigureAuthentication(WebApplicationBuilder builder)
             }
         );
 }
+builder.Services.AddAuthorization();
+builder.Services.AddCors(x =>
+{
+    x.AddDefaultPolicy(y =>
+    {
+        var allowedCorsOrigin = builder
+            .Configuration.GetSection("allowedCorsOrigin")
+            .Get<List<string>>();
+        if (allowedCorsOrigin == null || allowedCorsOrigin.Count == 0)
+        {
+            y.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+        }
+        else
+        {
+            y.WithOrigins(allowedCorsOrigin.ToArray())
+                .SetIsOriginAllowedToAllowWildcardSubdomains()
+                .AllowAnyMethod()
+                .AllowAnyHeader();
+        }
+    });
+});
+
 #endregion
 
 builder.Services.AddOcelot(builder.Configuration);
 
 var app = builder.Build();
+app.UseCors();
 
 app.UseAuthentication();
 app.UseAuthorization();

@@ -6,11 +6,12 @@ import { ToastModule, ToastPositionType } from "primeng/toast";
 import { TranslationService } from "./Core/Services/translation.service";
 import { locale as enLang } from "./Core/i18n/vocabs/en";
 import { locale as arLang } from "./Core/i18n/vocabs/ar";
+import { MainSpinnerComponent } from "./Core/Components/main-spinner/main-spinner.component";
 
 @Component({
   selector: "app-root",
   standalone: true,
-  imports: [RouterOutlet, ToastModule],
+  imports: [RouterOutlet, ToastModule, MainSpinnerComponent],
   providers: [CustomToasterService, MessageService],
   templateUrl: "./app.component.html",
   styleUrl: "./app.component.css",

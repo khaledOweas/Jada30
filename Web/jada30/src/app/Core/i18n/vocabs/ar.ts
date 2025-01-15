@@ -8,25 +8,10 @@ export const locale = {
     MENU: {
       NEW: "جديد",
       ACTIONS: "إجراءات",
-      CREATE_POST: "إنشاء منشور جديد",
       PAGES: "صفحات",
       FEATURES: "الميزات",
       APPS: "تطبيقات",
-      DASHBOARD: "لوحة القيادة",
-      Address: "العناويين",
-      Orginzations: "المؤسسات",
-      Speciality: "التخصصات الطبية",
-      DoctorList: "قائمة الأطباء",
-      Role: "الصلاحيات",
-      HospitalDoctorClinicAvailability: "جدول الأطباء في العيادات",
-      ExamCategory: "تصنيف الاختبار",
-      Exam: "الاختبار",
-      Services: "الخدمات",
-      Users: "العملاء",
-      Doctors: "الأطباء",
-      Sponsores: "المشتركين",
-      ExamList: "قوائم التحاليل و الأشعة",
-      ExamCategoryList: "تصنيفات التحاليل"
+      DASHBOARD: "لوحة القيادة"
     },
     AUTH: {
       GENERAL: {
@@ -121,6 +106,7 @@ export const locale = {
       }
     },
     SHARED: {
+      Id: "الكود التعريفي",
       TEST: "تجربة النصوص العربية",
       tools: "أدوات",
       ArabicName: "الأسم بالعربي",
@@ -200,8 +186,6 @@ export const locale = {
     Services: {},
     Users: {
       UserName: "اسم المستخدم",
-      UserNameorg: "اسم المؤسسة",
-      UserNamedoc: "اسم الطبيب",
       UserNamevis: "اسم الزائر",
       Mobile: "رقم الهاتف",
       Type: "نوع العميل",

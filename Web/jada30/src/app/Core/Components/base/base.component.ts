@@ -1,6 +1,7 @@
-import { Component, Injector } from "@angular/core";
+import { Component, Injector, OnDestroy } from "@angular/core";
 import { CustomToasterService } from "../../Services/custom-toaster.service";
 import { TranslationService } from "../../Services/translation.service";
+import { Subject } from "rxjs";
 
 @Component({
   selector: "app-base",
@@ -9,7 +10,14 @@ import { TranslationService } from "../../Services/translation.service";
   templateUrl: "./base.component.html",
   styleUrl: "./base.component.css"
 })
-export class BaseComponent {
+export class BaseComponent implements OnDestroy {
+  destroyed$ = new Subject<void>();
+
+  ngOnDestroy() {
+    this.destroyed$.next();
+    this.destroyed$.complete();
+  }
+
   ct: CustomToasterService;
   tr: TranslationService;
   lang: string = localStorage.getItem("dir")!;

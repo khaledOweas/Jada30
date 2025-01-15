@@ -8,10 +8,8 @@ import { AppConfigService } from "../../../Core/Services/app-config.service";
 })
 export class LoginService {
   constructor(private http: HttpClient, private configService: AppConfigService) {
-    const config = this.configService.getConfig();
-    console.log("API URL:", config.apiUrl);
-    console.log("Auth Endpoint:", config.authEndpoint);
-    console.log("Feature Flag:", config.featureFlags.enableNewFeature);
+
+
   }
 
   login(username: string, password: string): Observable<any> {
