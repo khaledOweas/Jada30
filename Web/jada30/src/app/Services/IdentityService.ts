@@ -85,7 +85,7 @@ export class IdentityService {
     /**
      * @return OK
      */
-    usersGET(): Observable<ApplicationUserListBaseResponse> {
+    usersGET(): Observable<UserDtoListBaseResponse> {
         let url_ = this.baseUrl + "/api/UserManagement/users";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -104,14 +104,14 @@ export class IdentityService {
                 try {
                     return this.processUsersGET(response_ as any);
                 } catch (e) {
-                    return _observableThrow(e) as any as Observable<ApplicationUserListBaseResponse>;
+                    return _observableThrow(e) as any as Observable<UserDtoListBaseResponse>;
                 }
             } else
-                return _observableThrow(response_) as any as Observable<ApplicationUserListBaseResponse>;
+                return _observableThrow(response_) as any as Observable<UserDtoListBaseResponse>;
         }));
     }
 
-    protected processUsersGET(response: HttpResponseBase): Observable<ApplicationUserListBaseResponse> {
+    protected processUsersGET(response: HttpResponseBase): Observable<UserDtoListBaseResponse> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -122,7 +122,7 @@ export class IdentityService {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ApplicationUserListBaseResponse.fromJS(resultData200);
+            result200 = UserDtoListBaseResponse.fromJS(resultData200);
             return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
@@ -734,122 +734,6 @@ export class IdentityService {
         }
         return _observableOf(null as any);
     }
-
-    /**
-     * @return OK
-     */
-    get(): Observable<WeatherForecast[]> {
-        let url_ = this.baseUrl + "/WF/Get";
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_ : any = {
-            observe: "response",
-            responseType: "blob",
-            headers: new HttpHeaders({
-                "Accept": "text/plain"
-            })
-        };
-
-        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processGet(response_);
-        })).pipe(_observableCatch((response_: any) => {
-            if (response_ instanceof HttpResponseBase) {
-                try {
-                    return this.processGet(response_ as any);
-                } catch (e) {
-                    return _observableThrow(e) as any as Observable<WeatherForecast[]>;
-                }
-            } else
-                return _observableThrow(response_) as any as Observable<WeatherForecast[]>;
-        }));
-    }
-
-    protected processGet(response: HttpResponseBase): Observable<WeatherForecast[]> {
-        const status = response.status;
-        const responseBlob =
-            response instanceof HttpResponse ? response.body :
-            (response as any).error instanceof Blob ? (response as any).error : undefined;
-
-        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            if (Array.isArray(resultData200)) {
-                result200 = [] as any;
-                for (let item of resultData200)
-                    result200!.push(WeatherForecast.fromJS(item));
-            }
-            else {
-                result200 = <any>null;
-            }
-            return _observableOf(result200);
-            }));
-        } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            }));
-        }
-        return _observableOf(null as any);
-    }
-
-    /**
-     * @return OK
-     */
-    getAll(): Observable<WeatherForecast[]> {
-        let url_ = this.baseUrl + "/WF/GetAll";
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_ : any = {
-            observe: "response",
-            responseType: "blob",
-            headers: new HttpHeaders({
-                "Accept": "text/plain"
-            })
-        };
-
-        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processGetAll(response_);
-        })).pipe(_observableCatch((response_: any) => {
-            if (response_ instanceof HttpResponseBase) {
-                try {
-                    return this.processGetAll(response_ as any);
-                } catch (e) {
-                    return _observableThrow(e) as any as Observable<WeatherForecast[]>;
-                }
-            } else
-                return _observableThrow(response_) as any as Observable<WeatherForecast[]>;
-        }));
-    }
-
-    protected processGetAll(response: HttpResponseBase): Observable<WeatherForecast[]> {
-        const status = response.status;
-        const responseBlob =
-            response instanceof HttpResponse ? response.body :
-            (response as any).error instanceof Blob ? (response as any).error : undefined;
-
-        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            if (Array.isArray(resultData200)) {
-                result200 = [] as any;
-                for (let item of resultData200)
-                    result200!.push(WeatherForecast.fromJS(item));
-            }
-            else {
-                result200 = <any>null;
-            }
-            return _observableOf(result200);
-            }));
-        } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            }));
-        }
-        return _observableOf(null as any);
-    }
 }
 
 export class ApplicationRole implements IApplicationRole {
@@ -1212,78 +1096,6 @@ export interface IApplicationUserBaseResponse {
     statusCode?: number;
 }
 
-export class ApplicationUserListBaseResponse implements IApplicationUserListBaseResponse {
-    isSuccess?: boolean;
-    version?: number;
-    message?: string | undefined;
-    responseData?: ApplicationUser[] | undefined;
-    errors?: Errors[] | undefined;
-    statusCode?: number;
-
-    constructor(data?: IApplicationUserListBaseResponse) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.isSuccess = _data["isSuccess"];
-            this.version = _data["version"];
-            this.message = _data["message"];
-            if (Array.isArray(_data["responseData"])) {
-                this.responseData = [] as any;
-                for (let item of _data["responseData"])
-                    this.responseData!.push(ApplicationUser.fromJS(item));
-            }
-            if (Array.isArray(_data["errors"])) {
-                this.errors = [] as any;
-                for (let item of _data["errors"])
-                    this.errors!.push(Errors.fromJS(item));
-            }
-            this.statusCode = _data["statusCode"];
-        }
-    }
-
-    static fromJS(data: any): ApplicationUserListBaseResponse {
-        data = typeof data === 'object' ? data : {};
-        let result = new ApplicationUserListBaseResponse();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["isSuccess"] = this.isSuccess;
-        data["version"] = this.version;
-        data["message"] = this.message;
-        if (Array.isArray(this.responseData)) {
-            data["responseData"] = [];
-            for (let item of this.responseData)
-                data["responseData"].push(item.toJSON());
-        }
-        if (Array.isArray(this.errors)) {
-            data["errors"] = [];
-            for (let item of this.errors)
-                data["errors"].push(item.toJSON());
-        }
-        data["statusCode"] = this.statusCode;
-        return data;
-    }
-}
-
-export interface IApplicationUserListBaseResponse {
-    isSuccess?: boolean;
-    version?: number;
-    message?: string | undefined;
-    responseData?: ApplicationUser[] | undefined;
-    errors?: Errors[] | undefined;
-    statusCode?: number;
-}
-
 export class BooleanBaseResponse implements IBooleanBaseResponse {
     isSuccess?: boolean;
     version?: number;
@@ -1350,8 +1162,11 @@ export interface IBooleanBaseResponse {
 
 export class CreateUserDto implements ICreateUserDto {
     userName?: string | undefined;
+    userNameAr?: string | undefined;
+    phoneNumber?: string | undefined;
+    roleName?: string | undefined;
     email?: string | undefined;
-    password?: string | undefined;
+    password!: string | undefined;
 
     constructor(data?: ICreateUserDto) {
         if (data) {
@@ -1365,6 +1180,9 @@ export class CreateUserDto implements ICreateUserDto {
     init(_data?: any) {
         if (_data) {
             this.userName = _data["userName"];
+            this.userNameAr = _data["userNameAr"];
+            this.phoneNumber = _data["phoneNumber"];
+            this.roleName = _data["roleName"];
             this.email = _data["email"];
             this.password = _data["password"];
         }
@@ -1380,6 +1198,9 @@ export class CreateUserDto implements ICreateUserDto {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["userName"] = this.userName;
+        data["userNameAr"] = this.userNameAr;
+        data["phoneNumber"] = this.phoneNumber;
+        data["roleName"] = this.roleName;
         data["email"] = this.email;
         data["password"] = this.password;
         return data;
@@ -1388,8 +1209,11 @@ export class CreateUserDto implements ICreateUserDto {
 
 export interface ICreateUserDto {
     userName?: string | undefined;
+    userNameAr?: string | undefined;
+    phoneNumber?: string | undefined;
+    roleName?: string | undefined;
     email?: string | undefined;
-    password?: string | undefined;
+    password: string | undefined;
 }
 
 export class Errors implements IErrors {
@@ -1680,13 +1504,14 @@ export interface IRolePermission {
     permission?: Permission;
 }
 
-export class WeatherForecast implements IWeatherForecast {
-    date?: Date;
-    temperatureC?: number;
-    readonly temperatureF?: number;
-    summary?: string | undefined;
+export class UserDto implements IUserDto {
+    userNameAr?: string | undefined;
+    id?: string | undefined;
+    userName?: string | undefined;
+    email?: string | undefined;
+    roles?: string[] | undefined;
 
-    constructor(data?: IWeatherForecast) {
+    constructor(data?: IUserDto) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -1697,41 +1522,118 @@ export class WeatherForecast implements IWeatherForecast {
 
     init(_data?: any) {
         if (_data) {
-            this.date = _data["date"] ? new Date(_data["date"].toString()) : <any>undefined;
-            this.temperatureC = _data["temperatureC"];
-            (<any>this).temperatureF = _data["temperatureF"];
-            this.summary = _data["summary"];
+            this.userNameAr = _data["userNameAr"];
+            this.id = _data["id"];
+            this.userName = _data["userName"];
+            this.email = _data["email"];
+            if (Array.isArray(_data["roles"])) {
+                this.roles = [] as any;
+                for (let item of _data["roles"])
+                    this.roles!.push(item);
+            }
         }
     }
 
-    static fromJS(data: any): WeatherForecast {
+    static fromJS(data: any): UserDto {
         data = typeof data === 'object' ? data : {};
-        let result = new WeatherForecast();
+        let result = new UserDto();
         result.init(data);
         return result;
     }
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["date"] = this.date ? formatDate(this.date) : <any>undefined;
-        data["temperatureC"] = this.temperatureC;
-        data["temperatureF"] = this.temperatureF;
-        data["summary"] = this.summary;
+        data["userNameAr"] = this.userNameAr;
+        data["id"] = this.id;
+        data["userName"] = this.userName;
+        data["email"] = this.email;
+        if (Array.isArray(this.roles)) {
+            data["roles"] = [];
+            for (let item of this.roles)
+                data["roles"].push(item);
+        }
         return data;
     }
 }
 
-export interface IWeatherForecast {
-    date?: Date;
-    temperatureC?: number;
-    temperatureF?: number;
-    summary?: string | undefined;
+export interface IUserDto {
+    userNameAr?: string | undefined;
+    id?: string | undefined;
+    userName?: string | undefined;
+    email?: string | undefined;
+    roles?: string[] | undefined;
 }
 
-function formatDate(d: Date) {
-    return d.getFullYear() + '-' + 
-        (d.getMonth() < 9 ? ('0' + (d.getMonth()+1)) : (d.getMonth()+1)) + '-' +
-        (d.getDate() < 10 ? ('0' + d.getDate()) : d.getDate());
+export class UserDtoListBaseResponse implements IUserDtoListBaseResponse {
+    isSuccess?: boolean;
+    version?: number;
+    message?: string | undefined;
+    responseData?: UserDto[] | undefined;
+    errors?: Errors[] | undefined;
+    statusCode?: number;
+
+    constructor(data?: IUserDtoListBaseResponse) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.isSuccess = _data["isSuccess"];
+            this.version = _data["version"];
+            this.message = _data["message"];
+            if (Array.isArray(_data["responseData"])) {
+                this.responseData = [] as any;
+                for (let item of _data["responseData"])
+                    this.responseData!.push(UserDto.fromJS(item));
+            }
+            if (Array.isArray(_data["errors"])) {
+                this.errors = [] as any;
+                for (let item of _data["errors"])
+                    this.errors!.push(Errors.fromJS(item));
+            }
+            this.statusCode = _data["statusCode"];
+        }
+    }
+
+    static fromJS(data: any): UserDtoListBaseResponse {
+        data = typeof data === 'object' ? data : {};
+        let result = new UserDtoListBaseResponse();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["isSuccess"] = this.isSuccess;
+        data["version"] = this.version;
+        data["message"] = this.message;
+        if (Array.isArray(this.responseData)) {
+            data["responseData"] = [];
+            for (let item of this.responseData)
+                data["responseData"].push(item.toJSON());
+        }
+        if (Array.isArray(this.errors)) {
+            data["errors"] = [];
+            for (let item of this.errors)
+                data["errors"].push(item.toJSON());
+        }
+        data["statusCode"] = this.statusCode;
+        return data;
+    }
+}
+
+export interface IUserDtoListBaseResponse {
+    isSuccess?: boolean;
+    version?: number;
+    message?: string | undefined;
+    responseData?: UserDto[] | undefined;
+    errors?: Errors[] | undefined;
+    statusCode?: number;
 }
 
 export class ApiException extends Error {

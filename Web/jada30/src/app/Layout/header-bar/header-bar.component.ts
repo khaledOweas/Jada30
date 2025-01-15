@@ -20,19 +20,22 @@ export class HeaderBarComponent implements OnInit {
     }
   }
 
-  changeLanguage(Text: string, path: string) {
+  changeLanguage(Text: string) {
     this.setLanguage(Text);
     this.translationService.setLanguage(Text);
+    window.location.reload();
   }
 
   setLanguage(lang: string) {
     this.currentLangText = lang == "ar" ? "العربية" : "English";
     if (lang == "ar") {
       this.changeStylesheet("s1", "assets/css/style.bundle.rtl.css");
+      this.changeStylesheet("s2", "assets/css/global.rtl.css");
       this.toggleDirection(false);
       this.currentLangIconPath = "assets/media/flags/saudi-arabia.svg";
     } else {
       this.changeStylesheet("s1", "assets/css/style.bundle.css");
+      this.changeStylesheet("s2", "assets/css/global.ltr.css");
       this.toggleDirection(true);
       this.currentLangIconPath = "assets/media/flags/united-states.svg";
     }

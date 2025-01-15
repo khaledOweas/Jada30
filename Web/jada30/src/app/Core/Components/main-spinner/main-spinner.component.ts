@@ -47,7 +47,7 @@ import { NgIf } from "@angular/common";
   ],
   template: `<div class="page-overlay-wrapper" *ngIf="showSpinner">
     <div class="svg-spinner">
-      <img [@enterAnimation] src="../../../../assets/media/logos/logoSDB.svg" width="190px" style="margin: 0 13px;" />
+      <img [@enterAnimation] src="../../../../assets/media/logos/logoSDB.svg" width="290px" style="margin: 0 -40px;" />
       <h3>{{ text }}</h3>
     </div>
   </div>`

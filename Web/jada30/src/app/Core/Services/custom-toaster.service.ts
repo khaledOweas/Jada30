@@ -6,6 +6,7 @@ import { BehaviorSubject } from "rxjs";
 })
 export class CustomToasterService {
   constructor() {}
+
   private toaster$ = new BehaviorSubject<any>({});
   toasterListener$ = this.toaster$.asObservable();
 

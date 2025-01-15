@@ -4,20 +4,20 @@ import { BaseComponent } from "../../../Core/Components/base/base.component";
 import { TranslateDirective } from "@ngx-translate/core";
 import { SharedDatatableComponent } from "../../../Core/shared/shared-datatable/shared-datatable.component";
 import { SharedDataTableColumn } from "../../../Core/shared/shared-datatable/sharedDatatablesModels";
-import { IdentityService, UserDto, UserDtoListBaseResponse } from "../../../Services/IdentityService";
-import { takeUntil } from "rxjs";
+import { ApplicationRole, ApplicationRoleListBaseResponse, IdentityService } from "../../../Services/IdentityService";
 
+import { takeUntil } from "rxjs";
 @Component({
-  selector: "app-user-list",
+  selector: "app-role-list",
   standalone: true,
   imports: [ToastModule, TranslateDirective, SharedDatatableComponent],
   providers: [IdentityService],
-  templateUrl: "./user-list.component.html",
-  styleUrl: "./user-list.component.css"
+  templateUrl: "./role-list.component.html",
+  styleUrl: "./role-list.component.css"
 })
-export class UserListComponent extends BaseComponent implements OnInit {
+export class RoleListComponent extends BaseComponent implements OnInit {
   Cols!: SharedDataTableColumn[];
-  Data: UserDto[] | undefined;
+  Data: ApplicationRole[] | undefined;
 
   constructor(private injector: Injector, private service: IdentityService) {
     super(injector);
@@ -37,41 +37,22 @@ export class UserListComponent extends BaseComponent implements OnInit {
         sorted: true,
         filtered: true,
         hidden: false,
-        field: this.lang == "ar" ? "userNameAr" : "userName",
-        header: this.tr.get("Users.UserName"),
-        type: "text"
-      }),
-
-      SharedDataTableColumn.fromJS({
-        id: 5,
-        sorted: true,
-        filtered: true,
-        hidden: false,
-        field: "email",
-        header: this.tr.get("Users.Email"),
-        type: "text"
-      }),
-      SharedDataTableColumn.fromJS({
-        id: 5,
-        sorted: true,
-        filtered: true,
-        hidden: false,
-        field: "roles",
-        header: this.tr.get("Roles.Roles"),
+        field: this.lang == "ar" ? "roleNameAr" : "name",
+        header: this.tr.get("Roles.RoleName"),
         type: "text"
       })
     ];
   }
   ngOnInit(): void {
-    this.loadUsers();
+    this.loadAll();
   }
 
-  loadUsers() {
+  loadAll() {
     this.service
-      .usersGET()
+      .rolesGET()
       .pipe(takeUntil(this.destroyed$))
       .subscribe({
-        next: (res: UserDtoListBaseResponse) => {
+        next: (res: ApplicationRoleListBaseResponse) => {
           this.ct.sendToaster("info", this.tr.get("SHARED.ServerDetails"), res.message);
           this.Data = res.responseData;
         }

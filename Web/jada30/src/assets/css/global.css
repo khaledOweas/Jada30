@@ -32,7 +32,10 @@ p-multiselect,
 .form-control td,
 .p-element .p-dropdown-label,
 .p-dropdown-label,
-button input {
+.p-toast-message-content,
+.p-toast-summary,
+button,
+input {
   font-family: "tajawal-black" !important;
   font-weight: bolder !important;
 }
@@ -149,6 +152,7 @@ td {
   font-family: "tajawal-black" !important;
   font-weight: bolder !important;
 }
+
 .page-overlay-wrapper {
   width: 100%;
   height: 100%;

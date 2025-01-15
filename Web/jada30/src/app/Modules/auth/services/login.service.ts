@@ -7,10 +7,7 @@ import { AppConfigService } from "../../../Core/Services/app-config.service";
   providedIn: "root"
 })
 export class LoginService {
-  constructor(private http: HttpClient, private configService: AppConfigService) {
-
-
-  }
+  constructor(private http: HttpClient, private configService: AppConfigService) {}
 
   login(username: string, password: string): Observable<any> {
     const headers = new HttpHeaders({

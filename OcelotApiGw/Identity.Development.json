@@ -31,8 +31,11 @@
 					"Port": "7187"
 				}
 			],
-			"SwaggerKey": "Identity"
-
+			"SwaggerKey": "Identity",
+			"AuthenticationOptions": {
+				"AuthenticationProviderKey": "Bearer",
+				"AllowedScopes": [ "read", "write" ]
+			}
 		},
 
 		// GET /api/UserManagement/users
@@ -47,7 +50,11 @@
 					"Port": "7187"
 				}
 			],
-			"SwaggerKey": "Identity"
+			"SwaggerKey": "Identity",
+			"AuthenticationOptions": {
+				"AuthenticationProviderKey": "Bearer",
+				"AllowedScopes": [ "read", "write" ]
+			}
 		},
 		// GET /api/UserManagement/users/{id}
 		{

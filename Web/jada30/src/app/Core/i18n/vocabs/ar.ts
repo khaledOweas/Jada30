@@ -107,6 +107,7 @@ export const locale = {
     },
     SHARED: {
       Id: "الكود التعريفي",
+      ServerDetails: "رسالة من الخادم",
       TEST: "تجربة النصوص العربية",
       tools: "أدوات",
       ArabicName: "الأسم بالعربي",
@@ -184,6 +185,10 @@ export const locale = {
       ChooseExamCateogry: "اختر تصنيف التحليل"
     },
     Services: {},
+    Roles: {
+      RoleName: "اسم الصلاحية",
+      Roles: "الصلاحيات"
+    },
     Users: {
       UserName: "اسم المستخدم",
       UserNamevis: "اسم الزائر",

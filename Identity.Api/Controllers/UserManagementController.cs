@@ -9,6 +9,7 @@ using Redis;
 using Identity.Common.User;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
+using StackExchange.Redis;
 
 namespace Identity.Api.Controllers
 {
@@ -39,8 +40,28 @@ namespace Identity.Api.Controllers
             try
             {
                 // TODO :  please use AutoMapper 
-                var userEntity = new ApplicationUser { UserName = user.UserName, Email = user.Email };
+                var userEntity = new ApplicationUser { UserNameAr = user.UserNameAr, UserName = user.UserName, Email = user.Email, NormalizedEmail = user.Email?.ToUpper(), NormalizedUserName = user.UserName?.ToUpper(), PhoneNumber = user.PhoneNumber };
+
+                userEntity.EmailConfirmed = true;
+                userEntity.PhoneNumberConfirmed = true;
+                userEntity.TwoFactorEnabled = true;
+                userEntity.LockoutEnabled = false;
+
                 var result = await _userManager.CreateAsync(userEntity, user.Password);
+
+
+                if (!string.IsNullOrWhiteSpace(user.RoleName))
+                {
+                    var roleExists = await _roleManager.RoleExistsAsync(user.RoleName);
+                    if (!roleExists)
+                    {
+                        var notExistError = result.Errors.Select(e => new Errors { Key = e.GetHashCode(), Value = "Role Not Exist!" }).ToList();
+
+                        return new FailedResponse<ApplicationUser>("Failed to create user.", notExistError);
+                    }
+                }
+                await _userManager.AddToRoleAsync(await _userManager.FindByNameAsync(user.UserName!)!, user.RoleName);
+
                 if (result.Succeeded)
                 {
                     return new SuccessResponse<ApplicationUser>("User created successfully.", userEntity);
@@ -51,7 +72,7 @@ namespace Identity.Api.Controllers
             }
             catch (Exception ex)
             {
-                return new FailedResponse<ApplicationUser>("An error occurred while creating the user.", new List<Errors> { new Errors { Key = ex.GetHashCode(), Value = ex.Message } });
+                return new FailedResponse<ApplicationUser>("An error occurred while creating the user.", new List<Errors> { new Errors { Key = ex.GetHashCode(), Value = ex.Message + "Inner Exception : " + "\n " + ex.InnerException.Message } });
             }
         }
 
@@ -69,21 +90,35 @@ namespace Identity.Api.Controllers
         }
 
 
-        // Get all users
         [HttpGet("users")]
-        public async Task<BaseResponse<List<ApplicationUser>>> GetUsers()
+        public async Task<BaseResponse<List<UserDto>>> GetUsers()
         {
             try
             {
-                // TODO :  please use autoMapper Project to return DTO not applicationUser 
-                var users = _userManager.Users.ToList();
-                return new SuccessResponse<List<ApplicationUser>>("Users retrieved successfully.", users);
+                var applicationUsers = _userManager.Users.ToList();
+
+                var userDtos = _mapper.Map<List<UserDto>>(applicationUsers);
+
+                for (var i = 0; i < applicationUsers.Count; i++)
+                {
+                    var user = applicationUsers[i];
+                    var roles = await _userManager.GetRolesAsync(user);
+                    userDtos[i].Roles = roles;
+                }
+                return new SuccessResponse<List<UserDto>>("Users retrieved successfully.", userDtos);
             }
             catch (Exception ex)
             {
-                return new FailedResponse<List<ApplicationUser>>("An error occurred while retrieving users.", new List<Errors> { new Errors { Key = ex.GetHashCode(), Value = ex.Message } });
+                return new FailedResponse<List<UserDto>>(
+                    "An error occurred while retrieving users.",
+                    new List<Errors>
+                    {
+                        new Errors { Key = ex.GetHashCode(), Value = ex.Message }
+                    }
+                );
             }
         }
+
 
         [HttpGet("users/{id}")]
         public async Task<BaseResponse<ApplicationUser>> GetUser(long id)
