@@ -165,7 +165,7 @@ app.Use(async (context, next) =>
         await context.Response.WriteAsync($"Access denied: Direct access is not allowed. {forwardedFor}");
         return;
     }
-    await next.Invoke();
+    await next();
 });
 
 app.UseHttpsRedirection();
