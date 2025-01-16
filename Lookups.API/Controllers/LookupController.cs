@@ -5,6 +5,8 @@ using Lookups.Infrastructure.Data;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Lookups.API.Controllers;
+
+
 [ApiController]
 [Route("api/[controller]/[action]")]
 public class LookupController : ControllerBase

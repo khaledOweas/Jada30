@@ -4,12 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 using Identity.Infrastructure.Models;
 using Identity.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
-using Identity.Framework.Cache;
 using Redis;
 using Identity.Common.User;
 using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
-using StackExchange.Redis;
 
 namespace Identity.Api.Controllers
 {
@@ -39,8 +36,15 @@ namespace Identity.Api.Controllers
         {
             try
             {
-                // TODO :  please use AutoMapper 
-                var userEntity = new ApplicationUser { UserNameAr = user.UserNameAr, UserName = user.UserName, Email = user.Email, NormalizedEmail = user.Email?.ToUpper(), NormalizedUserName = user.UserName?.ToUpper(), PhoneNumber = user.PhoneNumber };
+                var userEntity = new ApplicationUser
+                {
+                    UserNameAr = user.UserNameAr,
+                    UserName = user.UserName,
+                    Email = user.Email,
+                    NormalizedEmail = user.Email?.ToUpper(),
+                    NormalizedUserName = user.UserName?.ToUpper(),
+                    PhoneNumber = user.PhoneNumber
+                };
 
                 userEntity.EmailConfirmed = true;
                 userEntity.PhoneNumberConfirmed = true;
@@ -48,31 +52,51 @@ namespace Identity.Api.Controllers
                 userEntity.LockoutEnabled = false;
 
                 var result = await _userManager.CreateAsync(userEntity, user.Password);
-
-
-                if (!string.IsNullOrWhiteSpace(user.RoleName))
+                if (!result.Succeeded)
                 {
-                    var roleExists = await _roleManager.RoleExistsAsync(user.RoleName);
-                    if (!roleExists)
-                    {
-                        var notExistError = result.Errors.Select(e => new Errors { Key = e.GetHashCode(), Value = "Role Not Exist!" }).ToList();
-
-                        return new FailedResponse<ApplicationUser>("Failed to create user.", notExistError);
-                    }
+                    var errors = result.Errors.Select(e => new Errors { Key = e.GetHashCode(), Value = e.Description })
+                        .ToList();
+                    return new FailedResponse<ApplicationUser>("Failed to create user.", errors);
                 }
-                await _userManager.AddToRoleAsync(await _userManager.FindByNameAsync(user.UserName!)!, user.RoleName);
+
+                foreach (var role in user.RoleNames)
+                {
+                    if (!string.IsNullOrWhiteSpace(role))
+                    {
+                        var roleExists = await _roleManager.RoleExistsAsync(role);
+                        if (!roleExists)
+                        {
+                            var notExistError = result.Errors.Select(e => new Errors
+                            { Key = e.GetHashCode(), Value = "Role Not Exist!" }).ToList();
+                            return new FailedResponse<ApplicationUser>("Failed to create user.", notExistError);
+                        }
+                    }
+
+                    await _userManager.AddToRoleAsync(await _userManager.FindByNameAsync(user.UserName!)!, role);
+                }
 
                 if (result.Succeeded)
                 {
                     return new SuccessResponse<ApplicationUser>("User created successfully.", userEntity);
                 }
 
-                var errors = result.Errors.Select(e => new Errors { Key = e.GetHashCode(), Value = e.Description }).ToList();
-                return new FailedResponse<ApplicationUser>("Failed to create user.", errors);
+                return new FailedResponse<ApplicationUser>("Failed to create user.", null);
+
             }
             catch (Exception ex)
             {
-                return new FailedResponse<ApplicationUser>("An error occurred while creating the user.", new List<Errors> { new Errors { Key = ex.GetHashCode(), Value = ex.Message + "Inner Exception : " + "\n " + ex.InnerException.Message } });
+                return new FailedResponse<ApplicationUser>("An error occurred while creating the user.",
+                    new List<Errors>
+                    {
+                        new Errors
+                        {
+                            Key = ex.GetHashCode(),
+                            Value = ex.Message + "Inner Exception : " + "\n " + ex.InnerException.Message
+                        }
+
+                    }
+
+                );
             }
         }
 

@@ -29,7 +29,7 @@ export class AuthSignInComponent {
             nameAr: JSON.parse(JSON.parse(JSON.stringify(jwtDecode(response.access_token))).data).UserNameAr
           })
         );
-        // this.router.navigate(["/home/test"]);
+       this.router.navigate(["/home/test"]);
         window.location.href = "/home/test";
       },
       (error) => {

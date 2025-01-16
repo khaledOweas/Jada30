@@ -1164,7 +1164,7 @@ export class CreateUserDto implements ICreateUserDto {
     userName?: string | undefined;
     userNameAr?: string | undefined;
     phoneNumber?: string | undefined;
-    roleName?: string | undefined;
+    roleNames?: string[] | undefined;
     email?: string | undefined;
     password!: string | undefined;
 
@@ -1182,7 +1182,11 @@ export class CreateUserDto implements ICreateUserDto {
             this.userName = _data["userName"];
             this.userNameAr = _data["userNameAr"];
             this.phoneNumber = _data["phoneNumber"];
-            this.roleName = _data["roleName"];
+            if (Array.isArray(_data["roleNames"])) {
+                this.roleNames = [] as any;
+                for (let item of _data["roleNames"])
+                    this.roleNames!.push(item);
+            }
             this.email = _data["email"];
             this.password = _data["password"];
         }
@@ -1200,7 +1204,11 @@ export class CreateUserDto implements ICreateUserDto {
         data["userName"] = this.userName;
         data["userNameAr"] = this.userNameAr;
         data["phoneNumber"] = this.phoneNumber;
-        data["roleName"] = this.roleName;
+        if (Array.isArray(this.roleNames)) {
+            data["roleNames"] = [];
+            for (let item of this.roleNames)
+                data["roleNames"].push(item);
+        }
         data["email"] = this.email;
         data["password"] = this.password;
         return data;
@@ -1211,7 +1219,7 @@ export interface ICreateUserDto {
     userName?: string | undefined;
     userNameAr?: string | undefined;
     phoneNumber?: string | undefined;
-    roleName?: string | undefined;
+    roleNames?: string[] | undefined;
     email?: string | undefined;
     password: string | undefined;
 }
