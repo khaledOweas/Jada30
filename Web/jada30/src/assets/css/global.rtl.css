@@ -1,7 +1,7 @@
 p-dropdown ol,
 ul {
-  padding-right: 0rem !important;
-  padding-left: 0rem !important;
+  padding-right: 0rem;
+  padding-left: 0rem;
 }
 
 .p-datatable .p-datatable-thead>tr>th {
@@ -14,19 +14,17 @@ ul {
   text-align: right !important;
   display: table-cell !important;
   padding: 3px !important;
-  border-bottom: 0.5px rgb(38, 38, 38) solid;
+  border-bottom: 1px black solid;
 }
 
 .p-datatable .p-paginator-bottom,
 p-splitbutton {
-  direction: rtl;
+  direction: ltr;
 }
 
 .p-paginator {
-  direction: rtl;
+  direction: ltr;
 }
-
-
 
 .p-datatable .p-datatable-thead>tr :first-child {
 
@@ -39,5 +37,14 @@ p-splitbutton {
 }
 
 .clinics-radius {
-  border-radius: 14px 0 0 0;
+  border-radius: 0 14px 0 0;
+}
+
+p-calendar {
+  direction: ltr;
+  text-align: center;
+}
+
+p-calendar input {
+  text-align: end;
 }

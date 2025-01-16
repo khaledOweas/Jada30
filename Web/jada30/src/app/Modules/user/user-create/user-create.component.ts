@@ -1,14 +1,6 @@
 import { NgIf } from "@angular/common";
-import { Component, CUSTOM_ELEMENTS_SCHEMA, Injector, OnInit } from "@angular/core";
-import {
-  FormsModule,
-  ReactiveFormsModule,
-  FormBuilder,
-  FormGroup,
-  Validators,
-  AbstractControl,
-  ValidatorFn
-} from "@angular/forms";
+import { Component, Injector, OnInit } from "@angular/core";
+import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators, AbstractControl } from "@angular/forms";
 import { RouterLink, RouterLinkActive } from "@angular/router";
 import { TranslateDirective, TranslatePipe } from "@ngx-translate/core";
 import { ToastModule } from "primeng/toast";
