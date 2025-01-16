@@ -130,12 +130,15 @@ export const locale = {
       ArabicDesc: "Arabic Desc.",
       EnglishDesc: "English Desc.",
       Create: "Create",
+      Delete: "Delete",
       Post: "Post",
       Update: "Update",
       Edit: "Edit",
       from: "from",
       to: "to",
       Cancel: "Cancel",
+      Save: "Save",
+      SaveAndNew: "Save and New ",
       SignOut: "Sign Out",
       CreateNewStory: "Create New Story",
       Profile: "Profile",
@@ -202,21 +205,35 @@ export const locale = {
     Services: {},
     Roles: {
       RoleName: "Role Name",
-      Roles: "Roles"
+      Roles: "Roles",
+      ChooseRoles: "Choose Roles"
     },
     Users: {
       UserName: "User Name",
       UserNamevis: "Clint Name",
+      UserList: "User List",
       Mobile: "Mobile Number",
       Type: "Client Type",
       birthDate: "Birthdate",
-      longitude: "Longitude",
-      latitude: "Latitude",
-      Email: "Client Email",
+      Email: "Email",
       AddressDescription: "Address Description",
       ImageProfile: "Profile Image ",
       ChangeProfileImage: "Add / Update Profile Image",
-      DeletedOrNot: "Client Status"
+
+      Create: "Create New User",
+      NameRequired: "Name is required.",
+      NameArRequired: "Arabic Name is required.",
+      EmailRequired: "Email is required.",
+      EmailInvalidFormat: "Invalid email format.",
+      PhoneInvalidFormat: "Invalid Phone format.",
+      Password: "Password",
+      ConfirmPassword: "Confirm Password",
+      PasswordRequired: "Password is required.",
+      PasswordMinLength: "Password must be at least 8 characters long.",
+      ConfirmPasswordRequired: "Confirm Password is required.",
+      PasswordMismatch: "Passwords do not match.",
+      GeneratePassword: "Generate Random Password",
+      UserNameInvalid: "Username is invalid, can only contain letters or digits without spaces."
     },
     Doctors: {
       DoctorName: "Doctor Name",
@@ -257,6 +274,10 @@ export const locale = {
       listcase: "List Case",
       typing: "Typing Here",
       preview: "Preview the content you want to share before publishing  :"
+    },
+    DELETE_CONFIRMATION: {
+      TITLE: "Are You Sure?",
+      TEXT: "The deletion process is irreversible. If you are sure, click Delete or you can Cancel it."
     }
   }
   // Here We Can Add More Data

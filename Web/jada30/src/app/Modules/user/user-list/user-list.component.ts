@@ -4,13 +4,20 @@ import { BaseComponent } from "../../../Core/Components/base/base.component";
 import { TranslateDirective } from "@ngx-translate/core";
 import { SharedDatatableComponent } from "../../../Core/shared/shared-datatable/shared-datatable.component";
 import { SharedDataTableColumn } from "../../../Core/shared/shared-datatable/sharedDatatablesModels";
-import { IdentityService, UserDto, UserDtoListBaseResponse } from "../../../Services/IdentityService";
+import {
+  BooleanBaseResponse,
+  IdentityService,
+  UserDto,
+  UserDtoListBaseResponse
+} from "../../../Services/IdentityService";
 import { takeUntil } from "rxjs";
+import { RouterLink, RouterLinkActive } from "@angular/router";
+import Swal from "sweetalert2";
 
 @Component({
   selector: "app-user-list",
   standalone: true,
-  imports: [ToastModule, TranslateDirective, SharedDatatableComponent],
+  imports: [ToastModule, RouterLink, RouterLinkActive, TranslateDirective, SharedDatatableComponent],
   providers: [IdentityService],
   templateUrl: "./user-list.component.html",
   styleUrl: "./user-list.component.css"
@@ -18,9 +25,36 @@ import { takeUntil } from "rxjs";
 export class UserListComponent extends BaseComponent implements OnInit {
   Cols!: SharedDataTableColumn[];
   Data: UserDto[] | undefined;
+  contentFirstBtn: string;
+  contentSecondBtn: string;
 
   constructor(private injector: Injector, private service: IdentityService) {
     super(injector);
+    this.contentFirstBtn =
+      this.lang === "ar"
+        ? `<i class="ki-duotone ki-tablet-delete">
+ <span class="path1"></span>
+ <span class="path2"></span>
+ <span class="path3"></span>
+</i> تعديل`
+        : `<i class="ki-duotone ki-tablet-delete ">
+ <span class="path1"></span>
+ <span class="path2"></span>
+ <span class="path3"></span>
+</i> Edit`;
+
+    this.contentSecondBtn =
+      this.lang === "ar"
+        ? `<i class="ki-duotone ki-tablet-delete">
+ <span class="path1"></span>
+ <span class="path2"></span>
+ <span class="path3"></span>
+</i> حذف`
+        : `<i class="ki-duotone ki-tablet-delete ">
+ <span class="path1"></span>
+ <span class="path2"></span>
+ <span class="path3"></span>
+</i> Delete`;
 
     this.Cols = [
       SharedDataTableColumn.fromJS({
@@ -76,5 +110,41 @@ export class UserListComponent extends BaseComponent implements OnInit {
           this.Data = res.responseData;
         }
       });
+  }
+
+  editUser(id: number) {}
+  deleteUser(id: number) {
+    Swal.fire({
+      title: this.tr.get("DELETE_CONFIRMATION.TITLE"),
+      text: this.tr.get("DELETE_CONFIRMATION.TEXT"),
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: this.tr.get("SHARED.Delete"),
+      cancelButtonText: this.tr.get("SHARED.Cancel")
+    }).then((result) => {
+      if (result.isConfirmed) {
+        try {
+          this.service.usersDELETE(id).subscribe({
+            next: (res: BooleanBaseResponse) => {
+              if (res.isSuccess) {
+                this.ct.sendToaster("info", this.tr.get("SHARED.ServerDetails"), res.message);
+              } else {
+                res.errors!.forEach((element) => {
+                  this.ct.sendToaster("error", this.tr.get("SHARED.ServerDetails"), res.message! + element.value!);
+                });
+              }
+            },
+            error: (error) => {
+              Swal.showValidationMessage(`Request failed: ${error}`);
+            }
+          });
+        } catch (error) {
+          Swal.showValidationMessage(`Request failed: ${error}`);
+        }
+      }
+      return;
+    });
   }
 }

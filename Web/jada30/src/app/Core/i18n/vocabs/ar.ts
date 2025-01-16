@@ -115,12 +115,15 @@ export const locale = {
       ArabicDesc: "الوصف بالعربي ",
       EnglishDesc: "الوصف بالانجليزي",
       Create: "اضافة",
+      Delete: "حذف",
       Post: "نشر",
       Update: "اضافة",
       Edit: "تعديل",
       from: "مـن",
       to: "إلي",
       Cancel: "إلغاء",
+      Save: "حفظ",
+      SaveAndNew: "حفظ و إضافة جديد",
       SignOut: "تسجيل الخروج",
       CreateNewStory: "إنشاء حالة جديدة",
       Profile: "البروفايل",
@@ -187,21 +190,36 @@ export const locale = {
     Services: {},
     Roles: {
       RoleName: "اسم الصلاحية",
-      Roles: "الصلاحيات"
+      Roles: "الصلاحيات",
+      ChooseRoles: "اختر الصلاحيات"
     },
     Users: {
       UserName: "اسم المستخدم",
+      UserNameAr: "اسم المستخدم عربي",
+      UserList: "قائمة المستخدمين",
       UserNamevis: "اسم الزائر",
       Mobile: "رقم الهاتف",
       Type: "نوع العميل",
       birthDate: "تاريخ الميلاد",
-      longitude: "خط طول",
-      latitude: "خط عرض",
       Email: "البريد الالكتروني ",
       AddressDescription: "تفاصيل العنوان",
       ImageProfile: "الصورة الشخصية",
       ChangeProfileImage: "اضافة / تعديل الصورة الشخصية",
-      DeletedOrNot: "حاله العملاء"
+      DeletedOrNot: "حاله العملاء",
+      Create: "إضافة مستخدم جديد",
+      NameRequired: "اسم المستخدم مطلوب",
+      NameArRequired: "اسم المستخدم عربي مطلوب",
+      EmailRequired: "البريد الالكتروني مطلوب.",
+      EmailInvalidFormat: "البريد الالكتروني غير صحيح",
+      PhoneInvalidFormat: "الرقم غير صحيح",
+      Password: "كلمة المرور",
+      ConfirmPassword: "تأكيد كلمة المرور",
+      PasswordRequired: "كلمة المرور مطلوبة.",
+      PasswordMinLength: "يجب أن تكون كلمة المرور على الأقل 8 أحرف.",
+      ConfirmPasswordRequired: "تأكيد كلمة المرور مطلوب.",
+      PasswordMismatch: "كلمات المرور غير متطابقة.",
+      GeneratePassword: "إنشاء كلمة مرور عشوائية",
+      UserNameInvalid: "اسم المستخدم غير صالح، يمكن أن يحتوي فقط على أحرف أو أرقام بدون مسافات."
     },
     Doctors: {
       DoctorName: "اسم الطبيب",
@@ -242,6 +260,10 @@ export const locale = {
       listcase: "قائمة الحالات",
       typing: "ابدأ الكتـابة",
       preview: "عاين المحتوي الذي تريد مشاركته قبل النشر  :"
+    },
+    DELETE_CONFIRMATION: {
+      TITLE: "هل انت متأكد؟",
+      TEXT: "عملية الحذف لا يمكن الرجوع فيها. إذا كنت متأكدًا، اضغط على حذف أو يمكنك الإلغاء."
     }
   }
 };

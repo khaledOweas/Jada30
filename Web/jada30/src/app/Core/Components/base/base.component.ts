@@ -2,6 +2,7 @@ import { Component, Injector, OnDestroy } from "@angular/core";
 import { CustomToasterService } from "../../Services/custom-toaster.service";
 import { TranslationService } from "../../Services/translation.service";
 import { Subject } from "rxjs";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-base",
@@ -21,10 +22,11 @@ export class BaseComponent implements OnDestroy {
   ct: CustomToasterService;
   tr: TranslationService;
   lang: string = localStorage.getItem("dir")!;
-
+  router: Router;
   constructor(injector: Injector) {
     this.ct = injector.get(CustomToasterService);
     this.tr = injector.get(TranslationService);
     this.lang = localStorage.getItem("dir")!;
+    this.router = injector.get(Router);
   }
 }
