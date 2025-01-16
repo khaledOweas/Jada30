@@ -1,5 +1,4 @@
 import { Component, Injector, OnInit } from "@angular/core";
-import { ToastModule } from "primeng/toast";
 import { BaseComponent } from "../../../Core/Components/base/base.component";
 import { TranslateDirective } from "@ngx-translate/core";
 import { SharedDatatableComponent } from "../../../Core/shared/shared-datatable/shared-datatable.component";
@@ -10,7 +9,7 @@ import { takeUntil } from "rxjs";
 @Component({
   selector: "app-role-list",
   standalone: true,
-  imports: [ToastModule, TranslateDirective, SharedDatatableComponent],
+  imports: [TranslateDirective, SharedDatatableComponent],
   providers: [IdentityService],
   templateUrl: "./role-list.component.html",
   styleUrl: "./role-list.component.css"

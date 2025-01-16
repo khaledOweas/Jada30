@@ -215,6 +215,19 @@ export class SharedDatatableComponent {
     }
   }
 
+  // Custom Bind
+
+  BindRoles(data: any, column: SharedDataTableColumn) {
+    if (data[column.field]) {
+      const roleNames =
+        this.lang == "ar"
+          ? data[column.field].map((r: any) => r.roleNameAr).join(", ")
+          : data[column.field].map((r: any) => r.name).join(", ");
+      return roleNames;
+    }
+  }
+  // End Custom Bind
+
   GetValue(data: any, column: string) {
     let res: string = "";
     if (column == "visitId") {

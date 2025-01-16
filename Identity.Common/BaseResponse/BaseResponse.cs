@@ -12,6 +12,7 @@ public class BaseResponse<T>
     {
 
     }
+    // this for Error 
     public BaseResponse(List<Errors> errors, string message, T responseData = default)
     {
         Errors = errors;
@@ -20,14 +21,8 @@ public class BaseResponse<T>
         ResponseData = responseData;
         Version = 1.0;
     }
-    public BaseResponse(string message, List<Errors> errors, T responseData = default)
-    {
-        Errors = errors;
-        IsSuccess = false;
-        Message = message;
-        ResponseData = responseData;
-        Version = 1.0;
-    }
+
+    // useless till now 
     public BaseResponse(bool isSuccess, T responseData, double version, List<Errors> errors, string message)
     {
         IsSuccess = isSuccess;
@@ -37,9 +32,10 @@ public class BaseResponse<T>
         Message = message;
     }
 
-    public BaseResponse(T Data, string message, T responseData, List<Errors> errors)
+    // this for success 
+    public BaseResponse(string message, T responseData)
     {
-        ResponseData = Data;
+        ResponseData = responseData;
         Message = message;
         Version = 1.0;
         IsSuccess = true;
@@ -63,7 +59,7 @@ public class Errors
 
 public class SuccessResponse<T> : BaseResponse<T>
 {
-    public SuccessResponse(string message, T responseData) : base(null, message, responseData)
+    public SuccessResponse(string message, T responseData) : base(message, responseData)
     {
 
     }

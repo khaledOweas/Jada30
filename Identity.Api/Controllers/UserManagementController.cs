@@ -7,6 +7,8 @@ using Microsoft.EntityFrameworkCore;
 using Redis;
 using Identity.Common.User;
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using Identity.Common.Role;
 
 namespace Identity.Api.Controllers
 {
@@ -127,8 +129,11 @@ namespace Identity.Api.Controllers
                 {
                     var user = applicationUsers[i];
                     var roles = await _userManager.GetRolesAsync(user);
-                    userDtos[i].Roles = roles;
+                    var userRoles = _roleManager.Roles.AsNoTracking().ProjectTo<RoleDto>(_mapper.ConfigurationProvider).Where(x => roles.Contains(x.Name)).ToList();
+
+                    userDtos[i].Roles = userRoles;
                 }
+
                 return new SuccessResponse<List<UserDto>>("Users retrieved successfully.", userDtos);
             }
             catch (Exception ex)
@@ -145,48 +150,72 @@ namespace Identity.Api.Controllers
 
 
         [HttpGet("users/{id}")]
-        public async Task<BaseResponse<ApplicationUser>> GetUser(long id)
+        public async Task<BaseResponse<UserDto>> GetUser(long id)
         {
             try
             {
                 var user = await _userManager.FindByIdAsync(id.ToString());
                 if (user == null)
                 {
-                    return new FailedResponse<ApplicationUser>("User not found.");
+                    return new FailedResponse<UserDto>("User not found.");
                 }
+                var userDTOs = _mapper.Map<UserDto>(user);
+                var roles = await _userManager.GetRolesAsync(user);
 
-                return new SuccessResponse<ApplicationUser>("User retrieved successfully.", user);
+                var userRoles = _roleManager.Roles.AsNoTracking().ProjectTo<RoleDto>(_mapper.ConfigurationProvider).Where(x => roles.Contains(x.Name)).ToList();
+                userDTOs.Roles = userRoles;
+                return new SuccessResponse<UserDto>("User retrieved successfully.", userDTOs);
             }
             catch (Exception ex)
             {
-                return new FailedResponse<ApplicationUser>("An error occurred while retrieving the user.", new List<Errors> { new Errors { Key = ex.GetHashCode(), Value = ex.Message } });
+                return new FailedResponse<UserDto>("An error occurred while retrieving the user.", new List<Errors> { new Errors { Key = ex.GetHashCode(), Value = ex.Message } });
             }
         }
 
-
-        [HttpPut("users/{id}")]
-        public async Task<BaseResponse<ApplicationUser>> UpdateUser(long id, [FromBody] ApplicationUser user)
+        [HttpPut("users")]
+        public async Task<BaseResponse<ApplicationUser>> UpdateUser([FromBody] UpdateUserDto user)
         {
             try
             {
-                var existingUser = await _userManager.FindByIdAsync(id.ToString());
+                var existingUser = await _userManager.FindByIdAsync(user.Id.ToString());
                 if (existingUser == null)
                 {
                     return new FailedResponse<ApplicationUser>("User not found.");
                 }
 
                 existingUser.UserName = user.UserName;
+                existingUser.UserNameAr = user.UserNameAr;
                 existingUser.Email = user.Email;
-                // Update other properties as needed
+                existingUser.PhoneNumber = user.PhoneNumber;
 
                 var result = await _userManager.UpdateAsync(existingUser);
-                if (result.Succeeded)
+                if (!result.Succeeded)
                 {
-                    return new SuccessResponse<ApplicationUser>("User updated successfully.", existingUser);
+                    var errors = result.Errors.Select(e => new Errors { Key = e.GetHashCode(), Value = e.Description }).ToList();
+                    return new FailedResponse<ApplicationUser>("Failed to update user.", errors);
                 }
 
-                var errors = result.Errors.Select(e => new Errors { Key = e.GetHashCode(), Value = e.Description }).ToList();
-                return new FailedResponse<ApplicationUser>("Failed to update user.", errors);
+                // Update Roles
+                var currentRoles = await _userManager.GetRolesAsync(existingUser);
+                await _userManager.RemoveFromRolesAsync(existingUser, currentRoles);
+
+                foreach (var role in user.RoleNames)
+                {
+                    if (!string.IsNullOrWhiteSpace(role))
+                    {
+                        var roleExists = await _roleManager.RoleExistsAsync(role);
+                        if (!roleExists)
+                        {
+                            var notExistError = result.Errors.Select(e => new Errors
+                            { Key = e.GetHashCode(), Value = "Role Not Exist!" }).ToList();
+                            return new FailedResponse<ApplicationUser>("Failed to update user.", notExistError);
+                        }
+                    }
+
+                    await _userManager.AddToRoleAsync(existingUser, role);
+                }
+
+                return new SuccessResponse<ApplicationUser>("User updated successfully.", existingUser);
             }
             catch (Exception ex)
             {
@@ -280,14 +309,15 @@ namespace Identity.Api.Controllers
 
 
         [HttpPost("roles")]
-        public async Task<BaseResponse<ApplicationRole>> CreateRole([FromBody] ApplicationRole role)
+        public async Task<BaseResponse<ApplicationRole>> CreateRole([FromBody] RoleDto role)
         {
             try
             {
-                var result = await _roleManager.CreateAsync(role);
+                var appRole = new ApplicationRole() { Name = role.Name, RoleNameAr = role.RoleNameAr };
+                var result = await _roleManager.CreateAsync(appRole);
                 if (result.Succeeded)
                 {
-                    return new SuccessResponse<ApplicationRole>("Role created successfully.", role);
+                    return new SuccessResponse<ApplicationRole>("Role created successfully.", appRole);
                 }
 
                 var errors = result.Errors.Select(e => new Errors { Key = e.GetHashCode(), Value = e.Description }).ToList();

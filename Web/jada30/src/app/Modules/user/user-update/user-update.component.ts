@@ -1,23 +1,25 @@
-import { NgIf } from "@angular/common";
 import { Component, Injector, OnInit } from "@angular/core";
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators, AbstractControl } from "@angular/forms";
-import { RouterLink, RouterLinkActive } from "@angular/router";
+import { ActivatedRoute, RouterLink, RouterLinkActive } from "@angular/router";
 import { TranslateDirective, TranslatePipe } from "@ngx-translate/core";
 import { ToastModule } from "primeng/toast";
 import {
   ApplicationRole,
   ApplicationRoleListBaseResponse,
   ApplicationUserBaseResponse,
-  CreateUserDto,
-  IdentityService
+  IdentityService,
+  RoleDto,
+  UpdateUserDto,
+  UserDtoBaseResponse
 } from "../../../Services/IdentityService";
 import { takeUntil } from "rxjs";
 import { BaseComponent } from "../../../Core/Components/base/base.component";
 import { MultiSelectModule } from "primeng/multiselect";
 import { PasswordModule } from "primeng/password";
+import { NgIf } from "@angular/common";
 
 @Component({
-  selector: "app-user-create",
+  selector: "app-user-update",
   standalone: true,
   imports: [
     FormsModule,
@@ -32,52 +34,66 @@ import { PasswordModule } from "primeng/password";
     PasswordModule
   ],
   providers: [IdentityService],
-  templateUrl: "./user-create.component.html",
-  styleUrl: "./user-create.component.css"
+  templateUrl: "./user-update.component.html",
+  styleUrl: "./user-update.component.css"
 })
-export class UserCreateComponent extends BaseComponent implements OnInit {
+export class UserUpdateComponent extends BaseComponent implements OnInit {
   userForm: FormGroup;
   rolesData?: ApplicationRole[] | undefined;
+  userId: number;
 
-  constructor(private injector: Injector, private fb: FormBuilder, private service: IdentityService) {
+  constructor(
+    private injector: Injector,
+    private fb: FormBuilder,
+    private service: IdentityService,
+    private route: ActivatedRoute
+  ) {
     super(injector);
-    this.userForm = this.fb.group(
-      {
-        userName: ["", Validators.required],
-        userNameAr: ["", Validators.required],
-        email: ["", [Validators.required, Validators.email]],
-        phoneNumber: ["", this.phoneNumberValidator],
-        roleNames: [[], Validators.required],
-        password: ["", [Validators.required, Validators.minLength(8)]],
-        confirmPassword: ["", Validators.required]
-      },
-      { validator: this.passwordMatchValidator }
-    );
+    this.userForm = this.fb.group({
+      id: [null],
+      userName: ["", Validators.required],
+      userNameAr: ["", Validators.required],
+      email: ["", [Validators.required, Validators.email]],
+      phoneNumber: ["", this.phoneNumberValidator],
+      roleNames: [[], Validators.required]
+    });
+    this.userId = this.route.snapshot.params["id"];
   }
+
   ngOnInit(): void {
     this.loadAllRoles();
+    this.loadUserData();
   }
 
-  onSubmit(action: "new" | "redirect") {
+  loadUserData() {
+    this.service.usersGET2(this.userId).subscribe({
+      next: (res: UserDtoBaseResponse) => {
+        if (res.isSuccess) {
+          this.userForm.patchValue({
+            id: res.responseData!.id,
+            userName: res.responseData!.userName,
+            userNameAr: res.responseData!.userNameAr,
+            email: res.responseData!.email,
+            phoneNumber: res.responseData!.phoneNumber,
+            roleNames: res.responseData!.roles?.map((r) => r.name)
+          });
+        } else {
+          this.ct.sendToaster("error", this.tr.get("SHARED.ServerDetails"), res.message!);
+        }
+      },
+      error: () => {}
+    });
+  }
+
+  onSubmit() {
     if (this.userForm.valid) {
       const data = this.userForm.value;
-      data.roleNames = data.roleNames.map((x: any) => x.name);
-      console.log(data);
-      const model: CreateUserDto = new CreateUserDto(data);
-      this.service.usersPOST(model).subscribe({
+      const model: UpdateUserDto = new UpdateUserDto(data);
+      this.service.usersPUT(model).subscribe({
         next: (res: ApplicationUserBaseResponse) => {
           if (res.isSuccess) {
             this.ct.sendToaster("info", this.tr.get("SHARED.ServerDetails"), res.message);
-            switch (action) {
-              case "new":
-                this.userForm.reset();
-                break;
-              case "redirect":
-                this.router.navigate(["/user-list"]);
-                break;
-              default:
-                break;
-            }
+            this.router.navigate(["/user-list"]);
           } else {
             res.errors!.forEach((element) => {
               this.ct.sendToaster("error", this.tr.get("SHARED.ServerDetails"), res.message! + element.value!);
@@ -99,14 +115,17 @@ export class UserCreateComponent extends BaseComponent implements OnInit {
       }
     });
   }
-  onReset() {
-    this.userForm.reset();
+
+  onReturn() {
+    this.router.navigate(["/user-list"]);
   }
+
   phoneNumberValidator(control: AbstractControl): { [key: string]: any } | null {
     const phoneRegex = /^\d{10}$/;
     const valid = phoneRegex.test(control.value);
     return valid ? null : { invalidPhone: true };
   }
+
   passwordMatchValidator(formGroup: FormGroup) {
     const password = formGroup.get("password")?.value;
     const confirmPassword = formGroup.get("confirmPassword")?.value;
@@ -117,6 +136,7 @@ export class UserCreateComponent extends BaseComponent implements OnInit {
       formGroup.get("confirmPassword")?.setErrors(null);
     }
   }
+
   loadAllRoles() {
     this.service
       .rolesGET()
@@ -128,6 +148,7 @@ export class UserCreateComponent extends BaseComponent implements OnInit {
         }
       });
   }
+
   generateRandomPassword() {
     const randomPassword = this.generateStrongPassword(12); // Generate a 12-character password
     this.userForm.patchValue({

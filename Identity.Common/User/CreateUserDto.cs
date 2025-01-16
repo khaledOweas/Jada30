@@ -1,4 +1,6 @@
-﻿namespace Identity.Common.User;
+﻿using Identity.Common.Role;
+
+namespace Identity.Common.User;
 public class CreateUserDto
 {
     public string? UserName { get; set; }
@@ -12,10 +14,11 @@ public class CreateUserDto
 
 public class UserDto
 {
-    public string? UserNameAr { get; set; }
-    public string Id { get; set; }
+    public long Id { get; set; }
     public string UserName { get; set; }
+    public string? UserNameAr { get; set; }
     public string Email { get; set; }
-    public IList<string> Roles { get; set; }
+    public string phoneNumber { get; set; }
+    public IList<RoleDto> Roles { get; set; }
 
 }

@@ -30,7 +30,7 @@ export class AuthSignInComponent {
           })
         );
         // this.router.navigate(["/home/test"]);
-        window.location.href = "/home/test";
+        window.location.href = "#/user/user-list";
       },
       (error) => {
         console.error("Login failed:", error);

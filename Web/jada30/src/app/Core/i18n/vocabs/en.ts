@@ -137,6 +137,7 @@ export const locale = {
       from: "from",
       to: "to",
       Cancel: "Cancel",
+      Return: "Return",
       Save: "Save",
       SaveAndNew: "Save and New ",
       SignOut: "Sign Out",

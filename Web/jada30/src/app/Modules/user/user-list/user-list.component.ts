@@ -92,7 +92,7 @@ export class UserListComponent extends BaseComponent implements OnInit {
         hidden: false,
         field: "roles",
         header: this.tr.get("Roles.Roles"),
-        type: "text"
+        type: "roles"
       })
     ];
   }
@@ -112,7 +112,9 @@ export class UserListComponent extends BaseComponent implements OnInit {
       });
   }
 
-  editUser(id: number) {}
+  editUser(id: number) {
+    this.router.navigate(["/user-update/", id]);
+  }
   deleteUser(id: number) {
     Swal.fire({
       title: this.tr.get("DELETE_CONFIRMATION.TITLE"),

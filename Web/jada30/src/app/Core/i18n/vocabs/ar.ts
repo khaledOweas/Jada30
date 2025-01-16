@@ -122,6 +122,7 @@ export const locale = {
       from: "مـن",
       to: "إلي",
       Cancel: "إلغاء",
+      Return: "رجوع",
       Save: "حفظ",
       SaveAndNew: "حفظ و إضافة جديد",
       SignOut: "تسجيل الخروج",

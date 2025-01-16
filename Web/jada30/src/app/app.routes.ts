@@ -1,5 +1,4 @@
 import { Routes } from "@angular/router";
-import { LayoutComponent } from "./Layout/layout/layout.component";
 
 export const routes: Routes = [
   {
@@ -7,8 +6,12 @@ export const routes: Routes = [
     loadChildren: () => import("./Routes/login.routes").then((m) => m.LOGIN_ROUTES)
   },
   {
-    path: "",
+    path: "user",
     loadChildren: () => import("./Routes/user.routes").then((m) => m.USER_ROUTES)
+  },
+  {
+    path: "lookup",
+    loadChildren: () => import("./Routes/lookup.routes").then((m) => m.LOOKUP_ROUTES)
   },
   { path: "**", redirectTo: "" }
 ];
