@@ -6,7 +6,7 @@ export const routes: Routes = [
     loadChildren: () => import("./Routes/login.routes").then((m) => m.LOGIN_ROUTES)
   },
   {
-    path: "user",
+    path: "",
     loadChildren: () => import("./Routes/user.routes").then((m) => m.USER_ROUTES)
   },
   {

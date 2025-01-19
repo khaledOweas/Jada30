@@ -9,7 +9,7 @@
 // ReSharper disable InconsistentNaming
 
 import { mergeMap as _observableMergeMap, catchError as _observableCatch } from 'rxjs/operators';
-import { Observable, throwError as _observableThrow, of as _observableOf } from 'rxjs';
+import { Observable, throwError as _observableThrow, of as _observableOf, throwError } from 'rxjs';
 import { Injectable, Inject, Optional, InjectionToken } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpResponse, HttpResponseBase } from '@angular/common/http';
 
@@ -237,7 +237,7 @@ export class LookupService {
     }
 
     /**
-     * @param body (optional) 
+     * @param body (optional)
      * @return OK
      */
     createLookup(body: AddLookupDto | undefined): Observable<GetLookupDtoBaseResponse> {
@@ -293,7 +293,7 @@ export class LookupService {
     }
 
     /**
-     * @param body (optional) 
+     * @param body (optional)
      * @return OK
      */
     updateLookup(code: string, body: UpdateLookupDto | undefined): Observable<GetLookupDtoBaseResponse> {
@@ -859,10 +859,11 @@ export class ApiException extends Error {
 }
 
 function throwException(message: string, status: number, response: string, headers: { [key: string]: any; }, result?: any): Observable<any> {
-    if (result !== null && result !== undefined)
-        return _observableThrow(result);
+  debugger;
+  if (result !== null && result !== undefined)
+        return throwError(()=>result);
     else
-        return _observableThrow(new ApiException(message, status, response, headers, null));
+        return throwError(()=>result);
 }
 
 function blobToText(blob: any): Observable<string> {

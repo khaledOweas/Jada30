@@ -22,15 +22,26 @@ export class LookupListComponent extends BaseComponent implements OnInit {
   constructor(private injector: Injector, private service: LookupService, private route: ActivatedRoute) {
     super(injector);
   }
+
   ngOnInit(): void {
     this.code = this.route.snapshot.params["code"];
     this.loadAll();
+    this.route.params.subscribe((params) => {
+      const newCode = params["code"];
+      if (newCode !== this.code) {
+        this.code = newCode;
+        this.loadAll();
+      }
+    });
   }
 
   loadAll() {
     this.service.getAll2(this.code).subscribe({
       next: (res: GetLookupDtoListBaseResponse) => {
         this.Data = res.responseData;
+      },
+      error: (err) => {
+        console.error("Failed to load lookup data:", err);
       }
     });
   }
