@@ -1,16 +1,18 @@
-import { Injectable, OnDestroy } from '@angular/core';
-import { Observable, BehaviorSubject, of, Subscription } from 'rxjs';
-import { map, catchError, switchMap, finalize } from 'rxjs/operators';
-import { UserModel } from '../models/user.model';
-import { AuthModel } from '../models/auth.model';
-import { AuthHTTPService } from './auth-http';
-import { environment } from 'src/environments/environment';
-import { Router } from '@angular/router';
+import { Injectable, OnDestroy } from "@angular/core";
+import { Observable, BehaviorSubject, of, Subscription } from "rxjs";
+import { map, catchError, switchMap, finalize } from "rxjs/operators";
+import { UserModel } from "../models/user.model";
+import { AuthModel } from "../models/auth.model";
+import { AuthHTTPService } from "./auth-http";
+import { environment } from "src/environments/environment";
+import { Router } from "@angular/router";
+import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
+import { AppConfigService } from "src/app/core/services/app-config.service";
 
 export type UserType = UserModel | undefined;
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root"
 })
 export class AuthService implements OnDestroy {
   // private fields
@@ -33,7 +35,9 @@ export class AuthService implements OnDestroy {
 
   constructor(
     private authHttpService: AuthHTTPService,
-    private router: Router
+    private router: Router,
+    private http: HttpClient,
+    private configService: AppConfigService
   ) {
     this.isLoadingSubject = new BehaviorSubject<boolean>(false);
     this.currentUserSubject = new BehaviorSubject<UserType>(undefined);
@@ -44,7 +48,7 @@ export class AuthService implements OnDestroy {
   }
 
   // public methods
-  login(email: string, password: string): Observable<UserType> {
+  loginOld(email: string, password: string): Observable<UserType> {
     this.isLoadingSubject.next(true);
     return this.authHttpService.login(email, password).pipe(
       map((auth: AuthModel) => {
@@ -53,17 +57,32 @@ export class AuthService implements OnDestroy {
       }),
       switchMap(() => this.getUserByToken()),
       catchError((err) => {
-        console.error('err', err);
+        console.error("err", err);
         return of(undefined);
       }),
       finalize(() => this.isLoadingSubject.next(false))
     );
   }
+  login(username: string, password: string): Observable<any> {
+    const headers = new HttpHeaders({
+      "Content-Type": "application/x-www-form-urlencoded"
+    });
 
+    const body = new HttpParams()
+      .set("grant_type", "password")
+      .set("client_id", "Jada-30.api.local")
+      .set("username", username)
+      .set("password", password)
+      .set("scope", "read openid offline_access")
+      .set("aud", "Jada30APIGetWay");
+    this.isLoadingSubject.next(true);
+
+    return this.http.post<any>(this.configService.getConfig().authEndpoint, body.toString(), { headers });
+  }
   logout() {
     localStorage.removeItem(this.authLocalStorageToken);
-    this.router.navigate(['/auth/login'], {
-      queryParams: {},
+    this.router.navigate(["/auth/login"], {
+      queryParams: {}
     });
   }
 
@@ -96,7 +115,7 @@ export class AuthService implements OnDestroy {
       }),
       switchMap(() => this.login(user.email, user.password)),
       catchError((err) => {
-        console.error('err', err);
+        console.error("err", err);
         return of(undefined);
       }),
       finalize(() => this.isLoadingSubject.next(false))
@@ -105,9 +124,7 @@ export class AuthService implements OnDestroy {
 
   forgotPassword(email: string): Observable<boolean> {
     this.isLoadingSubject.next(true);
-    return this.authHttpService
-      .forgotPassword(email)
-      .pipe(finalize(() => this.isLoadingSubject.next(false)));
+    return this.authHttpService.forgotPassword(email).pipe(finalize(() => this.isLoadingSubject.next(false)));
   }
 
   // private methods

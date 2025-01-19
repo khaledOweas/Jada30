@@ -41,8 +41,12 @@ export const LAYOUT_ROUTES: Routes = [
       //   // data: { layout: 'light-sidebar' },
       // },
       {
-        path: "apps/users",
-        loadChildren: () => import("../../pages/user/user.routes").then((m) => m.USER_ROUTES)
+        path: "user",
+        loadChildren: () => import("../../modules/Routes/user.routes").then((m) => m.USER_ROUTES)
+      },
+      {
+        path: "lookups",
+        loadChildren: () => import("../../modules/Routes/lookup.routes").then((m) => m.LOOKUP_ROUTES)
       },
       // {
       //   path: "apps/roles",

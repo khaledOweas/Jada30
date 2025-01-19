@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, ApplicationConfig } from "@angular/core";
+import { ApplicationConfig } from "@angular/core";
 // import { routes } from "./app.routes";
 import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
 import { HashLocationStrategy, LocationStrategy } from "@angular/common";
@@ -10,9 +10,8 @@ import { routes } from "./app.routes";
 import { provideTranslateService } from "@ngx-translate/core";
 import { LoaderInterceptorService } from "./core/Interceptors/loader-interceptor.service";
 import { HeaderInterceptorService } from "./core/Interceptors/header-interceptor.service";
-// import { API_BASE_URL as Identity } from "./Services/IdentityService";
-// import { API_BASE_URL as Lookup } from "./Services/LookupService";
-
+import { API_BASE_URL as Identity } from "./services/IdentityService";
+import { API_BASE_URL as Lookup } from "./services/LookupService";
 
 function loadConfigFactory(configService: AppConfigService) {
   return () => configService.loadConfig();
@@ -35,16 +34,16 @@ export const appConfig: ApplicationConfig = {
       useClass: HeaderInterceptorService,
       multi: true
     },
-    // {
-    //   provide: Identity,
-    //   deps: [AppConfigService],
-    //   useFactory: (configService: AppConfigService) => configService.getConfig().apiUrl
-    // },
-    // {
-    //   provide: Lookup,
-    //   deps: [AppConfigService],
-    //   useFactory: (configService: AppConfigService) => configService.getConfig().apiUrl
-    // },
+    {
+      provide: Identity,
+      deps: [AppConfigService],
+      useFactory: (configService: AppConfigService) => configService.getConfig().apiUrl
+    },
+    {
+      provide: Lookup,
+      deps: [AppConfigService],
+      useFactory: (configService: AppConfigService) => configService.getConfig().apiUrl
+    },
     provideTranslateService({
       defaultLanguage: "ar"
     }),

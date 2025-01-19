@@ -6,7 +6,7 @@ export interface Locale {
   data: any;
 }
 
-const LOCALIZATION_LOCAL_STORAGE_KEY = "dir";
+const LOCALIZATION_LOCAL_STORAGE_KEY = "language";
 
 @Injectable({
   providedIn: "root"

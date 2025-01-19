@@ -1,18 +1,136 @@
 import { CommonModule } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
-import { RouterLink } from "@angular/router";
-import { TranslateModule } from "@ngx-translate/core";
-import { KeeniconComponent } from "src/app/_metronic/shared/keenicon/keenicon.component";
+import { Router, NavigationEnd, RouterLink, RouterLinkActive } from "@angular/router";
+import { filter } from "rxjs";
+import { GetLookupDtoListBaseResponse, LookupService } from "src/app/services/LookupService";
 
 @Component({
   selector: "app-sidebar-menu",
   templateUrl: "./sidebar-menu.component.html",
   styleUrls: ["./sidebar-menu.component.scss"],
   standalone: true,
-  imports: [KeeniconComponent, CommonModule, TranslateModule, RouterLink]
+  providers: [LookupService],
+  imports: [CommonModule, RouterLink, RouterLinkActive]
 })
 export class SidebarMenuComponent implements OnInit {
-  constructor() {}
+  currentRoute: string = "";
+  menuObj: any[] = [];
+  lang: string = "en";
+  username: string = "";
 
-  ngOnInit(): void {}
+  constructor(private router: Router, private service: LookupService) {
+    this.router.events
+      .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
+      .subscribe((event: NavigationEnd) => {
+        this.currentRoute = event.url;
+      });
+  }
+
+  ngOnInit(): void {
+    this.lang = localStorage.getItem("language") || "";
+    this.initializeMenu();
+    this.loadAllCategories();
+  }
+
+  initializeMenu(): void {
+    this.menuObj = [
+      {
+        PageNameAr: "إحصائيات",
+        PageNameEng: "Dashboard",
+        PageUrl: "/Statistics",
+        PageType: "Accordion",
+        Icon: ` <i class="ki-duotone ki-element-11 fs-2">
+                  <span class="path1"></span>
+                  <span class="path2"></span>
+                  <span class="path3"></span>
+                  <span class="path4"></span>
+                </i>`,
+        Children: [
+          {
+            PageNameAr: "إحصـائيات المستخدمين",
+            PageNameEng: "User Statistics",
+            PageUrl: "/User/UserStatistics"
+          },
+          {
+            PageNameAr: "إحصائيات الفروع",
+            PageNameEng: "Branches Statistics",
+            PageUrl: "/Branch/BranchStatistics"
+          }
+        ]
+      },
+      {
+        PageType: "Header",
+        PageNameAr: "الإدارات",
+        PageNameEng: "Managments"
+      },
+      {
+        PageNameAr: "إدارة المستخدمين",
+        PageNameEng: "User Managments",
+        PageType: "Accordion",
+        Icon: `  <i class="ki-duotone ki-user fs-2">
+                  <span class="path1"></span>
+                  <span class="path2"></span>
+                </i>`,
+        Children: [
+          {
+            PageNameAr: "قائمة المستخدمين",
+            PageNameEng: "User List",
+            PageUrl: "/user/user-list"
+          },
+          {
+            PageNameAr: "الصلاحيات",
+            PageNameEng: "Roles",
+            PageUrl: "/user/role-list"
+          }
+        ]
+      },
+      {
+        PageNameAr: "إدارة التعريفات",
+        PageNameEng: "Lookups",
+        PageUrl: "/lookups",
+        PageType: "Accordion",
+        Icon: `<i class="ki-duotone ki-user fs-2">
+              <span class="path1"></span>
+              <span class="path2"></span>
+            </i>`,
+        Children: []
+      }
+    ];
+  }
+
+  loadAllCategories(): void {
+    this.service.getAllCategory().subscribe({
+      next: (res: GetLookupDtoListBaseResponse) => {
+        if (res.responseData) {
+          const item = this.menuObj.filter((x) => x.PageNameEng === "Lookups")[0];
+          res.responseData.forEach((element) => {
+            const child: any = {
+              PageNameAr: element.nameAr,
+              PageNameEng: element.name,
+              PageUrl: "/lookups/lookup-list/" + element.internalCode
+            };
+            item.Children.push(child);
+          });
+        }
+      },
+      error: (err) => {
+        console.error("Failed to load categories:", err);
+      }
+    });
+  }
+  checkActiveChildren(item: any): boolean {
+    if (item.Children) {
+      return item.Children.some((child: any) => this.currentRoute === child.PageUrl);
+    }
+    return false;
+  }
+
+  getUserName(): void {
+    if (typeof localStorage !== "undefined") {
+      const user = localStorage.getItem("user");
+      if (user) {
+        this.username = JSON.parse(user).nameAr;
+      }
+    }
+  }
 }

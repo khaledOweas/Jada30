@@ -51,7 +51,10 @@
     "socicon": "3.0.5",
     "sweetalert2": "11.4.8",
     "tslib": "^2.3.0",
-    "zone.js": "~0.14.2"
+    "zone.js": "~0.14.2",
+    "primeicons": "^6.0.1",
+    "primeng": "^17.3.3",
+    "jwt-decode": "^4.0.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^18.1.4",

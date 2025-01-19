@@ -1,12 +1,12 @@
 <!--begin::Logo image-->
 <a routerLink="/dashboard">
   <ng-container *ngIf="currentLayoutType === 'dark-sidebar'">
-    <img alt="Logo" src="./assets/media/logos/default-dark.svg" class="h-25px app-sidebar-logo-default" />
+    <img alt="Logo" src="./assets/media/logos/default-dark.svg" style="height: 63px;" />
   </ng-container>
   <ng-container *ngIf="currentLayoutType !== 'dark-sidebar'">
     <img alt="Logo" src="./assets/media/logos/default.svg" class="h-25px app-sidebar-logo-default theme-light-show" />
     <img alt="Logo" src="./assets/media/logos/default-dark.svg"
-      class="h-25px app-sidebar-logo-default theme-dark-show" />
+      class=" app-sidebar-logo-default theme-dark-show" style="height: 63px;"/>
   </ng-container>
 
   <img alt="Logo" src="./assets/media/logos/default-small.svg" class="h-20px app-sidebar-logo-minimize" />

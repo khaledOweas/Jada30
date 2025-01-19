@@ -2,11 +2,11 @@ import { Component, OnInit, OnDestroy } from "@angular/core";
 import { FormGroup, FormBuilder, Validators, FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { Subscription, Observable } from "rxjs";
 import { Router } from "@angular/router";
-import { AuthService } from "../../services/auth.service";
 import { ConfirmPasswordValidator } from "./confirm-password.validator";
 import { UserModel } from "../../models/user.model";
 import { first } from "rxjs/operators";
 import { AsyncPipe, NgClass, NgIf, NgTemplateOutlet } from "@angular/common";
+import { AuthService } from "../../services/auth.service";
 
 @Component({
   selector: "app-registration",

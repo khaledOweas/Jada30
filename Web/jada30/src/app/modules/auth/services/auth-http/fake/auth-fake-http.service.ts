@@ -25,7 +25,6 @@ export class AuthHTTPService {
 
     return this.getAllUsers().pipe(
       map((result: UserModel[]) => {
-        debugger;
         if (result.length <= 0) {
           return notFoundError;
         }
