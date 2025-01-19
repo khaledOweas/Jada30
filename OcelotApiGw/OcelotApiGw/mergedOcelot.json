@@ -10,7 +10,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": "7187"
+          "Port": "7777"
         }
       ],
       "SwaggerKey": "Identity",
@@ -32,7 +32,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": "7187"
+          "Port": "7777"
         }
       ],
       "SwaggerKey": "Identity",
@@ -54,7 +54,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": "7187"
+          "Port": "7777"
         }
       ],
       "SwaggerKey": "Identity",
@@ -76,7 +76,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": "7187"
+          "Port": "7777"
         }
       ],
       "SwaggerKey": "Identity",
@@ -98,7 +98,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": "7187"
+          "Port": "7777"
         }
       ],
       "SwaggerKey": "Identity",
@@ -120,7 +120,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": "7187"
+          "Port": "7777"
         }
       ],
       "SwaggerKey": "Identity",
@@ -142,7 +142,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": "7187"
+          "Port": "7777"
         }
       ],
       "SwaggerKey": "Identity",
@@ -164,7 +164,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": "7187"
+          "Port": "7777"
         }
       ],
       "SwaggerKey": "Identity",
@@ -186,7 +186,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": "7187"
+          "Port": "7777"
         }
       ],
       "SwaggerKey": "Identity",
@@ -208,7 +208,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": "7187"
+          "Port": "7777"
         }
       ],
       "SwaggerKey": "Identity",
@@ -230,7 +230,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": "7187"
+          "Port": "7777"
         }
       ],
       "SwaggerKey": "Identity",
@@ -252,7 +252,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": "7187"
+          "Port": "7777"
         }
       ],
       "SwaggerKey": "Identity",
@@ -274,7 +274,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": "7187"
+          "Port": "7777"
         }
       ],
       "SwaggerKey": "Identity",
@@ -296,7 +296,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": "7291"
+          "Port": "7284"
         }
       ],
       "SwaggerKey": "Lookups",
@@ -318,7 +318,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": "7291"
+          "Port": "7284"
         }
       ],
       "SwaggerKey": "Lookups",
@@ -340,7 +340,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": "7291"
+          "Port": "7284"
         }
       ],
       "SwaggerKey": "Lookups",
@@ -362,7 +362,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": "7291"
+          "Port": "7284"
         }
       ],
       "SwaggerKey": "Lookups",
@@ -384,7 +384,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": "7291"
+          "Port": "7284"
         }
       ],
       "SwaggerKey": "Lookups",
@@ -406,7 +406,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": "7291"
+          "Port": "7284"
         }
       ],
       "SwaggerKey": "Lookups",
@@ -428,7 +428,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": "7291"
+          "Port": "7284"
         }
       ],
       "SwaggerKey": "Lookups",
@@ -448,7 +448,7 @@
         {
           "Name": "Identity API",
           "Version": "v1",
-          "Url": "https://localhost:7187/swagger/v1/swagger.json"
+          "Url": "https://localhost:7777/swagger/v1/swagger.json"
         }
       ]
     },
@@ -458,7 +458,7 @@
         {
           "Name": "Lookups API",
           "Version": "v1",
-          "Url": "https://localhost:7291/swagger/v1/swagger.json"
+          "Url": "https://localhost:7284/swagger/v1/swagger.json"
         }
       ]
     }

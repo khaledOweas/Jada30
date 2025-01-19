@@ -1,13 +1,14 @@
-﻿using Identity.Application.Interfaces;
+﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
+
+using Identity.Application.Interfaces;
 using Identity.Common.BaseResponse;
+using Identity.Common.Role;
 using Identity.Common.User;
 using Identity.Infrastructure.Models;
+
 using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace Identity.Application.Services
 {
@@ -15,11 +16,14 @@ namespace Identity.Application.Services
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<ApplicationRole> _roleManager;
+        private readonly IMapper _mapper;
 
-        public UserManagementService(UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager)
+        public UserManagementService(UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager, IMapper mapper)
         {
             _userManager = userManager;
             _roleManager = roleManager;
+            _mapper = mapper;
+
         }
 
         public async Task<BaseResponse<ApplicationUser>> CreateUser(CreateUserDto user)
@@ -61,18 +65,27 @@ namespace Identity.Application.Services
 
         public async Task<BaseResponse<List<UserDto>>> GetUsers()
         {
-            var users = _userManager.Users.ToList();
-            var userDtos = users.Select(user => new UserDto
+
+            var applicationUsers = await _userManager.Users.ToListAsync();
+
+            var userDtos = _mapper.Map<List<UserDto>>(applicationUsers);
+
+            for (var i = 0; i < applicationUsers.Count; i++)
             {
-                Id = user.Id,
-                UserName = user.UserName,
-                Email = user.Email,
-                Roles = _userManager.GetRolesAsync(user).Result.ToList()
-            }).ToList();
+                var user = applicationUsers[i];
+                var roles = await _userManager.GetRolesAsync(user);
+
+                var userRoles = await _roleManager.Roles
+                    .AsNoTracking()
+                    .Where(x => roles.Contains(x.Name))
+                    .ProjectTo<RoleDto>(_mapper.ConfigurationProvider)
+                    .ToListAsync();
+
+                userDtos[i].Roles = userRoles;
+            }
 
             return new SuccessResponse<List<UserDto>>("Users retrieved successfully.", userDtos);
         }
-
         public async Task<BaseResponse<ApplicationUser>> GetUser(long id)
         {
             var user = await _userManager.FindByIdAsync(id.ToString());

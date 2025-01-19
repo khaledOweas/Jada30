@@ -10,7 +10,7 @@ namespace Identity.Infrastructure.Data
 
         public DesignTimeDbContextFactory()
         {
-            _dbConnStr = "Data Source=192.168.1.85;Initial Catalog=Tabe3_SQL_DB_1;User ID=SJM_FVDBUser;Password=S@raSJM328311;Integrated Security=False;Trust Server Certificate=True;Encrypt=False";
+            _dbConnStr = "Data Source=.;Initial Catalog=Jada30_Identity; User ID=sa;Password=P@ssw0rd;Integrated Security=False;Trust Server Certificate=True;Encrypt=False";
         }
         public DesignTimeDbContextFactory(IConfiguration configuration)
         {

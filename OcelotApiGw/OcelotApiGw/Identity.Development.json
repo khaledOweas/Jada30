@@ -10,7 +10,7 @@
 			"DownstreamHostAndPorts": [
 				{
 					"Host": "localhost",
-					"Port": "7001"
+					"Port": "7777"
 				}
 			],
 			"SwaggerKey": "Identity",
@@ -28,7 +28,7 @@
 			"DownstreamHostAndPorts": [
 				{
 					"Host": "localhost",
-					"Port": "7001"
+					"Port": "7777"
 				}
 			],
 			"SwaggerKey": "Identity",
@@ -47,7 +47,7 @@
 			"DownstreamHostAndPorts": [
 				{
 					"Host": "localhost",
-					"Port": "7001"
+					"Port": "7777"
 				}
 			],
 			"SwaggerKey": "Identity",
@@ -65,7 +65,7 @@
 			"DownstreamHostAndPorts": [
 				{
 					"Host": "localhost",
-					"Port": "7001"
+					"Port": "7777"
 				}
 			],
 			"SwaggerKey": "Identity",
@@ -83,7 +83,7 @@
 			"DownstreamHostAndPorts": [
 				{
 					"Host": "localhost",
-					"Port": "7001"
+					"Port": "7777"
 				}
 			],
 			"SwaggerKey": "Identity",
@@ -101,7 +101,7 @@
 			"DownstreamHostAndPorts": [
 				{
 					"Host": "localhost",
-					"Port": "7001"
+					"Port": "7777"
 				}
 			],
 			"SwaggerKey": "Identity",
@@ -119,7 +119,7 @@
 			"DownstreamHostAndPorts": [
 				{
 					"Host": "localhost",
-					"Port": "7001"
+					"Port": "7777"
 				}
 			],
 			"SwaggerKey": "Identity",
@@ -137,7 +137,7 @@
 			"DownstreamHostAndPorts": [
 				{
 					"Host": "localhost",
-					"Port": "7001"
+					"Port": "7777"
 				}
 			],
 			"SwaggerKey": "Identity",
@@ -155,7 +155,7 @@
 			"DownstreamHostAndPorts": [
 				{
 					"Host": "localhost",
-					"Port": "7001"
+					"Port": "7777"
 				}
 			],
 			"SwaggerKey": "Identity",
@@ -173,7 +173,7 @@
 			"DownstreamHostAndPorts": [
 				{
 					"Host": "localhost",
-					"Port": "7001"
+					"Port": "7777"
 				}
 			],
 			"SwaggerKey": "Identity",
@@ -191,7 +191,7 @@
 			"DownstreamHostAndPorts": [
 				{
 					"Host": "localhost",
-					"Port": "7001"
+					"Port": "7777"
 				}
 			],
 			"SwaggerKey": "Identity",
@@ -209,7 +209,7 @@
 			"DownstreamHostAndPorts": [
 				{
 					"Host": "localhost",
-					"Port": "7001"
+					"Port": "7777"
 				}
 			],
 			"SwaggerKey": "Identity",
@@ -227,7 +227,7 @@
 			"DownstreamHostAndPorts": [
 				{
 					"Host": "localhost",
-					"Port": "7001"
+					"Port": "7777"
 				}
 			],
 			"SwaggerKey": "Identity",
@@ -244,14 +244,14 @@
 				{
 					"Name": "Identity API",
 					"Version": "v1",
-					"Url": "https://localhost:7001/swagger/v1/swagger.json"
+					"Url": "https://localhost:7777/swagger/v1/swagger.json"
 				}
 			]
 		}
 	],
 	"GlobalConfiguration": {
 		"RequestIdKey": "Request-Id",
-		"BaseUrl": "https://localhost:7151",
+		"BaseUrl": "https://localhost:7777",
 		"ServiceDiscoveryProvider": {
 			"Type": "ServiceFabric",
 			"Host": "localhost",

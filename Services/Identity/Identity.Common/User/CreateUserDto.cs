@@ -14,7 +14,6 @@ public class CreateUserDto
 
 public class UserDto
 {
-    public string? UserNameAr { get; set; }
     public long Id { get; set; }
     public string UserName { get; set; }
     public string? UserNameAr { get; set; }

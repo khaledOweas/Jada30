@@ -1,15 +1,9 @@
 ﻿using Identity.Application.Interfaces;
 using Identity.Common.BaseResponse;
 using Identity.Framework.UoW;
-using Identity.Infrastructure.Migrations;
 using Identity.Infrastructure.Models;
+
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Identity.Application.Services
 {
