@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Serilog;
-
+using Lookups.Application;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,6 +28,8 @@ builder.Services.AddDbContext<LookupsContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("Default"));
 });
+
+builder.Services.AddRepository(builder.Configuration);
 
 #region Logginig service
 builder.Services.AddExceptionLogging();

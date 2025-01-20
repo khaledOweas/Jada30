@@ -16,5 +16,6 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\Lookups.Common\Lookups.Common.csproj" />
 	  <ProjectReference Include="..\Lookups.Domain\Lookups.Domain.csproj" />
+	  <ProjectReference Include="..\Lookups.Framework\Lookups.Framework.csproj" />
 	</ItemGroup>
 </Project>
