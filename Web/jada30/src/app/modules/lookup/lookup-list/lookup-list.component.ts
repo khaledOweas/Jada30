@@ -23,6 +23,26 @@ export class LookupListComponent extends BaseComponent implements OnInit {
 
   constructor(private injector: Injector, private service: LookupService, private route: ActivatedRoute) {
     super(injector);
+    this.Cols = [
+      SharedDataTableColumn.fromJS({
+        id: 1,
+        sorted: true,
+        filtered: true,
+        hidden: false,
+        field: "id",
+        header: this.tr.get("SHARED.Id"),
+        type: "text"
+      }),
+      SharedDataTableColumn.fromJS({
+        id: 4,
+        sorted: true,
+        filtered: true,
+        hidden: false,
+        field: this.lang == "ar" ? "nameAr" : "name",
+        header: this.tr.get("Lookup.LookupName"),
+        type: "text"
+      })
+    ];
   }
 
   ngOnInit(): void {

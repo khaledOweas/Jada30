@@ -194,6 +194,9 @@ export const locale = {
       Roles: "الصلاحيات",
       ChooseRoles: "اختر الصلاحيات"
     },
+    Lookup: {
+      LookupName: "اسم التعريف"
+    },
     Users: {
       UserName: "اسم المستخدم",
       UserNameAr: "اسم المستخدم عربي",
