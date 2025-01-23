@@ -1,4 +1,11 @@
-
-
+<div class="row">
+  <div class="card-toolbar">
+    <a class="btn btn-success float-end" (click)="GoToCreate()">
+      <i class="ki-duotone ki-plus fs-2"></i>
+      <span translate="Lookup.Create"></span> </a>
+  </div>
+</div>
 <app-shared-datatable [cols]="Cols" [rowsPageNumbers]="10" [pagination]="true" [scrollable]="false" [data]="Data!"
-  [chooseColomns]="true"></app-shared-datatable>
+  [chooseColomns]="true" [FirstBtn]="true" [contentFirstBtn]="contentFirstBtn" [classFirstBtn]="'light-warning'"
+  (firstButtonEvent)="edit($event)" [SecondBtn]="true" [contentSecondBtn]="contentSecondBtn"
+  [classSecondBtn]="'light-danger'" (secondButtonEvent)="delete($event)"></app-shared-datatable>

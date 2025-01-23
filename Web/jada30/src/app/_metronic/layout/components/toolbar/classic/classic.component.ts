@@ -2,7 +2,6 @@ import { Component, Input, OnDestroy, OnInit } from "@angular/core";
 import { Subscription } from "rxjs";
 import { LayoutService } from "../../../core/layout.service";
 import { KeeniconComponent } from "src/app/_metronic/shared/keenicon/keenicon.component";
-import { DropdownMenu1Component } from "src/app/_metronic/partials/content/dropdown-menus/dropdown-menu1/dropdown-menu1.component";
 import { NgClass, NgIf } from "@angular/common";
 
 @Component({
@@ -10,7 +9,7 @@ import { NgClass, NgIf } from "@angular/common";
   templateUrl: "./classic.component.html",
   styleUrls: ["./classic.component.scss"],
   standalone: true,
-  imports: [NgClass, NgIf, KeeniconComponent, DropdownMenu1Component]
+  imports: [NgClass, NgIf, KeeniconComponent]
 })
 export class ClassicComponent implements OnInit, OnDestroy {
   private unsubscribe: Subscription[] = [];

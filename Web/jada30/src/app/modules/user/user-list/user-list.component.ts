@@ -109,7 +109,7 @@ export class UserListComponent extends BaseComponent implements OnInit {
   }
 
   editUser(id: number) {
-    this.router.navigate(["/user-update/", id]);
+    this.router.navigate(["/user/user-update/", id]);
   }
   deleteUser(id: number) {
     Swal.fire({

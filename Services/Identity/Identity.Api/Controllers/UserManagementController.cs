@@ -3,6 +3,7 @@ using Identity.Common.BaseResponse;
 using Identity.Common.Role;
 using Identity.Common.User;
 using Identity.Infrastructure.Models;
+
 using Microsoft.AspNetCore.Mvc;
 
 namespace Identity.Api.Controllers
@@ -24,7 +25,7 @@ namespace Identity.Api.Controllers
 
         // User Endpoints
         [HttpPost("users")]
-        public async Task<BaseResponse<ApplicationUser>> CreateUser([FromBody] CreateUserDto user)
+        public async Task<BaseResponse<UserDto>> CreateUser([FromBody] CreateUserDto user)
             => await _userService.CreateUser(user);
 
         [HttpGet("users")]
@@ -32,11 +33,11 @@ namespace Identity.Api.Controllers
             => await _userService.GetUsers();
 
         [HttpGet("users/{id}")]
-        public async Task<BaseResponse<ApplicationUser>> GetUser(long id)
+        public async Task<BaseResponse<UserDto>> GetUser(long id)
             => await _userService.GetUser(id);
 
         [HttpPut("users/{id}")]
-        public async Task<BaseResponse<ApplicationUser>> UpdateUser(long id, [FromBody] ApplicationUser user)
+        public async Task<BaseResponse<UserDto>> UpdateUser(long id, [FromBody] UpdateUserDto user)
             => await _userService.UpdateUser(id, user);
 
         [HttpDelete("users/{id}")]
@@ -51,7 +52,7 @@ namespace Identity.Api.Controllers
         public async Task<BaseResponse<bool>> RemoveRoleFromUser(long userId, string roleName)
             => await _userService.RemoveRoleFromUser(userId, roleName);
 
-        // Role Endpoints
+
         [HttpPost("roles")]
         public async Task<BaseResponse<ApplicationRole>> CreateRole([FromBody] ApplicationRole role)
             => await _roleService.CreateRole(role);

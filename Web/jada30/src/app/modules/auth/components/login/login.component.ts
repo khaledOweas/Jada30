@@ -76,7 +76,6 @@ export class LoginComponent implements OnInit, OnDestroy {
       .pipe(first())
       .subscribe(
         (response) => {
-          debugger;
           localStorage.setItem("token", response.access_token);
           localStorage.setItem(
             "user",
@@ -84,8 +83,8 @@ export class LoginComponent implements OnInit, OnDestroy {
               nameAr: JSON.parse(JSON.parse(JSON.stringify(jwtDecode(response.access_token))).data).UserNameAr
             })
           );
-          // this.router.navigate(["/home/test"]);
-          window.location.href = "#/user/user-list";
+          this.router.navigate(["/dashboard"]);
+          //  window.location.href = "#/user/user-list";
         },
         (error) => {
           console.error("Login failed:", error);

@@ -1,4 +1,5 @@
 using AutoMapper;
+
 using Lookups.Common;
 using Lookups.Common.BaseResponse;
 
@@ -143,9 +144,12 @@ public class LookupController : ControllerBase
 
             // this needs autoMapper . and working with DTO . instead of Entities Class 
             existingLookup.Name = updatedLookup.Name;
+            existingLookup.NameAr = updatedLookup.NameAr;
             existingLookup.Description = updatedLookup.Description;
+            existingLookup.DescriptionAr = updatedLookup.DescriptionAr;
             existingLookup.InternalRef = updatedLookup.InternalRef;
             existingLookup.InternalCode = updatedLookup.InternalCode;
+            existingLookup.IsActive = updatedLookup.IsActive;
 
             _context.SaveChanges();
 

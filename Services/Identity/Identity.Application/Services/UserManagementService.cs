@@ -26,7 +26,7 @@ namespace Identity.Application.Services
 
         }
 
-        public async Task<BaseResponse<ApplicationUser>> CreateUser(CreateUserDto user)
+        public async Task<BaseResponse<UserDto>> CreateUser(CreateUserDto user)
         {
             var userEntity = new ApplicationUser
             {
@@ -46,7 +46,7 @@ namespace Identity.Application.Services
             if (!result.Succeeded)
             {
                 var errors = result.Errors.Select(e => new Errors { Key = e.GetHashCode(), Value = e.Description }).ToList();
-                return new FailedResponse<ApplicationUser>("Failed to create user.", errors);
+                return new FailedResponse<UserDto>("Failed to create user.", errors);
             }
 
             foreach (var role in user.RoleNames.Where(role => !string.IsNullOrWhiteSpace(role)))
@@ -54,13 +54,15 @@ namespace Identity.Application.Services
                 var roleExists = await _roleManager.RoleExistsAsync(role);
                 if (!roleExists)
                 {
-                    return new FailedResponse<ApplicationUser>("Role does not exist.");
+                    return new FailedResponse<UserDto>("Role does not exist.");
                 }
 
                 await _userManager.AddToRoleAsync(userEntity, role);
             }
+            var userDto = _mapper.Map<UserDto>(userEntity);
 
-            return new SuccessResponse<ApplicationUser>("User created successfully.", userEntity);
+
+            return new SuccessResponse<UserDto>("User created successfully.", userDto);
         }
 
         public async Task<BaseResponse<List<UserDto>>> GetUsers()
@@ -86,29 +88,38 @@ namespace Identity.Application.Services
 
             return new SuccessResponse<List<UserDto>>("Users retrieved successfully.", userDtos);
         }
-        public async Task<BaseResponse<ApplicationUser>> GetUser(long id)
+        public async Task<BaseResponse<UserDto>> GetUser(long id)
         {
             var user = await _userManager.FindByIdAsync(id.ToString());
-            return user == null
-                ? new FailedResponse<ApplicationUser>("User not found.")
-                : new SuccessResponse<ApplicationUser>("User retrieved successfully.", user);
+            var userDto = _mapper.Map<UserDto>(user);
+            var roles = await _userManager.GetRolesAsync(user);
+            var userRoles = await _roleManager.Roles
+                .AsNoTracking()
+                .Where(x => roles.Contains(x.Name))
+                .ProjectTo<RoleDto>(_mapper.ConfigurationProvider)
+                .ToListAsync();
+            userDto.Roles = userRoles;
+            return userDto == null
+                ? new FailedResponse<UserDto>("User not found.")
+                : new SuccessResponse<UserDto>("User retrieved successfully.", userDto);
         }
 
-        public async Task<BaseResponse<ApplicationUser>> UpdateUser(long id, ApplicationUser user)
+        public async Task<BaseResponse<UserDto>> UpdateUser(long id, UpdateUserDto user)
         {
             var existingUser = await _userManager.FindByIdAsync(id.ToString());
             if (existingUser == null)
             {
-                return new FailedResponse<ApplicationUser>("User not found.");
-            }
-
+                return new FailedResponse<UserDto>("User not found.");
+            } 
             existingUser.UserName = user.UserName;
             existingUser.Email = user.Email;
+            existingUser.UserNameAr = user.UserNameAr ?? "";
 
             var result = await _userManager.UpdateAsync(existingUser);
+            var userDto = _mapper.Map<UserDto>(existingUser);
             return result.Succeeded
-                ? new SuccessResponse<ApplicationUser>("User updated successfully.", existingUser)
-                : new FailedResponse<ApplicationUser>("Failed to update user.", result.Errors.Select(e => new Errors { Key = e.GetHashCode(), Value = e.Description }).ToList());
+                ? new SuccessResponse<UserDto>("User updated successfully.", userDto)
+                : new FailedResponse<UserDto>("Failed to update user.", result.Errors.Select(e => new Errors { Key = e.GetHashCode(), Value = e.Description }).ToList());
         }
 
         public async Task<BaseResponse<bool>> DeleteUser(long id)

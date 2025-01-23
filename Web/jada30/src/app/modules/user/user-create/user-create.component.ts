@@ -7,9 +7,9 @@ import { ToastModule } from "primeng/toast";
 import {
   ApplicationRole,
   ApplicationRoleListBaseResponse,
-  ApplicationUserBaseResponse,
   CreateUserDto,
-  IdentityService
+  IdentityService,
+  UserDtoBaseResponse
 } from "../../../services/IdentityService";
 import { takeUntil } from "rxjs";
 import { MultiSelectModule } from "primeng/multiselect";
@@ -62,10 +62,9 @@ export class UserCreateComponent extends BaseComponent implements OnInit {
     if (this.userForm.valid) {
       const data = this.userForm.value;
       data.roleNames = data.roleNames.map((x: any) => x.name);
-      console.log(data);
       const model: CreateUserDto = new CreateUserDto(data);
       this.service.usersPOST(model).subscribe({
-        next: (res: ApplicationUserBaseResponse) => {
+        next: (res: UserDtoBaseResponse) => {
           if (res.isSuccess) {
             this.ct.sendToaster("info", this.tr.get("SHARED.ServerDetails"), res.message);
             switch (action) {
