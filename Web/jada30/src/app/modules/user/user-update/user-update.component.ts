@@ -6,7 +6,6 @@ import { ToastModule } from "primeng/toast";
 import {
   ApplicationRole,
   ApplicationRoleListBaseResponse,
-  ApplicationUserBaseResponse,
   IdentityService,
   RoleDto,
   UpdateUserDto,
@@ -89,13 +88,13 @@ export class UserUpdateComponent extends BaseComponent implements OnInit {
     if (this.userForm.valid) {
       const data = this.userForm.value;
       const model: UpdateUserDto = new UpdateUserDto(data);
-      this.service.usersPUT(model).subscribe({
-        next: (res: ApplicationUserBaseResponse) => {
+      this.service.usersPUT(data.id, model).subscribe({
+        next: (res: UserDtoBaseResponse) => {
           if (res.isSuccess) {
             this.ct.sendToaster("info", this.tr.get("SHARED.ServerDetails"), res.message);
-            this.router.navigate(["/user-list"]);
+            this.router.navigate(["/user/user-list"]);
           } else {
-            res.errors!.forEach((element) => {
+            res.errors!.forEach((element: any) => {
               this.ct.sendToaster("error", this.tr.get("SHARED.ServerDetails"), res.message! + element.value!);
             });
           }
@@ -117,7 +116,7 @@ export class UserUpdateComponent extends BaseComponent implements OnInit {
   }
 
   onReturn() {
-    this.router.navigate(["/user-list"]);
+    this.router.navigate(["/user/user-list"]);
   }
 
   phoneNumberValidator(control: AbstractControl): { [key: string]: any } | null {

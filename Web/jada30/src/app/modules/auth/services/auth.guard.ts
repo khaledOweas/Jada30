@@ -1,20 +1,26 @@
-import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { AuthService } from './auth.service';
+import { Injectable } from "@angular/core";
+import { ActivatedRouteSnapshot, RouterStateSnapshot } from "@angular/router";
+import { AuthService } from "./auth.service";
+import { jwtDecode } from "jwt-decode";
 
-@Injectable({ providedIn: 'root' })
-export class AuthGuard  {
+@Injectable({ providedIn: "root" })
+export class AuthGuard {
   constructor(private authService: AuthService) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    const currentUser = this.authService.currentUserValue;
-    if (currentUser) {
-      // logged in so return true
-      return true;
+    try {
+      let token = localStorage.getItem("token");
+      const tokenPayload = JSON.parse(JSON.stringify(jwtDecode(token!)));
+      const nowInSeconds = Math.floor(Date.now() / 1000);
+      if (nowInSeconds < tokenPayload.exp) {
+        return true;
+      }
+      this.authService.logout();
+      return false;
+    } catch (error) {
+      localStorage.removeItem("user");
+      this.authService.logout();
+      return false;
     }
-
-    // not logged in so redirect to login page with the return url
-    this.authService.logout();
-    return false;
   }
 }

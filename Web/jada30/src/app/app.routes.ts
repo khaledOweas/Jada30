@@ -1,4 +1,5 @@
 import { Routes } from "@angular/router";
+import { AuthGuard } from "./modules/auth/services/auth.guard";
 
 export const routes: Routes = [
   {
@@ -11,7 +12,7 @@ export const routes: Routes = [
   },
   {
     path: "",
-    // canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
     loadChildren: () => import("./_metronic/layout/layout.routes").then((m) => m.LAYOUT_ROUTES)
   },
   { path: "**", redirectTo: "error/404" }

@@ -111,6 +111,11 @@ export class SidebarMenuComponent implements OnInit {
             };
             item.Children.push(child);
           });
+          item.Children.unshift({
+            PageNameAr: "الكل",
+            PageNameEng: "All",
+            PageUrl: "/lookups/lookup-list/All"
+          });
         }
       },
       error: (err) => {

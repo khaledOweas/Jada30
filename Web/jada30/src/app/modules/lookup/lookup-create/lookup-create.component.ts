@@ -53,7 +53,6 @@ export class LookupCreateComponent extends BaseComponent implements OnInit {
   }
 
   onSubmit(action: "new" | "redirect") {
-    debugger;
     if (this.lookupForm.valid) {
       const data = this.lookupForm.value;
       const model: AddLookupDto = new AddLookupDto(data);
@@ -63,7 +62,7 @@ export class LookupCreateComponent extends BaseComponent implements OnInit {
             this.ct.sendToaster("info", this.tr.get("SHARED.ServerDetails"), res.message);
             switch (action) {
               case "new":
-                this.lookupForm.reset();
+                this.onReset();
                 break;
               case "redirect":
                 this.router.navigate(["/lookups/lookup-list", this.code]);
@@ -94,6 +93,14 @@ export class LookupCreateComponent extends BaseComponent implements OnInit {
   }
 
   onReset() {
-    this.lookupForm.reset();
+    this.lookupForm = this.fb.group({
+      name: ["", Validators.required],
+      nameAr: ["", Validators.required],
+      description: [""],
+      descriptionAr: [""],
+      internalCode: ["", Validators.required],
+      internalRef: [this.code],
+      isActive: [true]
+    });
   }
 }

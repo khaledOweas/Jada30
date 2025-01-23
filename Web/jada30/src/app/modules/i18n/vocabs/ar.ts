@@ -195,7 +195,19 @@ export const locale = {
       ChooseRoles: "اختر الصلاحيات"
     },
     Lookup: {
-      LookupName: "اسم التعريف"
+      LookupName: "اسم التعريف",
+      Name: "اسم التعريف",
+      NameAr: "اسم التعريف عربي",
+      Description: "الوصف",
+      DescriptionAr: "الوصف عربي",
+      Create: "إضافة جديد",
+      InternalCode: "الكود",
+      InternalRef: "كود التعريف الرئيسي",
+      IsActive: "نشط",
+      NameRequired: "اسم التعريف مطلوب",
+      NameArRequired: "اسم التعريف عربي مطلوب",
+      InternalCodeRequired: "الكود مطلوب",
+      Update: "تحديث التعريف"
     },
     Users: {
       UserName: "اسم المستخدم",

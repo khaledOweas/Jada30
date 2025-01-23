@@ -209,6 +209,21 @@ export const locale = {
       Roles: "Roles",
       ChooseRoles: "Choose Roles"
     },
+    Lookup: {
+      LookupName: "Definition Name",
+      Name: "Definition Name",
+      NameAr: "Definition Name (Arabic)",
+      Description: "Description",
+      DescriptionAr: "Description (Arabic)",
+      Create: "Add New",
+      InternalCode: "Code",
+      InternalRef: "Main Definition Code",
+      IsActive: "Active",
+      NameRequired: "Definition name is required",
+      NameArRequired: "Definition name (Arabic) is required",
+      InternalCodeRequired: "Code is required",
+      Update: "Update"
+    },
     Users: {
       UserName: "User Name",
       UserNamevis: "Clint Name",
