@@ -249,7 +249,8 @@ export const locale = {
       ConfirmPasswordRequired: "Confirm Password is required.",
       PasswordMismatch: "Passwords do not match.",
       GeneratePassword: "Generate Random Password",
-      UserNameInvalid: "Username is invalid, can only contain letters or digits without spaces."
+      UserNameInvalid: "Username is invalid, can only contain letters or digits without spaces.",
+      Update: "Update User"
     },
     Doctors: {
       DoctorName: "Doctor Name",

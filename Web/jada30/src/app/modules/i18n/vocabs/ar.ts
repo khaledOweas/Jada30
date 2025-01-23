@@ -235,7 +235,8 @@ export const locale = {
       ConfirmPasswordRequired: "تأكيد كلمة المرور مطلوب.",
       PasswordMismatch: "كلمات المرور غير متطابقة.",
       GeneratePassword: "إنشاء كلمة مرور عشوائية",
-      UserNameInvalid: "اسم المستخدم غير صالح، يمكن أن يحتوي فقط على أحرف أو أرقام بدون مسافات."
+      UserNameInvalid: "اسم المستخدم غير صالح، يمكن أن يحتوي فقط على أحرف أو أرقام بدون مسافات.",
+      Update:"تحديث المستخدم",
     },
     Doctors: {
       DoctorName: "اسم الطبيب",
