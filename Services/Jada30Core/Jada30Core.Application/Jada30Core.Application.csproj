@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="AutoMapper" Version="13.0.1" />
+
+	</ItemGroup>
+	
+  <ItemGroup>
+    <ProjectReference Include="..\Jada30Core.Common\Jada30Core.Common.csproj" />
+    <ProjectReference Include="..\Jada30Core.Domain\Jada30Core.Domain.csproj" />
+    <ProjectReference Include="..\Jada30Core.Framework\Jada30Core.Framework.csproj" />
+  </ItemGroup>
+
+</Project>
