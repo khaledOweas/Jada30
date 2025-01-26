@@ -27,6 +27,7 @@ namespace Lookups.Infrastructure.Seeding
         new Lookup { Name = "Base Price", NameAr = "السعر الأساسي", InternalCode = "PRICING_BASE", InternalRef = "Pricing_Categories", IsActive = true },
         new Lookup { Name = "Discounts", NameAr = "الخصومات", InternalCode = "PRICING_DISCOUNTS", InternalRef = "Pricing_Categories", IsActive = true },
         new Lookup { Name = "Seasonal Offers", NameAr = "العروض الموسمية", InternalCode = "PRICING_SEASONAL", InternalRef = "Pricing_Categories", IsActive = true },
+        new Lookup { Name = "Promotions", NameAr = "العروض الترويجية", InternalCode = "PRICING_PROMOTIONS", InternalRef = "Pricing_Categories", IsActive = true },
 
         // Parent Lookup: Packages
         new Lookup { Name = "Packages", NameAr = "الباقات", InternalCode = "Packages", InternalRef = null, IsActive = true },
@@ -34,38 +35,61 @@ namespace Lookups.Infrastructure.Seeding
         new Lookup { Name = "Virtual Office Package", NameAr = "باقات المكتب الافتراضي", InternalCode = "PKG_VIRTUAL_OFFICE", InternalRef = "Packages", IsActive = true },
         new Lookup { Name = "Meeting Room Package", NameAr = "باقات قاعات الاجتماعات", InternalCode = "PKG_MEETING_ROOM", InternalRef = "Packages", IsActive = true },
         new Lookup { Name = "LMS Package", NameAr = "باقات نظام إدارة التعلم", InternalCode = "PKG_LMS", InternalRef = "Packages", IsActive = true },
+        new Lookup { Name = "Premium Package", NameAr = "الباقة المميزة", InternalCode = "PKG_PREMIUM", InternalRef = "Packages", IsActive = true },
 
-        // Parent Lookup: Workspace Categories
-        new Lookup { Name = "Workspace Categories", NameAr = "فئات مساحات العمل", InternalCode = "Workspace_Categories", InternalRef = null, IsActive = true },
-        new Lookup { Name = "Co-Working Space", NameAr = "مساحات العمل المشترك", InternalCode = "WORKSPACE_COWORKING", InternalRef = "Workspace_Categories", IsActive = true },
-        new Lookup { Name = "Private Office", NameAr = "المكاتب الخاصة", InternalCode = "WORKSPACE_PRIVATE", InternalRef = "Workspace_Categories", IsActive = true },
-        new Lookup { Name = "Meeting Room", NameAr = "غرفة الاجتماعات", InternalCode = "WORKSPACE_MEETING", InternalRef = "Workspace_Categories", IsActive = true },
+        // Parent Lookup: Branch Management
+        new Lookup { Name = "Branch Management", NameAr = "إدارة الفروع", InternalCode = "Branch_Management", InternalRef = null, IsActive = true },
+        new Lookup { Name = "Branch A", NameAr = "الفرع أ", InternalCode = "BRANCH_A", InternalRef = "Branch_Management", IsActive = true },
+        new Lookup { Name = "Branch B", NameAr = "الفرع ب", InternalCode = "BRANCH_B", InternalRef = "Branch_Management", IsActive = true },
+        new Lookup { Name = "Branch C", NameAr = "الفرع ج", InternalCode = "BRANCH_C", InternalRef = "Branch_Management", IsActive = true },
+        new Lookup { Name = "Branch D", NameAr = "الفرع د", InternalCode = "BRANCH_D", InternalRef = "Branch_Management", IsActive = true },
 
-        // Parent Lookup: Events
-        new Lookup { Name = "Events", NameAr = "الفعاليات", InternalCode = "Events", InternalRef = null, IsActive = true },
-        new Lookup { Name = "Networking Event", NameAr = "فعاليات الشبكات", InternalCode = "EVENT_NETWORKING", InternalRef = "Events", IsActive = true },
-        new Lookup { Name = "Training Workshop", NameAr = "ورش العمل التدريبية", InternalCode = "EVENT_WORKSHOP", InternalRef = "Events", IsActive = true },
-        new Lookup { Name = "Product Launch", NameAr = "إطلاق المنتجات", InternalCode = "EVENT_PRODUCT_LAUNCH", InternalRef = "Events", IsActive = true },
+        // Parent Lookup: Administrative Areas
+        new Lookup { Name = "Administrative Areas", NameAr = "المناطق الإدارية", InternalCode = "Admin_Areas", InternalRef = null, IsActive = true },
+        new Lookup { Name = "North Region", NameAr = "المنطقة الشمالية", InternalCode = "NORTH_REGION", InternalRef = "Admin_Areas", IsActive = true },
+        new Lookup { Name = "South Region", NameAr = "المنطقة الجنوبية", InternalCode = "SOUTH_REGION", InternalRef = "Admin_Areas", IsActive = true },
+        new Lookup { Name = "East Region", NameAr = "المنطقة الشرقية", InternalCode = "EAST_REGION", InternalRef = "Admin_Areas", IsActive = true },
+        new Lookup { Name = "West Region", NameAr = "المنطقة الغربية", InternalCode = "WEST_REGION", InternalRef = "Admin_Areas", IsActive = true },
+
+        // Parent Lookup: Workspace Management
+        new Lookup { Name = "Workspace Management", NameAr = "إدارة المرافق", InternalCode = "Workspace_Management", InternalRef = null, IsActive = true },
+        new Lookup { Name = "Office", NameAr = "مكتب", InternalCode = "WORKSPACE_OFFICE", InternalRef = "Workspace_Management", IsActive = true },
+        new Lookup { Name = "Meeting Room", NameAr = "غرفة اجتماعات", InternalCode = "WORKSPACE_MEETING_ROOM", InternalRef = "Workspace_Management", IsActive = true },
+        new Lookup { Name = "Co-Working Space", NameAr = "مساحات العمل المشتركة", InternalCode = "WORKSPACE_COWORKING", InternalRef = "Workspace_Management", IsActive = true },
+        new Lookup { Name = "Event Hall", NameAr = "قاعة الفعاليات", InternalCode = "WORKSPACE_EVENT_HALL", InternalRef = "Workspace_Management", IsActive = true },
+        new Lookup { Name = "Private Office", NameAr = "مكتب خاص", InternalCode = "WORKSPACE_PRIVATE_OFFICE", InternalRef = "Workspace_Management", IsActive = true },
+
+        // Parent Lookup: Content Management
+        new Lookup { Name = "Content Management", NameAr = "إدارة المحتوى الإعلامي", InternalCode = "Content_Management", InternalRef = null, IsActive = true },
+        new Lookup { Name = "News", NameAr = "الأخبار", InternalCode = "CONTENT_NEWS", InternalRef = "Content_Management", IsActive = true },
+        new Lookup { Name = "Blogs", NameAr = "المدونات", InternalCode = "CONTENT_BLOGS", InternalRef = "Content_Management", IsActive = true },
+        new Lookup { Name = "Success Stories", NameAr = "قصص النجاح", InternalCode = "CONTENT_SUCCESS_STORIES", InternalRef = "Content_Management", IsActive = true },
+        new Lookup { Name = "Tutorials", NameAr = "الدروس التعليمية", InternalCode = "CONTENT_TUTORIALS", InternalRef = "Content_Management", IsActive = true },
+        new Lookup { Name = "Media Gallery", NameAr = "معرض الوسائط", InternalCode = "CONTENT_MEDIA_GALLERY", InternalRef = "Content_Management", IsActive = true },
+
+        // Parent Lookup: Event Management
+        new Lookup { Name = "Event Management", NameAr = "إدارة الفعاليات", InternalCode = "Event_Management", InternalRef = null, IsActive = true },
+        new Lookup { Name = "Networking Event", NameAr = "فعالية تواصل", InternalCode = "EVENT_NETWORKING", InternalRef = "Event_Management", IsActive = true },
+        new Lookup { Name = "Workshop", NameAr = "ورشة عمل", InternalCode = "EVENT_WORKSHOP", InternalRef = "Event_Management", IsActive = true },
+        new Lookup { Name = "Product Launch", NameAr = "إطلاق منتج", InternalCode = "EVENT_PRODUCT_LAUNCH", InternalRef = "Event_Management", IsActive = true },
+        new Lookup { Name = "Charity Event", NameAr = "فعالية خيرية", InternalCode = "EVENT_CHARITY", InternalRef = "Event_Management", IsActive = true },
 
         // Parent Lookup: Supporting Services
         new Lookup { Name = "Supporting Services", NameAr = "الخدمات الداعمة", InternalCode = "Supporting_Services", InternalRef = null, IsActive = true },
-        new Lookup { Name = "IT Support", NameAr = "الدعم الفني", InternalCode = "SERVICE_IT_SUPPORT", InternalRef = "Supporting_Services", IsActive = true },
-        new Lookup { Name = "Legal Consultation", NameAr = "الاستشارات القانونية", InternalCode = "SERVICE_LEGAL", InternalRef = "Supporting_Services", IsActive = true },
-        new Lookup { Name = "Business Coaching", NameAr = "التوجيه التجاري", InternalCode = "SERVICE_COACHING", InternalRef = "Supporting_Services", IsActive = true },
+        new Lookup { Name = "IT Support", NameAr = "الدعم التقني", InternalCode = "SERVICE_IT_SUPPORT", InternalRef = "Supporting_Services", IsActive = true },
+        new Lookup { Name = "Legal Consultancy", NameAr = "الاستشارات القانونية", InternalCode = "SERVICE_LEGAL", InternalRef = "Supporting_Services", IsActive = true },
+        new Lookup { Name = "Accounting Services", NameAr = "خدمات المحاسبة", InternalCode = "SERVICE_ACCOUNTING", InternalRef = "Supporting_Services", IsActive = true },
+        new Lookup { Name = "Marketing Support", NameAr = "دعم التسويق", InternalCode = "SERVICE_MARKETING", InternalRef = "Supporting_Services", IsActive = true },
 
-        // Parent Lookup: Content Types
-        new Lookup { Name = "Content Types", NameAr = "أنواع المحتوى", InternalCode = "Content_Types", InternalRef = null, IsActive = true },
-        new Lookup { Name = "News", NameAr = "الأخبار", InternalCode = "CONTENT_NEWS", InternalRef = "Content_Types", IsActive = true },
-        new Lookup { Name = "Blogs", NameAr = "المدونات", InternalCode = "CONTENT_BLOGS", InternalRef = "Content_Types", IsActive = true },
-        new Lookup { Name = "Success Stories", NameAr = "قصص النجاح", InternalCode = "CONTENT_SUCCESS_STORIES", InternalRef = "Content_Types", IsActive = true },
-
-        // Parent Lookup: Notifications
-        new Lookup { Name = "Notifications", NameAr = "الإشعارات", InternalCode = "Notifications", InternalRef = null, IsActive = true },
-        new Lookup { Name = "SMS Notifications", NameAr = "إشعارات الرسائل القصيرة", InternalCode = "NOTIFICATION_SMS", InternalRef = "Notifications", IsActive = true },
-        new Lookup { Name = "Email Notifications", NameAr = "إشعارات البريد الإلكتروني", InternalCode = "NOTIFICATION_EMAIL", InternalRef = "Notifications", IsActive = true },
-        new Lookup { Name = "System Alerts", NameAr = "تنبيهات النظام", InternalCode = "NOTIFICATION_ALERTS", InternalRef = "Notifications", IsActive = true }
+        // Parent Lookup: System Configuration
+        new Lookup { Name = "System Configuration", NameAr = "إعدادات النظام", InternalCode = "System_Configuration", InternalRef = null, IsActive = true },
+        new Lookup { Name = "Roles Management", NameAr = "إدارة الأدوار", InternalCode = "SYSTEM_ROLES", InternalRef = "System_Configuration", IsActive = true },
+        new Lookup { Name = "Permissions Management", NameAr = "إدارة الصلاحيات", InternalCode = "SYSTEM_PERMISSIONS", InternalRef = "System_Configuration", IsActive = true },
+        new Lookup { Name = "Settings Management", NameAr = "إدارة الإعدادات", InternalCode = "SYSTEM_SETTINGS", InternalRef = "System_Configuration", IsActive = true },
+        new Lookup { Name = "User Management", NameAr = "إدارة المستخدمين", InternalCode = "SYSTEM_USERS", InternalRef = "System_Configuration", IsActive = true }
     };
         }
+
 
     }
 }
