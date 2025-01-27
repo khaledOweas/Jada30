@@ -1,5 +1,6 @@
 ﻿using Identity.Application.Services;
 using Jada30Core.Application.Interfaces;
+using Jada30Core.Application.Services;
 using Jada30Core.Framework.UoW;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,6 +18,7 @@ namespace Identity.Application
         {
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddTransient<IFacilityManagementService, FacilityManagementService>();
+            services.AddTransient<IBranchManagementService, BranchManagementService>();
 
             return services;
         }
