@@ -4,6 +4,7 @@ using Framework;
 using Jada30Core.Application.Interfaces;
 using Jada30Core.Common.BaseResponse;
 using Jada30Core.Common.Facility;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,14 +46,14 @@ namespace Identity.Application.Services
 
         public async Task<BaseResponse<List<FacilityDto>>> GetFacilities()
         {
-            var facilities = _unitOfWork.GetRepository<Facilities>().GetAll();
+            var facilities = _unitOfWork.GetRepository<Facilities>().GetAll(include: x => x.Include(x => x.Category).Include(x => x.Type).Include(x => x.Subscription).Include(x => x.PricingUnit).Include(x => x.Destination));
 
             return new SuccessResponse<List<FacilityDto>>("Facilities retrieved successfully.", _mapper.Map<List<FacilityDto>>(facilities));
         }
 
         public async Task<BaseResponse<FacilityDto>> GetFacility(long id)
         {
-           var facility = (await _unitOfWork.GetRepository<Facilities>().GetAllAsync(x => x.Id == id)).FirstOrDefault();
+           var facility = (await _unitOfWork.GetRepository<Facilities>().GetAllAsync(x => x.Id == id,include: x => x.Include(x => x.Category).Include(x => x.Type).Include(x => x.Subscription).Include(x => x.PricingUnit).Include(x => x.Destination))).FirstOrDefault();
             return new SuccessResponse<FacilityDto>("Facility retrieved successfully.", _mapper.Map<FacilityDto>(facility));
         }
 
