@@ -1,15 +1,14 @@
 
 using Jada30.Logging;
 
-using Lookups.Infrastructure.Data;
-using Lookups.Infrastructure.Seeding;
-
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Serilog;
 using Lookups.Application;
+using Infrastructure.Data;
+using Lookups.Application.Seeding;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,7 +23,7 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddAutoMapper(typeof(Lookups.Application.Mappings.MappingProfile));
 
 
-builder.Services.AddDbContext<LookupsContext>(options =>
+builder.Services.AddDbContext<Jada30Context>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("Default"));
 });
@@ -118,7 +117,7 @@ using (var scope = app.Services.CreateScope())
     var services = scope.ServiceProvider;
     try
     {
-        var context = services.GetRequiredService<LookupsContext>();
+        var context = services.GetRequiredService<Jada30Context>();
 
         context.Database.Migrate();
         await DataSeeder.SeedAsync(context);

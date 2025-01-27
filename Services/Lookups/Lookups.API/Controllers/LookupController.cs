@@ -1,9 +1,9 @@
 using AutoMapper;
-
+using Domain;
+using Infrastructure.Data;
 using Lookups.Common;
 using Lookups.Common.BaseResponse;
 
-using Lookups.Infrastructure.Data;
 
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,10 +16,10 @@ public class LookupController : ControllerBase
 {
 
     private readonly ILogger<LookupController> _logger;
-    private readonly LookupsContext _context;
+    private readonly Jada30Context _context;
     private readonly IMapper _Mapper;
 
-    public LookupController(LookupsContext context, ILogger<LookupController> logger, IMapper mapper)
+    public LookupController(Jada30Context context, ILogger<LookupController> logger, IMapper mapper)
     {
         this._context = context;
         _logger = logger;
@@ -116,7 +116,7 @@ public class LookupController : ControllerBase
             {
                 return new FailedResponse<GetLookupDto>("Lookup data cannot be null.");
             }
-            var newLookup = _Mapper.Map<Domain.Entities.Lookup>(lookup);
+            var newLookup = _Mapper.Map<Lookup>(lookup);
 
             _context.Lookups.Add(newLookup);
             _context.SaveChanges();

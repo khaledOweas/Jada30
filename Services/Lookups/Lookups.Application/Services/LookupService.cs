@@ -2,7 +2,7 @@
 using Lookups.Application.Interfaces;
 using Lookups.Common;
 using Lookups.Common.BaseResponse;
-using Lookups.Framework.UoW;
+using Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +25,7 @@ namespace Lookups.Application.Services
         {
             try
             {
-                var lookups = await _unitOfWork.GetRepository<Domain.Entities.Lookup>().GetAllAsync(x => x.InternalRef == null);
+                var lookups = await _unitOfWork.GetRepository<Domain.Lookup>().GetAllAsync(x => x.InternalRef == null);
                 var mapped = _mapper.Map<List<GetLookupDto>>(lookups);
                 return new SuccessResponse<List<GetLookupDto>>("Categories retrieved successfully.", mapped);
             }
@@ -39,7 +39,7 @@ namespace Lookups.Application.Services
         {
             try
             {
-                var lookups = await _unitOfWork.GetRepository<Domain.Entities.Lookup>().GetAllAsync();
+                var lookups = await _unitOfWork.GetRepository<Domain.Lookup>().GetAllAsync();
                 var mapped = _mapper.Map<List<GetLookupDto>>(lookups);
                 return new SuccessResponse<List<GetLookupDto>>("Lookups retrieved successfully.", mapped);
             }
@@ -53,7 +53,7 @@ namespace Lookups.Application.Services
         {
             try
             {
-                var lookups = await _unitOfWork.GetRepository<Domain.Entities.Lookup>().GetAllAsync(x => x.InternalRef == refCode);
+                var lookups = await _unitOfWork.GetRepository<Domain.Lookup>().GetAllAsync(x => x.InternalRef == refCode);
                 var mapped = _mapper.Map<List<GetLookupDto>>(lookups);
                 return new SuccessResponse<List<GetLookupDto>>("Lookups by reference code retrieved successfully.", mapped);
             }
@@ -67,7 +67,7 @@ namespace Lookups.Application.Services
         {
             try
             {
-                var lookup = (await _unitOfWork.GetRepository<Domain.Entities.Lookup>().GetAllAsync(x => x.InternalCode == code))
+                var lookup = (await _unitOfWork.GetRepository<Domain.Lookup>().GetAllAsync(x => x.InternalCode == code))
                              .FirstOrDefault();
                 if (lookup == null)
                 {
@@ -87,8 +87,8 @@ namespace Lookups.Application.Services
         {
             try
             {
-                var newLookup = _mapper.Map<Domain.Entities.Lookup>(lookupDto);
-                await _unitOfWork.GetRepository<Domain.Entities.Lookup>().InsertAsync(newLookup);
+                var newLookup = _mapper.Map<Domain.Lookup>(lookupDto);
+                await _unitOfWork.GetRepository<Domain.Lookup>().InsertAsync(newLookup);
                 await _unitOfWork.SaveChangesAsync();
 
                 var mapped = _mapper.Map<GetLookupDto>(newLookup);
@@ -104,7 +104,7 @@ namespace Lookups.Application.Services
         {
             try
             {
-                var repository = _unitOfWork.GetRepository<Domain.Entities.Lookup>();
+                var repository = _unitOfWork.GetRepository<Domain.Lookup>();
                 var existingLookup = (await repository.GetAllAsync(x => x.InternalCode == code)).FirstOrDefault();
 
                 if (existingLookup == null)
@@ -129,7 +129,7 @@ namespace Lookups.Application.Services
         {
             try
             {
-                var repository = _unitOfWork.GetRepository<Domain.Entities.Lookup>();
+                var repository = _unitOfWork.GetRepository<Domain.Lookup>();
                 var existingLookup = (await repository.GetAllAsync(x => x.InternalCode == code)).FirstOrDefault();
 
                 if (existingLookup == null)

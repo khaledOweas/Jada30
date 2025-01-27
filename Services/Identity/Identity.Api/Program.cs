@@ -1,6 +1,3 @@
-using Identity.Infrastructure.Data;
-using Identity.Infrastructure.Models;
-using Identity.Infrastructure.Seeding;
 using Jada30.Logging;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -10,6 +7,9 @@ using Microsoft.IdentityModel.Tokens;
 using Serilog;
 using StackExchange.Redis;
 using Identity.Application;
+using Infrastructure.Data;
+using Domain;
+using Identity.Application.Seeding;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,7 +22,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddAutoMapper(typeof(Identity.Application.Mappings.MappingProfile));
 
-builder.Services.AddDbContext<IdentityContext>(options =>
+builder.Services.AddDbContext<Jada30Context>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("Default"));
 });
@@ -31,7 +31,7 @@ builder.Services.AddSingleton<IConnectionMultiplexer>(x =>
     ConnectionMultiplexer.Connect(builder.Configuration.GetValue<string>("RedisConnection")));
 
 builder.Services.AddIdentity<ApplicationUser, ApplicationRole>()
-    .AddEntityFrameworkStores<IdentityContext>()
+    .AddEntityFrameworkStores<Jada30Context>()
     .AddDefaultTokenProviders();
 
 builder.Services.AddRepository(builder.Configuration);
@@ -125,7 +125,7 @@ using (var scope = app.Services.CreateScope())
     var services = scope.ServiceProvider;
     try
     {
-        var context = services.GetRequiredService<IdentityContext>();
+        var context = services.GetRequiredService<Jada30Context>();
         var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
         var roleManager = services.GetRequiredService<RoleManager<ApplicationRole>>();
 

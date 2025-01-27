@@ -1,8 +1,7 @@
-﻿using Identity.Application.Interfaces;
+﻿using Domain;
+using Framework;
+using Identity.Application.Interfaces;
 using Identity.Common.BaseResponse;
-using Identity.Framework.UoW;
-using Identity.Infrastructure.Data;
-using Identity.Infrastructure.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

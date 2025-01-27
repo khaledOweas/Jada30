@@ -1,6 +1,6 @@
-﻿using Identity.Application.Interfaces;
+﻿using Framework;
+using Identity.Application.Interfaces;
 using Identity.Application.Services;
-using Identity.Framework.UoW;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;

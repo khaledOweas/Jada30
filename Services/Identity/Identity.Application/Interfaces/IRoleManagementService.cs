@@ -1,5 +1,6 @@
-﻿using Identity.Common.BaseResponse;
-using Identity.Infrastructure.Models;
+﻿using Domain;
+using Identity.Common.BaseResponse;
+using Identity.Common.Role;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,7 @@ namespace Identity.Application.Interfaces
         BaseResponse<List<ApplicationRole>> GetRoles();
         Task<BaseResponse<bool>> AssignPermissionToRole(long roleId, long permissionId);
         Task<BaseResponse<List<Permission>>> GetPermissionsForRole(long roleId);
+        Task<BaseResponse<ApplicationRole>> CreateRoleWithPermissions(CreateRoleWithPermssionsDto req);
     }
 
 }

@@ -1,7 +1,8 @@
-﻿using Identity.Application.Interfaces;
+﻿using Domain;
+using Identity.Application.Interfaces;
 using Identity.Common.BaseResponse;
+using Identity.Common.Role;
 using Identity.Common.User;
-using Identity.Infrastructure.Models;
 
 using Microsoft.AspNetCore.Mvc;
 
@@ -72,6 +73,10 @@ namespace Identity.Api.Controllers
         [HttpPost("permissions")]
         public async Task<BaseResponse<Permission>> CreatePermission([FromBody] Permission permission)
             => await _permissionService.CreatePermission(permission);
+
+        [HttpPost("CreateRoleWithPermissions")]
+        public async Task<BaseResponse<ApplicationRole>> CreateRoleWithPermissions(CreateRoleWithPermssionsDto req )
+            => await _roleService.CreateRoleWithPermissions(req);
     }
 
 }
