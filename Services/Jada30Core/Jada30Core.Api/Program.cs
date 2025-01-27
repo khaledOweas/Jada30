@@ -7,7 +7,7 @@ using Microsoft.IdentityModel.Tokens;
 using Serilog;
 using StackExchange.Redis;
 using Identity.Application;
-using Jada30Core.Infrastructure.Data;
+using Infrastructure.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,7 +20,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddAutoMapper(typeof(Identity.Application.Mappings.MappingProfile));
 
-builder.Services.AddDbContext<Jada30CoreContext>(options =>
+builder.Services.AddDbContext<Jada30Context>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("Default"));
 });
@@ -121,7 +121,7 @@ using (var scope = app.Services.CreateScope())
     var services = scope.ServiceProvider;
     try
     {
-        var context = services.GetRequiredService<Jada30CoreContext>();
+        var context = services.GetRequiredService<Jada30Context>();
         
         // Apply pending migrations (optional, ensures the database is up-to-date)
         context.Database.Migrate();

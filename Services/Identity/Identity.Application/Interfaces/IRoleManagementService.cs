@@ -1,6 +1,6 @@
-﻿using Identity.Common.BaseResponse;
+﻿using Domain;
+using Identity.Common.BaseResponse;
 using Identity.Common.Role;
-using Identity.Infrastructure.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

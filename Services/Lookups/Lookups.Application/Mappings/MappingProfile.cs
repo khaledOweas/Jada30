@@ -12,9 +12,9 @@ namespace Lookups.Application.Mappings
     {
         public MappingProfile()
         {
-            CreateMap<GetLookupDto, Domain.Entities.Lookup>().ReverseMap();
-            CreateMap<AddLookupDto, Domain.Entities.Lookup>().ReverseMap();
-            CreateMap<UpdateLookupDto, Domain.Entities.Lookup>().ReverseMap();
+            CreateMap<GetLookupDto, Domain.Lookup>().ReverseMap();
+            CreateMap<AddLookupDto, Domain.Lookup>().ReverseMap();
+            CreateMap<UpdateLookupDto, Domain.Lookup>().ReverseMap();
 
         }
     }

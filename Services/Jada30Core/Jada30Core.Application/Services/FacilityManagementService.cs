@@ -1,10 +1,9 @@
 ﻿using AutoMapper;
+using Domain;
+using Framework;
 using Jada30Core.Application.Interfaces;
 using Jada30Core.Common.BaseResponse;
 using Jada30Core.Common.Facility;
-using Jada30Core.Domain.Entities.Facility;
-using Jada30Core.Framework.UoW;
-using Jada30Core.Infrastructure.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,20 +15,16 @@ namespace Identity.Application.Services
     public class FacilityManagementService : IFacilityManagementService
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly Jada30CoreContext _dbContext;
         private readonly IMapper _mapper;
-        public FacilityManagementService(IUnitOfWork unitOfWork, IMapper mapper, Jada30CoreContext dbContext)
+        public FacilityManagementService(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
-            _dbContext = dbContext;
         }
 
         public async Task<BaseResponse<FacilityDto>> CreateFacility(CreateFacilityDto facility)
         {
             var NewFaciltiy = _mapper.Map<Facilities>(facility);
-            //await _dbContext.Facilities.AddAsync(NewFaciltiy);
-            //await _dbContext.SaveChangesAsync();
             await  _unitOfWork.GetRepository<Facilities>().InsertAsync(NewFaciltiy);
             await _unitOfWork.SaveChangesAsync();
             return new SuccessResponse<FacilityDto>("Facility created successfully.", _mapper.Map<FacilityDto>(NewFaciltiy));

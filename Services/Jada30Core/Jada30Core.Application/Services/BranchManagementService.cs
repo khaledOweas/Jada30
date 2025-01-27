@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
+using Domain;
+using Framework;
 using Jada30Core.Application.Interfaces;
 using Jada30Core.Common.BaseResponse;
 using Jada30Core.Common.Branch;
 using Jada30Core.Common.BranchComponents;
-using Jada30Core.Domain.Entities;
-using Jada30Core.Framework.UoW;
 using System;
 using System.Collections.Generic;
 using System.Linq;

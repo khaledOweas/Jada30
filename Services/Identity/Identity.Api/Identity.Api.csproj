@@ -13,9 +13,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Common\Shared\DataBaseLayer\Domain\Domain\Domain.csproj" />
+    <ProjectReference Include="..\..\..\Common\Shared\DataBaseLayer\Infrastructure\Infrastructure\Infrastructure.csproj" />
     <ProjectReference Include="..\..\..\Common\Shared\Logging\Jada30.Logging\Jada30.Logging.csproj" />
     <ProjectReference Include="..\Identity.Application\Identity.Application.csproj" />
-    <ProjectReference Include="..\Identity.Infrastructure\Identity.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

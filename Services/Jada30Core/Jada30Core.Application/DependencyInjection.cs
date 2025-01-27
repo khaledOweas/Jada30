@@ -1,7 +1,7 @@
-﻿using Identity.Application.Services;
+﻿using Framework;
+using Identity.Application.Services;
 using Jada30Core.Application.Interfaces;
 using Jada30Core.Application.Services;
-using Jada30Core.Framework.UoW;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;

@@ -10,9 +10,10 @@
 
 	</ItemGroup>
 	<ItemGroup>
+	  <ProjectReference Include="..\..\..\Common\Shared\DataBaseLayer\Domain\Domain\Domain.csproj" />
+	  <ProjectReference Include="..\..\..\Common\Shared\DataBaseLayer\Framework\Framework\Framework.csproj" />
+	  <ProjectReference Include="..\..\..\Common\Shared\DataBaseLayer\Infrastructure\Infrastructure\Infrastructure.csproj" />
 	  <ProjectReference Include="..\Identity.Common\Identity.Common.csproj" />
-	  <ProjectReference Include="..\Identity.Domain\Identity.Domain.csproj" />
-	  <ProjectReference Include="..\Identity.Framework\Identity.Framework.csproj" />
 	</ItemGroup>
 	
 </Project>

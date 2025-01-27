@@ -1,8 +1,7 @@
 ﻿using AutoMapper;
-
+using Domain;
 using Identity.Common.Role;
 using Identity.Common.User;
-using Identity.Infrastructure.Models;
 
 namespace Identity.Application.Mappings;
 public class MappingProfile : Profile

@@ -12,9 +12,9 @@
 	</ItemGroup>
 	
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Common\Shared\DataBaseLayer\Domain\Domain\Domain.csproj" />
+    <ProjectReference Include="..\..\..\Common\Shared\DataBaseLayer\Framework\Framework\Framework.csproj" />
     <ProjectReference Include="..\Jada30Core.Common\Jada30Core.Common.csproj" />
-    <ProjectReference Include="..\Jada30Core.Domain\Jada30Core.Domain.csproj" />
-    <ProjectReference Include="..\Jada30Core.Framework\Jada30Core.Framework.csproj" />
   </ItemGroup>
 
 </Project>

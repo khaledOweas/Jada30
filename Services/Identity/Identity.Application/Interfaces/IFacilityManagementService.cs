@@ -1,7 +1,6 @@
 ﻿using Identity.Common.BaseResponse;
 using Identity.Common.Facility;
 using Identity.Common.User;
-using Identity.Infrastructure.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

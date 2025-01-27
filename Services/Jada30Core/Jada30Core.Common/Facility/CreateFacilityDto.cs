@@ -10,7 +10,7 @@ namespace Jada30Core.Common.Facility
     public class CreateFacilityDto
     {
         public string Name { get; set; }
-        public FacilityCategory Category { get; set; }
+        public long Category { get; set; }
         public FacilityType Type { get; set; }
         public Destination Destination { get; set; }
         public PricingUnit PricingUnit { get; set; }

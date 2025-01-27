@@ -1,6 +1,6 @@
 ﻿using Lookups.Application.Interfaces;
 using Lookups.Application.Services;
-using Lookups.Framework.UoW;
+using Framework;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;

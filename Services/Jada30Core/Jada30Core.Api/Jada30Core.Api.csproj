@@ -20,7 +20,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\Common\Shared\Logging\Jada30.Logging\Jada30.Logging.csproj" />
     <ProjectReference Include="..\Jada30Core.Application\Jada30Core.Application.csproj" />
-    <ProjectReference Include="..\Jada30Core.Infrastructure\Jada30Core.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

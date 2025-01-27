@@ -1,8 +1,8 @@
-﻿using Identity.Application.Interfaces;
+﻿using Domain;
+using Identity.Application.Interfaces;
 using Identity.Common.BaseResponse;
 using Identity.Common.Role;
 using Identity.Common.User;
-using Identity.Infrastructure.Models;
 
 using Microsoft.AspNetCore.Mvc;
 

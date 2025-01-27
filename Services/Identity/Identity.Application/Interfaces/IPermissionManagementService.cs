@@ -1,5 +1,5 @@
-﻿using Identity.Common.BaseResponse;
-using Identity.Infrastructure.Models;
+﻿using Domain;
+using Identity.Common.BaseResponse;
 using System;
 using System.Collections.Generic;
 using System.Linq;
