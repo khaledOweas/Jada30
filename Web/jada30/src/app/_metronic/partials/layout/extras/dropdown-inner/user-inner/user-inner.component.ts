@@ -49,7 +49,7 @@ export class UserInnerComponent implements OnInit, OnDestroy {
   selectLanguage(lang: string) {
     this.translationService.setLanguage(lang);
     this.setLanguage(lang);
-    // document.location.reload();
+    document.location.reload();
   }
 
   setLanguage(lang: string) {
@@ -73,32 +73,24 @@ export class UserInnerComponent implements OnInit, OnDestroy {
   }
   toggleDirection(isLTR: boolean): void {
     const htmlElement = this.el.nativeElement.ownerDocument.documentElement;
-    // const header = document.getElementById("kt_header");
-    // const side = document.getElementById("kt_aside");
-    // const side2 = document.getElementById("kt_aside_menu");
-    // const content = document.getElementById("kt_content");
+    const body = this.el.nativeElement.ownerDocument.body;
+    const sideBar = document.getElementById("kt_app_sidebar");
     if (isLTR) {
       // Switch to LTR
       this.renderer.setAttribute(htmlElement, "direction", "ltr");
       this.renderer.setAttribute(htmlElement, "dir", "ltr");
       this.renderer.setStyle(htmlElement, "direction", "ltr");
-      // this.renderer.setStyle(header, "direction", "ltr");
-      // this.renderer.setStyle(side, "direction", "ltr");
-      // this.renderer.setStyle(side2, "direction", "ltr");
-      // this.renderer.setStyle(content, "direction", "ltr");
+      this.renderer.setStyle(sideBar, "direction", "ltr");
+      this.renderer.setStyle(body, "direction", "ltr");
     } else {
       // Switch to RTL
       this.renderer.setAttribute(htmlElement, "direction", "rtl");
       this.renderer.setAttribute(htmlElement, "dir", "rtl");
       this.renderer.setStyle(htmlElement, "direction", "rtl");
-      // this.renderer.setStyle(header, "direction", "rtl");
-      // this.renderer.setStyle(side, "direction", "rtl");
-      // this.renderer.setStyle(side2, "direction", "rtl");
-      // this.renderer.setStyle(content, "direction", "rtl");
+      this.renderer.setStyle(sideBar, "direction", "rtl");
+      this.renderer.setStyle(body, "direction", "rtl");
     }
-    // for temp
-
-    localStorage.setItem("dir", isLTR ? "eb" : "ar");
+    localStorage.setItem("dir", isLTR ? "en" : "ar");
   }
   changeStylesheet(id: string, newHref: string): void {
     const linkElement = document.getElementById(id) as HTMLLinkElement;
@@ -135,31 +127,7 @@ const languages = [
     name: "English",
     flag: "./assets/media/flags/united-states.svg"
   },
-  {
-    lang: "zh",
-    name: "Mandarin",
-    flag: "./assets/media/flags/china.svg"
-  },
-  {
-    lang: "es",
-    name: "Spanish",
-    flag: "./assets/media/flags/spain.svg"
-  },
-  {
-    lang: "ja",
-    name: "Japanese",
-    flag: "./assets/media/flags/japan.svg"
-  },
-  {
-    lang: "de",
-    name: "German",
-    flag: "./assets/media/flags/germany.svg"
-  },
-  {
-    lang: "fr",
-    name: "French",
-    flag: "./assets/media/flags/france.svg"
-  },
+
   {
     lang: "ar",
     name: "Arabic",
