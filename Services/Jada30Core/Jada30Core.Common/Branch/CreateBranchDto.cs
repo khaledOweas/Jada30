@@ -1,5 +1,4 @@
-﻿using Jada30Core.Common.BranchComponents;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +14,6 @@ namespace Jada30Core.Common.Branch
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
         public long CategoryBranchId { get; set; }
-        public ICollection<CreateBranchComponentDto>? BranchComponents { get; set; }
+        public ICollection<CreateBranchComponentDto>? BranchComponents { get; set; } = new List<CreateBranchComponentDto>();
     }
 }

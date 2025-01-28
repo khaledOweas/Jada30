@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Jada30Core.Common.Facility;
-using Jada30Core.Common.BranchComponents;
 using Jada30Core.Common.Branch;
 using Domain;
 
@@ -28,6 +27,13 @@ public class MappingProfile : Profile
 
         CreateMap<GetBranchDto, Branch>().ReverseMap();
         CreateMap<CreateBranchDto, Branch>().ReverseMap();
+        CreateMap<CreateBranchComponentDto, BranchComponent>().ReverseMap();
+        CreateMap<GetBranchComponentDto, BranchComponent>()
+            .ForPath(dest => dest.Branch.Name, opt => opt.MapFrom(src => src.BranchName))
+            .ForPath(dest => dest.Component.Name, opt => opt.MapFrom(src => src.ComponentName))
+            .ReverseMap()
+            .ForPath(dest => dest.BranchName, opt => opt.MapFrom(src => src.Branch.Name))
+            .ForPath(dest => dest.ComponentName, opt => opt.MapFrom(src => src.Component.Name));
 
     }
 }

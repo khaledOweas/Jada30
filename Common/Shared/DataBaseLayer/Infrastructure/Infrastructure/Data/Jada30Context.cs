@@ -27,6 +27,7 @@ namespace Infrastructure.Data
 
         public DbSet<Permission> Permissions { get; set; }
         public DbSet<RolePermission> RolePermissions { get; set; }
+        public DbSet<BranchComponent> BranchComponents { get; set; }
         public Jada30Context()
         {
         }

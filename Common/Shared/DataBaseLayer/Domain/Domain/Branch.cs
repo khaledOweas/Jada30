@@ -15,7 +15,7 @@ namespace Domain
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
         public long CategoryBranchId { get; set; }
-        public ICollection<Lookup>? BranchComponents { get; set; }
+        public ICollection<BranchComponent>? BranchComponents { get; set; } = new List<BranchComponent>();
 
     }
 }
