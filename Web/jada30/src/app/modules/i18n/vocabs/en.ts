@@ -149,7 +149,8 @@ export const locale = {
       FirstImage: "First Image",
       ChangeFirtImage: "Change First Image",
       SecondImage: "Second Image",
-      ChangeSecondImage: "Change Second Image"
+      ChangeSecondImage: "Change Second Image",
+      languages: "Languages"
     },
     address: {
       countryname: "Country Name",

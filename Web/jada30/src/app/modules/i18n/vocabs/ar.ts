@@ -1,3 +1,4 @@
+
 // Arabic - Egypt
 export const locale = {
   lang: "ar",
@@ -134,7 +135,8 @@ export const locale = {
       FirstImage: "الصورة الأولي",
       ChangeFirtImage: "تغيير الصورة الأولي",
       SecondImage: "الصورة الثانية",
-      ChangeSecondImage: "تغيير الصورة الثانية"
+      ChangeSecondImage: "تغيير الصورة الثانية",
+      languages: "اللغات"
     },
     address: {
       countryname: "اسم الدولة",
@@ -236,7 +238,7 @@ export const locale = {
       PasswordMismatch: "كلمات المرور غير متطابقة.",
       GeneratePassword: "إنشاء كلمة مرور عشوائية",
       UserNameInvalid: "اسم المستخدم غير صالح، يمكن أن يحتوي فقط على أحرف أو أرقام بدون مسافات.",
-      Update:"تحديث المستخدم",
+      Update: "تحديث المستخدم"
     },
     Doctors: {
       DoctorName: "اسم الطبيب",

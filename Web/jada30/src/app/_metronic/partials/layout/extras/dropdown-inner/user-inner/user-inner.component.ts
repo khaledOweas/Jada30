@@ -4,12 +4,13 @@ import { TranslationService } from "../../../../../../modules/i18n";
 import { AuthService, UserType } from "../../../../../../modules/auth";
 import { AsyncPipe, NgClass, NgFor, NgIf } from "@angular/common";
 import { RouterLink } from "@angular/router";
+import { TranslateModule } from "@ngx-translate/core";
 
 @Component({
   selector: "app-user-inner",
   templateUrl: "./user-inner.component.html",
   standalone: true,
-  imports: [NgClass, NgFor, NgIf, AsyncPipe, RouterLink]
+  imports: [NgClass, NgFor, NgIf, AsyncPipe, RouterLink, TranslateModule]
 })
 export class UserInnerComponent implements OnInit, OnDestroy {
   @HostBinding("class")
@@ -65,7 +66,7 @@ export class UserInnerComponent implements OnInit, OnDestroy {
         this.changeStylesheet("s3", "assets/css/global.rtl.css");
         this.toggleDirection(false);
       } else {
-        this.changeStylesheet("s2", "assets/sass/style.scss");
+        this.changeStylesheet("s2", "assets/css/style.css");
         this.changeStylesheet("s3", "assets/css/global.ltr.css");
         this.toggleDirection(true);
       }
@@ -117,6 +118,7 @@ export class UserInnerComponent implements OnInit, OnDestroy {
 interface LanguageFlag {
   lang: string;
   name: string;
+  nameAr: string;
   flag: string;
   active?: boolean;
 }
@@ -125,12 +127,14 @@ const languages = [
   {
     lang: "en",
     name: "English",
+    nameAr: "إنجليزي",
     flag: "./assets/media/flags/united-states.svg"
   },
 
   {
     lang: "ar",
     name: "Arabic",
+    nameAr: "عربي",
     flag: "./assets/media/flags/saudi-arabia.svg"
   }
 ];
