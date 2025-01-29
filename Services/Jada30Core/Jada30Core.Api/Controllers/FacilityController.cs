@@ -1,4 +1,5 @@
 using Jada30Core.Application.Interfaces;
+using Jada30Core.Common.BaseResponse;
 using Jada30Core.Common.Facility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -19,33 +20,33 @@ namespace Jada30Core.Api.Controllers
         }
 
         [HttpGet("GetFacilities")]
-        public async Task<IActionResult> GetFacilities()
+        public async Task<BaseResponse<List<FacilityDto>>> GetFacilities()
         {
-            return Ok(await _facilityManagementService.GetFacilities());
+            return await _facilityManagementService.GetFacilities();
         }
 
         [HttpGet("GetFacility/{id}")]
-        public async Task<IActionResult> GetFacility(int id)
+        public async Task<BaseResponse<FacilityDto>> GetFacility(int id)
         {
-            return Ok(await _facilityManagementService.GetFacility(id));
+            return await _facilityManagementService.GetFacility(id);
         }
 
         [HttpPost("CreateFacility")]
-        public async Task<IActionResult> CreateFacility(CreateFacilityDto facilityDto)
+        public async Task<BaseResponse<FacilityDto>> CreateFacility(CreateFacilityDto facilityDto)
         {
-            return Ok(await _facilityManagementService.CreateFacility(facilityDto));
+            return await _facilityManagementService.CreateFacility(facilityDto);
         }
 
         [HttpPut("UpdateFacility/{id}")]
-        public async Task<IActionResult> UpdateFacility(long id, FacilityDto facility)
+        public async Task<BaseResponse<FacilityDto>> UpdateFacility(long id, FacilityDto facility)
         {
-            return Ok(await _facilityManagementService.UpdateFacility(id, facility));
+            return await _facilityManagementService.UpdateFacility(id, facility);
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteFacility(int id)
+        public async Task<BaseResponse<bool>> DeleteFacility(int id)
         {
-            return Ok(await _facilityManagementService.DeleteFacility(id));
+            return await _facilityManagementService.DeleteFacility(id);
         }
 
 

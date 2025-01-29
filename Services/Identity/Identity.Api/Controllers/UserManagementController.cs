@@ -1,6 +1,7 @@
 ﻿using Domain;
 using Identity.Application.Interfaces;
 using Identity.Common.BaseResponse;
+using Identity.Common.Permission;
 using Identity.Common.Role;
 using Identity.Common.User;
 
@@ -54,11 +55,11 @@ namespace Identity.Api.Controllers
 
 
         [HttpPost("roles")]
-        public async Task<BaseResponse<ApplicationRole>> CreateRole([FromBody] ApplicationRole role)
+        public async Task<BaseResponse<bool>> CreateRole([FromBody] ApplicationRole role)
             => await _roleService.CreateRole(role);
 
         [HttpGet("roles")]
-        public BaseResponse<List<ApplicationRole>> GetRoles()
+        public BaseResponse<List<RoleDto>> GetRoles()
             => _roleService.GetRoles();
 
         [HttpPost("roles/{roleId}/permissions/{permissionId}")]
@@ -66,7 +67,7 @@ namespace Identity.Api.Controllers
             => await _roleService.AssignPermissionToRole(roleId, permissionId);
 
         [HttpGet("roles/{roleId}/permissions")]
-        public async Task<BaseResponse<List<Permission>>> GetPermissionsForRole(long roleId)
+        public async Task<BaseResponse<List<GetPermissionDto>>> GetPermissionsForRole(long roleId)
             => await _roleService.GetPermissionsForRole(roleId);
 
         // Permission Endpoints
@@ -75,7 +76,7 @@ namespace Identity.Api.Controllers
             => await _permissionService.CreatePermission(permission);
 
         [HttpPost("CreateRoleWithPermissions")]
-        public async Task<BaseResponse<ApplicationRole>> CreateRoleWithPermissions(CreateRoleWithPermssionsDto req )
+        public async Task<BaseResponse<bool>> CreateRoleWithPermissions(CreateRoleWithPermssionsDto req )
             => await _roleService.CreateRoleWithPermissions(req);
     }
 

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Domain;
+using Identity.Common.Permission;
 using Identity.Common.Role;
 using Identity.Common.User;
 
@@ -27,6 +28,10 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
             .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
             .ForMember(dest => dest.RoleNameAr, opt => opt.MapFrom(src => src.RoleNameAr));
+
+
+        CreateMap<GetPermissionDto, Permission>().ReverseMap();
+
 
     }
 }

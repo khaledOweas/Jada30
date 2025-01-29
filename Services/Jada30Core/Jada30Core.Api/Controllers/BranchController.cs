@@ -1,4 +1,5 @@
 using Jada30Core.Application.Interfaces;
+using Jada30Core.Common.BaseResponse;
 using Jada30Core.Common.Branch;
 using Jada30Core.Common.Facility;
 using Microsoft.AspNetCore.Authorization;
@@ -19,36 +20,36 @@ namespace Jada30Core.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateBranch(CreateBranchDto branchDto)
+        public async Task<BaseResponse<GetBranchDto>> CreateBranch(CreateBranchDto branchDto)
         {
-            return Ok(await _branchManagementService.AddBranch(branchDto));
+            return await _branchManagementService.AddBranch(branchDto);
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetBranches()
+        public async Task<BaseResponse<List<GetBranchDto>>> GetBranches()
         {
-            return Ok(await _branchManagementService.GetBranches());
+            return await _branchManagementService.GetBranches();
         }
 
         [HttpGet]
         [Route("{id}")]
-        public async Task<IActionResult> GetBranch(int id)
+        public async Task<BaseResponse<GetBranchDto>> GetBranch(int id)
         {
-            return Ok(await _branchManagementService.GetBranch(id));
+            return await _branchManagementService.GetBranch(id);
         }
 
         [HttpPut]
         [Route("{id}")]
-        public async Task<IActionResult> UpdateBranch(int id, CreateBranchDto branchDto)
+        public async Task<BaseResponse<GetBranchDto>> UpdateBranch(int id, CreateBranchDto branchDto)
         {
-            return Ok(await _branchManagementService.UpdateBranch(id, branchDto));
+            return await _branchManagementService.UpdateBranch(id, branchDto);
         }
 
         [HttpDelete]
         [Route("{id}")]
-        public async Task<IActionResult> DeleteBranch(int id)
+        public async Task<BaseResponse<bool>> DeleteBranch(int id)
         {
-            return Ok(await _branchManagementService.DeleteBranch(id));
+            return await _branchManagementService.DeleteBranch(id);
         }
 
     }
