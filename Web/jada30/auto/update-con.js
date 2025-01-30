@@ -13,24 +13,58 @@ const files = [
   "E:\\Jada\\Jada\\Services\\Identity\\Identity.Api\\appsettings.json",
 ];
 
-files.forEach((filePath) => {
+// Function to update JSON connection string
+const updateJsonFile = (filePath) => {
   try {
-    // Read JSON file
     const fileContent = fs.readFileSync(filePath, "utf8");
     const jsonData = JSON.parse(fileContent);
 
-    // Check if "ConnectionStrings" exists
     if (jsonData.ConnectionStrings && jsonData.ConnectionStrings.Default) {
       jsonData.ConnectionStrings.Default = targetConnectionString;
-
-      // Write updated JSON back to file
       fs.writeFileSync(filePath, JSON.stringify(jsonData, null, 4), "utf8");
-
-      console.log(`Updated connection string in: ${filePath}`);
+      console.log(`Updated JSON connection string in: ${filePath}`);
     } else {
-      console.log(`No "ConnectionStrings" found in: ${filePath}`);
+      console.log(`No "ConnectionStrings" found in JSON: ${filePath}`);
     }
   } catch (error) {
-    console.error(`Error processing file ${filePath}:`, error);
+    console.error(`Error processing JSON file ${filePath}:`, error);
+  }
+};
+
+// Function to update C# connection string
+const updateCsFile = (filePath) => {
+  try {
+    let fileContent = fs.readFileSync(filePath, "utf8");
+
+    // Match any hardcoded connection string starting with "Data Source="
+    const regex = /Data Source=[^;]+;[^"]+/g;
+
+    if (regex.test(fileContent)) {
+      fileContent = fileContent.replace(regex, targetConnectionString);
+      fs.writeFileSync(filePath, fileContent, "utf8");
+      console.log(`Updated C# connection string in: ${filePath}`);
+    } else {
+      console.log(`No hardcoded connection string found in C# file: ${filePath}`);
+    }
+  } catch (error) {
+    console.error(`Error processing C# file ${filePath}:`, error);
+  }
+};
+
+// Iterate over files and process based on type
+files.forEach((filePath) => {
+  if (!fs.existsSync(filePath)) {
+    console.log(`File not found: ${filePath}`);
+    return;
+  }
+
+  const ext = path.extname(filePath).toLowerCase();
+
+  if (ext === ".json") {
+    updateJsonFile(filePath);
+  } else if (ext === ".cs") {
+    updateCsFile(filePath);
+  } else {
+    console.log(`Skipping unsupported file type: ${filePath}`);
   }
 });
