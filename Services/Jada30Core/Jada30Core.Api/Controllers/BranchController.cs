@@ -31,22 +31,22 @@ namespace Jada30Core.Api.Controllers
             return await _branchManagementService.GetBranches();
         }
 
-        [HttpGet]
-        [Route("{id}")]
+        [HttpGet("{id}")]
+      
         public async Task<BaseResponse<GetBranchDto>> GetBranch(int id)
         {
             return await _branchManagementService.GetBranch(id);
         }
 
-        [HttpPut]
-        [Route("{id}")]
+        [HttpPut("{id}")]
+     
         public async Task<BaseResponse<GetBranchDto>> UpdateBranch(int id, CreateBranchDto branchDto)
         {
             return await _branchManagementService.UpdateBranch(id, branchDto);
         }
 
-        [HttpDelete]
-        [Route("{id}")]
+        [HttpDelete("{id}")]
+     
         public async Task<BaseResponse<bool>> DeleteBranch(int id)
         {
             return await _branchManagementService.DeleteBranch(id);
