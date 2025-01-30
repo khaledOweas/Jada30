@@ -21,7 +21,7 @@ export class UserInnerComponent implements OnInit, OnDestroy {
   user$: Observable<UserType>;
   langs = languages;
   lang: string = localStorage.getItem("language")!;
-
+  username: string = "";
   private unsubscribe: Subscription[] = [];
 
   constructor(
@@ -32,7 +32,14 @@ export class UserInnerComponent implements OnInit, OnDestroy {
   ) {
     this.lang = localStorage.getItem("language") ?? "ar";
   }
-
+  getUserName(): void {
+    if (typeof localStorage !== "undefined") {
+      const user = localStorage.getItem("user");
+      if (user) {
+        this.username = JSON.parse(user).nameAr;
+      }
+    }
+  }
   ngOnInit(): void {
     this.user$ = this.auth.currentUserSubject.asObservable();
     this.setLanguage(this.translationService.getSelectedLanguage());
@@ -40,6 +47,7 @@ export class UserInnerComponent implements OnInit, OnDestroy {
     if (!this.lang) {
       localStorage.setItem("language", "ar");
     }
+    this.getUserName();
   }
 
   logout() {

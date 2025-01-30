@@ -80,7 +80,8 @@ export class LoginComponent implements OnInit, OnDestroy {
           localStorage.setItem(
             "user",
             JSON.stringify({
-              nameAr: JSON.parse(JSON.parse(JSON.stringify(jwtDecode(response.access_token))).data).UserNameAr
+              nameAr: JSON.parse(JSON.parse(JSON.stringify(jwtDecode(response.access_token))).data).UserNameAr,
+              nameEn: JSON.parse(JSON.parse(JSON.stringify(jwtDecode(response.access_token))).data).UserName
             })
           );
           this.router.navigate(["/dashboard"]);
