@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 var builder = WebApplication.CreateBuilder(args);
 
 // Define microservices
-var microservices = new[] { "Identity", "Lookups" };
+var microservices = new[] { "Identity", "Lookups" , "Core"};
 var environment = builder.Environment.EnvironmentName;
 var tempConfigPath = "mergedOcelot.json";
 
