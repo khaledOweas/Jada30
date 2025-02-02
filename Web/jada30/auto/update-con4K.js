@@ -13,7 +13,6 @@ const files = [
   "E:\\Jada\\Jada\\Services\\Identity\\Identity.Api\\appsettings.json",
 ];
 
-// Function to update JSON connection string
 const updateJsonFile = (filePath) => {
   try {
     const fileContent = fs.readFileSync(filePath, "utf8");
@@ -31,12 +30,10 @@ const updateJsonFile = (filePath) => {
   }
 };
 
-// Function to update C# connection string
 const updateCsFile = (filePath) => {
   try {
     let fileContent = fs.readFileSync(filePath, "utf8");
 
-    // Match any hardcoded connection string starting with "Data Source="
     const regex = /Data Source=[^;]+;[^"]+/g;
 
     if (regex.test(fileContent)) {
@@ -51,7 +48,6 @@ const updateCsFile = (filePath) => {
   }
 };
 
-// Iterate over files and process based on type
 files.forEach((filePath) => {
   if (!fs.existsSync(filePath)) {
     console.log(`File not found: ${filePath}`);
