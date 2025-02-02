@@ -4,7 +4,7 @@ import { SharedDatatableComponent } from "../../../core/shared/shared-datatable/
 
 import { takeUntil } from "rxjs";
 import { BaseComponent } from "src/app/core/Components/base/base.component";
-import { ApplicationRole, ApplicationRoleListBaseResponse, IdentityService } from "src/app/services/IdentityService";
+import { ApplicationRole, IdentityService, RoleDtoListBaseResponse } from "src/app/services/IdentityService";
 import { SharedDataTableColumn } from "src/app/core/shared/shared-datatable/sharedDatatablesModels";
 @Component({
   selector: "app-role-list",
@@ -51,7 +51,7 @@ export class RoleListComponent extends BaseComponent implements OnInit {
       .rolesGET()
       .pipe(takeUntil(this.destroyed$))
       .subscribe({
-        next: (res: ApplicationRoleListBaseResponse) => {
+        next: (res: RoleDtoListBaseResponse) => {
           this.ct.sendToaster("info", this.tr.get("SHARED.ServerDetails"), res.message);
           this.Data = res.responseData;
         }

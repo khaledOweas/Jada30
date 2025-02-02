@@ -1,0 +1,156 @@
+{
+  "Routes": [
+    {
+      "UpstreamPathTemplate": "/Branch",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamPathTemplate": "/Branch",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7043"
+        }
+      ],
+      "SwaggerKey": "Jada30Core"
+    },
+    {
+      "UpstreamPathTemplate": "/Branch",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/Branch",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7043"
+        }
+      ],
+      "SwaggerKey": "Jada30Core"
+    },
+    {
+      "UpstreamPathTemplate": "/Branch/{id}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/Branch/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7043"
+        }
+      ],
+      "SwaggerKey": "Jada30Core"
+    },
+    {
+      "UpstreamPathTemplate": "/Branch/{id}",
+      "UpstreamHttpMethod": [ "Put" ],
+      "DownstreamPathTemplate": "/Branch/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7043"
+        }
+      ],
+      "SwaggerKey": "Jada30Core"
+    },
+    {
+      "UpstreamPathTemplate": "/Branch/{id}",
+      "UpstreamHttpMethod": [ "Delete" ],
+      "DownstreamPathTemplate": "/Branch/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7043"
+        }
+      ],
+      "SwaggerKey": "Jada30Core"
+    },
+    {
+      "UpstreamPathTemplate": "/Facility/GetFacilities",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/Facility/GetFacilities",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7043"
+        }
+      ],
+      "SwaggerKey": "Jada30Core"
+    },
+    {
+      "UpstreamPathTemplate": "/Facility/GetFacility/{id}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/Facility/GetFacility/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7043"
+        }
+      ],
+      "SwaggerKey": "Jada30Core"
+    },
+    {
+      "UpstreamPathTemplate": "/Facility/CreateFacility",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamPathTemplate": "/Facility/CreateFacility",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7043"
+        }
+      ],
+      "SwaggerKey": "Jada30Core"
+    },
+    {
+      "UpstreamPathTemplate": "/Facility/UpdateFacility/{id}",
+      "UpstreamHttpMethod": [ "Put" ],
+      "DownstreamPathTemplate": "/Facility/UpdateFacility/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7043"
+        }
+      ],
+      "SwaggerKey": "Jada30Core"
+    },
+    {
+      "UpstreamPathTemplate": "/Facility/{id}",
+      "UpstreamHttpMethod": [ "Delete" ],
+      "DownstreamPathTemplate": "/Facility/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7043"
+        }
+      ],
+      "SwaggerKey": "Jada30Core"
+    }
+  ],
+  "SwaggerEndPoints": [
+    {
+      "Key": "Jada30Core",
+      "Config": [
+        {
+          "Name": "Jada30Core API",
+          "Version": "v1",
+          "Url": "https://localhost:7043/swagger/v1/swagger.json"
+        }
+      ]
+    }
+  ],
+  "GlobalConfiguration": {
+    "RequestIdKey": "Request-Id"
+  },
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft": "Warning",
+      "Ocelot": "Debug"
+    }
+  }
+}

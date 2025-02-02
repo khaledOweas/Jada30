@@ -25,5 +25,13 @@
   <ItemGroup>
     <Folder Include="Routes\" />
   </ItemGroup>
+	
+  <ItemGroup>
+    <Content Update="Core.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
 
 </Project>
