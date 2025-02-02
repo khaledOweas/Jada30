@@ -50,10 +50,14 @@ export const LAYOUT_ROUTES: Routes = [
         path: "lookups",
         loadChildren: () => import("../../modules/Routes/lookup.routes").then((m) => m.LOOKUP_ROUTES)
       },
-      // {
-      //   path: "apps/roles",
-      //   loadChildren: () => import("./role/role.module").then((m) => m.RoleModule)
-      // },
+      {
+        path: "branch",
+        loadChildren: () => import("../../modules/Routes/branch.routes").then((m) => m.BRANCH_ROUTES)
+      },
+      {
+        path: "facility",
+        loadChildren: () => import("../../modules/Routes/facility.routes").then((m) => m.Facility_ROUTES)
+      },
       // {
       //   path: "apps/permissions",
       //   loadChildren: () => import("./permission/permission.module").then((m) => m.PermissionModule)

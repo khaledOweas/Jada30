@@ -23,7 +23,7 @@ public class MappingProfile : Profile
              .ForPath(dest => dest.DestinationName, opt => opt.MapFrom(src => src.Destination.Name))
              .ForPath(dest => dest.PricingUnitName, opt => opt.MapFrom(src => src.PricingUnit.Name))
              .ForPath(dest => dest.SubscriptionName, opt => opt.MapFrom(src => src.Subscription.Name))
-             .ForPath(dest => dest.TypeName, opt => opt.MapFrom(src => src.Type.Name));
+             .ForPath(dest => dest.TypeName, opt => opt.MapFrom(src => src.Type.Name)).ReverseMap();
 
 
 

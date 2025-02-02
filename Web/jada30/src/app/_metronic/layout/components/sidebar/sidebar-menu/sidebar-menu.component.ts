@@ -61,11 +61,11 @@ export class SidebarMenuComponent implements OnInit {
       {
         PageType: "Header",
         PageNameAr: "الإدارات",
-        PageNameEng: "Managments"
+        PageNameEng: "Managements"
       },
       {
         PageNameAr: "إدارة المستخدمين",
-        PageNameEng: "User Managments",
+        PageNameEng: "User Managements",
         PageType: "Accordion",
         Icon: `  <i class="ki-duotone ki-user fs-2">
                   <span class="path1"></span>
@@ -94,6 +94,27 @@ export class SidebarMenuComponent implements OnInit {
               <span class="path2"></span>
             </i>`,
         Children: []
+      },
+      {
+        PageNameAr: "إدارة الفروع",
+        PageNameEng: "Branch Managements",
+        PageType: "Accordion",
+        Icon: `  <i class="ki-duotone ki-user fs-2">
+                  <span class="path1"></span>
+                  <span class="path2"></span>
+                </i>`,
+        Children: [
+          {
+            PageNameAr: "قائمة الفروع",
+            PageNameEng: "Branch List",
+            PageUrl: "/branch/branch-list"
+          },
+          {
+            PageNameAr: "قائمة المرافق",
+            PageNameEng: "Facility List",
+            PageUrl: "/facility/facility-list"
+          }
+        ]
       }
     ];
   }

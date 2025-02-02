@@ -50,12 +50,14 @@ export class LookupCreateComponent extends BaseComponent implements OnInit {
       internalRef: [this.code],
       isActive: [true]
     });
+    this.subscribeToNameChange();
   }
 
   onSubmit(action: "new" | "redirect") {
     if (this.lookupForm.valid) {
       const data = this.lookupForm.value;
       const model: AddLookupDto = new AddLookupDto(data);
+      model.internalRef = this.code === "all" ? undefined : this.code;
       this.service.createLookup(model).subscribe({
         next: (res: GetLookupDtoBaseResponse) => {
           if (res.isSuccess) {
@@ -92,6 +94,16 @@ export class LookupCreateComponent extends BaseComponent implements OnInit {
     });
   }
 
+  subscribeToNameChange() {
+    this.lookupForm.get("name")?.valueChanges.subscribe((value) => {
+      const internalCodeControl = this.lookupForm.get("internalCode");
+      if (value) {
+        internalCodeControl?.setValue(value.replace(/\s+/g, "_"), { emitEvent: false });
+        internalCodeControl?.markAsTouched();
+        internalCodeControl?.updateValueAndValidity();
+      }
+    });
+  }
   onReset() {
     this.lookupForm = this.fb.group({
       name: ["", Validators.required],
@@ -102,5 +114,6 @@ export class LookupCreateComponent extends BaseComponent implements OnInit {
       internalRef: [this.code],
       isActive: [true]
     });
+    this.subscribeToNameChange();
   }
 }

@@ -1,4 +1,3 @@
-
 // Arabic - Egypt
 export const locale = {
   lang: "ar",
@@ -239,6 +238,45 @@ export const locale = {
       GeneratePassword: "إنشاء كلمة مرور عشوائية",
       UserNameInvalid: "اسم المستخدم غير صالح، يمكن أن يحتوي فقط على أحرف أو أرقام بدون مسافات.",
       Update: "تحديث المستخدم"
+    },
+    Branches: {
+      Create: "إضافة فرع جديد",
+      Name: "اسم الفرع",
+      WebsiteBranchId: "معرف فرع الموقع",
+      WorkingDays: "أيام العمل",
+      StartTime: "وقت البدء",
+      EndTime: "وقت الانتهاء",
+      CategoryBranchId: "معرف فئة الفرع",
+      BranchComponents: "مكونات الفرع",
+      ChooseComponents: "اختر المكونات",
+      NameRequired: "اسم الفرع مطلوب",
+      WebsiteBranchIdRequired: "معرف فرع الموقع مطلوب",
+      WorkingDaysRequired: "أيام العمل مطلوبة",
+      StartTimeRequired: "وقت البدء مطلوب",
+      EndTimeRequired: "وقت الانتهاء مطلوب",
+      CategoryBranchIdRequired: "معرف فئة الفرع مطلوب",
+      BranchComponentsRequired: "مكونات الفرع مطلوبة"
+    },
+    Facility: {
+      CreateTitle: "إنشاء منشأة",
+      Name: "اسم المنشأة",
+      NameRequired: "اسم المنشأة مطلوب.",
+      CategoryId: "التصنيف",
+      CategoryIdRequired: "التصنيف مطلوب.",
+      TypeId: "النوع",
+      TypeIdRequired: "النوع مطلوب.",
+      DestinationId: "الوجهة",
+      DestinationIdRequired: "الوجهة مطلوبة.",
+      PricingUnitId: "وحدة التسعير",
+      PricingUnitIdRequired: "وحدة التسعير مطلوبة.",
+      SubscriptionId: "نوع الاشتراك",
+      SubscriptionIdRequired: "نوع الاشتراك مطلوب.",
+      BasePrice: "السعر الأساسي",
+      BasePriceRequired: "السعر الأساسي مطلوب.",
+      IsTaxIncluded: "هل السعر شامل الضريبة؟",
+      BasicContract: "العقد الأساسي",
+      BasicContractRequired: "العقد الأساسي مطلوب.",
+      IsPublish: "هل تنشر الآن؟"
     },
     Doctors: {
       DoctorName: "اسم الطبيب",

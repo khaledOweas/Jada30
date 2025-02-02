@@ -1,5 +1,8 @@
 ﻿using Infrastructure.Data;
 using Infrastructure;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using Domain;
 
 namespace Lookups.Application.Seeding
 {
@@ -22,12 +25,30 @@ namespace Lookups.Application.Seeding
 
         public static async Task SeedLookup(Jada30Context context)
         {
-            if (!context.Lookups.Any())
+
+            var defaultLookups = DefaultData.GetDefaultLookups();
+            var saudiGov = DefaultData.GetSaudiArabiaGovernorates();
+            var facilityLookups = DefaultData.GetFacilityLookups();
+
+            var allLookupsToSeed = new List<Lookup>();
+            allLookupsToSeed.AddRange(defaultLookups);
+            allLookupsToSeed.AddRange(saudiGov);
+            allLookupsToSeed.AddRange(facilityLookups);
+
+            var existingCodes = await context.Lookups
+               .Select(l => l.InternalCode)
+               .ToListAsync();
+
+            var newRecords = allLookupsToSeed
+               .Where(l => !existingCodes.Contains(l.InternalCode))
+               .ToList();
+
+            if (newRecords.Any())
             {
-                var permissions = DefaultData.GetDefaultLookups();
-                await context.Lookups.AddRangeAsync(permissions);
+                await context.Lookups.AddRangeAsync(newRecords);
                 await context.SaveChangesAsync();
             }
         }
+
     }
 }

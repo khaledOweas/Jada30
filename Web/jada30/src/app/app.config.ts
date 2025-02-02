@@ -12,6 +12,7 @@ import { LoaderInterceptorService } from "./core/Interceptors/loader-interceptor
 import { HeaderInterceptorService } from "./core/Interceptors/header-interceptor.service";
 import { API_BASE_URL as Identity } from "./services/IdentityService";
 import { API_BASE_URL as Lookup } from "./services/LookupService";
+import { API_BASE_URL as Core } from "./services/CoreService";
 
 function loadConfigFactory(configService: AppConfigService) {
   return () => configService.loadConfig();
@@ -41,6 +42,11 @@ export const appConfig: ApplicationConfig = {
     },
     {
       provide: Lookup,
+      deps: [AppConfigService],
+      useFactory: (configService: AppConfigService) => configService.getConfig().apiUrl
+    },
+    {
+      provide: Core,
       deps: [AppConfigService],
       useFactory: (configService: AppConfigService) => configService.getConfig().apiUrl
     },

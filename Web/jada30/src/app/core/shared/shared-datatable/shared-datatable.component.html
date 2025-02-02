@@ -107,19 +107,11 @@
           <span *ngIf="col.type == 'bool'">
             <span *ngIf="getBooleanValue(rowData,
                             col.field)" class>
-              <i class="pi pi-check" style="color:
-                                #37ca00;
-                                border: 1px solid;
-                                border-radius: 5px;
-                                font-size: 17px;"></i>
+              <app-keenicon name="check-square" class="fs-2x" type="solid"></app-keenicon>
             </span>
             <span *ngIf="!getBooleanValue(rowData,
                             col.field)" class>
-              <i class="pi pi-times" style="color:
-                                #fe9b9b;
-                                border: 1px solid;
-                                border-radius: 5px;
-                                font-size: 17px;"></i>
+              <app-keenicon name="abstract-11" class="fs-2x" type="solid"></app-keenicon>
             </span>
           </span>
         </td>

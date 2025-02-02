@@ -8,12 +8,23 @@ import { ImageModule } from "primeng/image";
 
 import { FormsModule } from "@angular/forms";
 import { SharedDataTableColumn } from "./sharedDatatablesModels";
+import { KeeniconComponent } from "src/app/_metronic/shared/keenicon/keenicon.component";
 
 @Component({
   selector: "app-shared-datatable",
   templateUrl: "./shared-datatable.component.html",
   standalone: true,
-  imports: [TableModule, MultiSelectModule, SplitButtonModule, FormsModule, ImageModule, NgStyle, NgIf, NgFor],
+  imports: [
+    TableModule,
+    MultiSelectModule,
+    SplitButtonModule,
+    FormsModule,
+    ImageModule,
+    NgStyle,
+    NgIf,
+    NgFor,
+    KeeniconComponent
+  ],
   styleUrls: ["./shared-datatable.component.css"]
 })
 export class SharedDatatableComponent {

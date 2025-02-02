@@ -1,7 +1,7 @@
 using Jada30Core.Application.Interfaces;
 using Jada30Core.Common.BaseResponse;
 using Jada30Core.Common.Branch;
-using Jada30Core.Common.Facility;
+
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
