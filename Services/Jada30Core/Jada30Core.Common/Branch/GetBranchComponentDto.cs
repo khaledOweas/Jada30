@@ -10,6 +10,8 @@ namespace Jada30Core.Common.Branch
     {
         public long Id { get; set; }
         public string BranchName { get; set; }
+        public string BranchNameAr { get; set; }
         public string ComponentName { get; set; }
+        public string ComponentNameAr { get; set; }
     }
 }

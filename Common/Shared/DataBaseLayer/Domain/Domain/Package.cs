@@ -10,6 +10,9 @@ namespace Domain
     {
         public long Id { get; set; }
         public string Name { get; set; }
+        public string NameAr { get; set; }
+        public string DescriptionAr { get; set; }
+
         public string Description { get; set; }
         public decimal DefaultDiscount { get; set; }
         public string WrittenServices { get; set; } // الخدمات المكتبية

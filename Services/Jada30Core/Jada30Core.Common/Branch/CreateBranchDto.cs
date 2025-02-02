@@ -3,6 +3,8 @@
     public class CreateBranchDto
     {
         public string Name { get; set; }
+        public string NameAr { get; set; }
+        public long AdministrativeRegionId { get; set; }
         public long WebsiteBranchId { get; set; }
         public string WorkingDays { get; set; }
         public DateTime StartTime { get; set; }

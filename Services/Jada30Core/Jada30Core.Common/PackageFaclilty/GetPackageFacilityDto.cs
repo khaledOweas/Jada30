@@ -10,8 +10,11 @@ namespace Jada30Core.Common.PackageFaclilty
     {
         public long Id { get; set; }
         public string PackageName { get; set; }
+        public string PackageNameAr { get; set; }
         public string FacilityName { get; set; }
+        public string FacilityNameAr { get; set; }
         public string TypeName { get; set; }
+        public string TypeNameAr { get; set; }
         public int quantity { get; set; }
         public decimal PercentageDicount { get; set; }
         public decimal Price { get; set; }
