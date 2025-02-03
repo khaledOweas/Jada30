@@ -27,7 +27,7 @@ export class CoreService {
     }
 
     /**
-     * @param body (optional) 
+     * @param body (optional)
      * @return OK
      */
     branchPOST(body: CreateBranchDto | undefined): Observable<GetBranchDtoBaseResponse> {
@@ -188,7 +188,7 @@ export class CoreService {
     }
 
     /**
-     * @param body (optional) 
+     * @param body (optional)
      * @return OK
      */
     branchPUT(id: number, body: CreateBranchDto | undefined): Observable<GetBranchDtoBaseResponse> {
@@ -406,7 +406,7 @@ export class CoreService {
     }
 
     /**
-     * @param body (optional) 
+     * @param body (optional)
      * @return OK
      */
     createFacility(body: CreateFacilityDto | undefined): Observable<FacilityDtoBaseResponse> {
@@ -462,7 +462,7 @@ export class CoreService {
     }
 
     /**
-     * @param body (optional) 
+     * @param body (optional)
      * @return OK
      */
     updateFacility(id: number, body: FacilityDto | undefined): Observable<FacilityDtoBaseResponse> {
@@ -626,7 +626,7 @@ export class CoreService {
     }
 
     /**
-     * @param body (optional) 
+     * @param body (optional)
      * @return OK
      */
     createPackage(body: AddPackageDto | undefined): Observable<StringBaseResponse> {
@@ -682,7 +682,7 @@ export class CoreService {
     }
 
     /**
-     * @param body (optional) 
+     * @param body (optional)
      * @return OK
      */
     updatePackage(id: number, body: AddPackageDto | undefined): Observable<StringBaseResponse> {
@@ -849,7 +849,7 @@ export class CoreService {
     }
 
     /**
-     * @param body (optional) 
+     * @param body (optional)
      * @return OK
      */
     perkPOST(body: CreatePerkDto | undefined): Observable<GetPerkDtoBaseResponse> {
@@ -1010,7 +1010,7 @@ export class CoreService {
     }
 
     /**
-     * @param body (optional) 
+     * @param body (optional)
      * @return OK
      */
     perkPUT(id: number, body: CreatePerkDto | undefined): Observable<GetPerkDtoBaseResponse> {
@@ -1228,7 +1228,7 @@ export class CoreService {
     }
 
     /**
-     * @param body (optional) 
+     * @param body (optional)
      * @return OK
      */
     createSupportingServiceProvider(body: CreateSupportingServiceProviderDto | undefined): Observable<SupportingServiceProviderDtoBaseResponse> {
@@ -1284,7 +1284,7 @@ export class CoreService {
     }
 
     /**
-     * @param body (optional) 
+     * @param body (optional)
      * @return OK
      */
     updateSupportingServiceProvider(id: number, body: CreateSupportingServiceProviderDto | undefined): Observable<SupportingServiceProviderDtoBaseResponse> {
@@ -3448,7 +3448,7 @@ export interface IWeatherForecast {
 }
 
 function formatDate(d: Date) {
-    return d.getFullYear() + '-' + 
+    return d.getFullYear() + '-' +
         (d.getMonth() < 9 ? ('0' + (d.getMonth()+1)) : (d.getMonth()+1)) + '-' +
         (d.getDate() < 10 ? ('0' + d.getDate()) : d.getDate());
 }

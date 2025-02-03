@@ -7,6 +7,7 @@ import { ToastModule } from "primeng/toast";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NgIf, JsonPipe } from "@angular/common";
 import { LookupDropdownComponent } from "../../shared/lookup-dropdown/lookup-dropdown.component";
+import { ValidationAlertsComponent } from "src/app/core/Components/validation-alerts/validation-alerts.component";
 
 @Component({
   selector: "app-facility-create",
@@ -17,7 +18,7 @@ import { LookupDropdownComponent } from "../../shared/lookup-dropdown/lookup-dro
     ReactiveFormsModule,
     ToastModule,
     TranslateDirective,
-
+    ValidationAlertsComponent,
     NgIf,
     JsonPipe,
     LookupDropdownComponent
@@ -50,7 +51,6 @@ export class FacilityCreateComponent extends BaseComponent implements OnInit {
   onSubmit(action: "new" | "redirect") {
     if (this.facilityForm.valid) {
       const formValue = this.facilityForm.value;
-
       const createDto = CreateFacilityDto.fromJS({
         name: formValue.name,
         categoryId: +formValue.categoryId,

@@ -6,6 +6,6 @@
   </div>
 </div>
 <app-shared-datatable [cols]="Cols" [rowsPageNumbers]="10" [pagination]="true" [scrollable]="false" [data]="Data!"
-  [chooseColomns]="true" [FirstBtn]="true" [contentFirstBtn]="contentFirstBtn" [classFirstBtn]="'light-warning'"
-  (firstButtonEvent)="edit($event)" [SecondBtn]="true" [contentSecondBtn]="contentSecondBtn"
-  [classSecondBtn]="'light-danger'" (secondButtonEvent)="delete($event)"></app-shared-datatable>
+  [chooseColomns]="true" [FirstBtn]="true" [contentFirstBtn]="'edit'" [classFirstBtn]="'light-warning'"
+  (firstButtonEvent)="edit($event)" [SecondBtn]="true" [contentSecondBtn]="'delete'" [classSecondBtn]="'light-danger'"
+  (secondButtonEvent)="delete($event)"></app-shared-datatable>

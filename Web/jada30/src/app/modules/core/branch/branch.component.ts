@@ -4,10 +4,12 @@ import { SharedDatatableComponent } from "../../../core/shared/shared-datatable/
 
 import { takeUntil } from "rxjs";
 import { BaseComponent } from "src/app/core/Components/base/base.component";
-import { ApplicationRole } from "src/app/services/IdentityService";
+import { ApplicationRole, BooleanBaseResponse } from "src/app/services/IdentityService";
 import { SharedDataTableColumn } from "src/app/core/shared/shared-datatable/sharedDatatablesModels";
 import { CoreService, GetBranchDtoListBaseResponse } from "src/app/services/CoreService";
 import { RouterLink, RouterLinkActive } from "@angular/router";
+import Swal from "sweetalert2";
+import { ColumnManager, ListColumnType } from "src/app/data/DataTableColumnData";
 @Component({
   selector: "app-branch",
   standalone: true,
@@ -22,77 +24,7 @@ export class BranchComponent extends BaseComponent implements OnInit {
 
   constructor(private injector: Injector, private service: CoreService) {
     super(injector);
-
-    this.Cols = [
-      SharedDataTableColumn.fromJS({
-        id: 1,
-        sorted: true,
-        filtered: true,
-        hidden: false,
-        field: "id",
-        header: this.tr.get("SHARED.Id"),
-        type: "text"
-      }),
-      SharedDataTableColumn.fromJS({
-        id: 2,
-        sorted: true,
-        filtered: true,
-        hidden: false,
-        field: "name",
-        header: this.tr.get("Branches.Name"),
-        type: "text"
-      }),
-
-      SharedDataTableColumn.fromJS({
-        id: 3,
-        sorted: true,
-        filtered: true,
-        hidden: false,
-        field: "websiteBranchId",
-        header: this.tr.get("Branches.WebsiteBranchId"),
-        type: "text"
-      }),
-
-      SharedDataTableColumn.fromJS({
-        id: 4,
-        sorted: true,
-        filtered: true,
-        hidden: false,
-        field: "workingDays",
-        header: this.tr.get("Branches.WorkingDays"),
-        type: "text"
-      }),
-
-      SharedDataTableColumn.fromJS({
-        id: 5,
-        sorted: true,
-        filtered: true,
-        hidden: false,
-        field: "startTime",
-        header: this.tr.get("Branches.StartTime"),
-        type: "datetime"
-      }),
-
-      SharedDataTableColumn.fromJS({
-        id: 6,
-        sorted: true,
-        filtered: true,
-        hidden: false,
-        field: "endTime",
-        header: this.tr.get("Branches.EndTime"),
-        type: "datetime"
-      }),
-
-      SharedDataTableColumn.fromJS({
-        id: 7,
-        sorted: true,
-        filtered: true,
-        hidden: false,
-        field: "categoryBranchId",
-        header: this.tr.get("Branches.CategoryBranchId"),
-        type: "text"
-      })
-    ];
+    this.Cols = ColumnManager.getCol(ListColumnType.Branch);
   }
   ngOnInit(): void {
     this.loadAll();
@@ -104,9 +36,47 @@ export class BranchComponent extends BaseComponent implements OnInit {
       .pipe(takeUntil(this.destroyed$))
       .subscribe({
         next: (res: GetBranchDtoListBaseResponse) => {
-          this.ct.sendToaster("info", this.tr.get("SHARED.ServerDetails"), res.message);
           this.Data = res.responseData;
         }
       });
+  }
+
+  edit(id: number) {
+    this.router.navigate(["/user/user-update/", id]);
+  }
+  delete(id: number) {
+    Swal.fire({
+      title: this.tr.get("DELETE_CONFIRMATION.TITLE"),
+      text: this.tr.get("DELETE_CONFIRMATION.TEXT"),
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: this.tr.get("SHARED.Delete"),
+      cancelButtonText: this.tr.get("SHARED.Cancel")
+    }).then((result) => {
+      if (result.isConfirmed) {
+        try {
+          this.service.branchDELETE(id).subscribe({
+            next: (res: BooleanBaseResponse) => {
+              if (res.isSuccess) {
+                this.loadAll();
+                this.ct.sendToaster("info", this.tr.get("SHARED.ServerDetails"), res.message);
+              } else {
+                res.errors!.forEach((element) => {
+                  this.ct.sendToaster("error", this.tr.get("SHARED.ServerDetails"), res.message! + element.value!);
+                });
+              }
+            },
+            error: (error) => {
+              Swal.showValidationMessage(`Request failed: ${error}`);
+            }
+          });
+        } catch (error) {
+          Swal.showValidationMessage(`Request failed: ${error}`);
+        }
+      }
+      return;
+    });
   }
 }

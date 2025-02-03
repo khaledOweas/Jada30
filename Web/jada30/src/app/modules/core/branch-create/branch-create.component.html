@@ -1,9 +1,4 @@
-@for (controlName of objectKeys(branchForm.controls); track $index) {
-<div *ngIf="branchForm.get(controlName)?.invalid && branchForm.get(controlName)?.touched">
-  <strong>{{controlName}}</strong>
-  <pre>{{branchForm.get(controlName)?.errors | json}}</pre>
-</div>
-}
+<app-validation-alerts [parentForm]="branchForm" translateKey="Branches"></app-validation-alerts>
 <div class="card card-flush h-lg-100" id="kt_contacts_main">
   <div class="card-header pt-7" id="kt_chat_contacts_header">
     <div class="card-title">
@@ -24,6 +19,27 @@
         <div class="col">
           <div class="fv-row mb-7 fv-plugins-icon-container">
             <label class="fs-6 fw-semibold form-label mt-3">
+              <span class="required" translate="Branches.NameAr"></span>
+              <span class="ms-1" data-bs-toggle="tooltip" aria-label="Enter branch name"
+                data-bs-original-title="Enter branch name" data-kt-initialized="1">
+                <i class="ki-duotone ki-information fs-7">
+                  <span class="path1"></span>
+                  <span class="path2"></span>
+                  <span class="path3"></span>
+                </i>
+              </span>
+            </label>
+            <input type="text" formControlName="nameAr" class="form-control form-control-solid">
+            <div
+              *ngIf="branchForm.get('nameAr')!.invalid && (branchForm.get('nameAr')?.dirty || branchForm.get('nameAr')?.touched)"
+              class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
+              <span class="text-danger fw-bold" *ngIf="branchForm.get('nameAr')?.errors?.['required']" translate="Branches.NameRequired"></span>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="fv-row mb-7 fv-plugins-icon-container">
+            <label class="fs-6 fw-semibold form-label mt-3">
               <span class="required" translate="Branches.Name"></span>
               <span class="ms-1" data-bs-toggle="tooltip" aria-label="Enter branch name"
                 data-bs-original-title="Enter branch name" data-kt-initialized="1">
@@ -38,40 +54,18 @@
             <div
               *ngIf="branchForm.get('name')!.invalid && (branchForm.get('name')?.dirty || branchForm.get('name')?.touched)"
               class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
-              <div *ngIf="branchForm.get('name')?.errors?.['required']" translate="Branches.NameRequired"></div>
+              <span class="text-danger fw-bold" *ngIf="branchForm.get('name')?.errors?.['required']" translate="Branches.NameRequired"></span>
             </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="fv-row mb-7 fv-plugins-icon-container">
-            <app-lookup-dropdown [code]="'KSA_GOV'" [parentForm]="branchForm" itemFormName="websiteBranchId"
-              validationTextTranslated="Branches.WebsiteBranchIdRequired"
-              placeholderTextTranslated="Branches.WebsiteBranchId"
-              labelTextTranslated="Branches.WebsiteBranchId"></app-lookup-dropdown>
           </div>
         </div>
       </div>
       <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
         <div class="col">
           <div class="fv-row mb-7 fv-plugins-icon-container">
-            <label class="fs-6 fw-semibold form-label mt-3">
-              <span class="required" translate="Branches.WorkingDays"></span>
-              <span class="ms-1" data-bs-toggle="tooltip" aria-label="Enter working days (e.g., Sat-Sun)"
-                data-bs-original-title="Enter working days" data-kt-initialized="1">
-                <i class="ki-duotone ki-information fs-7">
-                  <span class="path1"></span>
-                  <span class="path2"></span>
-                  <span class="path3"></span>
-                </i>
-              </span>
-            </label>
-            <input type="text" formControlName="workingDays" class="form-control form-control-solid">
-            <div
-              *ngIf="branchForm.get('workingDays')!.invalid && (branchForm.get('workingDays')?.dirty || branchForm.get('workingDays')?.touched)"
-              class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
-              <div *ngIf="branchForm.get('workingDays')?.errors?.['required']" translate="Branches.WorkingDaysRequired">
-              </div>
-            </div>
+            <app-lookup-dropdown [code]="'KSA_GOV'" [parentForm]="branchForm" itemFormName="websiteBranchId"
+              validationTextTranslated="Branches.WebsiteBranchIdRequired"
+              placeholderTextTranslated="Branches.WebsiteBranchId"
+              labelTextTranslated="Branches.WebsiteBranchId"></app-lookup-dropdown>
           </div>
         </div>
         <div class="col">
@@ -101,8 +95,8 @@
             <div
               *ngIf="branchForm.get('startTime')!.invalid && (branchForm.get('startTime')?.dirty || branchForm.get('startTime')?.touched)"
               class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
-              <div *ngIf="branchForm.get('startTime')?.errors?.['required']" translate="Branches.StartTimeRequired">
-              </div>
+              <span class="text-danger fw-bold" *ngIf="branchForm.get('startTime')?.errors?.['required']" translate="Branches.StartTimeRequired">
+              </span>
             </div>
           </div>
         </div>
@@ -123,17 +117,41 @@
             <div
               *ngIf="branchForm.get('endTime')!.invalid && (branchForm.get('endTime')?.dirty || branchForm.get('endTime')?.touched)"
               class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
-              <div *ngIf="branchForm.get('endTime')?.errors?.['required']" translate="Branches.EndTimeRequired"></div>
+              <span class="text-danger fw-bold" *ngIf="branchForm.get('endTime')?.errors?.['required']" translate="Branches.EndTimeRequired"></span>
             </div>
           </div>
         </div>
       </div>
       <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
-        <div class="fv-row mb-7">
-          <app-lookup-multi-select code="Branch_Component" [parentForm]="branchForm" itemFormName="branchComponents"
-            validationTextTranslated="Branches.BranchComponentsRequired"
-            placeholderTextTranslated="Branches.ChooseComponents"
-            labelTextTranslated="Branches.BranchComponents"></app-lookup-multi-select>
+        <div class="col">
+          <div class="fv-row mb-7 fv-plugins-icon-container">
+            <label class="fs-6 fw-semibold form-label mt-3">
+              <span class="required" translate="Branches.WorkingDays"></span>
+              <span class="ms-1" data-bs-toggle="tooltip" aria-label="Enter working days (e.g., Sat-Sun)"
+                data-bs-original-title="Enter working days" data-kt-initialized="1">
+                <i class="ki-duotone ki-information fs-7">
+                  <span class="path1"></span>
+                  <span class="path2"></span>
+                  <span class="path3"></span>
+                </i>
+              </span>
+            </label>
+            <input type="text" formControlName="workingDays" class="form-control form-control-solid">
+            <div
+              *ngIf="branchForm.get('workingDays')!.invalid && (branchForm.get('workingDays')?.dirty || branchForm.get('workingDays')?.touched)"
+              class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
+              <span class="text-danger fw-bold" *ngIf="branchForm.get('workingDays')?.errors?.['required']" translate="Branches.WorkingDaysRequired">
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="fv-row mb-7">
+            <app-lookup-multi-select code="Branch_Component" [parentForm]="branchForm" itemFormName="branchComponents"
+              validationTextTranslated="Branches.BranchComponentsRequired"
+              placeholderTextTranslated="Branches.ChooseComponents"
+              labelTextTranslated="Branches.BranchComponents"></app-lookup-multi-select>
+          </div>
         </div>
       </div>
       <div class="separator mb-6"></div>

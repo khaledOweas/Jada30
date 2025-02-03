@@ -1,10 +1,10 @@
 import { Component, ElementRef, HostBinding, OnDestroy, OnInit, Renderer2 } from "@angular/core";
 import { Observable, Subscription } from "rxjs";
-import { TranslationService } from "../../../../../../modules/i18n";
 import { AuthService, UserType } from "../../../../../../modules/auth";
 import { AsyncPipe, NgClass, NgFor, NgIf } from "@angular/common";
 import { RouterLink } from "@angular/router";
 import { TranslateModule } from "@ngx-translate/core";
+import { TranslationService } from "src/app/core/services/translation.service";
 
 @Component({
   selector: "app-user-inner",

@@ -5,6 +5,11 @@ export const locale = {
     TRANSLATOR: {
       SELECT: "اختر لغتك"
     },
+    Validation: {
+      Required: "مطلوب",
+      Minlength: "لا يطابق الحد الأدني لعدد الاحرف",
+      Maxlength: "لا يطابق الحد الأقصس لعدد الاحرف"
+    },
     MENU: {
       NEW: "جديد",
       ACTIONS: "إجراءات",
@@ -242,6 +247,7 @@ export const locale = {
     Branches: {
       Create: "إضافة فرع جديد",
       Name: "اسم الفرع",
+      NameAr: "اسم الفرع عربي",
       WebsiteBranchId: "معرف فرع الموقع",
       WorkingDays: "أيام العمل",
       StartTime: "وقت البدء",

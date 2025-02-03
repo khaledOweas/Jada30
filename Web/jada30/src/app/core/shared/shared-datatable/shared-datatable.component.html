@@ -116,11 +116,11 @@
           </span>
         </td>
         <td *ngIf="FirstBtn || SecondBtn || ThirdBtn ">
-          <a *ngIf="FirstBtn" [innerHTML]="contentFirstBtn" (click)="rowFirstClick(rowData)"
+          <a *ngIf="FirstBtn" [innerHTML]="htmlContent(contentFirstBtn)" (click)="rowFirstClick(rowData)"
             class="btn btn-sm btn-{{classFirstBtn}}"></a>
-          <a *ngIf="SecondBtn" [innerHTML]="contentSecondBtn" (click)="rowSecondClick(rowData)" style="margin: 0px 7px;"
-            class="btn btn-sm btn-{{classSecondBtn}}"></a>
-          <a *ngIf="ThirdBtn" [innerHTML]="contentThirdBtn" (click)="rowThirdClick(rowData)"
+          <a *ngIf="SecondBtn" [innerHTML]="htmlContent(contentSecondBtn)" (click)="rowSecondClick(rowData)"
+            style="margin: 0px 7px;" class="btn btn-sm btn-{{classSecondBtn}}"></a>
+          <a *ngIf="ThirdBtn" [innerHTML]="htmlContent(contentThirdBtn)" (click)="rowThirdClick(rowData)"
             class="btn btn-sm btn-{{classThirdBtn}}"></a>
         </td>
       </tr>

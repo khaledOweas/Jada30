@@ -1,4 +1,4 @@
-import { JsonPipe, NgIf } from "@angular/common";
+import { NgIf } from "@angular/common";
 import { Component, Injector, OnInit } from "@angular/core";
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators, AbstractControl } from "@angular/forms";
 import { TranslateDirective, TranslatePipe } from "@ngx-translate/core";
@@ -8,7 +8,7 @@ import { BaseComponent } from "src/app/core/Components/base/base.component";
 import { CoreService, CreateBranchDto } from "src/app/services/CoreService";
 import { LookupDropdownComponent } from "../../shared/lookup-dropdown/lookup-dropdown.component";
 import { LookupMultiSelectComponent } from "../../shared/lookup-multi-select/lookup-multi-select.component";
-
+import { ValidationAlertsComponent } from "src/app/core/Components/validation-alerts/validation-alerts.component";
 
 @Component({
   selector: "app-branch-create",
@@ -23,7 +23,7 @@ import { LookupMultiSelectComponent } from "../../shared/lookup-multi-select/loo
     TranslatePipe,
     LookupDropdownComponent,
     LookupMultiSelectComponent,
-    JsonPipe
+    ValidationAlertsComponent
   ],
   providers: [CoreService],
   templateUrl: "./branch-create.component.html"
@@ -35,13 +35,14 @@ export class BranchCreateComponent extends BaseComponent implements OnInit {
   constructor(private injector: Injector, private fb: FormBuilder, private service: CoreService) {
     super(injector);
     this.branchForm = this.fb.group({
-      name: ["", Validators.required],
-      websiteBranchId: [0, [Validators.required, Validators.pattern(/^[0-9]+$/)]],
+      name: ["", Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(100)])],
+      nameAr: ["", Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(100)])],
+      websiteBranchId: [null, Validators.compose([Validators.required, Validators.pattern(/^[0-9]+$/)])],
       workingDays: ["", Validators.required],
       startTime: ["", Validators.required],
       endTime: ["", Validators.required],
-      categoryBranchId: [0, [Validators.required, Validators.pattern(/^[0-9]+$/)]],
-      branchComponents: [[], Validators.required]
+      categoryBranchId: [null, Validators.compose([Validators.required, Validators.pattern(/^[0-9]+$/)])],
+      branchComponents: [[], Validators.compose([Validators.required])]
     });
   }
 
@@ -102,9 +103,5 @@ export class BranchCreateComponent extends BaseComponent implements OnInit {
 
   onReset() {
     this.branchForm.reset();
-  }
-
-  objectKeys(obj: any): string[] {
-    return Object.keys(obj);
   }
 }

@@ -13,6 +13,7 @@ import { SharedDataTableColumn } from "src/app/core/shared/shared-datatable/shar
 import { SharedDatatableComponent } from "src/app/core/shared/shared-datatable/shared-datatable.component";
 import { BaseComponent } from "src/app/core/Components/base/base.component";
 import Swal from "sweetalert2";
+import { ColumnManager, ListColumnType } from "src/app/data/DataTableColumnData";
 
 @Component({
   selector: "app-lookup-list",
@@ -32,61 +33,15 @@ export class LookupListComponent extends BaseComponent implements OnInit {
   code: string = "";
   createURL = "/lookups/lookup-create";
   updateURL = "/lookups/lookup-update";
-  contentFirstBtn: string;
-  contentSecondBtn: string;
+
   constructor(private injector: Injector, private service: LookupService, private route: ActivatedRoute) {
     super(injector);
-    this.Cols = [
-      SharedDataTableColumn.fromJS({
-        id: 1,
-        sorted: true,
-        filtered: true,
-        hidden: false,
-        field: "id",
-        header: this.tr.get("SHARED.Id"),
-        type: "text"
-      }),
-      SharedDataTableColumn.fromJS({
-        id: 4,
-        sorted: true,
-        filtered: true,
-        hidden: false,
-        field: this.lang == "ar" ? "nameAr" : "name",
-        header: this.tr.get("Lookup.LookupName"),
-        type: "text"
-      })
-    ];
-
-    this.contentFirstBtn =
-      this.lang === "ar"
-        ? `<i class="ki-duotone ki-tablet-delete">
- <span class="path1"></span>
- <span class="path2"></span>
- <span class="path3"></span>
-</i> تعديل`
-        : `<i class="ki-duotone ki-tablet-delete ">
- <span class="path1"></span>
- <span class="path2"></span>
- <span class="path3"></span>
-</i> Edit`;
-
-    this.contentSecondBtn =
-      this.lang === "ar"
-        ? `<i class="ki-duotone ki-tablet-delete">
- <span class="path1"></span>
- <span class="path2"></span>
- <span class="path3"></span>
-</i> حذف`
-        : `<i class="ki-duotone ki-tablet-delete ">
- <span class="path1"></span>
- <span class="path2"></span>
- <span class="path3"></span>
-</i> Delete`;
+    this.Cols = ColumnManager.getCol(ListColumnType.Lookup);
   }
 
   ngOnInit(): void {
     this.code = this.route.snapshot.params["code"];
-   this.load();
+    this.load();
     this.route.params.subscribe((params) => {
       const newCode = params["code"];
       if (newCode !== this.code) {
