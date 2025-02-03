@@ -1,1 +1,153 @@
-<p>branch-update works!</p>
+<app-validation-alerts [parentForm]="branchForm" translateKey="Branches"></app-validation-alerts>
+<div class="card card-flush h-lg-100" id="kt_contacts_main">
+  <div class="card-header pt-7" id="kt_chat_contacts_header">
+    <div class="card-title">
+      <i class="ki-duotone ki-badge fs-1 me-2">
+        <span class="path1"></span>
+        <span class="path2"></span>
+        <span class="path3"></span>
+        <span class="path4"></span>
+        <span class="path5"></span>
+      </i>
+      <h2 class="card-title fw-bold" translate="Branches.Update"></h2>
+    </div>
+  </div>
+  <div class="card-body pt-5">
+    <form [formGroup]="branchForm" class="form fv-plugins-bootstrap5 fv-plugins-framework">
+      <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
+        <div class="col">
+          <div class="fv-row mb-7 fv-plugins-icon-container">
+            <label class="fs-6 fw-semibold form-label mt-3">
+              <span class="required" translate="Branches.NameAr"></span>
+              <span class="ms-1" data-bs-toggle="tooltip" aria-label="Enter branch name"
+                data-bs-original-title="Enter branch name" data-kt-initialized="1">
+                <i class="ki-duotone ki-information fs-7">
+                  <span class="path1"></span>
+                  <span class="path2"></span>
+                  <span class="path3"></span>
+                </i>
+              </span>
+            </label>
+            <input type="text" formControlName="nameAr" class="form-control form-control-solid">
+            <div *ngIf="branchForm.get('nameAr')!.invalid" class="invalid-feedback">
+              <span translate="Branches.NameRequired"></span>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="fv-row mb-7 fv-plugins-icon-container">
+            <label class="fs-6 fw-semibold form-label mt-3">
+              <span class="required" translate="Branches.Name"></span>
+              <span class="ms-1" data-bs-toggle="tooltip" aria-label="Enter branch name"
+                data-bs-original-title="Enter branch name" data-kt-initialized="1">
+                <i class="ki-duotone ki-information fs-7">
+                  <span class="path1"></span>
+                  <span class="path2"></span>
+                  <span class="path3"></span>
+                </i>
+              </span>
+            </label>
+            <input type="text" formControlName="name" class="form-control form-control-solid">
+            <div *ngIf="branchForm.get('name')!.invalid" class="invalid-feedback">
+              <span translate="Branches.NameRequired"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
+        <div class="col">
+          <div class="fv-row mb-7 fv-plugins-icon-container">
+            <app-lookup-dropdown [code]="'KSA_GOV'" [parentForm]="branchForm" itemFormName="websiteBranchId"
+              validationTextTranslated="Branches.WebsiteBranchIdRequired"
+              placeholderTextTranslated="Branches.WebsiteBranchId"
+              labelTextTranslated="Branches.WebsiteBranchId"></app-lookup-dropdown>
+          </div>
+        </div>
+        <div class="col">
+          <div class="fv-row mb-7 fv-plugins-icon-container">
+            <app-lookup-dropdown [code]="'BRANCH_CATEGORY'" [parentForm]="branchForm" itemFormName="categoryBranchId"
+              validationTextTranslated="Branches.CategoryBranchIdRequired"
+              placeholderTextTranslated="Branches.WebsiteBranchId"
+              labelTextTranslated="Branches.CategoryBranchId"></app-lookup-dropdown>
+          </div>
+        </div>
+      </div>
+      <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
+        <div class="col">
+          <div class="fv-row mb-7 fv-plugins-icon-container">
+            <label class="fs-6 fw-semibold form-label mt-3">
+              <span class="required" translate="Branches.StartTime"></span>
+              <span class="ms-1" data-bs-toggle="tooltip" aria-label="Select start time"
+                data-bs-original-title="Select start time" data-kt-initialized="1">
+                <i class="ki-duotone ki-information fs-7">
+                  <span class="path1"></span>
+                  <span class="path2"></span>
+                  <span class="path3"></span>
+                </i>
+              </span>
+            </label>
+            <input type="time" formControlName="startTime" class="form-control form-control-solid">
+            <div *ngIf="branchForm.get('startTime')!.invalid" class="invalid-feedback">
+              <span translate="Branches.StartTimeRequired"></span>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="fv-row mb-7 fv-plugins-icon-container">
+            <label class="fs-6 fw-semibold form-label mt-3">
+              <span class="required" translate="Branches.EndTime"></span>
+              <span class="ms-1" data-bs-toggle="tooltip" aria-label="Select end time"
+                data-bs-original-title="Select end time" data-kt-initialized="1">
+                <i class="ki-duotone ki-information fs-7">
+                  <span class="path1"></span>
+                  <span class="path2"></span>
+                  <span class="path3"></span>
+                </i>
+              </span>
+            </label>
+            <input type="time" formControlName="endTime" class="form-control form-control-solid">
+            <div *ngIf="branchForm.get('endTime')!.invalid" class="invalid-feedback">
+              <span translate="Branches.EndTimeRequired"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
+        <div class="col">
+          <div class="fv-row mb-7 fv-plugins-icon-container">
+            <label class="fs-6 fw-semibold form-label mt-3">
+              <span class="required" translate="Branches.WorkingDays"></span>
+              <span class="ms-1" data-bs-toggle="tooltip" aria-label="Enter working days (e.g., Sat-Sun)"
+                data-bs-original-title="Enter working days" data-kt-initialized="1">
+                <i class="ki-duotone ki-information fs-7">
+                  <span class="path1"></span>
+                  <span class="path2"></span>
+                  <span class="path3"></span>
+                </i>
+              </span>
+            </label>
+            <input type="text" formControlName="workingDays" class="form-control form-control-solid">
+            <div *ngIf="branchForm.get('workingDays')!.invalid" class="invalid-feedback">
+              <span translate="Branches.WorkingDaysRequired"></span>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="fv-row mb-7">
+            <app-lookup-multi-select code="Branch_Component" [parentForm]="branchForm" itemFormName="branchComponents"
+              validationTextTranslated="Branches.BranchComponentsRequired"
+              placeholderTextTranslated="Branches.ChooseComponents"
+              labelTextTranslated="Branches.BranchComponents"></app-lookup-multi-select>
+          </div>
+        </div>
+      </div>
+      <div class="separator mb-6"></div>
+      <div class="d-flex justify-content-end">
+        <button type="button" (click)="onReturn()" class="btn btn-light me-3" translate="SHARED.Return"></button>
+        <button type="button" (click)="onSubmit()" class="btn btn-success" [disabled]="branchForm.invalid"
+          translate="SHARED.Save">
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

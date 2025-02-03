@@ -42,7 +42,7 @@ export class BranchComponent extends BaseComponent implements OnInit {
   }
 
   edit(id: number) {
-    this.router.navigate(["/user/user-update/", id]);
+    this.router.navigate(["/branch/branch-update/", id]);
   }
   delete(id: number) {
     Swal.fire({

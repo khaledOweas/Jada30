@@ -261,7 +261,8 @@ export const locale = {
       StartTimeRequired: "وقت البدء مطلوب",
       EndTimeRequired: "وقت الانتهاء مطلوب",
       CategoryBranchIdRequired: "معرف فئة الفرع مطلوب",
-      BranchComponentsRequired: "مكونات الفرع مطلوبة"
+      BranchComponentsRequired: "مكونات الفرع مطلوبة",
+      Update: "تحديث بيانات الفرع "
     },
     Facility: {
       CreateTitle: "إنشاء منشأة",

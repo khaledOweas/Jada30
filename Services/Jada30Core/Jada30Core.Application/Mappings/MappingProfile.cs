@@ -52,6 +52,7 @@ public class MappingProfile : Profile
         CreateMap<CreateBranchDto, Branch>().ReverseMap();
         CreateMap<CreateBranchComponentDto, BranchComponent>().ReverseMap();
         CreateMap<GetBranchComponentDto, BranchComponent>()
+            .ForPath(dest => dest.ComponentId, opt => opt.MapFrom(src => src.Id))
             .ForPath(dest => dest.Branch.Name, opt => opt.MapFrom(src => src.BranchName))
             .ForPath(dest => dest.Branch.NameAr, opt => opt.MapFrom(src => src.BranchNameAr))
 
