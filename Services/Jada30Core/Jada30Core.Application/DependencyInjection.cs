@@ -19,6 +19,8 @@ namespace Identity.Application
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddTransient<IFacilityManagementService, FacilityManagementService>();
             services.AddTransient<IBranchManagementService, BranchManagementService>();
+            services.AddTransient<ISupportingServiceProviderManagementService, SupportingServiceProviderManagementService>();
+            services.AddTransient<IPerkManagementService, PerkManagementService>();
 
             return services;
         }

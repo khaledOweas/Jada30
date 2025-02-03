@@ -4,6 +4,7 @@ using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(Jada30Context))]
-    partial class Jada30ContextModelSnapshot : ModelSnapshot
+    [Migration("20250202091456_SupportingServiceProvider")]
+    partial class SupportingServiceProvider
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -223,7 +226,6 @@ namespace Infrastructure.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<decimal>("BasePrice")
-                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<long>("BasicContract")
@@ -321,95 +323,6 @@ namespace Infrastructure.Migrations
                     b.ToTable("Lookups");
                 });
 
-            modelBuilder.Entity("Domain.Perk", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
-
-                    b.Property<int>("AvailableQuantity")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CreatedBy")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsForJadah30Customers")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsTaxIncluded")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Link")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("ModifyBy")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("ModifyOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Perk");
-                });
-
-            modelBuilder.Entity("Domain.PerkLicense", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
-
-                    b.Property<int>("CreatedBy")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<long>("LicenseId")
-                        .HasColumnType("bigint");
-
-                    b.Property<int?>("ModifyBy")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("ModifyOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<long>("PerkId")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("LicenseId");
-
-                    b.HasIndex("PerkId");
-
-                    b.ToTable("PerkLicense");
-                });
-
             modelBuilder.Entity("Domain.Permission", b =>
                 {
                     b.Property<long>("Id")
@@ -452,74 +365,6 @@ namespace Infrastructure.Migrations
                     b.HasIndex("PermissionId");
 
                     b.ToTable("RolePermissions");
-                });
-
-            modelBuilder.Entity("Domain.SupportingServiceProvider", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("CreatedBy")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsJadah30Restricted")
-                        .HasColumnType("bit");
-
-                    b.Property<int?>("ModifyBy")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("ModifyOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<long?>("NationalityId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<long?>("SpecializationId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("TaxNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("WebsiteURL")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NationalityId");
-
-                    b.HasIndex("SpecializationId");
-
-                    b.ToTable("SupportingServiceProvider");
                 });
 
             modelBuilder.Entity("Domain.SysConfig", b =>
@@ -698,25 +543,6 @@ namespace Infrastructure.Migrations
                     b.Navigation("Type");
                 });
 
-            modelBuilder.Entity("Domain.PerkLicense", b =>
-                {
-                    b.HasOne("Domain.Lookup", "License")
-                        .WithMany()
-                        .HasForeignKey("LicenseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Domain.Perk", "Perk")
-                        .WithMany("PerkLicenses")
-                        .HasForeignKey("PerkId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("License");
-
-                    b.Navigation("Perk");
-                });
-
             modelBuilder.Entity("Domain.RolePermission", b =>
                 {
                     b.HasOne("Domain.Permission", "Permission")
@@ -734,21 +560,6 @@ namespace Infrastructure.Migrations
                     b.Navigation("Permission");
 
                     b.Navigation("Role");
-                });
-
-            modelBuilder.Entity("Domain.SupportingServiceProvider", b =>
-                {
-                    b.HasOne("Domain.Lookup", "Nationality")
-                        .WithMany()
-                        .HasForeignKey("NationalityId");
-
-                    b.HasOne("Domain.Lookup", "Specialization")
-                        .WithMany()
-                        .HasForeignKey("SpecializationId");
-
-                    b.Navigation("Nationality");
-
-                    b.Navigation("Specialization");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<long>", b =>
@@ -810,11 +621,6 @@ namespace Infrastructure.Migrations
             modelBuilder.Entity("Domain.Branch", b =>
                 {
                     b.Navigation("BranchComponents");
-                });
-
-            modelBuilder.Entity("Domain.Perk", b =>
-                {
-                    b.Navigation("PerkLicenses");
                 });
 
             modelBuilder.Entity("Domain.Permission", b =>

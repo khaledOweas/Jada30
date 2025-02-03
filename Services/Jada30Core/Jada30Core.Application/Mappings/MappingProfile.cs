@@ -2,6 +2,8 @@
 using Jada30Core.Common.Facility;
 using Jada30Core.Common.Branch;
 using Domain;
+using Jada30Core.Common.SupportingServiceProvider;
+using Jada30Core.Common.Perk;
 
 
 namespace Identity.Application.Mappings;
@@ -34,6 +36,25 @@ public class MappingProfile : Profile
             .ReverseMap()
             .ForPath(dest => dest.BranchName, opt => opt.MapFrom(src => src.Branch.Name))
             .ForPath(dest => dest.ComponentName, opt => opt.MapFrom(src => src.Component.Name));
+
+
+        CreateMap<CreateSupportingServiceProviderDto, Domain.SupportingServiceProvider>().ReverseMap();
+        CreateMap<SupportingServiceProviderDto, Domain.SupportingServiceProvider>()
+             .ForPath(dest => dest.Nationality.Name, opt => opt.MapFrom(src => src.NationalityName))
+             .ForPath(dest => dest.Specialization.Name, opt => opt.MapFrom(src => src.SpecializationName))
+             .ReverseMap()
+             .ForPath(dest => dest.NationalityName, opt => opt.MapFrom(src => src.Nationality.Name))
+             .ForPath(dest => dest.SpecializationName, opt => opt.MapFrom(src => src.Specialization.Name));
+
+        CreateMap<GetPerkDto, Perk>().ReverseMap();
+        CreateMap<CreatePerkDto, Perk>().ReverseMap();
+        CreateMap<CreatePerkLicenseDto, PerkLicense>().ReverseMap();
+        CreateMap<GetPerkLicenseDto, PerkLicense>()
+            .ForPath(dest => dest.Perk.Name, opt => opt.MapFrom(src => src.PerkName))
+            .ForPath(dest => dest.License.Name, opt => opt.MapFrom(src => src.LicenseName))
+            .ReverseMap()
+            .ForPath(dest => dest.LicenseName, opt => opt.MapFrom(src => src.Perk.Name))
+            .ForPath(dest => dest.LicenseName, opt => opt.MapFrom(src => src.License.Name));
 
     }
 }
