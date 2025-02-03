@@ -849,6 +849,554 @@ export class CoreService {
     }
 
     /**
+     * @param body (optional) 
+     * @return OK
+     */
+    perkPOST(body: CreatePerkDto | undefined): Observable<GetPerkDtoBaseResponse> {
+        let url_ = this.baseUrl + "/Perk";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processPerkPOST(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processPerkPOST(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<GetPerkDtoBaseResponse>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<GetPerkDtoBaseResponse>;
+        }));
+    }
+
+    protected processPerkPOST(response: HttpResponseBase): Observable<GetPerkDtoBaseResponse> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = GetPerkDtoBaseResponse.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @return OK
+     */
+    perkGET(): Observable<GetPerkDtoListBaseResponse> {
+        let url_ = this.baseUrl + "/Perk";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processPerkGET(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processPerkGET(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<GetPerkDtoListBaseResponse>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<GetPerkDtoListBaseResponse>;
+        }));
+    }
+
+    protected processPerkGET(response: HttpResponseBase): Observable<GetPerkDtoListBaseResponse> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = GetPerkDtoListBaseResponse.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @return OK
+     */
+    perkGET2(id: number): Observable<GetPerkDtoBaseResponse> {
+        let url_ = this.baseUrl + "/Perk/{id}";
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined.");
+        url_ = url_.replace("{id}", encodeURIComponent("" + id));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processPerkGET2(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processPerkGET2(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<GetPerkDtoBaseResponse>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<GetPerkDtoBaseResponse>;
+        }));
+    }
+
+    protected processPerkGET2(response: HttpResponseBase): Observable<GetPerkDtoBaseResponse> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = GetPerkDtoBaseResponse.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @param body (optional) 
+     * @return OK
+     */
+    perkPUT(id: number, body: CreatePerkDto | undefined): Observable<GetPerkDtoBaseResponse> {
+        let url_ = this.baseUrl + "/Perk/{id}";
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined.");
+        url_ = url_.replace("{id}", encodeURIComponent("" + id));
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("put", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processPerkPUT(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processPerkPUT(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<GetPerkDtoBaseResponse>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<GetPerkDtoBaseResponse>;
+        }));
+    }
+
+    protected processPerkPUT(response: HttpResponseBase): Observable<GetPerkDtoBaseResponse> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = GetPerkDtoBaseResponse.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @return OK
+     */
+    perkDELETE(id: number): Observable<BooleanBaseResponse> {
+        let url_ = this.baseUrl + "/Perk/{id}";
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined.");
+        url_ = url_.replace("{id}", encodeURIComponent("" + id));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("delete", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processPerkDELETE(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processPerkDELETE(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<BooleanBaseResponse>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<BooleanBaseResponse>;
+        }));
+    }
+
+    protected processPerkDELETE(response: HttpResponseBase): Observable<BooleanBaseResponse> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = BooleanBaseResponse.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @return OK
+     */
+    getFacilities2(): Observable<SupportingServiceProviderDtoListBaseResponse> {
+        let url_ = this.baseUrl + "/SupportingServiceProvider/GetFacilities";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetFacilities2(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetFacilities2(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<SupportingServiceProviderDtoListBaseResponse>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<SupportingServiceProviderDtoListBaseResponse>;
+        }));
+    }
+
+    protected processGetFacilities2(response: HttpResponseBase): Observable<SupportingServiceProviderDtoListBaseResponse> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = SupportingServiceProviderDtoListBaseResponse.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @return OK
+     */
+    getSupportingServiceProvider(id: number): Observable<SupportingServiceProviderDtoBaseResponse> {
+        let url_ = this.baseUrl + "/SupportingServiceProvider/GetSupportingServiceProvider/{id}";
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined.");
+        url_ = url_.replace("{id}", encodeURIComponent("" + id));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetSupportingServiceProvider(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetSupportingServiceProvider(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<SupportingServiceProviderDtoBaseResponse>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<SupportingServiceProviderDtoBaseResponse>;
+        }));
+    }
+
+    protected processGetSupportingServiceProvider(response: HttpResponseBase): Observable<SupportingServiceProviderDtoBaseResponse> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = SupportingServiceProviderDtoBaseResponse.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @param body (optional) 
+     * @return OK
+     */
+    createSupportingServiceProvider(body: CreateSupportingServiceProviderDto | undefined): Observable<SupportingServiceProviderDtoBaseResponse> {
+        let url_ = this.baseUrl + "/SupportingServiceProvider/CreateSupportingServiceProvider";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processCreateSupportingServiceProvider(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processCreateSupportingServiceProvider(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<SupportingServiceProviderDtoBaseResponse>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<SupportingServiceProviderDtoBaseResponse>;
+        }));
+    }
+
+    protected processCreateSupportingServiceProvider(response: HttpResponseBase): Observable<SupportingServiceProviderDtoBaseResponse> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = SupportingServiceProviderDtoBaseResponse.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @param body (optional) 
+     * @return OK
+     */
+    updateSupportingServiceProvider(id: number, body: CreateSupportingServiceProviderDto | undefined): Observable<SupportingServiceProviderDtoBaseResponse> {
+        let url_ = this.baseUrl + "/SupportingServiceProvider/UpdateSupportingServiceProvider/{id}";
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined.");
+        url_ = url_.replace("{id}", encodeURIComponent("" + id));
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("put", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processUpdateSupportingServiceProvider(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processUpdateSupportingServiceProvider(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<SupportingServiceProviderDtoBaseResponse>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<SupportingServiceProviderDtoBaseResponse>;
+        }));
+    }
+
+    protected processUpdateSupportingServiceProvider(response: HttpResponseBase): Observable<SupportingServiceProviderDtoBaseResponse> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = SupportingServiceProviderDtoBaseResponse.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @return OK
+     */
+    supportingServiceProvider(id: number): Observable<BooleanBaseResponse> {
+        let url_ = this.baseUrl + "/SupportingServiceProvider/{id}";
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined.");
+        url_ = url_.replace("{id}", encodeURIComponent("" + id));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("delete", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processSupportingServiceProvider(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processSupportingServiceProvider(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<BooleanBaseResponse>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<BooleanBaseResponse>;
+        }));
+    }
+
+    protected processSupportingServiceProvider(response: HttpResponseBase): Observable<BooleanBaseResponse> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = BooleanBaseResponse.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
      * @return OK
      */
     getWeatherForecast(): Observable<WeatherForecast[]> {
@@ -909,6 +1457,8 @@ export class CoreService {
 
 export class AddPackageDto implements IAddPackageDto {
     name?: string | undefined;
+    nameAr?: string | undefined;
+    descriptionAr?: string | undefined;
     description?: string | undefined;
     defaultDiscount?: number;
     writtenServices?: string | undefined;
@@ -928,6 +1478,8 @@ export class AddPackageDto implements IAddPackageDto {
     init(_data?: any) {
         if (_data) {
             this.name = _data["name"];
+            this.nameAr = _data["nameAr"];
+            this.descriptionAr = _data["descriptionAr"];
             this.description = _data["description"];
             this.defaultDiscount = _data["defaultDiscount"];
             this.writtenServices = _data["writtenServices"];
@@ -951,6 +1503,8 @@ export class AddPackageDto implements IAddPackageDto {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["name"] = this.name;
+        data["nameAr"] = this.nameAr;
+        data["descriptionAr"] = this.descriptionAr;
         data["description"] = this.description;
         data["defaultDiscount"] = this.defaultDiscount;
         data["writtenServices"] = this.writtenServices;
@@ -967,6 +1521,8 @@ export class AddPackageDto implements IAddPackageDto {
 
 export interface IAddPackageDto {
     name?: string | undefined;
+    nameAr?: string | undefined;
+    descriptionAr?: string | undefined;
     description?: string | undefined;
     defaultDiscount?: number;
     writtenServices?: string | undefined;
@@ -1141,6 +1697,8 @@ export interface ICreateBranchComponentDto {
 
 export class CreateBranchDto implements ICreateBranchDto {
     name?: string | undefined;
+    nameAr?: string | undefined;
+    administrativeRegionId?: number;
     websiteBranchId?: number;
     workingDays?: string | undefined;
     startTime?: Date;
@@ -1160,6 +1718,8 @@ export class CreateBranchDto implements ICreateBranchDto {
     init(_data?: any) {
         if (_data) {
             this.name = _data["name"];
+            this.nameAr = _data["nameAr"];
+            this.administrativeRegionId = _data["administrativeRegionId"];
             this.websiteBranchId = _data["websiteBranchId"];
             this.workingDays = _data["workingDays"];
             this.startTime = _data["startTime"] ? new Date(_data["startTime"].toString()) : <any>undefined;
@@ -1183,6 +1743,8 @@ export class CreateBranchDto implements ICreateBranchDto {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["name"] = this.name;
+        data["nameAr"] = this.nameAr;
+        data["administrativeRegionId"] = this.administrativeRegionId;
         data["websiteBranchId"] = this.websiteBranchId;
         data["workingDays"] = this.workingDays;
         data["startTime"] = this.startTime ? this.startTime.toISOString() : <any>undefined;
@@ -1199,6 +1761,8 @@ export class CreateBranchDto implements ICreateBranchDto {
 
 export interface ICreateBranchDto {
     name?: string | undefined;
+    nameAr?: string | undefined;
+    administrativeRegionId?: number;
     websiteBranchId?: number;
     workingDays?: string | undefined;
     startTime?: Date;
@@ -1209,6 +1773,7 @@ export interface ICreateBranchDto {
 
 export class CreateFacilityDto implements ICreateFacilityDto {
     name?: string | undefined;
+    nameAr?: string | undefined;
     categoryId?: number | undefined;
     typeId?: number | undefined;
     destinationId?: number | undefined;
@@ -1231,6 +1796,7 @@ export class CreateFacilityDto implements ICreateFacilityDto {
     init(_data?: any) {
         if (_data) {
             this.name = _data["name"];
+            this.nameAr = _data["nameAr"];
             this.categoryId = _data["categoryId"];
             this.typeId = _data["typeId"];
             this.destinationId = _data["destinationId"];
@@ -1253,6 +1819,7 @@ export class CreateFacilityDto implements ICreateFacilityDto {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["name"] = this.name;
+        data["nameAr"] = this.nameAr;
         data["categoryId"] = this.categoryId;
         data["typeId"] = this.typeId;
         data["destinationId"] = this.destinationId;
@@ -1268,6 +1835,7 @@ export class CreateFacilityDto implements ICreateFacilityDto {
 
 export interface ICreateFacilityDto {
     name?: string | undefined;
+    nameAr?: string | undefined;
     categoryId?: number | undefined;
     typeId?: number | undefined;
     destinationId?: number | undefined;
@@ -1277,6 +1845,190 @@ export interface ICreateFacilityDto {
     isTaxIncluded?: boolean;
     basicContract?: number;
     isPublish?: boolean;
+}
+
+export class CreatePerkDto implements ICreatePerkDto {
+    name?: string | undefined;
+    link?: string | undefined;
+    price?: number;
+    isTaxIncluded?: boolean;
+    availableQuantity?: number;
+    isForJadah30Customers?: boolean;
+    isActive?: boolean;
+    perkLicenses?: CreatePerkLicenseDto[] | undefined;
+
+    constructor(data?: ICreatePerkDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.name = _data["name"];
+            this.link = _data["link"];
+            this.price = _data["price"];
+            this.isTaxIncluded = _data["isTaxIncluded"];
+            this.availableQuantity = _data["availableQuantity"];
+            this.isForJadah30Customers = _data["isForJadah30Customers"];
+            this.isActive = _data["isActive"];
+            if (Array.isArray(_data["perkLicenses"])) {
+                this.perkLicenses = [] as any;
+                for (let item of _data["perkLicenses"])
+                    this.perkLicenses!.push(CreatePerkLicenseDto.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): CreatePerkDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new CreatePerkDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["name"] = this.name;
+        data["link"] = this.link;
+        data["price"] = this.price;
+        data["isTaxIncluded"] = this.isTaxIncluded;
+        data["availableQuantity"] = this.availableQuantity;
+        data["isForJadah30Customers"] = this.isForJadah30Customers;
+        data["isActive"] = this.isActive;
+        if (Array.isArray(this.perkLicenses)) {
+            data["perkLicenses"] = [];
+            for (let item of this.perkLicenses)
+                data["perkLicenses"].push(item.toJSON());
+        }
+        return data;
+    }
+}
+
+export interface ICreatePerkDto {
+    name?: string | undefined;
+    link?: string | undefined;
+    price?: number;
+    isTaxIncluded?: boolean;
+    availableQuantity?: number;
+    isForJadah30Customers?: boolean;
+    isActive?: boolean;
+    perkLicenses?: CreatePerkLicenseDto[] | undefined;
+}
+
+export class CreatePerkLicenseDto implements ICreatePerkLicenseDto {
+    perkId?: number;
+    licenseId?: number;
+
+    constructor(data?: ICreatePerkLicenseDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.perkId = _data["perkId"];
+            this.licenseId = _data["licenseId"];
+        }
+    }
+
+    static fromJS(data: any): CreatePerkLicenseDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new CreatePerkLicenseDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["perkId"] = this.perkId;
+        data["licenseId"] = this.licenseId;
+        return data;
+    }
+}
+
+export interface ICreatePerkLicenseDto {
+    perkId?: number;
+    licenseId?: number;
+}
+
+export class CreateSupportingServiceProviderDto implements ICreateSupportingServiceProviderDto {
+    name?: string | undefined;
+    taxNumber?: string | undefined;
+    specializationId?: number | undefined;
+    nationalityId?: number | undefined;
+    address?: string | undefined;
+    websiteURL?: string | undefined;
+    phone?: string | undefined;
+    email?: string | undefined;
+    isJadah30Restricted?: boolean;
+    isActive?: boolean;
+
+    constructor(data?: ICreateSupportingServiceProviderDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.name = _data["name"];
+            this.taxNumber = _data["taxNumber"];
+            this.specializationId = _data["specializationId"];
+            this.nationalityId = _data["nationalityId"];
+            this.address = _data["address"];
+            this.websiteURL = _data["websiteURL"];
+            this.phone = _data["phone"];
+            this.email = _data["email"];
+            this.isJadah30Restricted = _data["isJadah30Restricted"];
+            this.isActive = _data["isActive"];
+        }
+    }
+
+    static fromJS(data: any): CreateSupportingServiceProviderDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new CreateSupportingServiceProviderDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["name"] = this.name;
+        data["taxNumber"] = this.taxNumber;
+        data["specializationId"] = this.specializationId;
+        data["nationalityId"] = this.nationalityId;
+        data["address"] = this.address;
+        data["websiteURL"] = this.websiteURL;
+        data["phone"] = this.phone;
+        data["email"] = this.email;
+        data["isJadah30Restricted"] = this.isJadah30Restricted;
+        data["isActive"] = this.isActive;
+        return data;
+    }
+}
+
+export interface ICreateSupportingServiceProviderDto {
+    name?: string | undefined;
+    taxNumber?: string | undefined;
+    specializationId?: number | undefined;
+    nationalityId?: number | undefined;
+    address?: string | undefined;
+    websiteURL?: string | undefined;
+    phone?: string | undefined;
+    email?: string | undefined;
+    isJadah30Restricted?: boolean;
+    isActive?: boolean;
 }
 
 export class Errors implements IErrors {
@@ -1322,11 +2074,17 @@ export interface IErrors {
 export class FacilityDto implements IFacilityDto {
     id?: number;
     name?: string | undefined;
+    nameAr?: string | undefined;
     categoryName?: string | undefined;
+    categoryNameAr?: string | undefined;
     typeName?: string | undefined;
+    typeNameAr?: string | undefined;
     destinationName?: string | undefined;
+    destinationNameAr?: string | undefined;
     pricingUnitName?: string | undefined;
+    pricingUnitNameAr?: string | undefined;
     subscriptionName?: string | undefined;
+    subscriptionNameAr?: string | undefined;
     basePrice?: number;
     isTaxIncluded?: boolean;
     basicContract?: number;
@@ -1345,11 +2103,17 @@ export class FacilityDto implements IFacilityDto {
         if (_data) {
             this.id = _data["id"];
             this.name = _data["name"];
+            this.nameAr = _data["nameAr"];
             this.categoryName = _data["categoryName"];
+            this.categoryNameAr = _data["categoryNameAr"];
             this.typeName = _data["typeName"];
+            this.typeNameAr = _data["typeNameAr"];
             this.destinationName = _data["destinationName"];
+            this.destinationNameAr = _data["destinationNameAr"];
             this.pricingUnitName = _data["pricingUnitName"];
+            this.pricingUnitNameAr = _data["pricingUnitNameAr"];
             this.subscriptionName = _data["subscriptionName"];
+            this.subscriptionNameAr = _data["subscriptionNameAr"];
             this.basePrice = _data["basePrice"];
             this.isTaxIncluded = _data["isTaxIncluded"];
             this.basicContract = _data["basicContract"];
@@ -1368,11 +2132,17 @@ export class FacilityDto implements IFacilityDto {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
         data["name"] = this.name;
+        data["nameAr"] = this.nameAr;
         data["categoryName"] = this.categoryName;
+        data["categoryNameAr"] = this.categoryNameAr;
         data["typeName"] = this.typeName;
+        data["typeNameAr"] = this.typeNameAr;
         data["destinationName"] = this.destinationName;
+        data["destinationNameAr"] = this.destinationNameAr;
         data["pricingUnitName"] = this.pricingUnitName;
+        data["pricingUnitNameAr"] = this.pricingUnitNameAr;
         data["subscriptionName"] = this.subscriptionName;
+        data["subscriptionNameAr"] = this.subscriptionNameAr;
         data["basePrice"] = this.basePrice;
         data["isTaxIncluded"] = this.isTaxIncluded;
         data["basicContract"] = this.basicContract;
@@ -1384,11 +2154,17 @@ export class FacilityDto implements IFacilityDto {
 export interface IFacilityDto {
     id?: number;
     name?: string | undefined;
+    nameAr?: string | undefined;
     categoryName?: string | undefined;
+    categoryNameAr?: string | undefined;
     typeName?: string | undefined;
+    typeNameAr?: string | undefined;
     destinationName?: string | undefined;
+    destinationNameAr?: string | undefined;
     pricingUnitName?: string | undefined;
+    pricingUnitNameAr?: string | undefined;
     subscriptionName?: string | undefined;
+    subscriptionNameAr?: string | undefined;
     basePrice?: number;
     isTaxIncluded?: boolean;
     basicContract?: number;
@@ -1534,7 +2310,9 @@ export interface IFacilityDtoListBaseResponse {
 export class GetBranchComponentDto implements IGetBranchComponentDto {
     id?: number;
     branchName?: string | undefined;
+    branchNameAr?: string | undefined;
     componentName?: string | undefined;
+    componentNameAr?: string | undefined;
 
     constructor(data?: IGetBranchComponentDto) {
         if (data) {
@@ -1549,7 +2327,9 @@ export class GetBranchComponentDto implements IGetBranchComponentDto {
         if (_data) {
             this.id = _data["id"];
             this.branchName = _data["branchName"];
+            this.branchNameAr = _data["branchNameAr"];
             this.componentName = _data["componentName"];
+            this.componentNameAr = _data["componentNameAr"];
         }
     }
 
@@ -1564,7 +2344,9 @@ export class GetBranchComponentDto implements IGetBranchComponentDto {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
         data["branchName"] = this.branchName;
+        data["branchNameAr"] = this.branchNameAr;
         data["componentName"] = this.componentName;
+        data["componentNameAr"] = this.componentNameAr;
         return data;
     }
 }
@@ -1572,12 +2354,16 @@ export class GetBranchComponentDto implements IGetBranchComponentDto {
 export interface IGetBranchComponentDto {
     id?: number;
     branchName?: string | undefined;
+    branchNameAr?: string | undefined;
     componentName?: string | undefined;
+    componentNameAr?: string | undefined;
 }
 
 export class GetBranchDto implements IGetBranchDto {
     id?: number;
     name?: string | undefined;
+    nameAr?: string | undefined;
+    administrativeRegionId?: number;
     websiteBranchId?: number;
     workingDays?: string | undefined;
     startTime?: Date;
@@ -1598,6 +2384,8 @@ export class GetBranchDto implements IGetBranchDto {
         if (_data) {
             this.id = _data["id"];
             this.name = _data["name"];
+            this.nameAr = _data["nameAr"];
+            this.administrativeRegionId = _data["administrativeRegionId"];
             this.websiteBranchId = _data["websiteBranchId"];
             this.workingDays = _data["workingDays"];
             this.startTime = _data["startTime"] ? new Date(_data["startTime"].toString()) : <any>undefined;
@@ -1622,6 +2410,8 @@ export class GetBranchDto implements IGetBranchDto {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
         data["name"] = this.name;
+        data["nameAr"] = this.nameAr;
+        data["administrativeRegionId"] = this.administrativeRegionId;
         data["websiteBranchId"] = this.websiteBranchId;
         data["workingDays"] = this.workingDays;
         data["startTime"] = this.startTime ? this.startTime.toISOString() : <any>undefined;
@@ -1639,6 +2429,8 @@ export class GetBranchDto implements IGetBranchDto {
 export interface IGetBranchDto {
     id?: number;
     name?: string | undefined;
+    nameAr?: string | undefined;
+    administrativeRegionId?: number;
     websiteBranchId?: number;
     workingDays?: string | undefined;
     startTime?: Date;
@@ -1786,6 +2578,8 @@ export interface IGetBranchDtoListBaseResponse {
 export class GetPackageDto implements IGetPackageDto {
     id?: number;
     name?: string | undefined;
+    nameAr?: string | undefined;
+    descriptionAr?: string | undefined;
     description?: string | undefined;
     defaultDiscount?: number;
     writtenServices?: string | undefined;
@@ -1806,6 +2600,8 @@ export class GetPackageDto implements IGetPackageDto {
         if (_data) {
             this.id = _data["id"];
             this.name = _data["name"];
+            this.nameAr = _data["nameAr"];
+            this.descriptionAr = _data["descriptionAr"];
             this.description = _data["description"];
             this.defaultDiscount = _data["defaultDiscount"];
             this.writtenServices = _data["writtenServices"];
@@ -1830,6 +2626,8 @@ export class GetPackageDto implements IGetPackageDto {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
         data["name"] = this.name;
+        data["nameAr"] = this.nameAr;
+        data["descriptionAr"] = this.descriptionAr;
         data["description"] = this.description;
         data["defaultDiscount"] = this.defaultDiscount;
         data["writtenServices"] = this.writtenServices;
@@ -1847,6 +2645,8 @@ export class GetPackageDto implements IGetPackageDto {
 export interface IGetPackageDto {
     id?: number;
     name?: string | undefined;
+    nameAr?: string | undefined;
+    descriptionAr?: string | undefined;
     description?: string | undefined;
     defaultDiscount?: number;
     writtenServices?: string | undefined;
@@ -1994,8 +2794,11 @@ export interface IGetPackageDtoListBaseResponse {
 export class GetPackageFacilityDto implements IGetPackageFacilityDto {
     id?: number;
     packageName?: string | undefined;
+    packageNameAr?: string | undefined;
     facilityName?: string | undefined;
+    facilityNameAr?: string | undefined;
     typeName?: string | undefined;
+    typeNameAr?: string | undefined;
     quantity?: number;
     percentageDicount?: number;
     price?: number;
@@ -2014,8 +2817,11 @@ export class GetPackageFacilityDto implements IGetPackageFacilityDto {
         if (_data) {
             this.id = _data["id"];
             this.packageName = _data["packageName"];
+            this.packageNameAr = _data["packageNameAr"];
             this.facilityName = _data["facilityName"];
+            this.facilityNameAr = _data["facilityNameAr"];
             this.typeName = _data["typeName"];
+            this.typeNameAr = _data["typeNameAr"];
             this.quantity = _data["quantity"];
             this.percentageDicount = _data["percentageDicount"];
             this.price = _data["price"];
@@ -2034,8 +2840,11 @@ export class GetPackageFacilityDto implements IGetPackageFacilityDto {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
         data["packageName"] = this.packageName;
+        data["packageNameAr"] = this.packageNameAr;
         data["facilityName"] = this.facilityName;
+        data["facilityNameAr"] = this.facilityNameAr;
         data["typeName"] = this.typeName;
+        data["typeNameAr"] = this.typeNameAr;
         data["quantity"] = this.quantity;
         data["percentageDicount"] = this.percentageDicount;
         data["price"] = this.price;
@@ -2047,12 +2856,271 @@ export class GetPackageFacilityDto implements IGetPackageFacilityDto {
 export interface IGetPackageFacilityDto {
     id?: number;
     packageName?: string | undefined;
+    packageNameAr?: string | undefined;
     facilityName?: string | undefined;
+    facilityNameAr?: string | undefined;
     typeName?: string | undefined;
+    typeNameAr?: string | undefined;
     quantity?: number;
     percentageDicount?: number;
     price?: number;
     isTaxIncluded?: boolean;
+}
+
+export class GetPerkDto implements IGetPerkDto {
+    id?: number;
+    name?: string | undefined;
+    link?: string | undefined;
+    price?: number;
+    isTaxIncluded?: boolean;
+    availableQuantity?: number;
+    isForJadah30Customers?: boolean;
+    isActive?: boolean;
+    perkLicenses?: GetPerkLicenseDto[] | undefined;
+
+    constructor(data?: IGetPerkDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.name = _data["name"];
+            this.link = _data["link"];
+            this.price = _data["price"];
+            this.isTaxIncluded = _data["isTaxIncluded"];
+            this.availableQuantity = _data["availableQuantity"];
+            this.isForJadah30Customers = _data["isForJadah30Customers"];
+            this.isActive = _data["isActive"];
+            if (Array.isArray(_data["perkLicenses"])) {
+                this.perkLicenses = [] as any;
+                for (let item of _data["perkLicenses"])
+                    this.perkLicenses!.push(GetPerkLicenseDto.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): GetPerkDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new GetPerkDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["name"] = this.name;
+        data["link"] = this.link;
+        data["price"] = this.price;
+        data["isTaxIncluded"] = this.isTaxIncluded;
+        data["availableQuantity"] = this.availableQuantity;
+        data["isForJadah30Customers"] = this.isForJadah30Customers;
+        data["isActive"] = this.isActive;
+        if (Array.isArray(this.perkLicenses)) {
+            data["perkLicenses"] = [];
+            for (let item of this.perkLicenses)
+                data["perkLicenses"].push(item.toJSON());
+        }
+        return data;
+    }
+}
+
+export interface IGetPerkDto {
+    id?: number;
+    name?: string | undefined;
+    link?: string | undefined;
+    price?: number;
+    isTaxIncluded?: boolean;
+    availableQuantity?: number;
+    isForJadah30Customers?: boolean;
+    isActive?: boolean;
+    perkLicenses?: GetPerkLicenseDto[] | undefined;
+}
+
+export class GetPerkDtoBaseResponse implements IGetPerkDtoBaseResponse {
+    isSuccess?: boolean;
+    version?: number;
+    message?: string | undefined;
+    responseData?: GetPerkDto;
+    errors?: Errors[] | undefined;
+    statusCode?: number;
+
+    constructor(data?: IGetPerkDtoBaseResponse) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.isSuccess = _data["isSuccess"];
+            this.version = _data["version"];
+            this.message = _data["message"];
+            this.responseData = _data["responseData"] ? GetPerkDto.fromJS(_data["responseData"]) : <any>undefined;
+            if (Array.isArray(_data["errors"])) {
+                this.errors = [] as any;
+                for (let item of _data["errors"])
+                    this.errors!.push(Errors.fromJS(item));
+            }
+            this.statusCode = _data["statusCode"];
+        }
+    }
+
+    static fromJS(data: any): GetPerkDtoBaseResponse {
+        data = typeof data === 'object' ? data : {};
+        let result = new GetPerkDtoBaseResponse();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["isSuccess"] = this.isSuccess;
+        data["version"] = this.version;
+        data["message"] = this.message;
+        data["responseData"] = this.responseData ? this.responseData.toJSON() : <any>undefined;
+        if (Array.isArray(this.errors)) {
+            data["errors"] = [];
+            for (let item of this.errors)
+                data["errors"].push(item.toJSON());
+        }
+        data["statusCode"] = this.statusCode;
+        return data;
+    }
+}
+
+export interface IGetPerkDtoBaseResponse {
+    isSuccess?: boolean;
+    version?: number;
+    message?: string | undefined;
+    responseData?: GetPerkDto;
+    errors?: Errors[] | undefined;
+    statusCode?: number;
+}
+
+export class GetPerkDtoListBaseResponse implements IGetPerkDtoListBaseResponse {
+    isSuccess?: boolean;
+    version?: number;
+    message?: string | undefined;
+    responseData?: GetPerkDto[] | undefined;
+    errors?: Errors[] | undefined;
+    statusCode?: number;
+
+    constructor(data?: IGetPerkDtoListBaseResponse) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.isSuccess = _data["isSuccess"];
+            this.version = _data["version"];
+            this.message = _data["message"];
+            if (Array.isArray(_data["responseData"])) {
+                this.responseData = [] as any;
+                for (let item of _data["responseData"])
+                    this.responseData!.push(GetPerkDto.fromJS(item));
+            }
+            if (Array.isArray(_data["errors"])) {
+                this.errors = [] as any;
+                for (let item of _data["errors"])
+                    this.errors!.push(Errors.fromJS(item));
+            }
+            this.statusCode = _data["statusCode"];
+        }
+    }
+
+    static fromJS(data: any): GetPerkDtoListBaseResponse {
+        data = typeof data === 'object' ? data : {};
+        let result = new GetPerkDtoListBaseResponse();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["isSuccess"] = this.isSuccess;
+        data["version"] = this.version;
+        data["message"] = this.message;
+        if (Array.isArray(this.responseData)) {
+            data["responseData"] = [];
+            for (let item of this.responseData)
+                data["responseData"].push(item.toJSON());
+        }
+        if (Array.isArray(this.errors)) {
+            data["errors"] = [];
+            for (let item of this.errors)
+                data["errors"].push(item.toJSON());
+        }
+        data["statusCode"] = this.statusCode;
+        return data;
+    }
+}
+
+export interface IGetPerkDtoListBaseResponse {
+    isSuccess?: boolean;
+    version?: number;
+    message?: string | undefined;
+    responseData?: GetPerkDto[] | undefined;
+    errors?: Errors[] | undefined;
+    statusCode?: number;
+}
+
+export class GetPerkLicenseDto implements IGetPerkLicenseDto {
+    id?: number;
+    perkName?: string | undefined;
+    licenseName?: string | undefined;
+
+    constructor(data?: IGetPerkLicenseDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.perkName = _data["perkName"];
+            this.licenseName = _data["licenseName"];
+        }
+    }
+
+    static fromJS(data: any): GetPerkLicenseDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new GetPerkLicenseDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["perkName"] = this.perkName;
+        data["licenseName"] = this.licenseName;
+        return data;
+    }
+}
+
+export interface IGetPerkLicenseDto {
+    id?: number;
+    perkName?: string | undefined;
+    licenseName?: string | undefined;
 }
 
 export class StringBaseResponse implements IStringBaseResponse {
@@ -2115,6 +3183,218 @@ export interface IStringBaseResponse {
     version?: number;
     message?: string | undefined;
     responseData?: string | undefined;
+    errors?: Errors[] | undefined;
+    statusCode?: number;
+}
+
+export class SupportingServiceProviderDto implements ISupportingServiceProviderDto {
+    id?: number;
+    name?: string | undefined;
+    taxNumber?: string | undefined;
+    specializationName?: string | undefined;
+    nationalityName?: string | undefined;
+    address?: string | undefined;
+    websiteURL?: string | undefined;
+    phone?: string | undefined;
+    email?: string | undefined;
+    isJadah30Restricted?: boolean;
+    isActive?: boolean;
+
+    constructor(data?: ISupportingServiceProviderDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.name = _data["name"];
+            this.taxNumber = _data["taxNumber"];
+            this.specializationName = _data["specializationName"];
+            this.nationalityName = _data["nationalityName"];
+            this.address = _data["address"];
+            this.websiteURL = _data["websiteURL"];
+            this.phone = _data["phone"];
+            this.email = _data["email"];
+            this.isJadah30Restricted = _data["isJadah30Restricted"];
+            this.isActive = _data["isActive"];
+        }
+    }
+
+    static fromJS(data: any): SupportingServiceProviderDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new SupportingServiceProviderDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["name"] = this.name;
+        data["taxNumber"] = this.taxNumber;
+        data["specializationName"] = this.specializationName;
+        data["nationalityName"] = this.nationalityName;
+        data["address"] = this.address;
+        data["websiteURL"] = this.websiteURL;
+        data["phone"] = this.phone;
+        data["email"] = this.email;
+        data["isJadah30Restricted"] = this.isJadah30Restricted;
+        data["isActive"] = this.isActive;
+        return data;
+    }
+}
+
+export interface ISupportingServiceProviderDto {
+    id?: number;
+    name?: string | undefined;
+    taxNumber?: string | undefined;
+    specializationName?: string | undefined;
+    nationalityName?: string | undefined;
+    address?: string | undefined;
+    websiteURL?: string | undefined;
+    phone?: string | undefined;
+    email?: string | undefined;
+    isJadah30Restricted?: boolean;
+    isActive?: boolean;
+}
+
+export class SupportingServiceProviderDtoBaseResponse implements ISupportingServiceProviderDtoBaseResponse {
+    isSuccess?: boolean;
+    version?: number;
+    message?: string | undefined;
+    responseData?: SupportingServiceProviderDto;
+    errors?: Errors[] | undefined;
+    statusCode?: number;
+
+    constructor(data?: ISupportingServiceProviderDtoBaseResponse) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.isSuccess = _data["isSuccess"];
+            this.version = _data["version"];
+            this.message = _data["message"];
+            this.responseData = _data["responseData"] ? SupportingServiceProviderDto.fromJS(_data["responseData"]) : <any>undefined;
+            if (Array.isArray(_data["errors"])) {
+                this.errors = [] as any;
+                for (let item of _data["errors"])
+                    this.errors!.push(Errors.fromJS(item));
+            }
+            this.statusCode = _data["statusCode"];
+        }
+    }
+
+    static fromJS(data: any): SupportingServiceProviderDtoBaseResponse {
+        data = typeof data === 'object' ? data : {};
+        let result = new SupportingServiceProviderDtoBaseResponse();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["isSuccess"] = this.isSuccess;
+        data["version"] = this.version;
+        data["message"] = this.message;
+        data["responseData"] = this.responseData ? this.responseData.toJSON() : <any>undefined;
+        if (Array.isArray(this.errors)) {
+            data["errors"] = [];
+            for (let item of this.errors)
+                data["errors"].push(item.toJSON());
+        }
+        data["statusCode"] = this.statusCode;
+        return data;
+    }
+}
+
+export interface ISupportingServiceProviderDtoBaseResponse {
+    isSuccess?: boolean;
+    version?: number;
+    message?: string | undefined;
+    responseData?: SupportingServiceProviderDto;
+    errors?: Errors[] | undefined;
+    statusCode?: number;
+}
+
+export class SupportingServiceProviderDtoListBaseResponse implements ISupportingServiceProviderDtoListBaseResponse {
+    isSuccess?: boolean;
+    version?: number;
+    message?: string | undefined;
+    responseData?: SupportingServiceProviderDto[] | undefined;
+    errors?: Errors[] | undefined;
+    statusCode?: number;
+
+    constructor(data?: ISupportingServiceProviderDtoListBaseResponse) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.isSuccess = _data["isSuccess"];
+            this.version = _data["version"];
+            this.message = _data["message"];
+            if (Array.isArray(_data["responseData"])) {
+                this.responseData = [] as any;
+                for (let item of _data["responseData"])
+                    this.responseData!.push(SupportingServiceProviderDto.fromJS(item));
+            }
+            if (Array.isArray(_data["errors"])) {
+                this.errors = [] as any;
+                for (let item of _data["errors"])
+                    this.errors!.push(Errors.fromJS(item));
+            }
+            this.statusCode = _data["statusCode"];
+        }
+    }
+
+    static fromJS(data: any): SupportingServiceProviderDtoListBaseResponse {
+        data = typeof data === 'object' ? data : {};
+        let result = new SupportingServiceProviderDtoListBaseResponse();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["isSuccess"] = this.isSuccess;
+        data["version"] = this.version;
+        data["message"] = this.message;
+        if (Array.isArray(this.responseData)) {
+            data["responseData"] = [];
+            for (let item of this.responseData)
+                data["responseData"].push(item.toJSON());
+        }
+        if (Array.isArray(this.errors)) {
+            data["errors"] = [];
+            for (let item of this.errors)
+                data["errors"].push(item.toJSON());
+        }
+        data["statusCode"] = this.statusCode;
+        return data;
+    }
+}
+
+export interface ISupportingServiceProviderDtoListBaseResponse {
+    isSuccess?: boolean;
+    version?: number;
+    message?: string | undefined;
+    responseData?: SupportingServiceProviderDto[] | undefined;
     errors?: Errors[] | undefined;
     statusCode?: number;
 }
