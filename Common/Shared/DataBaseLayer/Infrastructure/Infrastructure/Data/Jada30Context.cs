@@ -23,6 +23,9 @@ namespace Infrastructure.Data
         public DbSet<Lookup> Lookups { get; set; }
         public DbSet<Facilities> Facilities { get; set; }
         public DbSet<Branch> Branch { get; set; }
+        public DbSet<SupportingServiceProvider> SupportingServiceProvider { get; set; }
+        public DbSet<Perk> Perk {  get; set; }
+        public DbSet<PerkLicense> PerkLicense { get; set; }
         public DbSet<SysConfig> SysConfigs { get; set; }
 
         public DbSet<Permission> Permissions { get; set; }
@@ -64,6 +67,10 @@ namespace Infrastructure.Data
                 .HasOne(rp => rp.Permission)
                 .WithMany(p => p.RolePermissions)
                 .HasForeignKey(rp => rp.PermissionId);
+
+            modelBuilder.Entity<Facilities>()
+                .Property(f => f.BasePrice)
+                .HasPrecision(18, 2); // Adjust precision and scale as needed
 
         }
 
