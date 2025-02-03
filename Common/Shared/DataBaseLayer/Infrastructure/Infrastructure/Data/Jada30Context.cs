@@ -31,6 +31,8 @@ namespace Infrastructure.Data
         public DbSet<Permission> Permissions { get; set; }
         public DbSet<RolePermission> RolePermissions { get; set; }
         public DbSet<BranchComponent> BranchComponents { get; set; }
+        public DbSet<Package> Packages { get; set; }
+        public DbSet<PackageFacility> PackageFacilities { get; set; }
         public Jada30Context()
         {
         }
@@ -76,6 +78,7 @@ namespace Infrastructure.Data
         {
             if (!optionsBuilder.IsConfigured)
             {
+                optionsBuilder.UseSqlServer("Data Source=192.168.1.85;Initial Catalog=Tabe3_SQL_DB_10;User ID=SJM_FVDBUser;Password=S@raSJM328311;Integrated Security=False;Trust Server Certificate=True;Encrypt=False");
             }
         }
 

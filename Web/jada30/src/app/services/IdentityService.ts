@@ -418,7 +418,7 @@ export class IdentityService {
      * @param body (optional) 
      * @return OK
      */
-    rolesPOST2(body: ApplicationRole | undefined): Observable<ApplicationRoleBaseResponse> {
+    rolesPOST2(body: ApplicationRole | undefined): Observable<BooleanBaseResponse> {
         let url_ = this.baseUrl + "/api/UserManagement/roles";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -441,14 +441,14 @@ export class IdentityService {
                 try {
                     return this.processRolesPOST2(response_ as any);
                 } catch (e) {
-                    return _observableThrow(e) as any as Observable<ApplicationRoleBaseResponse>;
+                    return _observableThrow(e) as any as Observable<BooleanBaseResponse>;
                 }
             } else
-                return _observableThrow(response_) as any as Observable<ApplicationRoleBaseResponse>;
+                return _observableThrow(response_) as any as Observable<BooleanBaseResponse>;
         }));
     }
 
-    protected processRolesPOST2(response: HttpResponseBase): Observable<ApplicationRoleBaseResponse> {
+    protected processRolesPOST2(response: HttpResponseBase): Observable<BooleanBaseResponse> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -459,7 +459,7 @@ export class IdentityService {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ApplicationRoleBaseResponse.fromJS(resultData200);
+            result200 = BooleanBaseResponse.fromJS(resultData200);
             return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
@@ -473,7 +473,7 @@ export class IdentityService {
     /**
      * @return OK
      */
-    rolesGET(): Observable<ApplicationRoleListBaseResponse> {
+    rolesGET(): Observable<RoleDtoListBaseResponse> {
         let url_ = this.baseUrl + "/api/UserManagement/roles";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -492,14 +492,14 @@ export class IdentityService {
                 try {
                     return this.processRolesGET(response_ as any);
                 } catch (e) {
-                    return _observableThrow(e) as any as Observable<ApplicationRoleListBaseResponse>;
+                    return _observableThrow(e) as any as Observable<RoleDtoListBaseResponse>;
                 }
             } else
-                return _observableThrow(response_) as any as Observable<ApplicationRoleListBaseResponse>;
+                return _observableThrow(response_) as any as Observable<RoleDtoListBaseResponse>;
         }));
     }
 
-    protected processRolesGET(response: HttpResponseBase): Observable<ApplicationRoleListBaseResponse> {
+    protected processRolesGET(response: HttpResponseBase): Observable<RoleDtoListBaseResponse> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -510,7 +510,7 @@ export class IdentityService {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ApplicationRoleListBaseResponse.fromJS(resultData200);
+            result200 = RoleDtoListBaseResponse.fromJS(resultData200);
             return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
@@ -581,7 +581,7 @@ export class IdentityService {
     /**
      * @return OK
      */
-    permissionsGET(roleId: number): Observable<PermissionListBaseResponse> {
+    permissionsGET(roleId: number): Observable<GetPermissionDtoListBaseResponse> {
         let url_ = this.baseUrl + "/api/UserManagement/roles/{roleId}/permissions";
         if (roleId === undefined || roleId === null)
             throw new Error("The parameter 'roleId' must be defined.");
@@ -603,14 +603,14 @@ export class IdentityService {
                 try {
                     return this.processPermissionsGET(response_ as any);
                 } catch (e) {
-                    return _observableThrow(e) as any as Observable<PermissionListBaseResponse>;
+                    return _observableThrow(e) as any as Observable<GetPermissionDtoListBaseResponse>;
                 }
             } else
-                return _observableThrow(response_) as any as Observable<PermissionListBaseResponse>;
+                return _observableThrow(response_) as any as Observable<GetPermissionDtoListBaseResponse>;
         }));
     }
 
-    protected processPermissionsGET(response: HttpResponseBase): Observable<PermissionListBaseResponse> {
+    protected processPermissionsGET(response: HttpResponseBase): Observable<GetPermissionDtoListBaseResponse> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -621,7 +621,7 @@ export class IdentityService {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = PermissionListBaseResponse.fromJS(resultData200);
+            result200 = GetPermissionDtoListBaseResponse.fromJS(resultData200);
             return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
@@ -678,6 +678,62 @@ export class IdentityService {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
             result200 = PermissionBaseResponse.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @param body (optional) 
+     * @return OK
+     */
+    createRoleWithPermissions(body: CreateRoleWithPermssionsDto | undefined): Observable<BooleanBaseResponse> {
+        let url_ = this.baseUrl + "/api/UserManagement/CreateRoleWithPermissions";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processCreateRoleWithPermissions(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processCreateRoleWithPermissions(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<BooleanBaseResponse>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<BooleanBaseResponse>;
+        }));
+    }
+
+    protected processCreateRoleWithPermissions(response: HttpResponseBase): Observable<BooleanBaseResponse> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = BooleanBaseResponse.fromJS(resultData200);
             return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
@@ -753,142 +809,6 @@ export interface IApplicationRole {
     rolePermissions?: RolePermission[] | undefined;
 }
 
-export class ApplicationRoleBaseResponse implements IApplicationRoleBaseResponse {
-    isSuccess?: boolean;
-    version?: number;
-    message?: string | undefined;
-    responseData?: ApplicationRole;
-    errors?: Errors[] | undefined;
-    statusCode?: number;
-
-    constructor(data?: IApplicationRoleBaseResponse) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.isSuccess = _data["isSuccess"];
-            this.version = _data["version"];
-            this.message = _data["message"];
-            this.responseData = _data["responseData"] ? ApplicationRole.fromJS(_data["responseData"]) : <any>undefined;
-            if (Array.isArray(_data["errors"])) {
-                this.errors = [] as any;
-                for (let item of _data["errors"])
-                    this.errors!.push(Errors.fromJS(item));
-            }
-            this.statusCode = _data["statusCode"];
-        }
-    }
-
-    static fromJS(data: any): ApplicationRoleBaseResponse {
-        data = typeof data === 'object' ? data : {};
-        let result = new ApplicationRoleBaseResponse();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["isSuccess"] = this.isSuccess;
-        data["version"] = this.version;
-        data["message"] = this.message;
-        data["responseData"] = this.responseData ? this.responseData.toJSON() : <any>undefined;
-        if (Array.isArray(this.errors)) {
-            data["errors"] = [];
-            for (let item of this.errors)
-                data["errors"].push(item.toJSON());
-        }
-        data["statusCode"] = this.statusCode;
-        return data;
-    }
-}
-
-export interface IApplicationRoleBaseResponse {
-    isSuccess?: boolean;
-    version?: number;
-    message?: string | undefined;
-    responseData?: ApplicationRole;
-    errors?: Errors[] | undefined;
-    statusCode?: number;
-}
-
-export class ApplicationRoleListBaseResponse implements IApplicationRoleListBaseResponse {
-    isSuccess?: boolean;
-    version?: number;
-    message?: string | undefined;
-    responseData?: ApplicationRole[] | undefined;
-    errors?: Errors[] | undefined;
-    statusCode?: number;
-
-    constructor(data?: IApplicationRoleListBaseResponse) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.isSuccess = _data["isSuccess"];
-            this.version = _data["version"];
-            this.message = _data["message"];
-            if (Array.isArray(_data["responseData"])) {
-                this.responseData = [] as any;
-                for (let item of _data["responseData"])
-                    this.responseData!.push(ApplicationRole.fromJS(item));
-            }
-            if (Array.isArray(_data["errors"])) {
-                this.errors = [] as any;
-                for (let item of _data["errors"])
-                    this.errors!.push(Errors.fromJS(item));
-            }
-            this.statusCode = _data["statusCode"];
-        }
-    }
-
-    static fromJS(data: any): ApplicationRoleListBaseResponse {
-        data = typeof data === 'object' ? data : {};
-        let result = new ApplicationRoleListBaseResponse();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["isSuccess"] = this.isSuccess;
-        data["version"] = this.version;
-        data["message"] = this.message;
-        if (Array.isArray(this.responseData)) {
-            data["responseData"] = [];
-            for (let item of this.responseData)
-                data["responseData"].push(item.toJSON());
-        }
-        if (Array.isArray(this.errors)) {
-            data["errors"] = [];
-            for (let item of this.errors)
-                data["errors"].push(item.toJSON());
-        }
-        data["statusCode"] = this.statusCode;
-        return data;
-    }
-}
-
-export interface IApplicationRoleListBaseResponse {
-    isSuccess?: boolean;
-    version?: number;
-    message?: string | undefined;
-    responseData?: ApplicationRole[] | undefined;
-    errors?: Errors[] | undefined;
-    statusCode?: number;
-}
-
 export class BooleanBaseResponse implements IBooleanBaseResponse {
     isSuccess?: boolean;
     version?: number;
@@ -951,6 +871,54 @@ export interface IBooleanBaseResponse {
     responseData?: boolean;
     errors?: Errors[] | undefined;
     statusCode?: number;
+}
+
+export class CreateRoleWithPermssionsDto implements ICreateRoleWithPermssionsDto {
+    roleName?: string | undefined;
+    permissionIds?: number[] | undefined;
+
+    constructor(data?: ICreateRoleWithPermssionsDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.roleName = _data["roleName"];
+            if (Array.isArray(_data["permissionIds"])) {
+                this.permissionIds = [] as any;
+                for (let item of _data["permissionIds"])
+                    this.permissionIds!.push(item);
+            }
+        }
+    }
+
+    static fromJS(data: any): CreateRoleWithPermssionsDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new CreateRoleWithPermssionsDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["roleName"] = this.roleName;
+        if (Array.isArray(this.permissionIds)) {
+            data["permissionIds"] = [];
+            for (let item of this.permissionIds)
+                data["permissionIds"].push(item);
+        }
+        return data;
+    }
+}
+
+export interface ICreateRoleWithPermssionsDto {
+    roleName?: string | undefined;
+    permissionIds?: number[] | undefined;
 }
 
 export class CreateUserDto implements ICreateUserDto {
@@ -1055,6 +1023,130 @@ export class Errors implements IErrors {
 export interface IErrors {
     key?: number;
     value?: string | undefined;
+}
+
+export class GetPermissionDto implements IGetPermissionDto {
+    id?: number;
+    name?: string | undefined;
+    nameAr?: string | undefined;
+    description?: string | undefined;
+    descriptionAr?: string | undefined;
+
+    constructor(data?: IGetPermissionDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.name = _data["name"];
+            this.nameAr = _data["nameAr"];
+            this.description = _data["description"];
+            this.descriptionAr = _data["descriptionAr"];
+        }
+    }
+
+    static fromJS(data: any): GetPermissionDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new GetPermissionDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["name"] = this.name;
+        data["nameAr"] = this.nameAr;
+        data["description"] = this.description;
+        data["descriptionAr"] = this.descriptionAr;
+        return data;
+    }
+}
+
+export interface IGetPermissionDto {
+    id?: number;
+    name?: string | undefined;
+    nameAr?: string | undefined;
+    description?: string | undefined;
+    descriptionAr?: string | undefined;
+}
+
+export class GetPermissionDtoListBaseResponse implements IGetPermissionDtoListBaseResponse {
+    isSuccess?: boolean;
+    version?: number;
+    message?: string | undefined;
+    responseData?: GetPermissionDto[] | undefined;
+    errors?: Errors[] | undefined;
+    statusCode?: number;
+
+    constructor(data?: IGetPermissionDtoListBaseResponse) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.isSuccess = _data["isSuccess"];
+            this.version = _data["version"];
+            this.message = _data["message"];
+            if (Array.isArray(_data["responseData"])) {
+                this.responseData = [] as any;
+                for (let item of _data["responseData"])
+                    this.responseData!.push(GetPermissionDto.fromJS(item));
+            }
+            if (Array.isArray(_data["errors"])) {
+                this.errors = [] as any;
+                for (let item of _data["errors"])
+                    this.errors!.push(Errors.fromJS(item));
+            }
+            this.statusCode = _data["statusCode"];
+        }
+    }
+
+    static fromJS(data: any): GetPermissionDtoListBaseResponse {
+        data = typeof data === 'object' ? data : {};
+        let result = new GetPermissionDtoListBaseResponse();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["isSuccess"] = this.isSuccess;
+        data["version"] = this.version;
+        data["message"] = this.message;
+        if (Array.isArray(this.responseData)) {
+            data["responseData"] = [];
+            for (let item of this.responseData)
+                data["responseData"].push(item.toJSON());
+        }
+        if (Array.isArray(this.errors)) {
+            data["errors"] = [];
+            for (let item of this.errors)
+                data["errors"].push(item.toJSON());
+        }
+        data["statusCode"] = this.statusCode;
+        return data;
+    }
+}
+
+export interface IGetPermissionDtoListBaseResponse {
+    isSuccess?: boolean;
+    version?: number;
+    message?: string | undefined;
+    responseData?: GetPermissionDto[] | undefined;
+    errors?: Errors[] | undefined;
+    statusCode?: number;
 }
 
 export class Permission implements IPermission {
@@ -1185,78 +1277,6 @@ export interface IPermissionBaseResponse {
     statusCode?: number;
 }
 
-export class PermissionListBaseResponse implements IPermissionListBaseResponse {
-    isSuccess?: boolean;
-    version?: number;
-    message?: string | undefined;
-    responseData?: Permission[] | undefined;
-    errors?: Errors[] | undefined;
-    statusCode?: number;
-
-    constructor(data?: IPermissionListBaseResponse) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.isSuccess = _data["isSuccess"];
-            this.version = _data["version"];
-            this.message = _data["message"];
-            if (Array.isArray(_data["responseData"])) {
-                this.responseData = [] as any;
-                for (let item of _data["responseData"])
-                    this.responseData!.push(Permission.fromJS(item));
-            }
-            if (Array.isArray(_data["errors"])) {
-                this.errors = [] as any;
-                for (let item of _data["errors"])
-                    this.errors!.push(Errors.fromJS(item));
-            }
-            this.statusCode = _data["statusCode"];
-        }
-    }
-
-    static fromJS(data: any): PermissionListBaseResponse {
-        data = typeof data === 'object' ? data : {};
-        let result = new PermissionListBaseResponse();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["isSuccess"] = this.isSuccess;
-        data["version"] = this.version;
-        data["message"] = this.message;
-        if (Array.isArray(this.responseData)) {
-            data["responseData"] = [];
-            for (let item of this.responseData)
-                data["responseData"].push(item.toJSON());
-        }
-        if (Array.isArray(this.errors)) {
-            data["errors"] = [];
-            for (let item of this.errors)
-                data["errors"].push(item.toJSON());
-        }
-        data["statusCode"] = this.statusCode;
-        return data;
-    }
-}
-
-export interface IPermissionListBaseResponse {
-    isSuccess?: boolean;
-    version?: number;
-    message?: string | undefined;
-    responseData?: Permission[] | undefined;
-    errors?: Errors[] | undefined;
-    statusCode?: number;
-}
-
 export class RoleDto implements IRoleDto {
     id?: number;
     name?: string | undefined;
@@ -1299,6 +1319,78 @@ export interface IRoleDto {
     id?: number;
     name?: string | undefined;
     roleNameAr?: string | undefined;
+}
+
+export class RoleDtoListBaseResponse implements IRoleDtoListBaseResponse {
+    isSuccess?: boolean;
+    version?: number;
+    message?: string | undefined;
+    responseData?: RoleDto[] | undefined;
+    errors?: Errors[] | undefined;
+    statusCode?: number;
+
+    constructor(data?: IRoleDtoListBaseResponse) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.isSuccess = _data["isSuccess"];
+            this.version = _data["version"];
+            this.message = _data["message"];
+            if (Array.isArray(_data["responseData"])) {
+                this.responseData = [] as any;
+                for (let item of _data["responseData"])
+                    this.responseData!.push(RoleDto.fromJS(item));
+            }
+            if (Array.isArray(_data["errors"])) {
+                this.errors = [] as any;
+                for (let item of _data["errors"])
+                    this.errors!.push(Errors.fromJS(item));
+            }
+            this.statusCode = _data["statusCode"];
+        }
+    }
+
+    static fromJS(data: any): RoleDtoListBaseResponse {
+        data = typeof data === 'object' ? data : {};
+        let result = new RoleDtoListBaseResponse();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["isSuccess"] = this.isSuccess;
+        data["version"] = this.version;
+        data["message"] = this.message;
+        if (Array.isArray(this.responseData)) {
+            data["responseData"] = [];
+            for (let item of this.responseData)
+                data["responseData"].push(item.toJSON());
+        }
+        if (Array.isArray(this.errors)) {
+            data["errors"] = [];
+            for (let item of this.errors)
+                data["errors"].push(item.toJSON());
+        }
+        data["statusCode"] = this.statusCode;
+        return data;
+    }
+}
+
+export interface IRoleDtoListBaseResponse {
+    isSuccess?: boolean;
+    version?: number;
+    message?: string | undefined;
+    responseData?: RoleDto[] | undefined;
+    errors?: Errors[] | undefined;
+    statusCode?: number;
 }
 
 export class RolePermission implements IRolePermission {

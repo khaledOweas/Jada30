@@ -6,9 +6,9 @@ import { TranslateDirective, TranslatePipe } from "@ngx-translate/core";
 import { ToastModule } from "primeng/toast";
 import {
   ApplicationRole,
-  ApplicationRoleListBaseResponse,
   CreateUserDto,
   IdentityService,
+  RoleDtoListBaseResponse,
   UserDtoBaseResponse
 } from "../../../services/IdentityService";
 import { takeUntil } from "rxjs";
@@ -121,7 +121,7 @@ export class UserCreateComponent extends BaseComponent implements OnInit {
       .rolesGET()
       .pipe(takeUntil(this.destroyed$))
       .subscribe({
-        next: (res: ApplicationRoleListBaseResponse) => {
+        next: (res: RoleDtoListBaseResponse) => {
           this.ct.sendToaster("info", this.tr.get("SHARED.ServerDetails"), res.message);
           this.rolesData = res.responseData;
         }

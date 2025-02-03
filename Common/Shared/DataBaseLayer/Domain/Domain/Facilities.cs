@@ -10,6 +10,8 @@ namespace Domain
     {
         public long Id { get; set; }
         public string Name { get; set; }
+        public string NameAr { get; set; }
+
         public long? CategoryId { get; set; }
         public Lookup? Category { get; set; }
         public long? TypeId { get; set; }
