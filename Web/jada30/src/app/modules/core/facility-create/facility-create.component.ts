@@ -34,6 +34,7 @@ export class FacilityCreateComponent extends BaseComponent implements OnInit {
 
     this.facilityForm = this.fb.group({
       name: ["", Validators.required],
+      nameAr: ["", Validators.required],
       categoryId: [null, [Validators.required, Validators.pattern(/^[0-9]+$/)]],
       typeId: [null, [Validators.required, Validators.pattern(/^[0-9]+$/)]],
       destinationId: [null, [Validators.required, Validators.pattern(/^[0-9]+$/)]],
@@ -53,6 +54,7 @@ export class FacilityCreateComponent extends BaseComponent implements OnInit {
       const formValue = this.facilityForm.value;
       const createDto = CreateFacilityDto.fromJS({
         name: formValue.name,
+        nameAr: formValue.nameAr,
         categoryId: +formValue.categoryId,
         typeId: +formValue.typeId,
         destinationId: +formValue.destinationId,

@@ -1,6 +1,4 @@
 <app-validation-alerts [parentForm]="facilityForm" translateKey="Facility"></app-validation-alerts>
-
-
 <div class="card card-flush h-lg-100" id="kt_facility_main">
   <div class="card-header pt-7" id="kt_facility_header">
     <div class="card-title">
@@ -16,7 +14,6 @@
   </div>
   <div class="card-body pt-5">
     <form [formGroup]="facilityForm" class="form fv-plugins-bootstrap5 fv-plugins-framework">
-
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-2">
         <div class="col">
           <div class="fv-row mb-7 fv-plugins-icon-container">
@@ -27,16 +24,21 @@
             <div
               *ngIf="facilityForm.get('name')?.invalid && (facilityForm.get('name')?.dirty || facilityForm.get('name')?.touched)"
               class="fv-plugins-message-container invalid-feedback">
-              <div *ngIf="facilityForm.get('name')?.errors?.['required']" translate="Facility.NameRequired"></div>
+              <div class="text-danger fw-bold" *ngIf="facilityForm.get('name')?.errors?.['required']" translate="Facility.NameRequired"></div>
             </div>
           </div>
         </div>
         <div class="col">
           <div class="fv-row mb-7 fv-plugins-icon-container">
-            <app-lookup-dropdown [code]="'FACILITY_CATEGORY'" [parentForm]="facilityForm" itemFormName="categoryId"
-              placeholderTextTranslated="Facility.CategoryId" labelTextTranslated="Facility.CategoryId"
-              validationTextTranslated="Facility.CategoryIdRequired">
-            </app-lookup-dropdown>
+            <label class="fs-6 fw-semibold form-label mt-3">
+              <span class="required" translate="Facility.NameAr"></span>
+            </label>
+            <input type="text" formControlName="nameAr" class="form-control form-control-solid" />
+            <div
+              *ngIf="facilityForm.get('nameAr')?.invalid && (facilityForm.get('nameAr')?.dirty || facilityForm.get('nameAr')?.touched)"
+              class="fv-plugins-message-container invalid-feedback">
+              <div class="text-danger fw-bold" *ngIf="facilityForm.get('nameAr')?.errors?.['required']" translate="Facility.NameRequired"></div>
+            </div>
           </div>
         </div>
       </div>
@@ -79,6 +81,24 @@
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-2">
         <div class="col">
           <div class="fv-row mb-7 fv-plugins-icon-container">
+            <app-lookup-dropdown [code]="'FACILITY_BASIC_CONTRACT'" [parentForm]="facilityForm"
+              itemFormName="basicContract" placeholderTextTranslated="Facility.BasicContract"
+              labelTextTranslated="Facility.BasicContract" validationTextTranslated="Facility.BasicContractRequired">
+            </app-lookup-dropdown>
+          </div>
+        </div>
+        <div class="col">
+          <div class="fv-row mb-7 fv-plugins-icon-container">
+            <app-lookup-dropdown [code]="'FACILITY_CATEGORY'" [parentForm]="facilityForm" itemFormName="categoryId"
+              placeholderTextTranslated="Facility.CategoryId" labelTextTranslated="Facility.CategoryId"
+              validationTextTranslated="Facility.CategoryIdRequired">
+            </app-lookup-dropdown>
+          </div>
+        </div>
+      </div>
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-2">
+        <div class="col">
+          <div class="fv-row mb-7 fv-plugins-icon-container">
             <label class="fs-6 fw-semibold form-label mt-3">
               <span class="required" translate="Facility.BasePrice"></span>
             </label>
@@ -86,7 +106,7 @@
             <div
               *ngIf="facilityForm.get('basePrice')?.invalid && (facilityForm.get('basePrice')?.dirty || facilityForm.get('basePrice')?.touched)"
               class="fv-plugins-message-container invalid-feedback">
-              <div *ngIf="facilityForm.get('basePrice')?.errors?.['required']" translate="Facility.BasePriceRequired">
+              <div class="text-danger fw-bold" *ngIf="facilityForm.get('basePrice')?.errors?.['required']" translate="Facility.BasePriceRequired">
               </div>
             </div>
           </div>
@@ -101,14 +121,6 @@
         </div>
       </div>
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-2">
-        <div class="col">
-          <div class="fv-row mb-7 fv-plugins-icon-container">
-            <app-lookup-dropdown [code]="'FACILITY_BASIC_CONTRACT'" [parentForm]="facilityForm"
-              itemFormName="basicContract" placeholderTextTranslated="Facility.BasicContract"
-              labelTextTranslated="Facility.BasicContract" validationTextTranslated="Facility.BasicContractRequired">
-            </app-lookup-dropdown>
-          </div>
-        </div>
         <div class="col">
           <div class="form-check form-switch fv-row mb-7 mt-9">
             <input class="form-check-input" type="checkbox" formControlName="isPublish" id="isPublishSwitch" />

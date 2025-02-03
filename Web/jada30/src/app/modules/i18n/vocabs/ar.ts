@@ -265,9 +265,10 @@ export const locale = {
       Update: "تحديث بيانات الفرع "
     },
     Facility: {
-      CreateTitle: "إنشاء منشأة",
-      Name: "اسم المنشأة",
-      NameRequired: "اسم المنشأة مطلوب.",
+      CreateTitle: "إنشاء مرفق",
+      Name: "اسم مرفق",
+      NameAr: "اسم مرفق عربي",
+      NameRequired: "اسم مرفق مطلوب.",
       CategoryId: "التصنيف",
       CategoryIdRequired: "التصنيف مطلوب.",
       TypeId: "النوع",
