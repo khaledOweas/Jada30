@@ -34,6 +34,7 @@ namespace Infrastructure.Data
         public DbSet<Package> Packages { get; set; }
         public DbSet<PackageFacility> PackageFacilities { get; set; }
         public DbSet<PricingCategories> PricingCategories { get; set; }
+        public DbSet<CategoryAdministrativeRegion> categoryAdministrativeRegions { get; set; }
         public Jada30Context()
         {
         }

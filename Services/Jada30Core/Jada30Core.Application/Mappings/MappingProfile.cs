@@ -7,6 +7,7 @@ using Jada30Core.Common.PackageFaclilty;
 using Jada30Core.Common.SupportingServiceProvider;
 using Jada30Core.Common.Perk;
 using Jada30Core.Common.PriceCategories;
+using Jada30Core.Common.categoryAdministrativeRegion;
 
 
 namespace Identity.Application.Mappings;
@@ -158,6 +159,25 @@ public class MappingProfile : Profile
 
         CreateMap<AddPriceCategory, PricingCategories>().ReverseMap();
         CreateMap<GetPriceCategory, PricingCategories>().ReverseMap();
+        CreateMap<GetCategoryAdministrativeRegionDto, CategoryAdministrativeRegion>()
+            .ForPath(dest => dest.PricingCategory.Id, opt => opt.MapFrom(src => src.PricingCategoryId))
+            .ForPath(dest => dest.PricingCategory.Name, opt => opt.MapFrom(src => src.PricingCategoryName))
+            .ForPath(dest => dest.PricingCategory.NameAr, opt => opt.MapFrom(src => src.PricingCategoryNameAr))
+
+            .ForPath(dest => dest.AdministrativeRegion.Id, opt => opt.MapFrom(src => src.AdministrativeRegionId))
+            .ForPath(dest => dest.AdministrativeRegion.Name, opt => opt.MapFrom(src => src.AdministrativeRegionName))
+            .ForPath(dest => dest.AdministrativeRegion.NameAr, opt => opt.MapFrom(src => src.AdministrativeRegionNameAr))
+            .ReverseMap()
+            .ForPath(dest => dest.PricingCategoryId, opt => opt.MapFrom(src => src.PricingCategory.Id))
+            .ForPath(dest => dest.PricingCategoryName, opt => opt.MapFrom(src => src.PricingCategory.Name))
+            .ForPath(dest => dest.PricingCategoryNameAr, opt => opt.MapFrom(src => src.PricingCategory.NameAr))
+
+            .ForPath(dest => dest.AdministrativeRegionId, opt => opt.MapFrom(src => src.AdministrativeRegion.Id))
+            .ForPath(dest => dest.AdministrativeRegionName, opt => opt.MapFrom(src => src.AdministrativeRegion.Name))
+            .ForPath(dest => dest.AdministrativeRegionNameAr, opt => opt.MapFrom(src => src.AdministrativeRegion.NameAr));
+            
+
+
 
     }
 }

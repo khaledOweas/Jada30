@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Jada30Core.Common.categoryAdministrativeRegion;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,5 +16,7 @@ namespace Jada30Core.Common.PriceCategories
         public string DescriptionAr { get; set; }
         public bool IsPublish { get; set; }
         public decimal Price { get; set; }
+
+        public ICollection<GetCategoryAdministrativeRegionDto> CategoryAdministrativeRegions { get; set; }
     }
 }

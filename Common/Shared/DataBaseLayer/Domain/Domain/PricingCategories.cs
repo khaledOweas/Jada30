@@ -15,6 +15,7 @@ namespace Domain
         public string DescriptionAr { get; set; }
         public bool IsPublish { get; set; }
         public decimal Price { get; set; }
+        public ICollection<CategoryAdministrativeRegion> CategoryAdministrativeRegions { get; set; } = new List<CategoryAdministrativeRegion>();
 
 
     }

@@ -14,5 +14,7 @@ namespace Jada30Core.Common.PriceCategories
         public string DescriptionAr { get; set; }
         public bool IsPublish { get; set; }
         public decimal Price { get; set; }
+
+        public List<long> CategoryAdministrativeRegionIds { get; set; } = new List<long>();
     }
 }
