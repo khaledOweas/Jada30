@@ -287,6 +287,20 @@ export const locale = {
       IsPublish: "هل تنشر الآن؟",
       Update: "تحديث بيانات المرفق"
     },
+    Packages: {
+      Create: "إنشاء باقة",
+      Update: "تحديث الباقة",
+      Name: "اسم الباقة",
+      NameAr: "اسم الباقة عربي",
+      Description: "وصف الباقة",
+      DescriptionAr: "وصف الباقة عربي",
+      NameRequired: "حقل الاسم مطلوب",
+      DescriptionRequired: "حقل الوصف مطلوب",
+      DefaultDiscount: "الخصم الافتراضي",
+      MaxBranchUsers: "الحد الأقصى للمستخدمين الفرعيين",
+      MaxMogdiPlatformUsage: "الحد الأقصى لاستخدام منصة مجدي",
+      WrittenServices: "الخدمات المكتبية"
+    },
     Doctors: {
       DoctorName: "اسم الطبيب",
       AboutMeTitle: "عن الطبيب",

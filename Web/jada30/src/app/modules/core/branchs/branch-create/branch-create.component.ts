@@ -6,8 +6,8 @@ import { ToastModule } from "primeng/toast";
 import { MultiSelectModule } from "primeng/multiselect";
 import { BaseComponent } from "src/app/core/Components/base/base.component";
 import { CoreService, CreateBranchDto } from "src/app/services/CoreService";
-import { LookupDropdownComponent } from "../../shared/lookup-dropdown/lookup-dropdown.component";
-import { LookupMultiSelectComponent } from "../../shared/lookup-multi-select/lookup-multi-select.component";
+import { LookupDropdownComponent } from "../../../shared/lookup-dropdown/lookup-dropdown.component";
+import { LookupMultiSelectComponent } from "../../../shared/lookup-multi-select/lookup-multi-select.component";
 import { ValidationAlertsComponent } from "src/app/core/Components/validation-alerts/validation-alerts.component";
 
 @Component({
