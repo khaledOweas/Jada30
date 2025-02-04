@@ -664,6 +664,96 @@
         }
       ],
       "SwaggerKey": "Jada30Core"
+    },
+    {
+      "UpstreamPathTemplate": "/PriceCategory/GetPriceCategories",
+      "UpstreamHttpMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/PriceCategory/GetPriceCategories",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7043"
+        }
+      ],
+      "SwaggerKey": "Jada30Core"
+    },
+    {
+      "UpstreamPathTemplate": "/PriceCategory/AddPriceCategory",
+      "UpstreamHttpMethod": [
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/PriceCategory/AddPriceCategory",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7043"
+        }
+      ],
+      "SwaggerKey": "Jada30Core"
+    },
+    {
+      "UpstreamPathTemplate": "/PriceCategory/UpdatePriceCategory/{id}",
+      "UpstreamHttpMethod": [
+        "Put"
+      ],
+      "DownstreamPathTemplate": "/PriceCategory/UpdatePriceCategory/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7043"
+        }
+      ],
+      "SwaggerKey": "Jada30Core"
+    },
+    {
+      "UpstreamPathTemplate": "/PriceCategory/DeletePriceCategory/{id}",
+      "UpstreamHttpMethod": [
+        "Delete"
+      ],
+      "DownstreamPathTemplate": "/PriceCategory/DeletePriceCategory/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7043"
+        }
+      ],
+      "SwaggerKey": "Jada30Core"
+    },
+    {
+      "UpstreamPathTemplate": "/PriceCategory/GetPriceCategory/{id}",
+      "UpstreamHttpMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/PriceCategory/GetPriceCategory/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7043"
+        }
+      ],
+      "SwaggerKey": "Jada30Core"
+    },
+    {
+      "UpstreamPathTemplate": "/PriceCategory/ToggelPublish/{id}",
+      "UpstreamHttpMethod": [
+        "Put"
+      ],
+      "DownstreamPathTemplate": "/PriceCategory/ToggelPublish/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7043"
+        }
+      ],
+      "SwaggerKey": "Jada30Core"
     }
   ],
   "SwaggerEndPoints": [

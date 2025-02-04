@@ -33,6 +33,7 @@ namespace Infrastructure.Data
         public DbSet<BranchComponent> BranchComponents { get; set; }
         public DbSet<Package> Packages { get; set; }
         public DbSet<PackageFacility> PackageFacilities { get; set; }
+        public DbSet<PricingCategories> PricingCategories { get; set; }
         public Jada30Context()
         {
         }

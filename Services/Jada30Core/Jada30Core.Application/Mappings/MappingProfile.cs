@@ -6,6 +6,7 @@ using Jada30Core.Common.Package;
 using Jada30Core.Common.PackageFaclilty;
 using Jada30Core.Common.SupportingServiceProvider;
 using Jada30Core.Common.Perk;
+using Jada30Core.Common.PriceCategories;
 
 
 namespace Identity.Application.Mappings;
@@ -153,6 +154,10 @@ public class MappingProfile : Profile
             .ReverseMap()
             .ForPath(dest => dest.LicenseName, opt => opt.MapFrom(src => src.Perk.Name))
             .ForPath(dest => dest.LicenseName, opt => opt.MapFrom(src => src.License.Name));
+
+
+        CreateMap<AddPriceCategory, PricingCategories>().ReverseMap();
+        CreateMap<GetPriceCategory, PricingCategories>().ReverseMap();
 
     }
 }
