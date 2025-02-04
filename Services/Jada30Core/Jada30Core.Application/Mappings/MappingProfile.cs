@@ -106,21 +106,27 @@ public class MappingProfile : Profile
         CreateMap<AddPackageDto, Package>().ReverseMap();
         CreateMap<GetPackageDto, Package>().ReverseMap();
         CreateMap<GetPackageFacilityDto, PackageFacility>()
+            .ForPath(dest => dest.Facility.Id, opt => opt.MapFrom(src => src.FacilityId))
             .ForPath(dest => dest.Facility.Name, opt => opt.MapFrom(src => src.FacilityName))
             .ForPath(dest => dest.Facility.NameAr, opt => opt.MapFrom(src => src.FacilityNameAr))
 
+            .ForPath(dest => dest.Package.Id, opt => opt.MapFrom(src => src.PackageId))
             .ForPath(dest => dest.Package.Name, opt => opt.MapFrom(src => src.PackageName))
             .ForPath(dest => dest.Package.NameAr, opt => opt.MapFrom(src => src.PackageNameAr))
 
+            .ForPath(dest => dest.Type.Id, opt => opt.MapFrom(src => src.TypeId))
             .ForPath(dest => dest.Type.Name, opt => opt.MapFrom(src => src.TypeName))
             .ForPath(dest => dest.Type.NameAr, opt => opt.MapFrom(src => src.TypeNameAr))
             .ReverseMap()
+            .ForPath(dest => dest.FacilityId, opt => opt.MapFrom(src => src.Facility.Id))
             .ForPath(dest => dest.FacilityName, opt => opt.MapFrom(src => src.Facility.Name))
             .ForPath(dest => dest.FacilityNameAr, opt => opt.MapFrom(src => src.Facility.NameAr))
 
+            .ForPath(dest => dest.PackageId, opt => opt.MapFrom(src => src.Package.Id))
             .ForPath(dest => dest.PackageName, opt => opt.MapFrom(src => src.Package.Name))
             .ForPath(dest => dest.PackageNameAr, opt => opt.MapFrom(src => src.Package.NameAr))
 
+            .ForPath(dest => dest.TypeId, opt => opt.MapFrom(src => src.Type.Id))
             .ForPath(dest => dest.TypeName, opt => opt.MapFrom(src => src.Type.Name))
             .ForPath(dest => dest.TypeNameAr, opt => opt.MapFrom(src => src.Type.NameAr));
 
