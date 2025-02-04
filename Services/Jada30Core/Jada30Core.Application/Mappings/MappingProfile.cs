@@ -48,7 +48,26 @@ public class MappingProfile : Profile
 
 
 
-        CreateMap<GetBranchDto, Branch>().ReverseMap();
+        CreateMap<GetBranchDto, Branch>()
+           .ForPath(dest => dest.AdministrativeRegion.NameAr, opt => opt.MapFrom(src => src.AdministrativeRegionAr))
+           .ForPath(dest => dest.AdministrativeRegion.Name, opt => opt.MapFrom(src => src.AdministrativeRegion))
+
+           .ForPath(dest => dest.CategoryBranch.NameAr, opt => opt.MapFrom(src => src.CategoryBranchAr))
+           .ForPath(dest => dest.CategoryBranch.Name, opt => opt.MapFrom(src => src.CategoryBranch))
+
+           .ForPath(dest => dest.WebsiteBranch.NameAr, opt => opt.MapFrom(src => src.WebsiteBranchAr))
+           .ForPath(dest => dest.WebsiteBranch.Name, opt => opt.MapFrom(src => src.WebsiteBranch))
+            .ReverseMap()
+
+           .ForPath(dest => dest.AdministrativeRegionAr, opt => opt.MapFrom(src => src.AdministrativeRegion.NameAr))
+           .ForPath(dest => dest.AdministrativeRegion, opt => opt.MapFrom(src => src.AdministrativeRegion.Name))
+
+           .ForPath(dest => dest.CategoryBranchAr, opt => opt.MapFrom(src => src.CategoryBranch.NameAr))
+           .ForPath(dest => dest.CategoryBranch, opt => opt.MapFrom(src => src.CategoryBranch.Name))
+
+           .ForPath(dest => dest.WebsiteBranchAr, opt => opt.MapFrom(src => src.WebsiteBranch.NameAr))
+           .ForPath(dest => dest.WebsiteBranch, opt => opt.MapFrom(src => src.WebsiteBranch.Name));
+
         CreateMap<CreateBranchDto, Branch>().ReverseMap();
         CreateMap<CreateBranchComponentDto, BranchComponent>().ReverseMap();
         CreateMap<GetBranchComponentDto, BranchComponent>()
