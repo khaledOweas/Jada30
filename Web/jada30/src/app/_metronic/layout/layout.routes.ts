@@ -26,22 +26,7 @@ export const LAYOUT_ROUTES: Routes = [
         loadChildren: () => import("../../modules/account/account.routes").then((m) => m.ACCOUNT_ROUTES)
         // data: { layout: 'dark-header' },
       },
-      // {
-      //   path: "crafted/pages/wizards",
-      //   loadChildren: () => import("../modules/wizards/wizards-routing.module").then((m) => m.WizardsRoutingModule)
-      //   // data: { layout: 'light-header' },
-      // },
-      // {
-      //   path: "crafted/widgets",
-      //   loadChildren: () =>
-      //     import("../modules/widgets-examples/widgets-examples.module").then((m) => m.WidgetsExamplesModule)
-      //   // data: { layout: 'light-header' },
-      // },
-      // {
-      //   path: "apps/chat",
-      //   loadChildren: () => import("../modules/apps/chat/chat.module").then((m) => m.ChatModule)
-      //   // data: { layout: 'light-sidebar' },
-      // },
+
       {
         path: "user",
         loadChildren: () => import("../../modules/Routes/user.routes").then((m) => m.USER_ROUTES)
@@ -58,10 +43,10 @@ export const LAYOUT_ROUTES: Routes = [
         path: "facility",
         loadChildren: () => import("../../modules/Routes/facility.routes").then((m) => m.Facility_ROUTES)
       },
-      // {
-      //   path: "apps/permissions",
-      //   loadChildren: () => import("./permission/permission.module").then((m) => m.PermissionModule)
-      // },
+      {
+        path: "package",
+        loadChildren: () => import("../../modules/Routes/package.routes").then((m) => m.PACKAGE_ROUTES)
+      },
       {
         path: "",
         redirectTo: "/dashboard",

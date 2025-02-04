@@ -1,6 +1,6 @@
 import { Component, Injector, OnInit } from "@angular/core";
 import { TranslateDirective } from "@ngx-translate/core";
-import { SharedDatatableComponent } from "../../../core/shared/shared-datatable/shared-datatable.component";
+import { SharedDatatableComponent } from "../../../../core/shared/shared-datatable/shared-datatable.component";
 
 import { takeUntil } from "rxjs";
 import { BaseComponent } from "src/app/core/Components/base/base.component";
@@ -10,21 +10,22 @@ import { CoreService, GetBranchDtoListBaseResponse } from "src/app/services/Core
 import { RouterLink, RouterLinkActive } from "@angular/router";
 import Swal from "sweetalert2";
 import { ColumnManager, ListColumnType } from "src/app/data/DataTableColumnData";
+
 @Component({
-  selector: "app-branch",
+  selector: "app-package-list",
   standalone: true,
   imports: [TranslateDirective, SharedDatatableComponent, RouterLink, RouterLinkActive],
-  templateUrl: "./branch.component.html",
-  styleUrl: "./branch.component.scss",
+  templateUrl: "./package-list.component.html",
+  styleUrl: "./package-list.component.scss",
   providers: [CoreService]
 })
-export class BranchComponent extends BaseComponent implements OnInit {
+export class PackageListComponent extends BaseComponent implements OnInit {
   Cols!: SharedDataTableColumn[];
   Data: ApplicationRole[] | undefined;
 
   constructor(private injector: Injector, private service: CoreService) {
     super(injector);
-    this.Cols = ColumnManager.getCol(ListColumnType.Branch);
+    this.Cols = ColumnManager.getCol(ListColumnType.Package);
   }
   ngOnInit(): void {
     this.loadAll();
@@ -32,7 +33,7 @@ export class BranchComponent extends BaseComponent implements OnInit {
 
   loadAll() {
     this.service
-      .branchGET()
+      .getPackages()
       .pipe(takeUntil(this.destroyed$))
       .subscribe({
         next: (res: GetBranchDtoListBaseResponse) => {

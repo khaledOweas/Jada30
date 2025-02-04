@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
 import { BaseComponent } from "src/app/core/Components/base/base.component";
 import { CoreService, FacilityDto } from "src/app/services/CoreService";
-import { LookupDropdownComponent } from "../../shared/lookup-dropdown/lookup-dropdown.component";
+import { LookupDropdownComponent } from "../../../shared/lookup-dropdown/lookup-dropdown.component";
 import { ValidationAlertsComponent } from "src/app/core/Components/validation-alerts/validation-alerts.component";
 import { TranslateModule, TranslatePipe } from "@ngx-translate/core";
 import { NgIf } from "@angular/common";

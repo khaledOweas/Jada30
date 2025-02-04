@@ -4,11 +4,11 @@ import { ActivatedRoute } from "@angular/router";
 import { TranslatePipe } from "@ngx-translate/core";
 import { BaseComponent } from "src/app/core/Components/base/base.component";
 import { CoreService, CreateBranchDto } from "src/app/services/CoreService";
-import { LookupDropdownComponent } from "../../shared/lookup-dropdown/lookup-dropdown.component";
-import { LookupMultiSelectComponent } from "../../shared/lookup-multi-select/lookup-multi-select.component";
+import { LookupDropdownComponent } from "../../../shared/lookup-dropdown/lookup-dropdown.component";
+import { LookupMultiSelectComponent } from "../../../shared/lookup-multi-select/lookup-multi-select.component";
 import { ValidationAlertsComponent } from "src/app/core/Components/validation-alerts/validation-alerts.component";
 import { NgIf } from "@angular/common";
-import { TranslationModule } from "../../i18n";
+import { TranslationModule } from "../../../i18n";
 
 @Component({
   selector: "app-branch-update",

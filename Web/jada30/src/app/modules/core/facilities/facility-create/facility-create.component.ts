@@ -6,7 +6,7 @@ import { TranslateDirective, TranslateModule } from "@ngx-translate/core";
 import { ToastModule } from "primeng/toast";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NgIf } from "@angular/common";
-import { LookupDropdownComponent } from "../../shared/lookup-dropdown/lookup-dropdown.component";
+import { LookupDropdownComponent } from "../../../shared/lookup-dropdown/lookup-dropdown.component";
 import { ValidationAlertsComponent } from "src/app/core/Components/validation-alerts/validation-alerts.component";
 
 @Component({

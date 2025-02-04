@@ -5,7 +5,8 @@ export enum ListColumnType {
   Branch = "branch",
   User = "user",
   Facility = "Facility",
-  Lookup = "Lookup"
+  Lookup = "Lookup",
+  Package = "Package"
 }
 
 export class ColumnManager {
@@ -25,6 +26,8 @@ export class ColumnManager {
         return this.getFacilityColumns();
       case ListColumnType.Lookup:
         return this.getLookupColumns();
+      case ListColumnType.Package:
+        return this.getPackageColumns();
       default:
         return [];
     }
@@ -270,6 +273,74 @@ export class ColumnManager {
         hidden: false,
         field: ColumnManager.tr!.getSelectedLanguage() == "ar" ? "nameAr" : "name",
         header: ColumnManager.tr!.get("Lookup.LookupName"),
+        type: "text"
+      })
+    ];
+  }
+
+  private static getPackageColumns(): SharedDataTableColumn[] {
+    return [
+      SharedDataTableColumn.fromJS({
+        id: 1,
+        sorted: true,
+        filtered: true,
+        hidden: false,
+        field: "id",
+        header: ColumnManager.tr!.get("SHARED.Id"),
+        type: "text"
+      }),
+      SharedDataTableColumn.fromJS({
+        id: 2,
+        sorted: true,
+        filtered: true,
+        hidden: false,
+        field: ColumnManager.tr!.getSelectedLanguage() == "ar" ? "nameAr" : "name",
+        header: ColumnManager.tr!.get("Package.Name"),
+        type: "text"
+      }),
+      SharedDataTableColumn.fromJS({
+        id: 2,
+        sorted: true,
+        filtered: true,
+        hidden: false,
+        field: ColumnManager.tr!.getSelectedLanguage() == "ar" ? "descriptionAr" : "description",
+        header: ColumnManager.tr!.get("Package.Description"),
+        type: "text"
+      }),
+      SharedDataTableColumn.fromJS({
+        id: 2,
+        sorted: true,
+        filtered: true,
+        hidden: false,
+        field: "defaultDiscount",
+        header: ColumnManager.tr!.get("Package.DefaultDiscount"),
+        type: "text"
+      }),
+      SharedDataTableColumn.fromJS({
+        id: 2,
+        sorted: true,
+        filtered: true,
+        hidden: false,
+        field: "writtenServices",
+        header: ColumnManager.tr!.get("Package.WrittenServices"),
+        type: "text"
+      }),
+      SharedDataTableColumn.fromJS({
+        id: 2,
+        sorted: true,
+        filtered: true,
+        hidden: false,
+        field: "maxBranchUsers",
+        header: ColumnManager.tr!.get("Package.MaxBranchUsers"),
+        type: "text"
+      }),
+      SharedDataTableColumn.fromJS({
+        id: 2,
+        sorted: true,
+        filtered: true,
+        hidden: false,
+        field: "maxMogdiPlatformUsage",
+        header: ColumnManager.tr!.get("Package.MaxMogdiPlatformUsage"),
         type: "text"
       })
     ];

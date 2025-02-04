@@ -113,6 +113,11 @@ export class SidebarMenuComponent implements OnInit {
             PageNameAr: "قائمة المرافق",
             PageNameEng: "Facility List",
             PageUrl: "/facility/facility-list"
+          },
+          {
+            PageNameAr: "قائمة الباقات",
+            PageNameEng: "Package List",
+            PageUrl: "/package/package-list"
           }
         ]
       }
