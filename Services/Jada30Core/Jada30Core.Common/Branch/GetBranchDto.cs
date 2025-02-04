@@ -21,6 +21,11 @@ namespace Jada30Core.Common.Branch
         public DateTime EndTime { get; set; }
         public string CategoryBranch { get; set; }
         public string CategoryBranchAr { get; set; }
+
+
+        public long AdministrativeRegionId { get; set; }
+        public long WebsiteBranchId { get; set; }
+        public long CategoryBranchId { get; set; }
         public ICollection<GetBranchComponentDto>? BranchComponents { get; set; }
     }
 }

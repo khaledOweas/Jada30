@@ -284,7 +284,8 @@ export const locale = {
       IsTaxIncluded: "هل السعر شامل الضريبة؟",
       BasicContract: "العقد الأساسي",
       BasicContractRequired: "العقد الأساسي مطلوب.",
-      IsPublish: "هل تنشر الآن؟"
+      IsPublish: "هل تنشر الآن؟",
+      Update: "تحديث بيانات المرفق"
     },
     Doctors: {
       DoctorName: "اسم الطبيب",

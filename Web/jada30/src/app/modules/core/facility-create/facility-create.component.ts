@@ -2,10 +2,10 @@ import { Component, Injector, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { BaseComponent } from "src/app/core/Components/base/base.component";
 import { CoreService, CreateFacilityDto } from "src/app/services/CoreService";
-import { TranslateDirective } from "@ngx-translate/core";
+import { TranslateDirective, TranslateModule } from "@ngx-translate/core";
 import { ToastModule } from "primeng/toast";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { NgIf, JsonPipe } from "@angular/common";
+import { NgIf } from "@angular/common";
 import { LookupDropdownComponent } from "../../shared/lookup-dropdown/lookup-dropdown.component";
 import { ValidationAlertsComponent } from "src/app/core/Components/validation-alerts/validation-alerts.component";
 
@@ -20,9 +20,8 @@ import { ValidationAlertsComponent } from "src/app/core/Components/validation-al
     TranslateDirective,
     ValidationAlertsComponent,
     NgIf,
-    JsonPipe,
-    LookupDropdownComponent
-    // إذا لديك lookup-multi-select أو غيره، اضفه
+    LookupDropdownComponent,
+    TranslateModule
   ],
   providers: [CoreService]
 })

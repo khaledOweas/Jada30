@@ -29,7 +29,9 @@ export class ColumnManager {
         return [];
     }
   }
-
+  private static perLang(arKey: string, enKey: string): string {
+    return ColumnManager.tr!.getSelectedLanguage() == "ar" ? arKey : enKey;
+  }
   private static getBranchColumns(): SharedDataTableColumn[] {
     return [
       SharedDataTableColumn.fromJS({
@@ -119,7 +121,7 @@ export class ColumnManager {
         sorted: true,
         filtered: true,
         hidden: false,
-        field: ColumnManager.tr!.getSelectedLanguage() == "ar" ? "userNameAr" : "userName",
+        field: this.perLang("userNameAr", "userName"),
         header: ColumnManager.tr!.get("Users.UserName"),
         type: "text"
       }),
@@ -161,7 +163,7 @@ export class ColumnManager {
         sorted: true,
         filtered: true,
         hidden: false,
-        field: "name",
+        field: this.perLang("nameAr", "name"),
         header: ColumnManager.tr!.get("Facility.Name"),
         type: "text"
       }),
@@ -171,7 +173,7 @@ export class ColumnManager {
         sorted: true,
         filtered: true,
         hidden: false,
-        field: "categoryName",
+        field: this.perLang("categoryNameAr", "categoryName"),
         header: ColumnManager.tr!.get("Facility.CategoryId"),
         type: "text"
       }),
@@ -180,7 +182,7 @@ export class ColumnManager {
         sorted: true,
         filtered: true,
         hidden: false,
-        field: "typeName",
+        field: this.perLang("typeNameAr", "typeName"),
         header: ColumnManager.tr!.get("Facility.TypeId"),
         type: "text"
       }),
@@ -189,7 +191,7 @@ export class ColumnManager {
         sorted: true,
         filtered: true,
         hidden: false,
-        field: "destinationName",
+        field: this.perLang("destinationNameAr", "destinationName"),
         header: ColumnManager.tr!.get("Facility.DestinationId"),
         type: "text"
       }),
@@ -198,7 +200,7 @@ export class ColumnManager {
         sorted: true,
         filtered: true,
         hidden: false,
-        field: "pricingUnitName",
+        field: this.perLang("pricingUnitNameAr", "pricingUnitName"),
         header: ColumnManager.tr!.get("Facility.PricingUnitId"),
         type: "text"
       }),
@@ -207,7 +209,7 @@ export class ColumnManager {
         sorted: true,
         filtered: true,
         hidden: false,
-        field: "subscriptionName",
+        field: this.perLang("subscriptionNameAr", "subscriptionName"),
         header: ColumnManager.tr!.get("Facility.SubscriptionId"),
         type: "text"
       }),

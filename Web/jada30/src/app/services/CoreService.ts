@@ -2075,6 +2075,11 @@ export class FacilityDto implements IFacilityDto {
     id?: number;
     name?: string | undefined;
     nameAr?: string | undefined;
+    categoryId?: number | undefined;
+    typeId?: number | undefined;
+    destinationId?: number | undefined;
+    pricingUnitId?: number | undefined;
+    subscriptionId?: number | undefined;
     categoryName?: string | undefined;
     categoryNameAr?: string | undefined;
     typeName?: string | undefined;
@@ -2104,6 +2109,11 @@ export class FacilityDto implements IFacilityDto {
             this.id = _data["id"];
             this.name = _data["name"];
             this.nameAr = _data["nameAr"];
+            this.categoryId = _data["categoryId"];
+            this.typeId = _data["typeId"];
+            this.destinationId = _data["destinationId"];
+            this.pricingUnitId = _data["pricingUnitId"];
+            this.subscriptionId = _data["subscriptionId"];
             this.categoryName = _data["categoryName"];
             this.categoryNameAr = _data["categoryNameAr"];
             this.typeName = _data["typeName"];
@@ -2133,6 +2143,11 @@ export class FacilityDto implements IFacilityDto {
         data["id"] = this.id;
         data["name"] = this.name;
         data["nameAr"] = this.nameAr;
+        data["categoryId"] = this.categoryId;
+        data["typeId"] = this.typeId;
+        data["destinationId"] = this.destinationId;
+        data["pricingUnitId"] = this.pricingUnitId;
+        data["subscriptionId"] = this.subscriptionId;
         data["categoryName"] = this.categoryName;
         data["categoryNameAr"] = this.categoryNameAr;
         data["typeName"] = this.typeName;
@@ -2155,6 +2170,11 @@ export interface IFacilityDto {
     id?: number;
     name?: string | undefined;
     nameAr?: string | undefined;
+    categoryId?: number | undefined;
+    typeId?: number | undefined;
+    destinationId?: number | undefined;
+    pricingUnitId?: number | undefined;
+    subscriptionId?: number | undefined;
     categoryName?: string | undefined;
     categoryNameAr?: string | undefined;
     typeName?: string | undefined;
@@ -2363,11 +2383,17 @@ export class GetBranchDto implements IGetBranchDto {
     id?: number;
     name?: string | undefined;
     nameAr?: string | undefined;
-    administrativeRegionId?: number;
-    websiteBranchId?: number;
+    administrativeRegion?: string | undefined;
+    administrativeRegionAr?: string | undefined;
+    websiteBranch?: string | undefined;
+    websiteBranchAr?: string | undefined;
     workingDays?: string | undefined;
     startTime?: Date;
     endTime?: Date;
+    categoryBranch?: string | undefined;
+    categoryBranchAr?: string | undefined;
+    administrativeRegionId?: number;
+    websiteBranchId?: number;
     categoryBranchId?: number;
     branchComponents?: GetBranchComponentDto[] | undefined;
 
@@ -2385,11 +2411,17 @@ export class GetBranchDto implements IGetBranchDto {
             this.id = _data["id"];
             this.name = _data["name"];
             this.nameAr = _data["nameAr"];
-            this.administrativeRegionId = _data["administrativeRegionId"];
-            this.websiteBranchId = _data["websiteBranchId"];
+            this.administrativeRegion = _data["administrativeRegion"];
+            this.administrativeRegionAr = _data["administrativeRegionAr"];
+            this.websiteBranch = _data["websiteBranch"];
+            this.websiteBranchAr = _data["websiteBranchAr"];
             this.workingDays = _data["workingDays"];
             this.startTime = _data["startTime"] ? new Date(_data["startTime"].toString()) : <any>undefined;
             this.endTime = _data["endTime"] ? new Date(_data["endTime"].toString()) : <any>undefined;
+            this.categoryBranch = _data["categoryBranch"];
+            this.categoryBranchAr = _data["categoryBranchAr"];
+            this.administrativeRegionId = _data["administrativeRegionId"];
+            this.websiteBranchId = _data["websiteBranchId"];
             this.categoryBranchId = _data["categoryBranchId"];
             if (Array.isArray(_data["branchComponents"])) {
                 this.branchComponents = [] as any;
@@ -2411,11 +2443,17 @@ export class GetBranchDto implements IGetBranchDto {
         data["id"] = this.id;
         data["name"] = this.name;
         data["nameAr"] = this.nameAr;
-        data["administrativeRegionId"] = this.administrativeRegionId;
-        data["websiteBranchId"] = this.websiteBranchId;
+        data["administrativeRegion"] = this.administrativeRegion;
+        data["administrativeRegionAr"] = this.administrativeRegionAr;
+        data["websiteBranch"] = this.websiteBranch;
+        data["websiteBranchAr"] = this.websiteBranchAr;
         data["workingDays"] = this.workingDays;
         data["startTime"] = this.startTime ? this.startTime.toISOString() : <any>undefined;
         data["endTime"] = this.endTime ? this.endTime.toISOString() : <any>undefined;
+        data["categoryBranch"] = this.categoryBranch;
+        data["categoryBranchAr"] = this.categoryBranchAr;
+        data["administrativeRegionId"] = this.administrativeRegionId;
+        data["websiteBranchId"] = this.websiteBranchId;
         data["categoryBranchId"] = this.categoryBranchId;
         if (Array.isArray(this.branchComponents)) {
             data["branchComponents"] = [];
@@ -2430,11 +2468,17 @@ export interface IGetBranchDto {
     id?: number;
     name?: string | undefined;
     nameAr?: string | undefined;
-    administrativeRegionId?: number;
-    websiteBranchId?: number;
+    administrativeRegion?: string | undefined;
+    administrativeRegionAr?: string | undefined;
+    websiteBranch?: string | undefined;
+    websiteBranchAr?: string | undefined;
     workingDays?: string | undefined;
     startTime?: Date;
     endTime?: Date;
+    categoryBranch?: string | undefined;
+    categoryBranchAr?: string | undefined;
+    administrativeRegionId?: number;
+    websiteBranchId?: number;
     categoryBranchId?: number;
     branchComponents?: GetBranchComponentDto[] | undefined;
 }

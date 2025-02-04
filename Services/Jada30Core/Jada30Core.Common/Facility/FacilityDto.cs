@@ -1,4 +1,5 @@
 ﻿using Jada30Core.Common.Enums;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,13 @@ namespace Jada30Core.Common.Facility
         public long Id { get; set; }
         public string Name { get; set; }
         public string NameAr { get; set; }
+
+
+        public long? CategoryId { get; set; }
+        public long? TypeId { get; set; }
+        public long? DestinationId { get; set; }
+        public long? PricingUnitId { get; set; }
+        public long? SubscriptionId { get; set; }
 
         public string? CategoryName { get; set; }
         public string? CategoryNameAr { get; set; }
