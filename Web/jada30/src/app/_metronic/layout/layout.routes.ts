@@ -48,6 +48,11 @@ export const LAYOUT_ROUTES: Routes = [
         loadChildren: () => import("../../modules/Routes/package.routes").then((m) => m.PACKAGE_ROUTES)
       },
       {
+        path: "pricing-category",
+        loadChildren: () =>
+          import("../../modules/Routes/pricing-category.routes").then((m) => m.PRICING_CATEGORY_ROUTES)
+      },
+      {
         path: "",
         redirectTo: "/dashboard",
         pathMatch: "full"

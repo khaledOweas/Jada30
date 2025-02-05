@@ -27,7 +27,7 @@ export class CoreService {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return OK
      */
     branchPOST(body: CreateBranchDto | undefined): Observable<GetBranchDtoBaseResponse> {
@@ -188,7 +188,7 @@ export class CoreService {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return OK
      */
     branchPUT(id: number, body: CreateBranchDto | undefined): Observable<GetBranchDtoBaseResponse> {
@@ -406,7 +406,7 @@ export class CoreService {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return OK
      */
     createFacility(body: CreateFacilityDto | undefined): Observable<FacilityDtoBaseResponse> {
@@ -462,7 +462,7 @@ export class CoreService {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return OK
      */
     updateFacility(id: number, body: FacilityDto | undefined): Observable<FacilityDtoBaseResponse> {
@@ -626,7 +626,7 @@ export class CoreService {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return OK
      */
     createPackage(body: AddPackageDto | undefined): Observable<StringBaseResponse> {
@@ -682,7 +682,7 @@ export class CoreService {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return OK
      */
     updatePackage(id: number, body: AddPackageDto | undefined): Observable<StringBaseResponse> {
@@ -849,7 +849,7 @@ export class CoreService {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return OK
      */
     perkPOST(body: CreatePerkDto | undefined): Observable<GetPerkDtoBaseResponse> {
@@ -1010,7 +1010,7 @@ export class CoreService {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return OK
      */
     perkPUT(id: number, body: CreatePerkDto | undefined): Observable<GetPerkDtoBaseResponse> {
@@ -1112,6 +1112,334 @@ export class CoreService {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
             result200 = BooleanBaseResponse.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @return OK
+     */
+    getPriceCategories(): Observable<GetPriceCategoryListBaseResponse> {
+        let url_ = this.baseUrl + "/PriceCategory/GetPriceCategories";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetPriceCategories(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetPriceCategories(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<GetPriceCategoryListBaseResponse>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<GetPriceCategoryListBaseResponse>;
+        }));
+    }
+
+    protected processGetPriceCategories(response: HttpResponseBase): Observable<GetPriceCategoryListBaseResponse> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = GetPriceCategoryListBaseResponse.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @param body (optional) 
+     * @return OK
+     */
+    addPriceCategory(body: AddPriceCategory | undefined): Observable<GetPriceCategoryBaseResponse> {
+        let url_ = this.baseUrl + "/PriceCategory/AddPriceCategory";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processAddPriceCategory(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processAddPriceCategory(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<GetPriceCategoryBaseResponse>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<GetPriceCategoryBaseResponse>;
+        }));
+    }
+
+    protected processAddPriceCategory(response: HttpResponseBase): Observable<GetPriceCategoryBaseResponse> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = GetPriceCategoryBaseResponse.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @param body (optional) 
+     * @return OK
+     */
+    updatePriceCategory(id: number, body: AddPriceCategory | undefined): Observable<GetPriceCategoryBaseResponse> {
+        let url_ = this.baseUrl + "/PriceCategory/UpdatePriceCategory/{id}";
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined.");
+        url_ = url_.replace("{id}", encodeURIComponent("" + id));
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("put", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processUpdatePriceCategory(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processUpdatePriceCategory(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<GetPriceCategoryBaseResponse>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<GetPriceCategoryBaseResponse>;
+        }));
+    }
+
+    protected processUpdatePriceCategory(response: HttpResponseBase): Observable<GetPriceCategoryBaseResponse> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = GetPriceCategoryBaseResponse.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @return OK
+     */
+    deletePriceCategory(id: number): Observable<BooleanBaseResponse> {
+        let url_ = this.baseUrl + "/PriceCategory/DeletePriceCategory/{id}";
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined.");
+        url_ = url_.replace("{id}", encodeURIComponent("" + id));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("delete", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processDeletePriceCategory(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processDeletePriceCategory(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<BooleanBaseResponse>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<BooleanBaseResponse>;
+        }));
+    }
+
+    protected processDeletePriceCategory(response: HttpResponseBase): Observable<BooleanBaseResponse> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = BooleanBaseResponse.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @return OK
+     */
+    getPriceCategory(id: number): Observable<GetPriceCategoryBaseResponse> {
+        let url_ = this.baseUrl + "/PriceCategory/GetPriceCategory/{id}";
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined.");
+        url_ = url_.replace("{id}", encodeURIComponent("" + id));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetPriceCategory(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetPriceCategory(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<GetPriceCategoryBaseResponse>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<GetPriceCategoryBaseResponse>;
+        }));
+    }
+
+    protected processGetPriceCategory(response: HttpResponseBase): Observable<GetPriceCategoryBaseResponse> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = GetPriceCategoryBaseResponse.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @return OK
+     */
+    toggelPublish(id: number): Observable<StringBaseResponse> {
+        let url_ = this.baseUrl + "/PriceCategory/ToggelPublish/{id}";
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined.");
+        url_ = url_.replace("{id}", encodeURIComponent("" + id));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("put", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processToggelPublish(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processToggelPublish(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<StringBaseResponse>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<StringBaseResponse>;
+        }));
+    }
+
+    protected processToggelPublish(response: HttpResponseBase): Observable<StringBaseResponse> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = StringBaseResponse.fromJS(resultData200);
             return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
@@ -1228,7 +1556,7 @@ export class CoreService {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return OK
      */
     createSupportingServiceProvider(body: CreateSupportingServiceProviderDto | undefined): Observable<SupportingServiceProviderDtoBaseResponse> {
@@ -1284,7 +1612,7 @@ export class CoreService {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return OK
      */
     updateSupportingServiceProvider(id: number, body: CreateSupportingServiceProviderDto | undefined): Observable<SupportingServiceProviderDtoBaseResponse> {
@@ -1589,6 +1917,74 @@ export interface IAddPackageFacilityDto {
     percentageDicount?: number;
     price?: number;
     isTaxIncluded?: boolean;
+}
+
+export class AddPriceCategory implements IAddPriceCategory {
+    name?: string | undefined;
+    nameAr?: string | undefined;
+    description?: string | undefined;
+    descriptionAr?: string | undefined;
+    isPublish?: boolean;
+    price?: number;
+    categoryAdministrativeRegionIds?: number[] | undefined;
+
+    constructor(data?: IAddPriceCategory) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.name = _data["name"];
+            this.nameAr = _data["nameAr"];
+            this.description = _data["description"];
+            this.descriptionAr = _data["descriptionAr"];
+            this.isPublish = _data["isPublish"];
+            this.price = _data["price"];
+            if (Array.isArray(_data["categoryAdministrativeRegionIds"])) {
+                this.categoryAdministrativeRegionIds = [] as any;
+                for (let item of _data["categoryAdministrativeRegionIds"])
+                    this.categoryAdministrativeRegionIds!.push(item);
+            }
+        }
+    }
+
+    static fromJS(data: any): AddPriceCategory {
+        data = typeof data === 'object' ? data : {};
+        let result = new AddPriceCategory();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["name"] = this.name;
+        data["nameAr"] = this.nameAr;
+        data["description"] = this.description;
+        data["descriptionAr"] = this.descriptionAr;
+        data["isPublish"] = this.isPublish;
+        data["price"] = this.price;
+        if (Array.isArray(this.categoryAdministrativeRegionIds)) {
+            data["categoryAdministrativeRegionIds"] = [];
+            for (let item of this.categoryAdministrativeRegionIds)
+                data["categoryAdministrativeRegionIds"].push(item);
+        }
+        return data;
+    }
+}
+
+export interface IAddPriceCategory {
+    name?: string | undefined;
+    nameAr?: string | undefined;
+    description?: string | undefined;
+    descriptionAr?: string | undefined;
+    isPublish?: boolean;
+    price?: number;
+    categoryAdministrativeRegionIds?: number[] | undefined;
 }
 
 export class BooleanBaseResponse implements IBooleanBaseResponse {
@@ -2619,6 +3015,66 @@ export interface IGetBranchDtoListBaseResponse {
     statusCode?: number;
 }
 
+export class GetCategoryAdministrativeRegionDto implements IGetCategoryAdministrativeRegionDto {
+    id?: number;
+    administrativeRegionId?: number | undefined;
+    administrativeRegionName?: string | undefined;
+    administrativeRegionNameAr?: string | undefined;
+    pricingCategoryId?: number | undefined;
+    pricingCategoryName?: string | undefined;
+    pricingCategoryNameAr?: string | undefined;
+
+    constructor(data?: IGetCategoryAdministrativeRegionDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.administrativeRegionId = _data["administrativeRegionId"];
+            this.administrativeRegionName = _data["administrativeRegionName"];
+            this.administrativeRegionNameAr = _data["administrativeRegionNameAr"];
+            this.pricingCategoryId = _data["pricingCategoryId"];
+            this.pricingCategoryName = _data["pricingCategoryName"];
+            this.pricingCategoryNameAr = _data["pricingCategoryNameAr"];
+        }
+    }
+
+    static fromJS(data: any): GetCategoryAdministrativeRegionDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new GetCategoryAdministrativeRegionDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["administrativeRegionId"] = this.administrativeRegionId;
+        data["administrativeRegionName"] = this.administrativeRegionName;
+        data["administrativeRegionNameAr"] = this.administrativeRegionNameAr;
+        data["pricingCategoryId"] = this.pricingCategoryId;
+        data["pricingCategoryName"] = this.pricingCategoryName;
+        data["pricingCategoryNameAr"] = this.pricingCategoryNameAr;
+        return data;
+    }
+}
+
+export interface IGetCategoryAdministrativeRegionDto {
+    id?: number;
+    administrativeRegionId?: number | undefined;
+    administrativeRegionName?: string | undefined;
+    administrativeRegionNameAr?: string | undefined;
+    pricingCategoryId?: number | undefined;
+    pricingCategoryName?: string | undefined;
+    pricingCategoryNameAr?: string | undefined;
+}
+
 export class GetPackageDto implements IGetPackageDto {
     id?: number;
     name?: string | undefined;
@@ -2837,10 +3293,13 @@ export interface IGetPackageDtoListBaseResponse {
 
 export class GetPackageFacilityDto implements IGetPackageFacilityDto {
     id?: number;
+    packageId?: number;
     packageName?: string | undefined;
     packageNameAr?: string | undefined;
+    facilityId?: number;
     facilityName?: string | undefined;
     facilityNameAr?: string | undefined;
+    typeId?: number;
     typeName?: string | undefined;
     typeNameAr?: string | undefined;
     quantity?: number;
@@ -2860,10 +3319,13 @@ export class GetPackageFacilityDto implements IGetPackageFacilityDto {
     init(_data?: any) {
         if (_data) {
             this.id = _data["id"];
+            this.packageId = _data["packageId"];
             this.packageName = _data["packageName"];
             this.packageNameAr = _data["packageNameAr"];
+            this.facilityId = _data["facilityId"];
             this.facilityName = _data["facilityName"];
             this.facilityNameAr = _data["facilityNameAr"];
+            this.typeId = _data["typeId"];
             this.typeName = _data["typeName"];
             this.typeNameAr = _data["typeNameAr"];
             this.quantity = _data["quantity"];
@@ -2883,10 +3345,13 @@ export class GetPackageFacilityDto implements IGetPackageFacilityDto {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
+        data["packageId"] = this.packageId;
         data["packageName"] = this.packageName;
         data["packageNameAr"] = this.packageNameAr;
+        data["facilityId"] = this.facilityId;
         data["facilityName"] = this.facilityName;
         data["facilityNameAr"] = this.facilityNameAr;
+        data["typeId"] = this.typeId;
         data["typeName"] = this.typeName;
         data["typeNameAr"] = this.typeNameAr;
         data["quantity"] = this.quantity;
@@ -2899,10 +3364,13 @@ export class GetPackageFacilityDto implements IGetPackageFacilityDto {
 
 export interface IGetPackageFacilityDto {
     id?: number;
+    packageId?: number;
     packageName?: string | undefined;
     packageNameAr?: string | undefined;
+    facilityId?: number;
     facilityName?: string | undefined;
     facilityNameAr?: string | undefined;
+    typeId?: number;
     typeName?: string | undefined;
     typeNameAr?: string | undefined;
     quantity?: number;
@@ -3165,6 +3633,214 @@ export interface IGetPerkLicenseDto {
     id?: number;
     perkName?: string | undefined;
     licenseName?: string | undefined;
+}
+
+export class GetPriceCategory implements IGetPriceCategory {
+    id?: number;
+    name?: string | undefined;
+    nameAr?: string | undefined;
+    description?: string | undefined;
+    descriptionAr?: string | undefined;
+    isPublish?: boolean;
+    price?: number;
+    categoryAdministrativeRegions?: GetCategoryAdministrativeRegionDto[] | undefined;
+
+    constructor(data?: IGetPriceCategory) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.name = _data["name"];
+            this.nameAr = _data["nameAr"];
+            this.description = _data["description"];
+            this.descriptionAr = _data["descriptionAr"];
+            this.isPublish = _data["isPublish"];
+            this.price = _data["price"];
+            if (Array.isArray(_data["categoryAdministrativeRegions"])) {
+                this.categoryAdministrativeRegions = [] as any;
+                for (let item of _data["categoryAdministrativeRegions"])
+                    this.categoryAdministrativeRegions!.push(GetCategoryAdministrativeRegionDto.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): GetPriceCategory {
+        data = typeof data === 'object' ? data : {};
+        let result = new GetPriceCategory();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["name"] = this.name;
+        data["nameAr"] = this.nameAr;
+        data["description"] = this.description;
+        data["descriptionAr"] = this.descriptionAr;
+        data["isPublish"] = this.isPublish;
+        data["price"] = this.price;
+        if (Array.isArray(this.categoryAdministrativeRegions)) {
+            data["categoryAdministrativeRegions"] = [];
+            for (let item of this.categoryAdministrativeRegions)
+                data["categoryAdministrativeRegions"].push(item.toJSON());
+        }
+        return data;
+    }
+}
+
+export interface IGetPriceCategory {
+    id?: number;
+    name?: string | undefined;
+    nameAr?: string | undefined;
+    description?: string | undefined;
+    descriptionAr?: string | undefined;
+    isPublish?: boolean;
+    price?: number;
+    categoryAdministrativeRegions?: GetCategoryAdministrativeRegionDto[] | undefined;
+}
+
+export class GetPriceCategoryBaseResponse implements IGetPriceCategoryBaseResponse {
+    isSuccess?: boolean;
+    version?: number;
+    message?: string | undefined;
+    responseData?: GetPriceCategory;
+    errors?: Errors[] | undefined;
+    statusCode?: number;
+
+    constructor(data?: IGetPriceCategoryBaseResponse) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.isSuccess = _data["isSuccess"];
+            this.version = _data["version"];
+            this.message = _data["message"];
+            this.responseData = _data["responseData"] ? GetPriceCategory.fromJS(_data["responseData"]) : <any>undefined;
+            if (Array.isArray(_data["errors"])) {
+                this.errors = [] as any;
+                for (let item of _data["errors"])
+                    this.errors!.push(Errors.fromJS(item));
+            }
+            this.statusCode = _data["statusCode"];
+        }
+    }
+
+    static fromJS(data: any): GetPriceCategoryBaseResponse {
+        data = typeof data === 'object' ? data : {};
+        let result = new GetPriceCategoryBaseResponse();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["isSuccess"] = this.isSuccess;
+        data["version"] = this.version;
+        data["message"] = this.message;
+        data["responseData"] = this.responseData ? this.responseData.toJSON() : <any>undefined;
+        if (Array.isArray(this.errors)) {
+            data["errors"] = [];
+            for (let item of this.errors)
+                data["errors"].push(item.toJSON());
+        }
+        data["statusCode"] = this.statusCode;
+        return data;
+    }
+}
+
+export interface IGetPriceCategoryBaseResponse {
+    isSuccess?: boolean;
+    version?: number;
+    message?: string | undefined;
+    responseData?: GetPriceCategory;
+    errors?: Errors[] | undefined;
+    statusCode?: number;
+}
+
+export class GetPriceCategoryListBaseResponse implements IGetPriceCategoryListBaseResponse {
+    isSuccess?: boolean;
+    version?: number;
+    message?: string | undefined;
+    responseData?: GetPriceCategory[] | undefined;
+    errors?: Errors[] | undefined;
+    statusCode?: number;
+
+    constructor(data?: IGetPriceCategoryListBaseResponse) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.isSuccess = _data["isSuccess"];
+            this.version = _data["version"];
+            this.message = _data["message"];
+            if (Array.isArray(_data["responseData"])) {
+                this.responseData = [] as any;
+                for (let item of _data["responseData"])
+                    this.responseData!.push(GetPriceCategory.fromJS(item));
+            }
+            if (Array.isArray(_data["errors"])) {
+                this.errors = [] as any;
+                for (let item of _data["errors"])
+                    this.errors!.push(Errors.fromJS(item));
+            }
+            this.statusCode = _data["statusCode"];
+        }
+    }
+
+    static fromJS(data: any): GetPriceCategoryListBaseResponse {
+        data = typeof data === 'object' ? data : {};
+        let result = new GetPriceCategoryListBaseResponse();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["isSuccess"] = this.isSuccess;
+        data["version"] = this.version;
+        data["message"] = this.message;
+        if (Array.isArray(this.responseData)) {
+            data["responseData"] = [];
+            for (let item of this.responseData)
+                data["responseData"].push(item.toJSON());
+        }
+        if (Array.isArray(this.errors)) {
+            data["errors"] = [];
+            for (let item of this.errors)
+                data["errors"].push(item.toJSON());
+        }
+        data["statusCode"] = this.statusCode;
+        return data;
+    }
+}
+
+export interface IGetPriceCategoryListBaseResponse {
+    isSuccess?: boolean;
+    version?: number;
+    message?: string | undefined;
+    responseData?: GetPriceCategory[] | undefined;
+    errors?: Errors[] | undefined;
+    statusCode?: number;
 }
 
 export class StringBaseResponse implements IStringBaseResponse {
@@ -3492,7 +4168,7 @@ export interface IWeatherForecast {
 }
 
 function formatDate(d: Date) {
-    return d.getFullYear() + '-' +
+    return d.getFullYear() + '-' + 
         (d.getMonth() < 9 ? ('0' + (d.getMonth()+1)) : (d.getMonth()+1)) + '-' +
         (d.getDate() < 10 ? ('0' + d.getDate()) : d.getDate());
 }

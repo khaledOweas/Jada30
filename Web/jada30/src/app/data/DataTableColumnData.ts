@@ -51,7 +51,7 @@ export class ColumnManager {
         sorted: true,
         filtered: true,
         hidden: false,
-        field: "name",
+        field: this.perLang("nameAr", "name"),
         header: ColumnManager.tr!.get("Branches.Name"),
         type: "text"
       }),

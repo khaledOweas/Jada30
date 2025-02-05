@@ -76,7 +76,49 @@
         </label>
         <input type="number" formControlName="maxMogdiPlatformUsage" class="form-control form-control-solid" />
       </div>
-      <!-- If you handle facilities, you could add them similarly to your branchComponents approach -->
+      <!-- If you want to show packageFacilities like in Create -->
+      <div class="card card-flush mb-5 p-4 bg-light">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h4 translate="Packages.PackageFacilities"></h4>
+          <button class="btn btn-primary" type="button" (click)="addFacilityRow()" translate="Packages.AddFacility">
+          </button>
+        </div>
+        <div class="row mb-3" *ngFor="let facility of facilitiesArray.controls; let i = index" [formGroup]="facility">
+          <div class="col-md-2 mb-3">
+            <app-facility-dropdown [parentForm]="facility" itemFormName="facilityId"
+              placeholderTextTranslated="Facility.Name" labelTextTranslated="Facility.Name"
+              validationTextTranslated="Facility.NameRequired">
+            </app-facility-dropdown>
+          </div>
+          <div class="col-md-2 mb-3">
+            <app-lookup-dropdown [code]="'Packages'" [parentForm]="facility" itemFormName="typeId"
+              placeholderTextTranslated="Packages.TypeId" labelTextTranslated="Packages.TypeId"
+              validationTextTranslated="Packages.TypeIdRequired">
+            </app-lookup-dropdown>
+          </div>
+          <div class="col-md-2 mb-3">
+            <label class="fs-6 fw-semibold form-label  mt-3" translate="Packages.Quantity"> </label>
+            <input type="number" formControlName="quantity" class="form-control " />
+          </div>
+          <div class="col-md-2 mb-3">
+            <label class="fs-6 fw-semibold form-label  mt-3" translate="Packages.Discount"> </label>
+            <input type="number" formControlName="percentageDicount" class="form-control " />
+          </div>
+          <div class="col-md-2 mb-3">
+            <label class="fs-6 fw-semibold form-label  mt-3" translate="Packages.Price"> </label>
+            <input type="number" formControlName="price" class="form-control " />
+          </div>
+          <div class="col-md-2 mb-3 d-flex align-items-end">
+            <div class="form-check me-2">
+              <input type="checkbox" formControlName="isTaxIncluded" class="form-check-input" />
+              <label class="form-check-label" translate="Packages.Tax"></label>
+            </div>
+            <button class="btn btn-danger" type="button" (click)="removeFacilityRow(i)">
+              X
+            </button>
+          </div>
+        </div>
+      </div>
       <div class="separator mb-6"></div>
       <div class="d-flex justify-content-end">
         <button type="button" (click)="onReturn()" class="btn btn-light me-3" translate="SHARED.Return"></button>
