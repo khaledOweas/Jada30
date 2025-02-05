@@ -1,0 +1,15 @@
+<label class="fs-6 fw-semibold form-label mt-3">
+  <span class="required" translate="{{labelTextTranslated}}"></span>
+</label>
+<div class="dropdown">
+  <form [formGroup]="parentForm">
+    <p-dropdown styleClass="fc-primng" [formControlName]="itemFormName" [filter]="true" filterBy="name"
+      [options]="items" optionLabel="name" placeholder="{{placeholderTextTranslated | translate}}"
+      [optionValue]="'id'" />
+    <div
+      *ngIf="parentForm.get(itemFormName)!.invalid && (parentForm.get(itemFormName)?.dirty || parentForm.get(itemFormName)?.touched)">
+      <span class="text-danger" translate="{{validationTextTranslated}}"
+        *ngIf="parentForm.get(itemFormName)?.errors?.['required']"></span>
+    </div>
+  </form>
+</div>

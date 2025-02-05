@@ -299,7 +299,16 @@ export const locale = {
       DefaultDiscount: "الخصم الافتراضي",
       MaxBranchUsers: "الحد الأقصى للمستخدمين الفرعيين",
       MaxMogdiPlatformUsage: "الحد الأقصى لاستخدام منصة مجدي",
-      WrittenServices: "الخدمات المكتبية"
+      WrittenServices: "الخدمات المكتبية",
+      Quantity: "الكمية",
+      Discount: "نسبة الخصم",
+      Price: "السعر",
+      Tax: "يشمل الضريبة؟",
+      PackageFacilities: "مرافق الباقة",
+      AddFacility: "+ إضافة مرفق",
+      FacilityId: " اسم مرفق ",
+      TypeId: "نوع الباقة",
+      TypeIdRequired: "نوع الباقة مطلوب"
     },
     Doctors: {
       DoctorName: "اسم الطبيب",

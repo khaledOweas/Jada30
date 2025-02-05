@@ -6,7 +6,7 @@ import { takeUntil } from "rxjs";
 import { BaseComponent } from "src/app/core/Components/base/base.component";
 import { ApplicationRole, BooleanBaseResponse } from "src/app/services/IdentityService";
 import { SharedDataTableColumn } from "src/app/core/shared/shared-datatable/sharedDatatablesModels";
-import { CoreService, GetBranchDtoListBaseResponse } from "src/app/services/CoreService";
+import { CoreService, GetBranchDtoListBaseResponse, StringBaseResponse } from "src/app/services/CoreService";
 import { RouterLink, RouterLinkActive } from "@angular/router";
 import Swal from "sweetalert2";
 import { ColumnManager, ListColumnType } from "src/app/data/DataTableColumnData";
@@ -43,7 +43,7 @@ export class PackageListComponent extends BaseComponent implements OnInit {
   }
 
   edit(id: number) {
-    this.router.navigate(["/branch/branch-update/", id]);
+    this.router.navigate(["/package/package-update/", id]);
   }
   delete(id: number) {
     Swal.fire({
@@ -58,11 +58,13 @@ export class PackageListComponent extends BaseComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         try {
-          this.service.branchDELETE(id).subscribe({
-            next: (res: BooleanBaseResponse) => {
+          this.service.deletePackage(id).subscribe({
+            next: (res: StringBaseResponse) => {
               if (res.isSuccess) {
                 this.loadAll();
-                this.ct.sendToaster("info", this.tr.get("SHARED.ServerDetails"), res.message);
+                if (res.message) {
+                  this.ct.sendToaster("info", this.tr.get("SHARED.ServerDetails"), res.message);
+                }
               } else {
                 res.errors!.forEach((element) => {
                   this.ct.sendToaster("error", this.tr.get("SHARED.ServerDetails"), res.message! + element.value!);

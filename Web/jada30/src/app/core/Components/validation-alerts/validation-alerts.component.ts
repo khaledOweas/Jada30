@@ -13,8 +13,12 @@ export class ValidationAlertsComponent {
   @Input() parentForm: FormGroup;
   @Input() translateKey: string = "";
 
-  objectKeys(obj: any): string[] {
-    return Object.keys(obj);
+  objectKeys(obj: any): string[] | null {
+    if (obj != null) {
+      return Object.keys(obj);
+    } else {
+      return null;
+    }
   }
   concatString(str1: string, str2: string): string {
     return str1 + this.capitalizeFirstLetter(str2);

@@ -41,7 +41,7 @@ export class ColumnManager {
         id: 1,
         sorted: true,
         filtered: true,
-        hidden: false,
+        hidden: true,
         field: "id",
         header: ColumnManager.tr!.get("SHARED.Id"),
         type: "text"
@@ -156,7 +156,7 @@ export class ColumnManager {
         id: 1,
         sorted: true,
         filtered: true,
-        hidden: false,
+        hidden: true,
         field: "id",
         header: ColumnManager.tr!.get("SHARED.Id"),
         type: "text"
@@ -284,7 +284,7 @@ export class ColumnManager {
         id: 1,
         sorted: true,
         filtered: true,
-        hidden: false,
+        hidden: true,
         field: "id",
         header: ColumnManager.tr!.get("SHARED.Id"),
         type: "text"
@@ -295,7 +295,7 @@ export class ColumnManager {
         filtered: true,
         hidden: false,
         field: ColumnManager.tr!.getSelectedLanguage() == "ar" ? "nameAr" : "name",
-        header: ColumnManager.tr!.get("Package.Name"),
+        header: ColumnManager.tr!.get("Packages.Name"),
         type: "text"
       }),
       SharedDataTableColumn.fromJS({
@@ -304,7 +304,7 @@ export class ColumnManager {
         filtered: true,
         hidden: false,
         field: ColumnManager.tr!.getSelectedLanguage() == "ar" ? "descriptionAr" : "description",
-        header: ColumnManager.tr!.get("Package.Description"),
+        header: ColumnManager.tr!.get("Packages.Description"),
         type: "text"
       }),
       SharedDataTableColumn.fromJS({
@@ -313,7 +313,7 @@ export class ColumnManager {
         filtered: true,
         hidden: false,
         field: "defaultDiscount",
-        header: ColumnManager.tr!.get("Package.DefaultDiscount"),
+        header: ColumnManager.tr!.get("Packages.DefaultDiscount"),
         type: "text"
       }),
       SharedDataTableColumn.fromJS({
@@ -322,7 +322,7 @@ export class ColumnManager {
         filtered: true,
         hidden: false,
         field: "writtenServices",
-        header: ColumnManager.tr!.get("Package.WrittenServices"),
+        header: ColumnManager.tr!.get("Packages.WrittenServices"),
         type: "text"
       }),
       SharedDataTableColumn.fromJS({
@@ -331,7 +331,7 @@ export class ColumnManager {
         filtered: true,
         hidden: false,
         field: "maxBranchUsers",
-        header: ColumnManager.tr!.get("Package.MaxBranchUsers"),
+        header: ColumnManager.tr!.get("Packages.MaxBranchUsers"),
         type: "text"
       }),
       SharedDataTableColumn.fromJS({
@@ -340,7 +340,7 @@ export class ColumnManager {
         filtered: true,
         hidden: false,
         field: "maxMogdiPlatformUsage",
-        header: ColumnManager.tr!.get("Package.MaxMogdiPlatformUsage"),
+        header: ColumnManager.tr!.get("Packages.MaxMogdiPlatformUsage"),
         type: "text"
       })
     ];

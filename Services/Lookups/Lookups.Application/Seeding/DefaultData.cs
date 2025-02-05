@@ -38,7 +38,7 @@ namespace Lookups.Application.Seeding
                     InternalRef = "Roles", IsActive = true
                 },
 
-                                new Lookup
+                new Lookup
                 {
                     Name = "Contract Types", NameAr = "أنواع العقود", InternalCode = "Contract_Types",
                     InternalRef = null, IsActive = true
@@ -57,9 +57,9 @@ namespace Lookups.Application.Seeding
                 {
                     Name = "Subscription-Based Contract", NameAr = "عقد اشتراك", InternalCode = "CONTRACT_SUBSCRIPTION",
                     InternalRef = "Contract_Types", IsActive = true
-                },
+                }, 
 
-                                new Lookup
+                new Lookup
                 {
                     Name = "Pricing Categories", NameAr = "فئات التسعير", InternalCode = "Pricing_Categories",
                     InternalRef = null, IsActive = true
