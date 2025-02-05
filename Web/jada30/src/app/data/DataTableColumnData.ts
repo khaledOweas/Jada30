@@ -6,7 +6,8 @@ export enum ListColumnType {
   User = "user",
   Facility = "Facility",
   Lookup = "Lookup",
-  Package = "Package"
+  Package = "Package",
+  PricingCategory = "PricingCategory"
 }
 
 export class ColumnManager {
@@ -28,6 +29,8 @@ export class ColumnManager {
         return this.getLookupColumns();
       case ListColumnType.Package:
         return this.getPackageColumns();
+      case ListColumnType.PricingCategory:
+        return this.getPricingCategoryColumns();
       default:
         return [];
     }
@@ -61,7 +64,7 @@ export class ColumnManager {
         sorted: true,
         filtered: true,
         hidden: false,
-        field: "websiteBranchId",
+        field: this.perLang("websiteBranchAr", "websiteBranch"),
         header: ColumnManager.tr!.get("Branches.WebsiteBranchId"),
         type: "text"
       }),
@@ -101,8 +104,17 @@ export class ColumnManager {
         sorted: true,
         filtered: true,
         hidden: false,
-        field: "categoryBranchId",
+        field: this.perLang("categoryBranchAr", "categoryBranch"),
         header: ColumnManager.tr!.get("Branches.CategoryBranchId"),
+        type: "text"
+      }),
+      SharedDataTableColumn.fromJS({
+        id: 8,
+        sorted: true,
+        filtered: true,
+        hidden: false,
+        field: this.perLang("administrativeRegionAr", "administrativeRegion"),
+        header: ColumnManager.tr!.get("Branches.AdministrativeRegionId"),
         type: "text"
       })
     ];
@@ -343,6 +355,46 @@ export class ColumnManager {
         header: ColumnManager.tr!.get("Packages.MaxMogdiPlatformUsage"),
         type: "text"
       })
+    ];
+  }
+  private static getPricingCategoryColumns(): SharedDataTableColumn[] {
+    return [
+      SharedDataTableColumn.fromJS({
+        id: 1,
+        sorted: true,
+        filtered: true,
+        hidden: true,
+        field: "id",
+        header: ColumnManager.tr!.get("SHARED.Id"),
+        type: "text"
+      }),
+      SharedDataTableColumn.fromJS({
+        id: 2,
+        sorted: true,
+        filtered: true,
+        hidden: false,
+        field: ColumnManager.tr!.getSelectedLanguage() == "ar" ? "nameAr" : "name",
+        header: ColumnManager.tr!.get("PricingCategory.Name"),
+        type: "text"
+      }),
+      SharedDataTableColumn.fromJS({
+        id: 2,
+        sorted: true,
+        filtered: true,
+        hidden: false,
+        field: ColumnManager.tr!.getSelectedLanguage() == "ar" ? "descriptionAr" : "description",
+        header: ColumnManager.tr!.get("PricingCategory.Description"),
+        type: "text"
+      }),
+      SharedDataTableColumn.fromJS({
+        id: 2,
+        sorted: true,
+        filtered: true,
+        hidden: false,
+        field: "price",
+        header: ColumnManager.tr!.get("PricingCategory.Price"),
+        type: "text"
+      }),
     ];
   }
 }

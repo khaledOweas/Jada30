@@ -42,6 +42,7 @@ export class BranchCreateComponent extends BaseComponent implements OnInit {
       startTime: ["", Validators.required],
       endTime: ["", Validators.required],
       categoryBranchId: [null, Validators.compose([Validators.required, Validators.pattern(/^[0-9]+$/)])],
+      administrativeRegionId: [null, Validators.compose([Validators.required, Validators.pattern(/^[0-9]+$/)])],
       branchComponents: [[], Validators.compose([Validators.required])]
     });
   }

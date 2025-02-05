@@ -262,7 +262,8 @@ export const locale = {
       EndTimeRequired: "وقت الانتهاء مطلوب",
       CategoryBranchIdRequired: "معرف فئة الفرع مطلوب",
       BranchComponentsRequired: "مكونات الفرع مطلوبة",
-      Update: "تحديث بيانات الفرع "
+      Update: "تحديث بيانات الفرع ",
+      AdministrativeRegionId: "المنطقة الإدارية"
     },
     Facility: {
       CreateTitle: "إنشاء مرفق",
@@ -309,6 +310,21 @@ export const locale = {
       FacilityId: " اسم مرفق ",
       TypeId: "نوع الباقة",
       TypeIdRequired: "نوع الباقة مطلوب"
+    },
+    PricingCategory: {
+      Name: "اسم تصنيف التسعير",
+      NameAr: "اسم تصنيف التسعير عربي",
+      Description: "وصف تصنيف التسعير",
+      DescriptionAr: "وصف تصنيف التسعير عربي",
+      Price: "السعر",
+      PriceRequired: "السعر مطلوب",
+      Create: "إنشاء تصنيف التسعير",
+      Update: "تحديث التصنيف التسعير",
+
+      LookupName: "اسم التعريف",
+      IsActive: "نشط",
+      NameRequired: "اسم تصنيف التسعير مطلوب",
+      NameArRequired: "اسم تصنيف التسعير عربي مطلوب"
     },
     Doctors: {
       DoctorName: "اسم الطبيب",

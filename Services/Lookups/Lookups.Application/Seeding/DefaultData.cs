@@ -57,7 +57,7 @@ namespace Lookups.Application.Seeding
                 {
                     Name = "Subscription-Based Contract", NameAr = "عقد اشتراك", InternalCode = "CONTRACT_SUBSCRIPTION",
                     InternalRef = "Contract_Types", IsActive = true
-                }, 
+                },
 
                 new Lookup
                 {
@@ -226,7 +226,7 @@ namespace Lookups.Application.Seeding
                     InternalRef = "BRANCH_CATEGORY", IsActive = true
                 },
 
-                                new Lookup
+               new Lookup
                 {
                     Name = "Branch Component", NameAr = "مكونات الفرع", InternalCode = "Branch_Component",
                     InternalRef = null, IsActive = true
@@ -245,8 +245,27 @@ namespace Lookups.Application.Seeding
                 {
                     Name = "Third Component", NameAr = "المكون الثالث", InternalCode = "Third_Component",
                     InternalRef = "Branch_Component", IsActive = true
+                },
+                new Lookup
+                {
+                    Name = "Administrative Region", NameAr = "المناطق الإدارية", InternalCode = "Administrative_Region",
+                    InternalRef = null, IsActive = true
+                },
+                new Lookup
+                {
+                    Name = "First Administrative Region", NameAr = "المنقطة الإدارية الأولي", InternalCode = "First_Administrative_Region",
+                    InternalRef = "Administrative_Region", IsActive = true
+                },
+                new Lookup
+                {
+                    Name = "Second Administrative Region", NameAr = "المنقطة الإدارية الثانية", InternalCode = "Second_Administrative_Region",
+                    InternalRef = "Administrative_Region", IsActive = true
+                },
+                new Lookup
+                {
+                    Name = "Third Administrative Region", NameAr = "المنقطة الإدارية الثالثة", InternalCode = "Third_Administrative_Region",
+                    InternalRef = "Administrative_Region", IsActive = true
                 }
-
             };
         }
         public static List<Lookup> GetSaudiArabiaGovernorates()

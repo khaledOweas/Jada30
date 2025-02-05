@@ -210,7 +210,7 @@ export class SharedDatatableComponent {
       return this.defaultImage;
     }
   }
-  defaultImage: string = "https://mutabbib-test.start-it-ly.com/assets/logo/png%202.png";
+  defaultImage: string = "../assets/logo/png%202.png";
   onImageError(event: any): void {
     event.target.src = this.defaultImage;
   }

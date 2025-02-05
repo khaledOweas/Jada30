@@ -65,6 +65,14 @@
         </div>
         <div class="col">
           <div class="fv-row mb-7 fv-plugins-icon-container">
+            <app-lookup-dropdown [code]="'Administrative_Region'" [parentForm]="branchForm"
+              itemFormName="administrativeRegionId" validationTextTranslated="Branches.AdministrativeRegionId"
+              placeholderTextTranslated="Branches.AdministrativeRegionId"
+              labelTextTranslated="Branches.AdministrativeRegionId"></app-lookup-dropdown>
+          </div>
+        </div>
+        <div class="col">
+          <div class="fv-row mb-7 fv-plugins-icon-container">
             <app-lookup-dropdown [code]="'BRANCH_CATEGORY'" [parentForm]="branchForm" itemFormName="categoryBranchId"
               validationTextTranslated="Branches.CategoryBranchIdRequired"
               placeholderTextTranslated="Branches.WebsiteBranchId"

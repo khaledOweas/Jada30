@@ -12,7 +12,7 @@ namespace Jada30Core.Api.Controllers
     [AllowAnonymous]
     public class PerkController : ControllerBase
     {
-       
+
         private readonly IPerkManagementService _perkManagementService;
         public PerkController(IPerkManagementService perkManagementService)
         {
@@ -32,21 +32,18 @@ namespace Jada30Core.Api.Controllers
         }
 
         [HttpGet("{id}")]
-      
         public async Task<BaseResponse<GetPerkDto>> GetPerk(int id)
         {
             return await _perkManagementService.GetPerk(id);
         }
 
         [HttpPut("{id}")]
-     
         public async Task<BaseResponse<GetPerkDto>> UpdatePerk(int id, CreatePerkDto perkDto)
         {
             return await _perkManagementService.UpdatePerk(id, perkDto);
         }
 
         [HttpDelete("{id}")]
-     
         public async Task<BaseResponse<bool>> DeletePerk(int id)
         {
             return await _perkManagementService.DeletePerk(id);

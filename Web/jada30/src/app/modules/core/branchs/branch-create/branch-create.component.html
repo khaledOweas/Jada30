@@ -33,7 +33,8 @@
             <div
               *ngIf="branchForm.get('nameAr')!.invalid && (branchForm.get('nameAr')?.dirty || branchForm.get('nameAr')?.touched)"
               class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
-              <span class="text-danger fw-bold" *ngIf="branchForm.get('nameAr')?.errors?.['required']" translate="Branches.NameRequired"></span>
+              <span class="text-danger fw-bold" *ngIf="branchForm.get('nameAr')?.errors?.['required']"
+                translate="Branches.NameRequired"></span>
             </div>
           </div>
         </div>
@@ -54,7 +55,8 @@
             <div
               *ngIf="branchForm.get('name')!.invalid && (branchForm.get('name')?.dirty || branchForm.get('name')?.touched)"
               class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
-              <span class="text-danger fw-bold" *ngIf="branchForm.get('name')?.errors?.['required']" translate="Branches.NameRequired"></span>
+              <span class="text-danger fw-bold" *ngIf="branchForm.get('name')?.errors?.['required']"
+                translate="Branches.NameRequired"></span>
             </div>
           </div>
         </div>
@@ -76,6 +78,14 @@
               labelTextTranslated="Branches.CategoryBranchId"></app-lookup-dropdown>
           </div>
         </div>
+        <div class="col">
+          <div class="fv-row mb-7 fv-plugins-icon-container">
+            <app-lookup-dropdown [code]="'Administrative_Region'" [parentForm]="branchForm"
+              itemFormName="administrativeRegionId" validationTextTranslated="Branches.AdministrativeRegionId"
+              placeholderTextTranslated="Branches.AdministrativeRegionId"
+              labelTextTranslated="Branches.AdministrativeRegionId"></app-lookup-dropdown>
+          </div>
+        </div>
       </div>
       <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
         <div class="col">
@@ -95,7 +105,8 @@
             <div
               *ngIf="branchForm.get('startTime')!.invalid && (branchForm.get('startTime')?.dirty || branchForm.get('startTime')?.touched)"
               class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
-              <span class="text-danger fw-bold" *ngIf="branchForm.get('startTime')?.errors?.['required']" translate="Branches.StartTimeRequired">
+              <span class="text-danger fw-bold" *ngIf="branchForm.get('startTime')?.errors?.['required']"
+                translate="Branches.StartTimeRequired">
               </span>
             </div>
           </div>
@@ -117,7 +128,8 @@
             <div
               *ngIf="branchForm.get('endTime')!.invalid && (branchForm.get('endTime')?.dirty || branchForm.get('endTime')?.touched)"
               class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
-              <span class="text-danger fw-bold" *ngIf="branchForm.get('endTime')?.errors?.['required']" translate="Branches.EndTimeRequired"></span>
+              <span class="text-danger fw-bold" *ngIf="branchForm.get('endTime')?.errors?.['required']"
+                translate="Branches.EndTimeRequired"></span>
             </div>
           </div>
         </div>
@@ -140,7 +152,8 @@
             <div
               *ngIf="branchForm.get('workingDays')!.invalid && (branchForm.get('workingDays')?.dirty || branchForm.get('workingDays')?.touched)"
               class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
-              <span class="text-danger fw-bold" *ngIf="branchForm.get('workingDays')?.errors?.['required']" translate="Branches.WorkingDaysRequired">
+              <span class="text-danger fw-bold" *ngIf="branchForm.get('workingDays')?.errors?.['required']"
+                translate="Branches.WorkingDaysRequired">
               </span>
             </div>
           </div>

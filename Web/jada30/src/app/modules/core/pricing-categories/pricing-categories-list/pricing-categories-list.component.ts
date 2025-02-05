@@ -24,7 +24,7 @@ export class PricingCategoriesListComponent extends BaseComponent implements OnI
 
   constructor(private injector: Injector, private service: CoreService) {
     super(injector);
-    this.Cols = ColumnManager.getCol(ListColumnType.Package);
+    this.Cols = ColumnManager.getCol(ListColumnType.PricingCategory);
   }
   ngOnInit(): void {
     this.loadAll();

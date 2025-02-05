@@ -45,6 +45,7 @@ export class BranchUpdateComponent extends BaseComponent implements OnInit {
       startTime: ["", Validators.required],
       endTime: ["", Validators.required],
       categoryBranchId: [null, Validators.compose([Validators.required, Validators.pattern(/^[0-9]+$/)])],
+      administrativeRegionId: [null, Validators.compose([Validators.required, Validators.pattern(/^[0-9]+$/)])],
       branchComponents: [[], Validators.compose([Validators.required])]
     });
     this.branchId = this.route.snapshot.params["id"];
@@ -68,6 +69,7 @@ export class BranchUpdateComponent extends BaseComponent implements OnInit {
             startTime: this.formatTime(branch.startTime!),
             endTime: this.formatTime(branch.endTime!),
             categoryBranchId: branch.categoryBranchId,
+            administrativeRegionId: branch.administrativeRegionId,
             branchComponents: branch.branchComponents?.map((x) => x.id!)!
           });
         }
