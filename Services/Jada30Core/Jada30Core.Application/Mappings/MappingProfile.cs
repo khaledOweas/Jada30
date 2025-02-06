@@ -8,6 +8,8 @@ using Jada30Core.Common.SupportingServiceProvider;
 using Jada30Core.Common.Perk;
 using Jada30Core.Common.PriceCategories;
 using Jada30Core.Common.categoryAdministrativeRegion;
+using Jada30Core.Common.Workspace;
+using Domain.WorkSpace;
 
 
 namespace Identity.Application.Mappings;
@@ -175,8 +177,49 @@ public class MappingProfile : Profile
             .ForPath(dest => dest.AdministrativeRegionId, opt => opt.MapFrom(src => src.AdministrativeRegion.Id))
             .ForPath(dest => dest.AdministrativeRegionName, opt => opt.MapFrom(src => src.AdministrativeRegion.Name))
             .ForPath(dest => dest.AdministrativeRegionNameAr, opt => opt.MapFrom(src => src.AdministrativeRegion.NameAr));
-            
 
+
+        CreateMap<AddWorkspaceDto, Workspace>().ReverseMap();
+        CreateMap<AddWorkspaceSubcategoryDto, WorkspaceSubcategory>().ReverseMap();
+        CreateMap<AddWorkspacePriceCategoryDto, WorkspacePriceCategory>().ReverseMap();
+
+        CreateMap<GetWorkspaceDto, Workspace>()
+           .ForPath(dest => dest.WorkspaceCategory.Id, opt => opt.MapFrom(src => src.WorkspaceCategoryId))
+           .ForPath(dest => dest.WorkspaceCategory.Name, opt => opt.MapFrom(src => src.WorkspaceCategoryName))
+           .ForPath(dest => dest.WorkspaceCategory.NameAr, opt => opt.MapFrom(src => src.WorkspaceCategoryNameAr))
+
+           .ForPath(dest => dest.WorkspaceSubcategory.Id, opt => opt.MapFrom(src => src.WorkspaceSubcategoryId))
+           .ForPath(dest => dest.WorkspaceSubcategory.Name, opt => opt.MapFrom(src => src.WorkspaceSubcategoryName))
+           .ForPath(dest => dest.WorkspaceSubcategory.NameAr, opt => opt.MapFrom(src => src.WorkspaceSubcategoryNameAr))
+            .ReverseMap()
+
+            .ForPath(dest => dest.WorkspaceCategoryId, opt => opt.MapFrom(src => src.WorkspaceCategory.Id))
+            .ForPath(dest => dest.WorkspaceCategoryName, opt => opt.MapFrom(src => src.WorkspaceCategory.Name))
+            .ForPath(dest => dest.WorkspaceCategoryNameAr, opt => opt.MapFrom(src => src.WorkspaceCategory.NameAr))
+
+            .ForPath(dest => dest.WorkspaceSubcategoryId, opt => opt.MapFrom(src => src.WorkspaceSubcategory.Id))
+            .ForPath(dest => dest.WorkspaceSubcategoryName, opt => opt.MapFrom(src => src.WorkspaceSubcategory.Name))
+            .ForPath(dest => dest.WorkspaceSubcategoryNameAr, opt => opt.MapFrom(src => src.WorkspaceSubcategory.NameAr));
+
+
+        CreateMap<GetWorkspaceSubcategoryDto, WorkspaceSubcategory>()
+            .ForPath(dest => dest.WorkspaceCategory.Id, opt => opt.MapFrom(src => src.WorkspaceCategoryId))
+           .ForPath(dest => dest.WorkspaceCategory.Name, opt => opt.MapFrom(src => src.WorkspaceCategoryName))
+           .ForPath(dest => dest.WorkspaceCategory.NameAr, opt => opt.MapFrom(src => src.WorkspaceCategoryNameAr))
+
+            .ReverseMap()
+            .ForPath(dest => dest.WorkspaceCategoryId, opt => opt.MapFrom(src => src.WorkspaceCategory.Id))
+            .ForPath(dest => dest.WorkspaceCategoryName, opt => opt.MapFrom(src => src.WorkspaceCategory.Name))
+            .ForPath(dest => dest.WorkspaceCategoryNameAr, opt => opt.MapFrom(src => src.WorkspaceCategory.NameAr));
+
+        CreateMap<GetWorkspacePriceCategoryDto, WorkspacePriceCategory>()
+             .ForPath(dest => dest.WorkspaceSubcategory.Id, opt => opt.MapFrom(src => src.WorkspaceSubcategoryId))
+           .ForPath(dest => dest.WorkspaceSubcategory.Name, opt => opt.MapFrom(src => src.WorkspaceSubcategoryName))
+           .ForPath(dest => dest.WorkspaceSubcategory.NameAr, opt => opt.MapFrom(src => src.WorkspaceSubcategoryNameAr))
+           .ReverseMap()
+           .ForPath(dest => dest.WorkspaceSubcategoryId, opt => opt.MapFrom(src => src.WorkspaceSubcategory.Id))
+            .ForPath(dest => dest.WorkspaceSubcategoryName, opt => opt.MapFrom(src => src.WorkspaceSubcategory.Name))
+            .ForPath(dest => dest.WorkspaceSubcategoryNameAr, opt => opt.MapFrom(src => src.WorkspaceSubcategory.NameAr));
 
 
     }
