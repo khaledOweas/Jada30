@@ -24,7 +24,8 @@
             <div
               *ngIf="pricingCategoryForm.get('name')!.invalid && (pricingCategoryForm.get('name')?.dirty || pricingCategoryForm.get('name')?.touched)"
               class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
-              <div *ngIf="pricingCategoryForm.get('name')?.errors?.['required']" translate="PricingCategory.NameRequired"></div>
+              <div *ngIf="pricingCategoryForm.get('name')?.errors?.['required']"
+                translate="PricingCategory.NameRequired"></div>
             </div>
           </div>
         </div>
@@ -37,7 +38,8 @@
             <div
               *ngIf="pricingCategoryForm.get('nameAr')!.invalid && (pricingCategoryForm.get('nameAr')?.dirty || pricingCategoryForm.get('nameAr')?.touched)"
               class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
-              <div *ngIf="pricingCategoryForm.get('nameAr')?.errors?.['required']" translate="PricingCategory.NameArRequired"></div>
+              <div *ngIf="pricingCategoryForm.get('nameAr')?.errors?.['required']"
+                translate="PricingCategory.NameArRequired"></div>
             </div>
           </div>
         </div>
@@ -70,9 +72,18 @@
             <div
               *ngIf="pricingCategoryForm.get('price')!.invalid && (pricingCategoryForm.get('price')?.dirty || pricingCategoryForm.get('price')?.touched)"
               class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
-              <div *ngIf="pricingCategoryForm.get('price')?.errors?.['required']" translate="PricingCategory.PriceRequired">
+              <div *ngIf="pricingCategoryForm.get('price')?.errors?.['required']"
+                translate="PricingCategory.PriceRequired">
               </div>
             </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="fv-row mb-7 fv-plugins-icon-container">
+            <app-lookup-multi-select code="Administrative_Region" [parentForm]="pricingCategoryForm"
+              itemFormName="categoryAdministrativeRegionIds" validationTextTranslated="Branches.AdministrativeRegionId"
+              placeholderTextTranslated="Branches.ChooseComponents"
+              labelTextTranslated="Branches.AdministrativeRegionId"></app-lookup-multi-select>
           </div>
         </div>
         <div class="col">

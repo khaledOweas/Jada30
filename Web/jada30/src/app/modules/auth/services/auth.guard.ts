@@ -18,7 +18,7 @@ export class AuthGuard {
       this.authService.logout();
       return false;
     } catch (error) {
-      localStorage.removeItem("user");
+      localStorage.removeItem("token");
       this.authService.logout();
       return false;
     }

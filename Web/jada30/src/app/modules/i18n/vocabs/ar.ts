@@ -8,7 +8,7 @@ export const locale = {
     Validation: {
       Required: "مطلوب",
       Minlength: "لا يطابق الحد الأدني لعدد الاحرف",
-      Maxlength: "لا يطابق الحد الأقصس لعدد الاحرف"
+      Maxlength: "لا يطابق الحد الأقصي لعدد الاحرف"
     },
     MENU: {
       NEW: "جديد",
@@ -37,7 +37,16 @@ export const locale = {
         Password: "كلمة المرور",
         ForgetPassword: "نسيت كلمة المرور ؟",
         NotaMemeberYet: "هل انت ليس بعضو ؟",
-        SignUp: "تسجيل جديد "
+        SignUp: "تسجيل جديد ",
+        AppName: "بنك التنمية الإجتماعية",
+        LoginError: "خطأ اثناء تسجيل الدخول ",
+        UserNameError: "إسم المستخدم غير مسجل لدينا",
+        PasswordError: "خطأ في كلمة المرور",
+        Email: "البريد أو اسم المستخدم",
+        EmailRequired: "  البريد أو اسم المستخدم مطلوب ",
+        PasswordRequired: "كلمة المرور مطلوبة ",
+        LoginButton: "استكمال",
+        LoginButtonLoading: "انتظر من فضلك ..."
       },
       FORGOT: {
         TITLE: "نسيت كلمة المرور؟",

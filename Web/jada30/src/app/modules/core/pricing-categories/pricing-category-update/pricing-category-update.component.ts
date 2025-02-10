@@ -7,6 +7,7 @@ import { MultiSelectModule } from "primeng/multiselect";
 import { PasswordModule } from "primeng/password";
 import { ToastModule } from "primeng/toast";
 import { BaseComponent } from "src/app/core/Components/base/base.component";
+import { LookupMultiSelectComponent } from "src/app/modules/shared/lookup-multi-select/lookup-multi-select.component";
 import { AddPriceCategory, CoreService, GetPriceCategoryBaseResponse } from "src/app/services/CoreService";
 
 @Component({
@@ -20,7 +21,8 @@ import { AddPriceCategory, CoreService, GetPriceCategoryBaseResponse } from "src
     NgIf,
     MultiSelectModule,
     TranslatePipe,
-    PasswordModule
+    PasswordModule,
+    LookupMultiSelectComponent
   ],
   templateUrl: "./pricing-category-update.component.html",
   styleUrl: "./pricing-category-update.component.scss",
@@ -56,6 +58,7 @@ export class PricingCategoryUpdateComponent extends BaseComponent implements OnI
       description: [""],
       descriptionAr: [""],
       price: [null, Validators.required],
+      categoryAdministrativeRegionIds: [[], Validators.required],
       isActive: [true]
     });
   }
@@ -66,8 +69,10 @@ export class PricingCategoryUpdateComponent extends BaseComponent implements OnI
         if (res.isSuccess) {
           this.pricingCategoryForm.patchValue({
             ...res.responseData,
-            isActive: res.responseData!.isPublish
+            isActive: res.responseData!.isPublish,
+            categoryAdministrativeRegionIds: res.responseData!.categoryAdministrativeRegions?.map((x) => x.administrativeRegionId!)!
           });
+          debugger;
         } else {
           this.ct.sendToaster("error", this.tr.get("SHARED.ServerDetails"), res.message!);
         }
@@ -79,6 +84,7 @@ export class PricingCategoryUpdateComponent extends BaseComponent implements OnI
   }
 
   onSubmit(): void {
+    debugger;
     if (this.pricingCategoryForm.valid) {
       const data = this.pricingCategoryForm.value;
       const model: AddPriceCategory = new AddPriceCategory(data);

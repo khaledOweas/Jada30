@@ -4,6 +4,16 @@
   src: url('./../fonts/Tajawal/Tajawal-Medium.ttf') format('truetype');
 }
 
+@font-face {
+  font-family: 'khodkar';
+  src: url('./../fonts/khodkar/phalls-khodkar.ttf') format('truetype');
+}
+
+
+.font-kh {
+  font-family: "khodkar" !important;
+  font-weight: bolder !important;
+}
 
 .fc-primng {
   width: 100%;
@@ -192,4 +202,9 @@ td {
 
 p-password input {
   width: 100% !important;
+}
+
+.fv-plugins-message-container[role="alert"] {
+  color: red;
+  font-size: 14px;
 }

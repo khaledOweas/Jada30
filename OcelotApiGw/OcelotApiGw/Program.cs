@@ -5,49 +5,53 @@ using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
 using Newtonsoft.Json.Linq;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Ocelot.Values;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Define microservices
-var microservices = new[] { "Identity", "Lookups" , "Core"};
+var microservices = new[] { "Identity", "Lookups", "Core" };
 var environment = builder.Environment.EnvironmentName;
-var tempConfigPath = "mergedOcelot.json";
+var tempConfigPath = $"mergedOcelot.{environment}.json";
 
-// Initialize a JObject for merging
-var mergedConfig = new JObject
+if (environment == "Development")
 {
-    ["Routes"] = new JArray(),
-    ["SwaggerEndPoints"] = new JArray()
-};
-
-// Iterate through each microservice to load and merge configurations
-foreach (var service in microservices)
-{
-    var configPath = $"{service}.{environment}.json";
-
-    if (!File.Exists(configPath))
+    // Initialize a JObject for merging
+    var mergedConfig = new JObject
     {
-        throw new FileNotFoundException($"Configuration file not found: {configPath}");
+        ["Routes"] = new JArray(),
+        ["SwaggerEndPoints"] = new JArray()
+    };
+
+    // Iterate through each microservice to load and merge configurations
+    foreach (var service in microservices)
+    {
+        var configPath = $"{service}.{environment}.json";
+
+        if (!File.Exists(configPath))
+        {
+            throw new FileNotFoundException($"Configuration file not found: {configPath}");
+        }
+
+        var serviceConfig = JObject.Parse(File.ReadAllText(configPath));
+
+        // Merge Routes
+        if (serviceConfig["Routes"] is JArray serviceRoutes)
+        {
+            ((JArray)mergedConfig["Routes"]).Merge(serviceRoutes);
+        }
+
+        // Merge SwaggerEndPoints
+        if (serviceConfig["SwaggerEndPoints"] is JArray serviceSwaggerEndpoints)
+        {
+            ((JArray)mergedConfig["SwaggerEndPoints"]).Merge(serviceSwaggerEndpoints);
+        }
     }
 
-    var serviceConfig = JObject.Parse(File.ReadAllText(configPath));
+    // Write the merged configuration to a temporary file
+    File.WriteAllText(tempConfigPath, mergedConfig.ToString());
 
-    // Merge Routes
-    if (serviceConfig["Routes"] is JArray serviceRoutes)
-    {
-        ((JArray)mergedConfig["Routes"]).Merge(serviceRoutes);
-    }
-
-    // Merge SwaggerEndPoints
-    if (serviceConfig["SwaggerEndPoints"] is JArray serviceSwaggerEndpoints)
-    {
-        ((JArray)mergedConfig["SwaggerEndPoints"]).Merge(serviceSwaggerEndpoints);
-    }
 }
-
-// Write the merged configuration to a temporary file
-File.WriteAllText(tempConfigPath, mergedConfig.ToString());
-
 // Add the merged configuration to the app builder
 builder.Configuration.AddJsonFile(tempConfigPath, optional: false, reloadOnChange: true);
 

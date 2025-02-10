@@ -1,18 +1,119 @@
 {
 	"Routes": [
-		//ِAccount API
 		{
-			"UpstreamPathTemplate": "/api/Account/CreateUser",
-			"UpstreamHttpMethod": [ "POST" ],
-			"DownstreamPathTemplate": "/api/Account/CreateUser",
-			"DownstreamScheme": "https",
+			"UpstreamPathTemplate": "/api/Lookup/GetAllCategory",
+			"UpstreamHttpMethod": [ "Get" ],
+			"DownstreamPathTemplate": "/api/Lookup/GetAllCategory",
+			"DownstreamScheme": "http",
 			"DownstreamHostAndPorts": [
 				{
 					"Host": "localhost",
-					"Port": "7158"
+					"Port": "7284"
 				}
 			],
-			"SwaggerKey": "Identity",
+			"SwaggerKey": "Lookups",
+			"AuthenticationOptions": {
+				"AuthenticationProviderKey": "Bearer",
+				"AllowedScopes": [ "read", "write" ]
+			}
+		},
+		{
+			"UpstreamPathTemplate": "/api/Lookup/GetAll",
+			"UpstreamHttpMethod": [ "Get" ],
+			"DownstreamPathTemplate": "/api/Lookup/GetAll",
+			"DownstreamScheme": "http",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "localhost",
+					"Port": "7284"
+				}
+			],
+			"SwaggerKey": "Lookups",
+			"AuthenticationOptions": {
+				"AuthenticationProviderKey": "Bearer",
+				"AllowedScopes": [ "read", "write" ]
+			}
+		},
+		{
+			"UpstreamPathTemplate": "/api/Lookup/GetAll/{refCode}",
+			"UpstreamHttpMethod": [ "Get" ],
+			"DownstreamPathTemplate": "/api/Lookup/GetAll/{refCode}",
+			"DownstreamScheme": "http",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "localhost",
+					"Port": "7284"
+				}
+			],
+			"SwaggerKey": "Lookups",
+			"AuthenticationOptions": {
+				"AuthenticationProviderKey": "Bearer",
+				"AllowedScopes": [ "read", "write" ]
+			}
+		},
+		{
+			"UpstreamPathTemplate": "/api/Lookup/Get/{code}",
+			"UpstreamHttpMethod": [ "Get" ],
+			"DownstreamPathTemplate": "/api/Lookup/Get/{code}",
+			"DownstreamScheme": "http",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "localhost",
+					"Port": "7284"
+				}
+			],
+			"SwaggerKey": "Lookups",
+			"AuthenticationOptions": {
+				"AuthenticationProviderKey": "Bearer",
+				"AllowedScopes": [ "read", "write" ]
+			}
+		},
+		{
+			"UpstreamPathTemplate": "/api/Lookup/CreateLookup",
+			"UpstreamHttpMethod": [ "Post" ],
+			"DownstreamPathTemplate": "/api/Lookup/CreateLookup",
+			"DownstreamScheme": "http",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "localhost",
+					"Port": "7284"
+				}
+			],
+			"SwaggerKey": "Lookups",
+			"AuthenticationOptions": {
+				"AuthenticationProviderKey": "Bearer",
+				"AllowedScopes": [ "read", "write" ]
+			}
+		},
+		{
+			"UpstreamPathTemplate": "/api/Lookup/UpdateLookup/{code}",
+			"UpstreamHttpMethod": [ "Put" ],
+			"DownstreamPathTemplate": "/api/Lookup/UpdateLookup/{code}",
+			"DownstreamScheme": "http",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "localhost",
+					"Port": "7284"
+				}
+			],
+			"SwaggerKey": "Lookups",
+			"AuthenticationOptions": {
+				"AuthenticationProviderKey": "Bearer",
+				"AllowedScopes": [ "read", "write" ]
+			}
+		},
+		{
+			"UpstreamPathTemplate": "/api/Lookup/DeleteLookup/{code}",
+			"UpstreamHttpMethod": [ "Delete" ],
+			"DownstreamPathTemplate": "/api/Lookup/DeleteLookup/{code}",
+			"DownstreamScheme": "http",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "localhost",
+					"Port": "7284"
+				}
+			],
+			"SwaggerKey": "Lookups",
 			"AuthenticationOptions": {
 				"AuthenticationProviderKey": "Bearer",
 				"AllowedScopes": [ "read", "write" ]
@@ -21,14 +122,21 @@
 	],
 	"SwaggerEndPoints": [
 		{
-			"Key": "Identity",
+			"Key": "Lookups",
 			"Config": [
 				{
-					"Name": "Identity API",
+					"Name": "Lookups API",
 					"Version": "v1",
-					"Url": "https://localhost:7158/swagger/v1/swagger.json"
+					"Url": "http://localhost:7284/swagger/v1/swagger.json"
 				}
 			]
 		}
-	]
+	],
+	"Logging": {
+		"LogLevel": {
+			"Default": "Debug",
+			"Microsoft": "Warning",
+			"Ocelot": "Debug"
+		}
+	}
 }

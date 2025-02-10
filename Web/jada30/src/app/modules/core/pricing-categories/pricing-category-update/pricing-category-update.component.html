@@ -81,6 +81,14 @@
         </div>
         <div class="col">
           <div class="fv-row mb-7 fv-plugins-icon-container">
+            <app-lookup-multi-select code="Administrative_Region" [parentForm]="pricingCategoryForm"
+              itemFormName="categoryAdministrativeRegionIds" validationTextTranslated="Branches.AdministrativeRegionId"
+              placeholderTextTranslated="Branches.ChooseComponents"
+              labelTextTranslated="Branches.AdministrativeRegionId"></app-lookup-multi-select>
+          </div>
+        </div>
+        <div class="col">
+          <div class="fv-row mb-7 fv-plugins-icon-container">
             <label class="fs-6 fw-semibold form-label mt-3">
               <span translate="PricingCategory.IsActive"></span>
             </label>

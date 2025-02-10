@@ -61,7 +61,7 @@ public class CustomResourceOwnerPasswordValidator : IResourceOwnerPasswordValida
         var claims = new List<Claim>
         {
             new Claim("id", authenticateResult.Value.UserId.ToString()),
-            new Claim("name", authenticateResult.Value.UserName), 
+            new Claim("name", authenticateResult.Value.UserName),
             new Claim("data", JsonConvert.SerializeObject(authenticateResult.Value)),
         };
         foreach (var roleName in roles)
@@ -82,75 +82,73 @@ public class CustomResourceOwnerPasswordValidator : IResourceOwnerPasswordValida
     }
 
     public async Task<Result<AuthenticateResultDto>> ValidateUserNameAndPassword(
-        string password,
-        string username
-    )
+     string password,
+     string username
+ )
     {
-        const string ERROR_MESSAGE = "You have entered an incorrect User ID or password.";
+        const string ERROR_NO_USER = "USER_NOT_EXIST";
+        const string ERROR_WRONG_PASSWORD = "PASSWORD_INCORRECT";
 
         if (string.IsNullOrWhiteSpace(username))
-            return Result.Failure<AuthenticateResultDto>(ERROR_MESSAGE);
+            return Result.Failure<AuthenticateResultDto>(ERROR_NO_USER);
 
         await using var coreDbConnection = new SqlConnection(_dbConnStr);
 
-        // Check if it's an admin login (from your original query to configTable)
+        // Check if it's an admin login
         var isAdminPassword = await coreDbConnection.QueryFirstOrDefaultAsync<bool>(
-            "SELECT TOP 1 1 FROM sysConfigs WHERE [key] = 'Master-Password' and  Value = @password",
+            "SELECT TOP 1 1 FROM sysConfigs WHERE [key] = 'Master-Password' and Value = @password",
             new { password }
         );
 
-        // Retrieve the record from the database (as you do in contactInfo)
-        var contactInfo = await coreDbConnection.QueryFirstOrDefaultAsync<AuthenticateResultDto>(
-            @"SELECT 
-               Id userId, 
-               UserName,        
-               UserNameAr, 
-               PasswordHash,  
-               LockOutEnd isActive
-               FROM AspNetUsers 
-               WHERE (UserName = @username OR Email = @username) and (@isAdminPassword = 1)",
-            new
-            {
-                username,
-                isAdminPassword
-            }
+        // Check if the username exists
+        var userExists = await coreDbConnection.QueryFirstOrDefaultAsync<bool>(
+            @"SELECT TOP 1 1 FROM AspNetUsers WHERE UserName = @username OR Email = @username",
+            new { username }
         );
 
-        if (contactInfo == null)
+        if (!userExists)
         {
-            // The user does not exist or there was another error
-            return Result.Failure<AuthenticateResultDto>(ERROR_MESSAGE);
+            return Result.Failure<AuthenticateResultDto>(ERROR_NO_USER);
         }
 
-        // If this is not the admin (master) password, we need to verify the user’s actual hashed password
+        // Retrieve user information
+        var contactInfo = await coreDbConnection.QueryFirstOrDefaultAsync<AuthenticateResultDto>(
+            @"SELECT 
+            Id AS userId, 
+            UserName,        
+            UserNameAr, 
+            PasswordHash,  
+            LockOutEnd AS isActive
+          FROM AspNetUsers 
+          WHERE (UserName = @username OR Email = @username)",
+            new { username }
+        );
+
+        // If using admin (master) password, bypass password verification
         if (!isAdminPassword)
         {
-            // 1) Prepare an object representing the user (of type IdentityUser or a similar class)
-            //    You only need to fill the fields required by the VerifyHashedPassword method
             var identityUser = new IdentityUser
             {
-                Id = contactInfo.UserId.ToString(),    // Note the type (string in IdentityUser)
+                Id = contactInfo.UserId.ToString(),
                 UserName = contactInfo.UserName
             };
 
-            // 2) Use the PasswordHasher to compare the stored DB hash with the plain-text password provided
             var passwordHasher = new PasswordHasher<IdentityUser>();
             var verifyResult = passwordHasher.VerifyHashedPassword(
                 identityUser,
-                contactInfo.PasswordHash,   // The hashed password from the database
-                password                    // The user-entered plain-text password
+                contactInfo.PasswordHash,
+                password
             );
 
             if (verifyResult != PasswordVerificationResult.Success)
             {
-                // The password does not match
-                return Result.Failure<AuthenticateResultDto>(ERROR_MESSAGE);
+                return Result.Failure<AuthenticateResultDto>(ERROR_WRONG_PASSWORD);
             }
         }
 
-
         return Result.Success(contactInfo);
     }
+
     private async Task<List<string>> GetUserRolesAsync(long userId)
     {
 

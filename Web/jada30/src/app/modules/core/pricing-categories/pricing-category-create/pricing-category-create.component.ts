@@ -7,8 +7,10 @@ import { MultiSelectModule } from "primeng/multiselect";
 import { PasswordModule } from "primeng/password";
 import { ToastModule } from "primeng/toast";
 import { BaseComponent } from "src/app/core/Components/base/base.component";
+import { LookupDropdownComponent } from "src/app/modules/shared/lookup-dropdown/lookup-dropdown.component";
+import { LookupMultiSelectComponent } from "src/app/modules/shared/lookup-multi-select/lookup-multi-select.component";
 import { AddPriceCategory, CoreService, GetPriceCategoryBaseResponse } from "src/app/services/CoreService";
-import { LookupService, AddLookupDto, GetLookupDtoBaseResponse } from "src/app/services/LookupService";
+import { LookupService } from "src/app/services/LookupService";
 
 @Component({
   selector: "app-pricing-category-create",
@@ -21,11 +23,12 @@ import { LookupService, AddLookupDto, GetLookupDtoBaseResponse } from "src/app/s
     NgIf,
     MultiSelectModule,
     TranslatePipe,
-    PasswordModule
+    PasswordModule,
+    LookupMultiSelectComponent
   ],
   templateUrl: "./pricing-category-create.component.html",
   styleUrl: "./pricing-category-create.component.scss",
-  providers: [CoreService]
+  providers: [CoreService, LookupService]
 })
 export class PricingCategoryCreateComponent extends BaseComponent implements OnInit {
   pricingCategoryForm: FormGroup;
@@ -46,6 +49,7 @@ export class PricingCategoryCreateComponent extends BaseComponent implements OnI
       description: [""],
       descriptionAr: [""],
       price: [null, Validators.required],
+      categoryAdministrativeRegionIds: [[], Validators.required],
       isActive: [true]
     });
   }
@@ -86,6 +90,7 @@ export class PricingCategoryCreateComponent extends BaseComponent implements OnI
       description: [""],
       descriptionAr: [""],
       price: [null, Validators.required],
+      categoryAdministrativeRegionIds: [[], Validators.required],
       isActive: [true]
     });
   }

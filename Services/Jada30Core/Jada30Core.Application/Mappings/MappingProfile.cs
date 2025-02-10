@@ -171,11 +171,12 @@ public class MappingProfile : Profile
             .ForPath(dest => dest.PricingCategoryId, opt => opt.MapFrom(src => src.PricingCategory.Id))
             .ForPath(dest => dest.PricingCategoryName, opt => opt.MapFrom(src => src.PricingCategory.Name))
             .ForPath(dest => dest.PricingCategoryNameAr, opt => opt.MapFrom(src => src.PricingCategory.NameAr))
+            .ForPath(dest => dest.IsPublish, opt => opt.MapFrom(src => src.PricingCategory.IsPublish))
 
             .ForPath(dest => dest.AdministrativeRegionId, opt => opt.MapFrom(src => src.AdministrativeRegion.Id))
             .ForPath(dest => dest.AdministrativeRegionName, opt => opt.MapFrom(src => src.AdministrativeRegion.Name))
             .ForPath(dest => dest.AdministrativeRegionNameAr, opt => opt.MapFrom(src => src.AdministrativeRegion.NameAr));
-            
+
 
 
 
