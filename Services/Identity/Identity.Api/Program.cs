@@ -151,6 +151,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors(builder =>
+    builder.AllowAnyOrigin()
+           .AllowAnyMethod()
+           .AllowAnyHeader());
+
 app.Use(async (context, next) =>
 {
     var forwardedFor = context.Request.Headers["X-Secure-Gateway-Value"].FirstOrDefault();
@@ -172,3 +177,4 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
