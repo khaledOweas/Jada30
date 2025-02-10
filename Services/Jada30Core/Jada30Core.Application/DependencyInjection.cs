@@ -23,6 +23,7 @@ namespace Identity.Application
             services.AddTransient<ISupportingServiceProviderManagementService, SupportingServiceProviderManagementService>();
             services.AddTransient<IPerkManagementService, PerkManagementService>();
             services.AddTransient<IPriceCategoriesManagementService, PriceCategoriesManagementService>();
+            services.AddTransient<IWorkspaceManagementService, WorkspaceManagementService>();
             return services;
         }
     }

@@ -754,6 +754,231 @@
         }
       ],
       "SwaggerKey": "Jada30Core"
+    },
+    {
+      "UpstreamPathTemplate": "/WorkSpace",
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "DownstreamPathTemplate": "/WorkSpace",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7043"
+        }
+      ],
+      "SwaggerKey": "Jada30Core"
+    },
+    {
+      "UpstreamPathTemplate": "/WorkSpace/GetWorkSpace/{id}",
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "DownstreamPathTemplate": "/WorkSpace/GetWorkSpace/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7043"
+        }
+      ],
+      "SwaggerKey": "Jada30Core"
+    },
+    {
+      "UpstreamPathTemplate": "/WorkSpace/CreateWorkSpace",
+      "UpstreamHttpMethod": [
+        "POST"
+      ],
+      "DownstreamPathTemplate": "/WorkSpace/CreateWorkSpace",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7043"
+        }
+      ],
+      "SwaggerKey": "Jada30Core"
+    },
+    {
+      "UpstreamPathTemplate": "/WorkSpace/DeleteWorkSpace/{id}",
+      "UpstreamHttpMethod": [
+        "DELETE"
+      ],
+      "DownstreamPathTemplate": "/WorkSpace/DeleteWorkSpace/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7043"
+        }
+      ],
+      "SwaggerKey": "Jada30Core"
+    },
+    {
+      "UpstreamPathTemplate": "/WorkSpace/UpdateWorkSpace/{id}",
+      "UpstreamHttpMethod": [
+        "PUT"
+      ],
+      "DownstreamPathTemplate": "/WorkSpace/UpdateWorkSpace/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7043"
+        }
+      ],
+      "SwaggerKey": "Jada30Core"
+    },
+    {
+      "UpstreamPathTemplate": "/WorkSpace/CreateWorkSpaceSubCategory",
+      "UpstreamHttpMethod": [
+        "POST"
+      ],
+      "DownstreamPathTemplate": "/WorkSpace/CreateWorkSpaceSubCategory",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7043"
+        }
+      ],
+      "SwaggerKey": "Jada30Core"
+    },
+    {
+      "UpstreamPathTemplate": "/WorkSpace/UpdateWorkSpaceSubCategory/{id}",
+      "UpstreamHttpMethod": [
+        "PUT"
+      ],
+      "DownstreamPathTemplate": "/WorkSpace/UpdateWorkSpaceSubCategory/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7043"
+        }
+      ],
+      "SwaggerKey": "Jada30Core"
+    },
+    {
+      "UpstreamPathTemplate": "/WorkSpace/DeleteWorkSpaceSubCategory/{id}",
+      "UpstreamHttpMethod": [
+        "DELETE"
+      ],
+      "DownstreamPathTemplate": "/WorkSpace/DeleteWorkSpaceSubCategory/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7043"
+        }
+      ],
+      "SwaggerKey": "Jada30Core"
+    },
+    {
+      "UpstreamPathTemplate": "/WorkSpace/GetWorkSpaceSubCategory/{id}",
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "DownstreamPathTemplate": "/WorkSpace/GetWorkSpaceSubCategory/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7043"
+        }
+      ],
+      "SwaggerKey": "Jada30Core"
+    },
+    {
+      "UpstreamPathTemplate": "/WorkSpace/GetWorkSpaceSubCategories",
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "DownstreamPathTemplate": "/WorkSpace/GetWorkSpaceSubCategories",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7043"
+        }
+      ],
+      "SwaggerKey": "Jada30Core"
+    },
+    {
+      "UpstreamPathTemplate": "/WorkSpace/CreateWorkSpacePriceCategory",
+      "UpstreamHttpMethod": [
+        "POST"
+      ],
+      "DownstreamPathTemplate": "/WorkSpace/CreateWorkSpacePriceCategory",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7043"
+        }
+      ],
+      "SwaggerKey": "Jada30Core"
+    },
+    {
+      "UpstreamPathTemplate": "/WorkSpace/UpdateWorkSpacePriceCategory/{id}",
+      "UpstreamHttpMethod": [
+        "PUT"
+      ],
+      "DownstreamPathTemplate": "/WorkSpace/UpdateWorkSpacePriceCategory/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7043"
+        }
+      ],
+      "SwaggerKey": "Jada30Core"
+    },
+    {
+      "UpstreamPathTemplate": "/WorkSpace/DeleteWorkSpacePriceCategory/{id}",
+      "UpstreamHttpMethod": [
+        "DELETE"
+      ],
+      "DownstreamPathTemplate": "/WorkSpace/DeleteWorkSpacePriceCategory/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7043"
+        }
+      ],
+      "SwaggerKey": "Jada30Core"
+    },
+    {
+      "UpstreamPathTemplate": "/WorkSpace/GetWorkSpacePriceCategory/{id}",
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "DownstreamPathTemplate": "/WorkSpace/GetWorkSpacePriceCategory/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7043"
+        }
+      ],
+      "SwaggerKey": "Jada30Core"
+    },
+    {
+      "UpstreamPathTemplate": "/WorkSpace/GetWorkSpacePriceCategories",
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "DownstreamPathTemplate": "/WorkSpace/GetWorkSpacePriceCategories",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7043"
+        }
+      ],
+      "SwaggerKey": "Jada30Core"
     }
   ],
   "SwaggerEndPoints": [

@@ -1,4 +1,5 @@
 ﻿using Domain;
+using Domain.WorkSpace;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -35,6 +36,9 @@ namespace Infrastructure.Data
         public DbSet<PackageFacility> PackageFacilities { get; set; }
         public DbSet<PricingCategories> PricingCategories { get; set; }
         public DbSet<CategoryAdministrativeRegion> categoryAdministrativeRegions { get; set; }
+        public DbSet<Workspace> workspaces { get; set; }
+        public DbSet<WorkspacePriceCategory> workspacePriceCategories { get; set; }
+        public DbSet<WorkspaceSubcategory> workspaceSubcategories { get; set; }
         public Jada30Context()
         {
         }
