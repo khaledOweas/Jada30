@@ -19,7 +19,7 @@ namespace Infrastructure.Data
             _context = context;
         }
 
-
+        public DbSet<AboutJada> AboutJada { get; set; }    
         public DbSet<Lookup> Lookups { get; set; }
         public DbSet<Facilities> Facilities { get; set; }
         public DbSet<Branch> Branch { get; set; }
@@ -33,6 +33,8 @@ namespace Infrastructure.Data
         public DbSet<BranchComponent> BranchComponents { get; set; }
         public DbSet<Package> Packages { get; set; }
         public DbSet<PackageFacility> PackageFacilities { get; set; }
+        public DbSet<Event> Events { get; set; }
+        public DbSet<MediaFile> MediaFiles { get; set; }
         public Jada30Context()
         {
         }
@@ -78,7 +80,7 @@ namespace Infrastructure.Data
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Data Source=192.168.1.85;Initial Catalog=Tabe3_SQL_DB_10;User ID=SJM_FVDBUser;Password=S@raSJM328311;Integrated Security=False;Trust Server Certificate=True;Encrypt=False");
+                optionsBuilder.UseSqlServer("Data Source=Jada30;Initial Catalog=Jada30_Identity; User ID=sa;Password=AAqqZZTT2025$;Integrated Security=False;Trust Server Certificate=True;Encrypt=False");
             }
         }
 

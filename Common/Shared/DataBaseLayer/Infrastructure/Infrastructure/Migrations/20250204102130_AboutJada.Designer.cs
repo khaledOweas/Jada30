@@ -4,6 +4,7 @@ using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(Jada30Context))]
-    partial class Jada30ContextModelSnapshot : ModelSnapshot
+    [Migration("20250204102130_AboutJada")]
+    partial class AboutJada
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -263,79 +266,6 @@ namespace Infrastructure.Migrations
                     b.ToTable("BranchComponents");
                 });
 
-            modelBuilder.Entity("Domain.Event", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
-
-                    b.Property<long>("BranchId")
-                        .HasColumnType("bigint");
-
-                    b.Property<int>("CreatedBy")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("Duration")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("EndDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsForJadah30Customers")
-                        .HasColumnType("bit");
-
-                    b.Property<int?>("ModifyBy")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("ModifyOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("NumberSeats")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("RegistrationForm")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("SocialMediaLinks")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SpeakersNames")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("StartDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TitleAr")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<long?>("TypeId")
-                        .HasColumnType("bigint");
-
-                    b.Property<bool>("isFreePaid")
-                        .HasColumnType("bit");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("TypeId");
-
-                    b.ToTable("Events");
-                });
-
             modelBuilder.Entity("Domain.Facilities", b =>
                 {
                     b.Property<long>("Id")
@@ -445,52 +375,6 @@ namespace Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Lookups");
-                });
-
-            modelBuilder.Entity("Domain.MediaFile", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
-
-                    b.Property<int>("CreatedBy")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<long>("EventId")
-                        .HasColumnType("bigint");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<int?>("ModifyBy")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("ModifyOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Path")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<long>("TypeId")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EventId");
-
-                    b.HasIndex("TypeId");
-
-                    b.ToTable("MediaFiles");
                 });
 
             modelBuilder.Entity("Domain.Package", b =>
@@ -949,15 +833,6 @@ namespace Infrastructure.Migrations
                     b.Navigation("Component");
                 });
 
-            modelBuilder.Entity("Domain.Event", b =>
-                {
-                    b.HasOne("Domain.Lookup", "Type")
-                        .WithMany()
-                        .HasForeignKey("TypeId");
-
-                    b.Navigation("Type");
-                });
-
             modelBuilder.Entity("Domain.Facilities", b =>
                 {
                     b.HasOne("Domain.Lookup", "Category")
@@ -987,25 +862,6 @@ namespace Infrastructure.Migrations
                     b.Navigation("PricingUnit");
 
                     b.Navigation("Subscription");
-
-                    b.Navigation("Type");
-                });
-
-            modelBuilder.Entity("Domain.MediaFile", b =>
-                {
-                    b.HasOne("Domain.Event", "Event")
-                        .WithMany("MediaFiles")
-                        .HasForeignKey("EventId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Domain.Lookup", "Type")
-                        .WithMany()
-                        .HasForeignKey("TypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Event");
 
                     b.Navigation("Type");
                 });
@@ -1149,11 +1005,6 @@ namespace Infrastructure.Migrations
             modelBuilder.Entity("Domain.Branch", b =>
                 {
                     b.Navigation("BranchComponents");
-                });
-
-            modelBuilder.Entity("Domain.Event", b =>
-                {
-                    b.Navigation("MediaFiles");
                 });
 
             modelBuilder.Entity("Domain.Package", b =>

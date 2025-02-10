@@ -35,7 +35,7 @@ export class ScriptsInitComponent implements OnInit, OnDestroy {
         this.pageInfo.calculateBreadcrumbs();
 
         this.pageInfo.title.asObservable().subscribe((title) => {
-          this.titleService.setTitle(title + " - " + environment.appName);
+          this.titleService.setTitle(title );
         });
       }, 10);
     };

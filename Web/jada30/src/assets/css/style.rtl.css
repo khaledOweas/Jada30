@@ -29652,6 +29652,8 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
 }
 .show:not(.menu-dropdown) > .menu-sub-accordion, .menu-sub-accordion.show {
   display: flex;
+  overflow-y: auto;
+  max-height: 300px;
 }
 
 .menu-sub-indention .menu-sub:not([data-popper-placement]) {

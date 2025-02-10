@@ -22,6 +22,9 @@ namespace Identity.Application
             services.AddTransient<IPackageManagementService, PackageManagementService>();
             services.AddTransient<ISupportingServiceProviderManagementService, SupportingServiceProviderManagementService>();
             services.AddTransient<IPerkManagementService, PerkManagementService>();
+            services.AddTransient<IEventManagementService, EventManagementService>();
+            services.AddTransient<IFileService, FileService>();
+            services.AddTransient<IFileStorageService, FileStorageService>();
             return services;
         }
     }

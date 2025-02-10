@@ -6,6 +6,8 @@ using Jada30Core.Common.Package;
 using Jada30Core.Common.PackageFaclilty;
 using Jada30Core.Common.SupportingServiceProvider;
 using Jada30Core.Common.Perk;
+using Jada30Core.Common.AboutJada;
+using Jada30Core.Common.Event;
 
 
 namespace Identity.Application.Mappings;
@@ -110,6 +112,21 @@ public class MappingProfile : Profile
             .ReverseMap()
             .ForPath(dest => dest.LicenseName, opt => opt.MapFrom(src => src.Perk.Name))
             .ForPath(dest => dest.LicenseName, opt => opt.MapFrom(src => src.License.Name));
+
+        CreateMap<CreateAboutJadaDto, Domain.AboutJada>().ReverseMap();
+
+        CreateMap<GetEventDto, Event>().ReverseMap();
+        CreateMap<CreateEventDto, Event>().ReverseMap();
+        CreateMap<CreateEventMediaFileDto, MediaFile>().ReverseMap();
+        CreateMap<GetEventMediaFileDto, MediaFile>()
+            .ForPath(dest => dest.Event.Title, opt => opt.MapFrom(src => src.EventTitle))
+            .ForPath(dest => dest.Event.TitleAr, opt => opt.MapFrom(src => src.EventTitleAr))
+            .ForPath(dest => dest.Type.Name, opt => opt.MapFrom(src => src.TypeName))
+            .ReverseMap()
+            .ForPath(dest => dest.EventTitle, opt => opt.MapFrom(src => src.Event.Title))
+            .ForPath(dest => dest.EventTitleAr, opt => opt.MapFrom(src => src.Event.TitleAr))
+            .ForPath(dest => dest.TypeName, opt => opt.MapFrom(src => src.Type.Name));
+
 
     }
 }

@@ -66,6 +66,71 @@
       "SwaggerKey": "Jada30Core"
     },
     {
+      "UpstreamPathTemplate": "/Perk",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamPathTemplate": "/Perk",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7043"
+        }
+      ],
+      "SwaggerKey": "Jada30Core"
+    },
+    {
+      "UpstreamPathTemplate": "/Perk",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/Perk",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7043"
+        }
+      ],
+      "SwaggerKey": "Jada30Core"
+    },
+    {
+      "UpstreamPathTemplate": "/Perk/{id}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/Perk/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7043"
+        }
+      ],
+      "SwaggerKey": "Jada30Core"
+    },
+    {
+      "UpstreamPathTemplate": "/Perk/{id}",
+      "UpstreamHttpMethod": [ "Put" ],
+      "DownstreamPathTemplate": "/Perk/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7043"
+        }
+      ],
+      "SwaggerKey": "Jada30Core"
+    },
+    {
+      "UpstreamPathTemplate": "/Perk/{id}",
+      "UpstreamHttpMethod": [ "Delete" ],
+      "DownstreamPathTemplate": "/Perk/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7043"
+        }
+      ],
+      "SwaggerKey": "Jada30Core"
+    },
+    {
       "UpstreamPathTemplate": "/Facility/GetFacilities",
       "UpstreamHttpMethod": [ "Get" ],
       "DownstreamPathTemplate": "/Facility/GetFacilities",
