@@ -5,11 +5,6 @@ using Jada30Core.Application.Interfaces;
 using Jada30Core.Common.BaseResponse;
 using Jada30Core.Common.Package;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Jada30Core.Application.Services
 {

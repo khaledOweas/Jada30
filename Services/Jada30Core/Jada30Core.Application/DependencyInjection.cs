@@ -25,6 +25,8 @@ namespace Identity.Application
             services.AddTransient<IEventManagementService, EventManagementService>();
             services.AddTransient<IFileService, FileService>();
             services.AddTransient<IFileStorageService, FileStorageService>();
+            services.AddTransient<IPriceCategoriesManagementService, PriceCategoriesManagementService>();
+            services.AddTransient<IWorkspaceManagementService, WorkspaceManagementService>();
             return services;
         }
     }

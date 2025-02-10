@@ -5,6 +5,11 @@ export const locale = {
     TRANSLATOR: {
       SELECT: "اختر لغتك"
     },
+    Validation: {
+      Required: "مطلوب",
+      Minlength: "لا يطابق الحد الأدني لعدد الاحرف",
+      Maxlength: "لا يطابق الحد الأقصي لعدد الاحرف"
+    },
     MENU: {
       NEW: "جديد",
       ACTIONS: "إجراءات",
@@ -32,7 +37,16 @@ export const locale = {
         Password: "كلمة المرور",
         ForgetPassword: "نسيت كلمة المرور ؟",
         NotaMemeberYet: "هل انت ليس بعضو ؟",
-        SignUp: "تسجيل جديد "
+        SignUp: "تسجيل جديد ",
+        AppName: "بنك التنمية الإجتماعية",
+        LoginError: "خطأ اثناء تسجيل الدخول ",
+        UserNameError: "إسم المستخدم غير مسجل لدينا",
+        PasswordError: "خطأ في كلمة المرور",
+        Email: "البريد أو اسم المستخدم",
+        EmailRequired: "  البريد أو اسم المستخدم مطلوب ",
+        PasswordRequired: "كلمة المرور مطلوبة ",
+        LoginButton: "استكمال",
+        LoginButtonLoading: "انتظر من فضلك ..."
       },
       FORGOT: {
         TITLE: "نسيت كلمة المرور؟",
@@ -242,6 +256,7 @@ export const locale = {
     Branches: {
       Create: "إضافة فرع جديد",
       Name: "اسم الفرع",
+      NameAr: "اسم الفرع عربي",
       WebsiteBranchId: "معرف فرع الموقع",
       WorkingDays: "أيام العمل",
       StartTime: "وقت البدء",
@@ -255,12 +270,15 @@ export const locale = {
       StartTimeRequired: "وقت البدء مطلوب",
       EndTimeRequired: "وقت الانتهاء مطلوب",
       CategoryBranchIdRequired: "معرف فئة الفرع مطلوب",
-      BranchComponentsRequired: "مكونات الفرع مطلوبة"
+      BranchComponentsRequired: "مكونات الفرع مطلوبة",
+      Update: "تحديث بيانات الفرع ",
+      AdministrativeRegionId: "المنطقة الإدارية"
     },
     Facility: {
-      CreateTitle: "إنشاء منشأة",
-      Name: "اسم المنشأة",
-      NameRequired: "اسم المنشأة مطلوب.",
+      CreateTitle: "إنشاء مرفق",
+      Name: "اسم مرفق",
+      NameAr: "اسم مرفق عربي",
+      NameRequired: "اسم مرفق مطلوب.",
       CategoryId: "التصنيف",
       CategoryIdRequired: "التصنيف مطلوب.",
       TypeId: "النوع",
@@ -276,7 +294,46 @@ export const locale = {
       IsTaxIncluded: "هل السعر شامل الضريبة؟",
       BasicContract: "العقد الأساسي",
       BasicContractRequired: "العقد الأساسي مطلوب.",
-      IsPublish: "هل تنشر الآن؟"
+      IsPublish: "هل تنشر الآن؟",
+      Update: "تحديث بيانات المرفق"
+    },
+    Packages: {
+      Create: "إنشاء باقة",
+      Update: "تحديث الباقة",
+      Name: "اسم الباقة",
+      NameAr: "اسم الباقة عربي",
+      Description: "وصف الباقة",
+      DescriptionAr: "وصف الباقة عربي",
+      NameRequired: "حقل الاسم مطلوب",
+      DescriptionRequired: "حقل الوصف مطلوب",
+      DefaultDiscount: "الخصم الافتراضي",
+      MaxBranchUsers: "الحد الأقصى للمستخدمين الفرعيين",
+      MaxMogdiPlatformUsage: "الحد الأقصى لاستخدام منصة مجدي",
+      WrittenServices: "الخدمات المكتبية",
+      Quantity: "الكمية",
+      Discount: "نسبة الخصم",
+      Price: "السعر",
+      Tax: "يشمل الضريبة؟",
+      PackageFacilities: "مرافق الباقة",
+      AddFacility: "+ إضافة مرفق",
+      FacilityId: " اسم مرفق ",
+      TypeId: "نوع الباقة",
+      TypeIdRequired: "نوع الباقة مطلوب"
+    },
+    PricingCategory: {
+      Name: "اسم تصنيف التسعير",
+      NameAr: "اسم تصنيف التسعير عربي",
+      Description: "وصف تصنيف التسعير",
+      DescriptionAr: "وصف تصنيف التسعير عربي",
+      Price: "السعر",
+      PriceRequired: "السعر مطلوب",
+      Create: "إنشاء تصنيف التسعير",
+      Update: "تحديث التصنيف التسعير",
+
+      LookupName: "اسم التعريف",
+      IsActive: "نشط",
+      NameRequired: "اسم تصنيف التسعير مطلوب",
+      NameArRequired: "اسم تصنيف التسعير عربي مطلوب"
     },
     Doctors: {
       DoctorName: "اسم الطبيب",

@@ -23,11 +23,12 @@ export class LookupMultiSelectComponent implements OnInit {
   @Input() placeholderTextTranslated: string;
   @Input() labelTextTranslated: string;
   private destroy$ = new Subject<void>();
+  lang: string = localStorage.getItem("language")!;
 
-  selectedItem: any = {};
   items: any[] = [];
   constructor(private lookupService: LookupService) {}
   ngOnInit(): void {
+    this.lang = localStorage.getItem("language")!;
     this.loadAll();
   }
 
@@ -37,7 +38,10 @@ export class LookupMultiSelectComponent implements OnInit {
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (res: GetLookupDtoListBaseResponse) => {
-          this.items = res.responseData?.map((x) => ({ id: x.id!, name: x.nameAr!, code: x.internalCode! })) || [];
+          this.items =
+            res.responseData?.map((x) => ({ id: x.id!, name: this.lang === "ar" ? x.nameAr! : x.name! })) || [];
+
+
         }
       });
   }

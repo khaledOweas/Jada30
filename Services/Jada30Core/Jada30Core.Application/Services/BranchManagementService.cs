@@ -43,13 +43,13 @@ namespace Jada30Core.Application.Services
 
         public async Task<BaseResponse<List<GetBranchDto>>> GetBranches()
         {
-            var branches = _unitOfWork.GetRepository<Branch>().GetAll(include: x => x.Include(x => x.BranchComponents).ThenInclude(x => x.Component));
+            var branches = _unitOfWork.GetRepository<Branch>().GetAll(include: x => x.Include(x => x.BranchComponents).ThenInclude(x => x.Component).Include(x => x.AdministrativeRegion).Include(x => x.CategoryBranch).Include(x => x.WebsiteBranch));
             return new SuccessResponse<List<GetBranchDto>>("Branches retrieved successfully.", _mapper.Map<List<GetBranchDto>>(branches));
         }
 
         public async Task<BaseResponse<GetBranchDto>> GetBranch(long id)
         {
-            var branch = (await _unitOfWork.GetRepository<Branch>().GetAllAsync(x => x.Id == id, include: x => x.Include(x => x.BranchComponents).ThenInclude(x => x.Component))).FirstOrDefault();
+            var branch = (await _unitOfWork.GetRepository<Branch>().GetAllAsync(x => x.Id == id, include: x => x.Include(x => x.BranchComponents).ThenInclude(x => x.Component).Include(x => x.AdministrativeRegion).Include(x => x.CategoryBranch).Include(x => x.WebsiteBranch))).FirstOrDefault();
             return new SuccessResponse<GetBranchDto>("Branch retrieved successfully.", _mapper.Map<GetBranchDto>(branch));
         }
 

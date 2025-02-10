@@ -30,4 +30,6 @@ export class BaseComponent implements OnDestroy {
     this.lang = localStorage.getItem("language")!;
     this.router = injector.get(Router);
   }
+
+
 }

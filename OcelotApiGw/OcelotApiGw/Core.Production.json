@@ -1,0 +1,296 @@
+{
+	"Routes": [
+		{
+			"UpstreamPathTemplate": "/Branch",
+			"UpstreamHttpMethod": [ "Post" ],
+			"DownstreamPathTemplate": "/Branch",
+			"DownstreamScheme": "http",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "localhost",
+					"Port": "7043"
+				}
+			],
+			"SwaggerKey": "Jada30Core"
+		},
+		{
+			"UpstreamPathTemplate": "/Branch",
+			"UpstreamHttpMethod": [ "Get" ],
+			"DownstreamPathTemplate": "/Branch",
+			"DownstreamScheme": "http",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "localhost",
+					"Port": "7043"
+				}
+			],
+			"SwaggerKey": "Jada30Core"
+		},
+		{
+			"UpstreamPathTemplate": "/Branch/{id}",
+			"UpstreamHttpMethod": [ "Get" ],
+			"DownstreamPathTemplate": "/Branch/{id}",
+			"DownstreamScheme": "http",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "localhost",
+					"Port": "7043"
+				}
+			],
+			"SwaggerKey": "Jada30Core"
+		},
+		{
+			"UpstreamPathTemplate": "/Branch/{id}",
+			"UpstreamHttpMethod": [ "Put" ],
+			"DownstreamPathTemplate": "/Branch/{id}",
+			"DownstreamScheme": "http",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "localhost",
+					"Port": "7043"
+				}
+			],
+			"SwaggerKey": "Jada30Core"
+		},
+		{
+			"UpstreamPathTemplate": "/Branch/{id}",
+			"UpstreamHttpMethod": [ "Delete" ],
+			"DownstreamPathTemplate": "/Branch/{id}",
+			"DownstreamScheme": "http",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "localhost",
+					"Port": "7043"
+				}
+			],
+			"SwaggerKey": "Jada30Core"
+		},
+		{
+			"UpstreamPathTemplate": "/Facility/GetFacilities",
+			"UpstreamHttpMethod": [ "Get" ],
+			"DownstreamPathTemplate": "/Facility/GetFacilities",
+			"DownstreamScheme": "http",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "localhost",
+					"Port": "7043"
+				}
+			],
+			"SwaggerKey": "Jada30Core"
+		},
+		{
+			"UpstreamPathTemplate": "/Facility/GetFacility/{id}",
+			"UpstreamHttpMethod": [ "Get" ],
+			"DownstreamPathTemplate": "/Facility/GetFacility/{id}",
+			"DownstreamScheme": "http",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "localhost",
+					"Port": "7043"
+				}
+			],
+			"SwaggerKey": "Jada30Core"
+		},
+		{
+			"UpstreamPathTemplate": "/Facility/CreateFacility",
+			"UpstreamHttpMethod": [ "Post" ],
+			"DownstreamPathTemplate": "/Facility/CreateFacility",
+			"DownstreamScheme": "http",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "localhost",
+					"Port": "7043"
+				}
+			],
+			"SwaggerKey": "Jada30Core"
+		},
+		{
+			"UpstreamPathTemplate": "/Facility/UpdateFacility/{id}",
+			"UpstreamHttpMethod": [ "Put" ],
+			"DownstreamPathTemplate": "/Facility/UpdateFacility/{id}",
+			"DownstreamScheme": "http",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "localhost",
+					"Port": "7043"
+				}
+			],
+			"SwaggerKey": "Jada30Core"
+		},
+		{
+			"UpstreamPathTemplate": "/Facility/{id}",
+			"UpstreamHttpMethod": [ "Delete" ],
+			"DownstreamPathTemplate": "/Facility/{id}",
+			"DownstreamScheme": "http",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "localhost",
+					"Port": "7043"
+				}
+			],
+			"SwaggerKey": "Jada30Core"
+		},
+		{
+			"UpstreamPathTemplate": "/Package/GetPackages",
+			"UpstreamHttpMethod": [ "Get" ],
+			"DownstreamPathTemplate": "/Package/GetPackages",
+			"DownstreamScheme": "http",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "localhost",
+					"Port": "7043"
+				}
+			],
+			"SwaggerKey": "Jada30Core"
+		},
+		{
+			"UpstreamPathTemplate": "/Package/CreatePackage",
+			"UpstreamHttpMethod": [ "Post" ],
+			"DownstreamPathTemplate": "/Package/CreatePackage",
+			"DownstreamScheme": "http",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "localhost",
+					"Port": "7043"
+				}
+			],
+			"SwaggerKey": "Jada30Core"
+		},
+		{
+			"UpstreamPathTemplate": "/Package/UpdatePackage/{id}",
+			"UpstreamHttpMethod": [ "Put" ],
+			"DownstreamPathTemplate": "/Package/UpdatePackage/{id}",
+			"DownstreamScheme": "http",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "localhost",
+					"Port": "7043"
+				}
+			],
+			"SwaggerKey": "Jada30Core"
+		},
+		{
+			"UpstreamPathTemplate": "/Package/DeletePackage/{id}",
+			"UpstreamHttpMethod": [ "Delete" ],
+			"DownstreamPathTemplate": "/Package/DeletePackage/{id}",
+			"DownstreamScheme": "http",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "localhost",
+					"Port": "7043"
+				}
+			],
+			"SwaggerKey": "Jada30Core"
+		},
+		{
+			"UpstreamPathTemplate": "/Package/GetPackage/{id}",
+			"UpstreamHttpMethod": [ "Get" ],
+			"DownstreamPathTemplate": "/Package/GetPackage/{id}",
+			"DownstreamScheme": "http",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "localhost",
+					"Port": "7043"
+				}
+			],
+			"SwaggerKey": "Jada30Core"
+		},
+		{
+			"UpstreamPathTemplate": "/PriceCategory/GetPriceCategories",
+			"UpstreamHttpMethod": [ "Get" ],
+			"DownstreamPathTemplate": "/PriceCategory/GetPriceCategories",
+			"DownstreamScheme": "http",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "localhost",
+					"Port": "7043"
+				}
+			],
+			"SwaggerKey": "Jada30Core"
+		},
+		{
+			"UpstreamPathTemplate": "/PriceCategory/AddPriceCategory",
+			"UpstreamHttpMethod": [ "Post" ],
+			"DownstreamPathTemplate": "/PriceCategory/AddPriceCategory",
+			"DownstreamScheme": "http",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "localhost",
+					"Port": "7043"
+				}
+			],
+			"SwaggerKey": "Jada30Core"
+		},
+		{
+			"UpstreamPathTemplate": "/PriceCategory/UpdatePriceCategory/{id}",
+			"UpstreamHttpMethod": [ "Put" ],
+			"DownstreamPathTemplate": "/PriceCategory/UpdatePriceCategory/{id}",
+			"DownstreamScheme": "http",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "localhost",
+					"Port": "7043"
+				}
+			],
+			"SwaggerKey": "Jada30Core"
+		},
+		{
+			"UpstreamPathTemplate": "/PriceCategory/DeletePriceCategory/{id}",
+			"UpstreamHttpMethod": [ "Delete" ],
+			"DownstreamPathTemplate": "/PriceCategory/DeletePriceCategory/{id}",
+			"DownstreamScheme": "http",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "localhost",
+					"Port": "7043"
+				}
+			],
+			"SwaggerKey": "Jada30Core"
+		},
+		{
+			"UpstreamPathTemplate": "/PriceCategory/GetPriceCategory/{id}",
+			"UpstreamHttpMethod": [ "Get" ],
+			"DownstreamPathTemplate": "/PriceCategory/GetPriceCategory/{id}",
+			"DownstreamScheme": "http",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "localhost",
+					"Port": "7043"
+				}
+			],
+			"SwaggerKey": "Jada30Core"
+		},
+		{
+			"UpstreamPathTemplate": "/PriceCategory/ToggelPublish/{id}",
+			"UpstreamHttpMethod": [ "Put" ],
+			"DownstreamPathTemplate": "/PriceCategory/ToggelPublish/{id}",
+			"DownstreamScheme": "http",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "localhost",
+					"Port": "7043"
+				}
+			],
+			"SwaggerKey": "Jada30Core"
+		}
+	],
+	"SwaggerEndPoints": [
+		{
+			"Key": "Jada30Core",
+			"Config": [
+				{
+					"Name": "Jada30Core API",
+					"Version": "v1",
+					"Url": "http://localhost:7043/swagger/v1/swagger.json"
+				}
+			]
+		}
+	],
+	"Logging": {
+		"LogLevel": {
+			"Default": "Information",
+			"Microsoft": "Warning",
+			"Ocelot": "Debug"
+		}
+	}
+}

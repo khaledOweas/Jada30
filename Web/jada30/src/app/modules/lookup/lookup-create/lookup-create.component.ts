@@ -48,6 +48,7 @@ export class LookupCreateComponent extends BaseComponent implements OnInit {
       descriptionAr: [""],
       internalCode: ["", Validators.required],
       internalRef: [this.code],
+      price: this.fb.control<number>(0),
       isActive: [true]
     });
     this.subscribeToNameChange();

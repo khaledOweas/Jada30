@@ -210,7 +210,7 @@ export class SharedDatatableComponent {
       return this.defaultImage;
     }
   }
-  defaultImage: string = "https://mutabbib-test.start-it-ly.com/assets/logo/png%202.png";
+  defaultImage: string = "../assets/logo/png%202.png";
   onImageError(event: any): void {
     event.target.src = this.defaultImage;
   }
@@ -305,5 +305,35 @@ th {
 
       newWindow!.close();
     }, 1000);
+  }
+
+  htmlContent(ind: string): string {
+    switch (ind) {
+      case "edit":
+        return this.lang === "ar"
+          ? `<i class="ki-duotone ki-tablet-delete">
+ <span class="path1"></span>
+ <span class="path2"></span>
+ <span class="path3"></span>
+</i> تعديل`
+          : `<i class="ki-duotone ki-tablet-delete ">
+ <span class="path1"></span>
+ <span class="path2"></span>
+ <span class="path3"></span>
+</i> Edit`;
+      case "delete":
+        return this.lang === "ar"
+          ? `<i class="ki-duotone ki-tablet-delete">
+ <span class="path1"></span>
+ <span class="path2"></span>
+ <span class="path3"></span>
+</i> حذف`
+          : `<i class="ki-duotone ki-tablet-delete ">
+ <span class="path1"></span>
+ <span class="path2"></span>
+ <span class="path3"></span>
+</i> Delete`;
+    }
+    return "";
   }
 }

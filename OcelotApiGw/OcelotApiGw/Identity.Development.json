@@ -251,7 +251,6 @@
 	],
 	"GlobalConfiguration": {
 		"RequestIdKey": "Request-Id",
-		"BaseUrl": "https://localhost:7777",
 		"ServiceDiscoveryProvider": {
 			"Type": "ServiceFabric",
 			"Host": "localhost",

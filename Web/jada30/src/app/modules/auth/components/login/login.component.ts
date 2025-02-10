@@ -6,13 +6,24 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { AsyncPipe, NgClass, NgIf, NgTemplateOutlet } from "@angular/common";
 import { AuthService } from "../../services/auth.service";
 import { jwtDecode } from "jwt-decode";
+import { TranslationModule } from "src/app/modules/i18n";
+import { ValidationAlertsComponent } from "src/app/core/Components/validation-alerts/validation-alerts.component";
+import { TranslationService } from "src/app/core/services/translation.service";
 
 @Component({
   selector: "app-login",
   templateUrl: "./login.component.html",
   styleUrls: ["./login.component.scss"],
   standalone: true,
-  imports: [NgClass, NgTemplateOutlet, FormsModule, ReactiveFormsModule, NgIf, AsyncPipe]
+  imports: [
+    NgClass,
+    NgTemplateOutlet,
+    FormsModule,
+    ReactiveFormsModule,
+    AsyncPipe,
+    TranslationModule,
+    ValidationAlertsComponent
+  ]
 })
 export class LoginComponent implements OnInit, OnDestroy {
   // KeenThemes mock, change it to:
@@ -31,6 +42,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
+    public tr: TranslationService,
     private route: ActivatedRoute,
     private router: Router
   ) {
@@ -68,7 +80,8 @@ export class LoginComponent implements OnInit, OnDestroy {
       ]
     });
   }
-
+  usernameError: boolean = false;
+  passwordError: boolean = false;
   submit() {
     this.hasError = false;
     const loginSubscr = this.authService
@@ -84,12 +97,22 @@ export class LoginComponent implements OnInit, OnDestroy {
               nameEn: JSON.parse(JSON.parse(JSON.stringify(jwtDecode(response.access_token))).data).UserName
             })
           );
+          this.authService.isLoadingSubject.next(false);
           this.router.navigate(["/dashboard"]);
-          //  window.location.href = "#/user/user-list";
         },
-        (error) => {
-          console.error("Login failed:", error);
-          alert("Invalid login credentials");
+        (e) => {
+          this.usernameError = false;
+          this.passwordError = false;
+          if (e.error.error_description === "USER_NOT_EXIST") {
+            this.usernameError = true;
+          }
+
+          if (e.error.error_description === "PASSWORD_INCORRECT") {
+            this.passwordError = true;
+          }
+
+          this.hasError = false;
+          this.authService.isLoadingSubject.next(false);
         }
       );
     this.unsubscribe.push(loginSubscr);

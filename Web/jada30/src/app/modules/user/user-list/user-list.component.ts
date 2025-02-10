@@ -6,6 +6,7 @@ import { takeUntil } from "rxjs";
 import { BaseComponent } from "src/app/core/Components/base/base.component";
 import { SharedDatatableComponent } from "src/app/core/shared/shared-datatable/shared-datatable.component";
 import { SharedDataTableColumn } from "src/app/core/shared/shared-datatable/sharedDatatablesModels";
+import { ColumnManager, ListColumnType } from "src/app/data/DataTableColumnData";
 import { IdentityService, UserDto, UserDtoListBaseResponse } from "src/app/services/IdentityService";
 import { BooleanBaseResponse } from "src/app/services/LookupService";
 import Swal from "sweetalert2";
@@ -21,76 +22,13 @@ import Swal from "sweetalert2";
 export class UserListComponent extends BaseComponent implements OnInit {
   Cols!: SharedDataTableColumn[];
   Data: UserDto[] | undefined;
-  contentFirstBtn: string;
-  contentSecondBtn: string;
 
   constructor(private injector: Injector, private service: IdentityService) {
     super(injector);
-    this.contentFirstBtn =
-      this.lang === "ar"
-        ? `<i class="ki-duotone ki-tablet-delete">
- <span class="path1"></span>
- <span class="path2"></span>
- <span class="path3"></span>
-</i> تعديل`
-        : `<i class="ki-duotone ki-tablet-delete ">
- <span class="path1"></span>
- <span class="path2"></span>
- <span class="path3"></span>
-</i> Edit`;
 
-    this.contentSecondBtn =
-      this.lang === "ar"
-        ? `<i class="ki-duotone ki-tablet-delete">
- <span class="path1"></span>
- <span class="path2"></span>
- <span class="path3"></span>
-</i> حذف`
-        : `<i class="ki-duotone ki-tablet-delete ">
- <span class="path1"></span>
- <span class="path2"></span>
- <span class="path3"></span>
-</i> Delete`;
+    this.Cols = ColumnManager.getCol(ListColumnType.User);
 
-    this.Cols = [
-      SharedDataTableColumn.fromJS({
-        id: 1,
-        sorted: true,
-        filtered: true,
-        hidden: false,
-        field: "id",
-        header: this.tr.get("SHARED.Id"),
-        type: "text"
-      }),
-      SharedDataTableColumn.fromJS({
-        id: 4,
-        sorted: true,
-        filtered: true,
-        hidden: false,
-        field: this.lang == "ar" ? "userNameAr" : "userName",
-        header: this.tr.get("Users.UserName"),
-        type: "text"
-      }),
 
-      SharedDataTableColumn.fromJS({
-        id: 5,
-        sorted: true,
-        filtered: true,
-        hidden: false,
-        field: "email",
-        header: this.tr.get("Users.Email"),
-        type: "text"
-      }),
-      SharedDataTableColumn.fromJS({
-        id: 5,
-        sorted: true,
-        filtered: true,
-        hidden: false,
-        field: "roles",
-        header: this.tr.get("Roles.Roles"),
-        type: "roles"
-      })
-    ];
   }
   ngOnInit(): void {
     this.loadUsers();
