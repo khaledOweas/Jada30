@@ -35,7 +35,7 @@ namespace Jada30Core.Application.Services
         {
             var response = new BaseResponse<string>();
           
-            var package = (await _unitOfWork.GetRepository<Package>().GetAllAsync(x => x.Id == id)).FirstOrDefault();
+            var package = (await _unitOfWork.GetRepository<Package>().GetAllAsync(x => x.Id == id && !x.IsDeleted)).FirstOrDefault();
             if (package == null)
             {
                 response.Message = "Package not found";
@@ -53,7 +53,7 @@ namespace Jada30Core.Application.Services
         {
             var response = new BaseResponse<List<GetPackageDto>>();
           
-            var packages = await _unitOfWork.GetRepository<Package>().GetAllAsync(include: x => x.Include(x => x.PackageFacilities).ThenInclude(x => x.Facility).Include(x => x.PackageFacilities).ThenInclude(x => x.Type));
+            var packages = await _unitOfWork.GetRepository<Package>().GetAllAsync(x => !x.IsDeleted, include: x => x.Include(x => x.PackageFacilities).ThenInclude(x => x.Facility).Include(x => x.PackageFacilities).ThenInclude(x => x.Type));
             response.ResponseData = _mapper.Map<List<GetPackageDto>>(packages);
             response.IsSuccess = true;
             
@@ -64,7 +64,7 @@ namespace Jada30Core.Application.Services
         {
             var response = new BaseResponse<GetPackageDto>();
           
-            var package = (await _unitOfWork.GetRepository<Package>().GetAllAsync(x => x.Id == id, include: x => x.Include(x => x.PackageFacilities).ThenInclude(x => x.Facility).Include(x => x.PackageFacilities).ThenInclude(x => x.Type))).FirstOrDefault();
+            var package = (await _unitOfWork.GetRepository<Package>().GetAllAsync(x => x.Id == id && !x.IsDeleted, include: x => x.Include(x => x.PackageFacilities).ThenInclude(x => x.Facility).Include(x => x.PackageFacilities).ThenInclude(x => x.Type))).FirstOrDefault();
             if (package == null)
             {
                 response.Message = "Package not found";
@@ -89,6 +89,15 @@ namespace Jada30Core.Application.Services
          
             _mapper.Map(package, packageEntity);
             _unitOfWork.GetRepository<Package>().Update(packageEntity);
+            if (packageEntity.PackageFacilities != null)
+            {
+                _unitOfWork.GetRepository<PackageFacility>().Delete(packageEntity.PackageFacilities);
+            }
+            if (package.PackageFacilities != null)
+            {
+                var packageFacility =_mapper.Map<List<PackageFacility>>(package.PackageFacilities);
+                await _unitOfWork.GetRepository<PackageFacility>().InsertAsync(packageFacility);
+            }
             await _unitOfWork.SaveChangesAsync();
             response.IsSuccess = true;
            
