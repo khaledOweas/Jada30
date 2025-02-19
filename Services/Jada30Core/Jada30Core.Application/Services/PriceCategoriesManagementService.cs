@@ -39,6 +39,16 @@ namespace Jada30Core.Application.Services
                 return new FailedResponse<GetPriceCategory>("Price Category not found.");
             _mapper.Map(request, priceCategory);
             _unitOfWork.GetRepository<PricingCategories>().Update(priceCategory);
+            if (priceCategory.CategoryAdministrativeRegions != null)
+            {
+                _unitOfWork.GetRepository<CategoryAdministrativeRegion>().Delete(priceCategory.CategoryAdministrativeRegions);
+            }
+            if (request.CategoryAdministrativeRegionIds != null)
+            {
+                var categoryAdministrativeRegions = request.CategoryAdministrativeRegionIds.Select(x => new CategoryAdministrativeRegion { AdministrativeRegionId = x, PricingCategoryId = priceCategory.Id }).ToList();
+                await _unitOfWork.GetRepository<CategoryAdministrativeRegion>().InsertAsync(categoryAdministrativeRegions);
+            }
+
             await _unitOfWork.SaveChangesAsync();
             return new SuccessResponse<GetPriceCategory>("Price Category updated successfully.", _mapper.Map<GetPriceCategory>(priceCategory));
         }
