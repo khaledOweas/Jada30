@@ -70,7 +70,7 @@ export class AuthService implements OnDestroy {
 
     const body = new HttpParams()
       .set("grant_type", "password")
-      .set("client_id", "Jada-30.api.production")
+      .set("client_id", "Jada-30.api.local")
       .set("username", username)
       .set("password", password)
       .set("scope", "read openid offline_access")
