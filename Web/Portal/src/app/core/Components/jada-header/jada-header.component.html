@@ -1,0 +1,45 @@
+<div class="header">
+  <!-- <p-toast /> -->
+  <div class="toolbar">
+    <p-button icon="pi pi-search" [rounded]="true" [text]="true" severity="secondary" />
+    <p-button icon="pi pi-language" [label]="this.languagelabel" [rounded]="true" [text]="true" severity="secondary"
+      (click)="toggleLanguage()" />
+    <p-button [rounded]="true" [text]="true" severity="secondary" [icon]="mode === 'dark' ? 'pi pi-moon' : 'pi pi-sun'"
+      (click)="toggleMode()" />
+  </div>
+  <div class="navbar-container">
+    <div class="logo">
+      <img src="assets\media\logos\logo.png" />
+    </div>
+    <p-menubar styleClass="custom-menubar" [model]="items" />
+    <div *ngIf="state==='default'">
+      <p-button class="login-button" label="تسجيل الدخول" icon="pi pi-sign-in" styleClass="m-0" iconPos="right"
+        variant="outlined" severity="secondary" routerlink="/src/app/modules/auth/components/login/login.component.ts" />
+    </div>
+    <div *ngIf="state==='loggedin'" class="flex items-center">
+      <!-- <span class="pi pi-shopping-cart" style="font-size: 2rem"></span> -->
+      <p-button icon="pi pi-shopping-cart" aria-label="Save" [rounded]="true" [text]="true" severity="secondary"
+        [link]="true" link="www.google.com" />
+      <p-avatar  [label]="avatarusername" class="mr-2" size="large" shape="circle" />
+      <!-- [image]="useravatar" -->
+      <div class="nav-side">
+        <label style="padding-inline-start: 3rem;">هلا،</label>
+        <p-menubar styleClass="custom-menubar" [model]="treeitems" />
+        <!-- <p-tree styleClass="p-tree-custom w-full md:w-[10rem]" selectionMode="single" [value]="treeitems"
+          layout="horizontal">
+          <ng-template let-node pTemplate="url">
+            <a [href]="node.data" target="_blank" rel="noopener noreferrer"
+              class="text-surface-700 dark:text-surface-100 hover:text-primary">
+              {{ node.label }}
+            </a>
+          </ng-template>
+          <ng-template let-node pTemplate="default">
+            <b>{{ node.label }}</b>
+          </ng-template>
+        </p-tree> -->
+      </div>
+    </div>
+
+  </div>
+
+</div>

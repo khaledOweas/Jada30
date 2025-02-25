@@ -1,0 +1,249 @@
+/*================= constant styles ==================*/
+.card--container {
+  box-sizing: border-box;
+  display: flex;
+  padding: 1rem;
+  gap: 1rem;
+  border-radius: 0.5rem 0.5rem 0.5rem 0.1rem;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.card--up--info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+  align-self: stretch;
+}
+.card--up--container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-self: stretch;
+  justify-content: center;
+  align-items: flex-start;
+  flex-grow: 1;
+  .card--up {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 0.5rem;
+    align-self: stretch;
+    .card--title {
+      flex: 1 0 0;
+      font-family: 'Cairo', sans-serif; /* Apply Cairo font to the body */
+      font-size: 1.25rem;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 2.3425rem;
+      text-transform: capitalize;
+    }
+    .card--date {
+      font-family: 'Cairo', sans-serif; /* Apply Cairo font to the body */
+      font-size: 1.25rem;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 1.125rem;
+      text-transform: capitalize;
+    }
+  }
+  .card--sub {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1.5rem;
+    align-self: stretch;
+    .card--label {
+      font-family: 'Cairo', sans-serif; /* Apply Cairo font to the body */
+      font-size: 0.75rem;
+      font-style: normal;
+      font-weight: 500;
+    }
+    .card--note {
+      display: flex;
+      justify-content: flex-end;
+      flex: 1 0 0;
+      font-family: 'Cairo', sans-serif; /* Apply Cairo font to the body */
+      font-size: 0.75rem;
+      font-style: normal;
+      font-weight: 500;
+    }
+  }
+}
+.card--mid--container {
+  align-self: stretch;
+  font-family: 'Cairo', sans-serif; /* Apply Cairo font to the body */
+  font-size: 0.875rem;
+  font-style: normal;
+  line-height: 1.25rem;
+  text-transform: capitalize;
+  font-weight: 400;
+  display: flex;
+  align-items: flex-end;
+}
+/*================== End Constant Styles ==================*/
+
+/*================= Changeable Styles ==================*/
+.card--container {
+  &.card--lessinfo {
+    &.card--light {
+      border: 1px solid var(--noble-black-secondary-noble-black-tone-20, #eaeef1);
+      background: var(--white-100, #fff);
+    }
+    &.card--dark {
+      border: 1px solid var(--noble-black-secondary-noble-black-tone-85, #2e3133);
+      background: var(--noble-black-secondary-noble-black-tone-85, #2e3133);
+    }
+  }
+  &.card--fullinfo {
+    &.card--light {
+      border: 1px solid var(--noble-black-secondary-noble-black-tone-20, #eaeef1);
+      background: var(--white-100, #fff);
+    }
+    &.card--dark {
+      border: 1px solid var(--noble-black-secondary-noble-black-tone-80, #3f4244);
+      background: var(--noble-black-secondary-noble-black-tone-80, #3f4244);
+    }
+  }
+}
+////////////////////////////////////////////////////////////////////
+.card--title {
+  &.card--arabic {
+    text-align: right;
+  }
+  &.card--lessinfo {
+    &.card--light {
+      color: var(--noble-black-secondary-noble-black-tone-60, #A5B3BC);
+      font-size: 1.25rem !important;
+      font-style: normal !important;
+      font-weight: 700 !important;
+      line-height: 1.3425rem !important;
+    }
+    &.card--dark {
+      color: var(--noble-black-secondary-noble-black-tone-30, #dce0e3);
+    }
+  }
+  &.card--fullinfo {
+    &.card--light {
+      color: var(--noble-black-secondary-noble-black-tone-85, #2e3133);
+    }
+    &.card--dark {
+      color: var(--white-100, #fff);
+    }
+  }
+}
+////////////////////////////////////////////////////////////////////
+.card--date {
+  &.card--lessinfo {
+    &.card--light {
+      color: var(--noble-black-secondary-noble-black-tone-40, #b9bdc0);
+    }
+    &.card--dark {
+      color: var(--noble-black-secondary-noble-black-tone-40, #b9bdc0);
+    }
+  }
+  &.card--fullinfo {
+    &.card--light {
+      color: var(--noble-black-secondary-noble-black-tone-40, #b9bdc0);
+    }
+    &.card--dark {
+      color: var(--noble-black-secondary-noble-black-tone-20, #eaeef1);
+    }
+  }
+}
+////////////////////////////////////////////////////////////////////
+.card--label {
+  &.card--arabic {
+    text-align: right;
+    line-height: 1.125rem;
+    text-transform: capitalize;
+  }
+  &.card--english {
+    line-height: 1rem;
+    letter-spacing: 0.6px;
+  }
+  &.card--lessinfo {
+    &.card--light {
+      color: var(--noble-black-secondary-noble-black-tone-50, #9a9ea1);
+    }
+    &.card--dark {
+      color: var(--noble-black-secondary-noble-black-tone-50, #9a9ea1);
+    }
+  }
+  &.card--fullinfo {
+    &.card--light {
+      color: var(--noble-black-secondary-noble-black-tone-50, #9a9ea1);
+    }
+    &.card--dark {
+      color: var(--noble-black-secondary-noble-black-tone-40, #b9bdc0);
+    }
+  }
+}
+////////////////////////////////////////////////////////////////////
+.card--note {
+  &.card--arabic {
+    line-height: 1.125rem;
+    text-transform: capitalize;
+  }
+  &.card--english {
+    line-height: 1rem;
+    letter-spacing: 0.6px;
+  }
+  &.card--lessinfo {
+    &.card--light {
+      color: var(--noble-black-secondary-noble-black-tone-50, #9a9ea1);
+    }
+    &.card--dark {
+      color: var(--noble-black-secondary-noble-black-tone-50, #9a9ea1);
+    }
+  }
+  &.card--fullinfo {
+    &.card--light {
+      color: var(--noble-black-secondary-noble-black-tone-50, #9a9ea1);
+    }
+    &.card--dark {
+      color: var(--noble-black-secondary-noble-black-tone-40, #b9bdc0);
+    }
+  }
+}
+////////////////////////////////////////////////////////////////////
+.card--mid--container {
+  &.card--arabic {
+    text-align: right;
+  }
+//
+  &.card--lessinfo {
+    &.card--light {
+      color: var(--noble-black-secondary-noble-black-tone-70, #5e6163);
+      font-family: 'Cairo', sans-serif; /* Apply Cairo font to the body */
+      font-size: 1.25rem;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 2.3425rem;
+    }
+    &.card--dark {
+      color: var(--noble-black-secondary-noble-black-tone-40, #b9bdc0);
+    }
+  }
+  &.card--fullinfo {
+    &.card--light {
+      // color: var(--noble-black-secondary-noble-black-tone-40, #b9bdc0);
+      color: var(--noble-black-secondary-noble-black-tone-60, #A5B3BC);
+      font-size: 1.25rem !important;
+      font-style: normal !important;
+      font-weight: 500 !important;
+      line-height: 1.3425rem !important;
+    }
+    &.card--dark {
+      color: var(--noble-black-secondary-noble-black-tone-20, #eaeef1);
+    }
+  }
+//
+  // &.card--light {
+  //   color: var(--noble-black-secondary-noble-black-tone-70, #5e6163);
+  // }
+  // &.card--dark {
+  //   color: var(--noble-black-secondary-noble-black-tone-20, #eaeef1);
+  // }
+}
+/*================== End Changeable Styles ==================*/

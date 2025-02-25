@@ -1,0 +1,117 @@
+
+/* my-range-input.css */
+:host {
+  display: block;
+  width: 100%;
+}
+
+.progress-wrapper {
+  display: flex;
+  min-width: 10rem;
+  width: 100%;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+/* Define styles for the progress container */
+.progress-container {
+  width: 100%;
+  height: .25rem;
+  overflow: hidden;
+  border-radius: 0.0625rem;
+  background: var(--noble-black-secondary-noble-black-tone-20, #EAEEF1);
+}
+
+.progress-container-light {
+  background: var(--noble-black-secondary-noble-black-tone-20, #EAEEF1);
+}
+
+.progress-container-dark {
+  background: var(--noble-black-secondary-noble-black-tone-70, #5E6163);
+}
+
+/* Define styles for the progress bar */
+.progress-bar {
+  height: 100%;
+  width: 0;
+  background-color: #4CAF50;
+  transition: width 0.3s ease;
+  /* Add a smooth transition effect */
+}
+
+/* Define styles for the Light progress bar */
+
+.progress--light.progress--default {
+  background: var(--noble-black-secondary-noble-black-tone-20, #EAEEF1);
+}
+
+.progress--light.progress--success {
+  background: var(--pigment-green-success-normal-pigment-green, #26A637);
+}
+
+.progress--light.progress--alert {
+  background: var(--golden-poppy-alert-normal-golden-poppy-hover, #FDBC00);
+}
+
+.progress--light.progress--warn {
+  background: var(--golden-poppy-alert-golden-poppy-tone-80, #FF8900);
+}
+
+.progress--light.progress--danger {
+  background: var(--safety-red-danger-normal-safety-red, #C00019);
+}
+
+/* Define styles for the dark progress bar */
+
+.progress--dark.progress--default {
+  background: var(--noble-black-secondary-noble-black-tone-70, #5E6163);
+}
+
+.progress--dark.progress--success {
+  background: var(--pigment-green-success-pigment-green-tone-40, #55C15E);
+}
+
+.progress--dark.progress--alert {
+  background: var(--golden-poppy-alert-normal-golden-poppy, #FDC600);
+}
+
+.progress--dark.progress--warn {
+  background: var(--golden-poppy-alert-golden-poppy-tone-70, #FE9B00);
+}
+
+.progress--dark.progress--danger {
+  background: var(--safety-red-danger-safety-red-tone-40, #FF544F);
+}
+
+/* progress-percentage */
+.progress-percentage {
+  text-align: right;
+  /* AR/Labels/AR | (Mobile) Label 8px Medium */
+  font-family: 'Noto Kufi Arabic', sans-serif;
+  font-size: 0.5rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 0.75rem;
+  /* 150% */
+}
+
+/* progress-percentage light */
+.progress-percentage--light {
+  color: var(--noble-black-secondary-noble-black-tone-70, #5E6163);
+}
+
+/* progress-percentage light default */
+.progress-percentage--light.progress-percentage--default {
+  color: var(--noble-black-secondary-noble-black-tone-40, #B9BDC0);
+}
+
+/* progress-percentage dark */
+.progress-percentage--dark {
+  color: var(--noble-black-secondary-noble-black-tone-40, #B9BDC0);
+}
+
+/* progress-percentage dark default */
+.progress-percentage--dark.progress-percentage--default {
+  color: var(--noble-black-secondary-noble-black-tone-70, #5E6163);
+}

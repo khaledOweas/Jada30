@@ -1,0 +1,74 @@
+<div [dir]="language === 'english' ? 'ltr' : 'rtl'">
+  <div *ngIf="header === 'true'" [ngClass]="[
+      'input-internal--header',
+      'input-internal--' + mode,
+      'input-internal--' + language,
+      'input-internal--' + status,
+      hasRequiredValidator() ? 'input-internal--required' : ''
+    ]">
+    {{ headertext }}
+  </div>
+  <div class="input-wrapper">
+    <input type="text" [name]="name" [value]="value" [placeholder]="placeholder" (input)="handleChange($event)"
+      (focus)="onInputFocus()" (blur)="onInputBlur()" [dir]="language === 'english' ? 'ltr' : 'rtl'" 
+      [ngClass]="{
+        'input-internal--original': true,
+        'input-internal--light' : mode === 'light',
+        'input-internal--dark' : mode === 'dark',
+        'input-internal--english' : language ==='english',
+        'input-internal--arabic' : language ==='arabic',
+        'input-internal--phone': type==='phone',
+        'input-internal--regular': type==='regular',
+        'input-internal--currency': type==='currency',
+        'input-internal--disabled' : formControl.valid && status==='disabled',
+        'input-internal--success' : formControl.valid && status==='success',
+        'input-internal--default' : formControl.valid && status==='default',
+        'input-internal--value' : formControl.valid && status==='value',
+        'input-internal--focus' : formControl.valid && status==='focus',
+        'input-internal--error': formControl.invalid
+    }"
+      [style.background]="background" [formControl]="formControl">
+    <div class="close-icon" [ngClass]="['close-icon--' + xmarkvisible]" (click)="onClose()">
+      <!-- <moe-icon name="xmark" size="large" [color]="getCloseIconColorBasedOnStatus(status)"></moe-icon> -->
+      <span class="pi pi-times"></span>
+    </div>
+    <div *ngIf="type === 'regular'" class="circle-icon">
+      <!-- <moe-icon name="circle" variant="regular" size="large" [color]="getCircleIconColorBasedOnStatus(status)"></moe-icon> -->
+      <span class="pi pi-search"></span>
+    </div>
+    <div *ngIf="type === 'currency'" class="currency-button">
+      <!-- <app-button iconname="chevron-down" size="x-small" iconsize="small" radius="rounded" background="fill" 
+        label="ريال"></app-button>-->
+      <!-- <p-button/>   -->
+    </div>
+    <div *ngIf="type === 'phone'" class="phone-button">
+      <!-- <app-button iconname="chevron-down" size="x-small" iconsize="small" radius="rounded" background="fill"
+        label="+966"></app-button> -->
+        <!-- <p-button/> -->
+    </div>
+  </div>
+  <!-- <div *ngIf="status === 'error'" [ngClass]="[
+      'input-internal--caption',
+      'input-internal--' + mode,
+      'input-internal--' + language,
+      'input-internal--' + status
+    ]">
+    {{ caption_text }}
+  </div> -->
+  <div [ngClass]="[
+  'input-internal--caption',
+  'input-internal--' + mode,
+  'input-internal--' + language,
+  'input-internal--error'
+]"
+ *ngIf="formControl.invalid && (formControl.dirty || formControl.touched)">
+    <div *ngIf="formControl.hasError('required')">{{ requiredErrorMessage }}</div>
+    <div *ngIf="formControl.hasError('minlength')">{{ minLengthErrorMessage }}
+      {{formControl.errors?.['minlength']?.requiredLength }}</div>
+    <div *ngIf="formControl.hasError('maxlength')">{{ maxLengthErrorMessage }}
+      {{formControl.errors?.['maxlength']?.requiredLength }}
+    </div>
+    <div *ngIf="formControl.hasError('pattern')">{{ patternErrorMessage }}</div>
+    <div *ngIf="formControl.hasError('email')">{{ emailErrorMessage }}</div>
+  </div>
+</div>

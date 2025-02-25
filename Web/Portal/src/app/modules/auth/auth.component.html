@@ -1,0 +1,50 @@
+<div class="d-flex flex-column flex-lg-row flex-column-fluid" dir="rtl">
+  <!--begin::Body-->
+  <div class="d-flex flex-column flex-lg-row-fluid w-lg-50 p-10 order-2 order-lg-1 bg-light">
+    <!--begin::Form-->
+    <div class="d-flex flex-center flex-column flex-lg-row-fluid">
+      <!--begin::Wrapper-->
+      <div class="<?php echo $params['wrapperClass']?> p-10">
+        <div class="text-center mb-10">
+          <h1 class="text-dark fw-bolder mb-3">مرحبا بك في بوابة الخدمات الداخلية</h1>
+          <div class="text-gray-600 fw-semibold fs-6">
+            نظام آمن للوصول الموحد إلى خدمات الوزارة
+          </div>
+        </div>
+        <router-outlet></router-outlet>
+        <div class="text-center mt-5">
+          <span class="text-muted me-2">نسيت كلمة المرور؟</span>
+          <a href="#" class="link-primary fs-6 fw-bold">استعادة الدخول</a>
+        </div>
+      </div>
+      <!--end::Wrapper-->
+    </div>
+    <!--end::Form-->
+    <!--begin::Footer-->
+    <div class="d-flex flex-center flex-wrap px-5">
+      <div class="d-flex fw-semibold text-primary fs-base">
+        <a href="#" class="px-5" target="_blank">الشروط والأحكام</a>
+        <a href="#" class="px-5" target="_blank">سياسة الخصوصية</a>
+        <a href="#" class="px-5" target="_blank">الدعم الفني</a>
+      </div>
+    </div>
+    <!--end::Footer-->
+  </div>
+  <!--end::Body-->
+  <!--begin::Aside-->
+  <div class="d-flex flex-lg-row-fluid w-lg-50 bgi-size-cover bgi-position-center order-1 order-lg-2"
+    [ngStyle]="{'background-image': 'linear-gradient(270deg, rgb(197 92 92 / 0%) 0%, rgb(25, 118, 210) 100%)'}">
+
+    <!--begin::Content-->
+    <div class="d-flex flex-column flex-center py-15 px-5 px-md-15 w-100">
+      <!--begin::Logo-->
+      <img alt="Logo" class="app-sidebar-logo-default" src="./assets/media/logos/default-dark.svg"
+        style="height: 150px;" />
+      <!--end::Logo-->
+      <!--begin::Title-->
+      <!--end::Features-->
+    </div>
+    <!--end::Content-->
+  </div>
+  <!--end::Aside-->
+</div>

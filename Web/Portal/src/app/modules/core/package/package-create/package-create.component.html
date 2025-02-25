@@ -1,0 +1,109 @@
+<app-validation-alerts [parentForm]="packageForm" translateKey="Packages"></app-validation-alerts>
+<div class="row mb-3" *ngFor="let facility of facilitiesArray.controls; let i = index" [formGroup]="facility">
+  <app-validation-alerts [parentForm]="facility" translateKey="Packages"></app-validation-alerts>
+</div>
+<div class="card card-flush h-lg-100">
+  <div class="card-header pt-7">
+    <div class="card-title">
+      <i class="ki-duotone ki-badge fs-1 me-2"></i>
+      <h2 class="card-title fw-bold" translate="Packages.Create"></h2>
+    </div>
+  </div>
+  <div class="card-body pt-5">
+    <form [formGroup]="packageForm" class="form fv-plugins-bootstrap5 fv-plugins-framework">
+      <!-- Base Package Fields -->
+      <div class="row">
+        <div class="col-md-6 mb-5">
+          <label><span translate="Packages.NameAr"></span></label>
+          <input type="text" formControlName="nameAr" class="form-control form-control-solid" />
+        </div>
+        <div class="col-md-6 mb-5">
+          <label><span translate="Packages.Name"></span></label>
+          <input type="text" formControlName="name" class="form-control form-control-solid" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 mb-5">
+          <label><span translate="Packages.DescriptionAr"></span></label>
+          <textarea formControlName="descriptionAr" class="form-control form-control-solid"></textarea>
+        </div>
+        <div class="col-md-6 mb-5">
+          <label><span translate="Packages.Description"></span></label>
+          <textarea formControlName="description" class="form-control form-control-solid"></textarea>
+        </div>
+      </div>
+      <!-- Other numeric fields -->
+      <div class="row">
+        <div class="col-md-4 mb-5">
+          <label><span translate="Packages.DefaultDiscount"></span></label>
+          <input type="number" formControlName="defaultDiscount" class="form-control form-control-solid" />
+        </div>
+        <div class="col-md-4 mb-5">
+          <label><span translate="Packages.MaxBranchUsers"></span></label>
+          <input type="number" formControlName="maxBranchUsers" class="form-control form-control-solid" />
+        </div>
+        <div class="col-md-4 mb-5">
+          <label><span translate="Packages.MaxMogdiPlatformUsage"></span></label>
+          <input type="number" formControlName="maxMogdiPlatformUsage" class="form-control form-control-solid" />
+        </div>
+      </div>
+      <div class="mb-5">
+        <label><span translate="Packages.WrittenServices"></span></label>
+        <input type="text" formControlName="writtenServices" class="form-control form-control-solid" />
+      </div>
+      <div class="card card-flush mb-5 p-4 bg-light">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h4 translate="Packages.PackageFacilities"> </h4>
+          <button class="btn btn-primary" type="button" (click)="addFacilityRow()" translate="Packages.AddFacility">
+          </button>
+        </div>
+        <div class="row mb-3" *ngFor="let facility of facilitiesArray.controls; let i = index" [formGroup]="facility">
+          <div class="col-md-2 mb-3">
+            <app-facility-dropdown [parentForm]="facility" itemFormName="facilityId"
+              placeholderTextTranslated="Facility.Name" labelTextTranslated="Facility.Name"
+              validationTextTranslated="Facility.NameRequired">
+            </app-facility-dropdown>
+          </div>
+          <div class="col-md-2 mb-3">
+            <app-lookup-dropdown [code]="'Packages'" [parentForm]="facility" itemFormName="typeId"
+              placeholderTextTranslated="Packages.TypeId" labelTextTranslated="Packages.TypeId"
+              validationTextTranslated="Packages.TypeIdRequired">
+            </app-lookup-dropdown>
+          </div>
+          <div class="col-md-2 mb-3">
+            <label class="fs-6 fw-semibold form-label  mt-3" translate="Packages.Quantity"> </label>
+            <input type="number" formControlName="quantity" class="form-control " />
+          </div>
+          <div class="col-md-2 mb-3">
+            <label class="fs-6 fw-semibold form-label  mt-3" translate="Packages.Discount"> </label>
+            <input type="number" formControlName="percentageDicount" class="form-control " />
+          </div>
+          <div class="col-md-2 mb-3">
+            <label class="fs-6 fw-semibold form-label  mt-3" translate="Packages.Price"> </label>
+            <input type="number" formControlName="price" class="form-control " />
+          </div>
+          <div class="col-md-2 mb-3 d-flex align-items-end">
+            <div class="form-check me-2">
+              <input type="checkbox" formControlName="isTaxIncluded" class="form-check-input" />
+              <label class="form-check-label" translate="Packages.Tax"> </label>
+            </div>
+            <button class="btn btn-danger" type="button" (click)="removeFacilityRow(i)">
+              X
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="separator mb-6"></div>
+      <div class="d-flex justify-content-end">
+        <button type="button" (click)="onReset()" class="btn btn-light me-3" translate="SHARED.Cancel"></button>
+        <button type="button" (click)="onSubmit('redirect')" class="btn btn-success me-3"
+          [disabled]="packageForm.invalid">
+          <span translate="SHARED.Save"></span>
+        </button>
+        <button type="button" (click)="onSubmit('new')" class="btn btn-primary" [disabled]="packageForm.invalid">
+          <span translate="SHARED.SaveAndNew"></span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

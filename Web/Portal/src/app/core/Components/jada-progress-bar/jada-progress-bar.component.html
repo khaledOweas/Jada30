@@ -1,0 +1,9 @@
+<div [attr.dir]="language === 'english' ? 'ltr' : 'rtl'" class="progress-wrapper">
+  <div [ngClass]="['progress-container', 'progress-container-' + mode]">
+    <div [ngStyle]="{ width: progress + '%' }" 
+         [ngClass]="['progress-bar', 'progress--' + mode, 'progress--' + status]"></div>
+  </div>
+  <span [ngClass]="['progress-percentage', 'progress-percentage--' + mode, 'progress-percentage--' + status]">
+    {{ progress }}%
+  </span>
+</div>

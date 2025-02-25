@@ -1,0 +1,165 @@
+$p-menubar-gap:20px;
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  border-bottom: 1px solid #ddd;
+  background: #F3F6FB;
+  flex-direction: column; /* Stack items vertically */
+  align-items: center;
+}
+
+.logo img {
+  height: 50px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+}
+
+.nav-link:hover {
+  color: #007bff;
+}
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  border-radius: 4px;
+  width: 100%;
+  justify-content: flex-end;   /* Align items to the end */
+  flex-grow: 1;        
+
+}
+.navbar-container{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  background-color: white !important;
+  border-radius: 4px;
+  width: 100%;
+  justify-content: flex-start; /* Align items to the start */
+  justify-content: space-between;    /* Space between items: first at start, last at end */
+  align-items: center;               /* Center items vertically */
+  padding: 10px;    
+
+}
+/* Optional: Style the button if needed */
+.login-button {
+  margin-left: 20px;                 /* Space between menubar and button (optional) */
+}
+
+.separator {
+  width: 1px;
+  height: 24px;
+  background-color: var(--surface-d);
+}
+
+/* Custom styles for the menubar */
+.ui-menubar {
+  background-color: #f4f4f4;
+  border: 1px solid #ddd;
+}
+
+.ui-menubar .ui-menuitem-link {
+  color: #333;
+}
+
+.ui-menubar .ui-menuitem-link:hover {
+  background-color: #ddd;
+}
+/* custom-menubar */
+.custom-menubar {
+  display: flex;                                   /* Flexbox layout */
+  padding: 10px 20px;   
+  border: none !important;
+}
+
+.custom-menubar .p-menubar-root-list {
+  display: flex;                                   /* Ensure list is flex */
+  background: white !important;
+  color: black !important;                                   /* Space between items */
+}
+
+.custom-menubar .p-menu-item {
+  position: relative;                              /* Position for pseudo-elements */
+  padding: 12px 18px;                             /* Item padding */
+  border-radius: 8px;                             /* Rounded corners */
+  transition: all 0.3s;                           /* Smooth transitions */
+}
+
+.custom-menubar .p-menu-item:not(:last-child)::after {
+  content: "";                                    /* Create a separator */
+  position: absolute;                             /* Positioning */
+  right: 0;                                      /* Align to the right */
+  top: 50%;                                      /* Center vertically */
+  width: 1px;                                    /* Width of the separator */
+  height: 40%;                                   /* Height of the separator */
+  background-color: rgba(255, 255, 255, 0.3);   /* Color of the separator */
+  transform: translateY(-50%);                   /* Center it */
+}
+
+.custom-menubar .p-menu-item:hover {
+  background-color: rgba(255, 255, 255, 0.1);    /* Light hover effect */
+  transform: scale(1.05);                         /* Slight scale on hover */
+}
+
+.custom-menubar .p-menuitem-link {
+  color: white;                                   /* Link color */
+  font-weight: bold;                              /* Bold text */
+  text-decoration: none;                          /* Remove underline */
+}
+
+.custom-menubar .p-menu-item-link:active {
+  color: #FFD700;                                 /* Active link color */
+}
+
+@media (max-width: 768px) {
+  .custom-menubar {
+    flex-direction: column;                        /* Stack items on small screens */
+  }
+
+  .p-menubar .p-menubar-root-list {
+    gap: 20px !important;                                    /* Adjust gap for smaller screens */
+  }
+}
+
+.nav-side {
+  align-items: center;
+  gap: 8px; /* Adds spacing between label and tree */
+  padding: 0.3rem;
+}
+
+/* Customize the tree component */
+.w-full {
+  width: 100%;
+}
+
+.md\:w-\[30rem\] {
+  width: 30rem;
+}
+.flex{
+  display: flex;
+}
+.p-tree-custom{
+  padding: 0.5rem !important;
+}
+.items-center{
+  justify-content: flex-start;
+    align-items: anchor-center;
+    gap: 20px;
+}
+.p-menubar{
+  background-color: transparent !important;
+  border: 0 !important;
+}

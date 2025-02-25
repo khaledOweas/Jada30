@@ -1,0 +1,15 @@
+<button
+  (click)="handleClick()"
+  [disabled]="state === 'disabled'"
+  [ngClass]="buttonClasses"
+   
+>
+  <div [ngClass]="['button--container', 'button--ending']">
+    <div *ngIf="hasicon">
+      <span [class]="iconname"></span>
+    </div>
+    <div class="button--label">
+      {{ label }}
+    </div>
+  </div>
+</button>

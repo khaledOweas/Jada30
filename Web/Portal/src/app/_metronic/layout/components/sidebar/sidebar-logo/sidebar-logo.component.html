@@ -1,0 +1,73 @@
+<!--begin::Logo image-->
+<a routerLink="/dashboard">
+  <ng-container *ngIf="currentLayoutType === 'dark-sidebar'">
+    <img alt="Logo" class="app-sidebar-logo-default" src="./assets/media/logos/default-dark.svg"
+      style="height: 63px;" />
+    <div class="  app-sidebar-logo-minimize">
+      <svg xmlns="http://www.w3.org/2000/svg " style="height: 63px;" xmlns:xlink="http://www.w3.org/1999/xlink"
+        viewBox="0 0 701.38 252">
+        <defs>
+          <style>
+            .a {
+              fill: none;
+            }
+
+            .b {
+              clip-path: url(#a);
+            }
+
+            .c {
+              fill: #909295;
+            }
+
+            .d {
+              clip-path: url(#b);
+            }
+
+            .e {
+              fill: url(#c);
+            }
+          </style>
+          <clipPath id="a">
+            <rect class="a" x="24.7" y="28.29" width="651.98" height="197.05" />
+          </clipPath>
+          <clipPath id="b">
+            <path class="a"
+              d="M632.66,52.14V69.73H611s-23-2.6-23,23v20.43h-21s-22.2-3-22.2,22.46v25.53c0,8.64,7.9,64.21,67.12,64.21s64.67-58.81,64.67-65.33V114.35H653.12s-19.62.56-19.62,23v22.42s1.41,23-21,23-23.82-19.89-23.82-19.89V114.35h22.42s21.58-1.12,21.58-22.42V71.47h23.83S676.66,69,676.66,46.53V28.31H651.72s-.26,0-.72,0c-3.46,0-18.34,1.31-18.34,23.85" />
+          </clipPath>
+          <linearGradient id="c" x1="50.02" y1="548.9" x2="56.21" y2="548.9"
+            gradientTransform="matrix(-31.67, 0, 0, 31.67, 2290.25, -17256.35)" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#84c55c" />
+            <stop offset="0.1" stop-color="#5bc17a" />
+            <stop offset="0.22" stop-color="#34bc97" />
+            <stop offset="0.33" stop-color="#17b9ac" />
+            <stop offset="0.42" stop-color="#06b8b9" />
+            <stop offset="0.49" stop-color="#00b7bd" />
+            <stop offset="0.82" stop-color="#0484b3" />
+            <stop offset="1" stop-color="#0484b3" />
+          </linearGradient>
+        </defs>
+        <g class="d">
+          <rect class="e" x="492.46" y="20.24" width="236.62" height="213.15"
+            transform="translate(193.38 590.4) rotate(-59.73)" />
+        </g>
+      </svg>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="currentLayoutType !== 'dark-sidebar'">
+    <img alt="Logo" src="./assets/media/logos/default-dark.svg"
+      class="h-25px app-sidebar-logo-default theme-light-show" />
+    <img alt="Logo" src="./assets/media/logos/default-dark.svg" />
+  </ng-container>
+</a>
+<!--end::Logo image-->
+<ng-container *ngIf="toggleEnabled">
+  <!--begin::Sidebar toggle-->
+  <div id="kt_app_sidebar_toggle" (click)="toggleIcon()"
+    class="app-sidebar-toggle btn btn-icon btn-shadow btn-sm btn-color-muted btn-active-color-primary body-bg h-30px w-30px position-absolute top-50 start-100 translate-middle rotate"
+    [ngClass]="toggleButtonClass" data-kt-toggle="true" [attr.data-kt-toggle-state]="toggleState"
+    data-kt-toggle-target="body" [attr.data-kt-toggle-name]="toggleAttr">
+    <app-keenicon [name]="iconName" class="fs-2 rotate-180"></app-keenicon>
+  </div>
+  <!--end::Sidebar toggle-->
+</ng-container>

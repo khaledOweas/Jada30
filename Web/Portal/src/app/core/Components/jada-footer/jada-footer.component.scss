@@ -1,0 +1,316 @@
+/* my-range-input.css */
+:host {
+  display: block;
+  font-family: 'Cairo', sans-serif; /* Apply Cairo font to the body */
+}
+
+.footer-external-parent {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: -3rem;
+  width: 100%;
+
+  .footer-card {
+    // display: flex;
+    width: 90%;
+    margin-bottom: -3rem;
+    z-index: 1;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .footer-external-wrapper {
+    display: flex;
+    width: 100%;
+    // height: 24.75rem;
+    align-items: center;
+    align-content: center;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+    // background: var(--sea-blue-primary-normal-blue-onclick, #adc2cf);
+
+    background: transparent;
+    .footer-content {
+      display: flex;
+      width: 100%;
+      padding: 2.5rem 8.75rem 3.5rem 8.75rem;
+      justify-content: space-between;
+      align-items: flex-start;
+      align-content: flex-start;
+      flex-wrap: wrap;
+      // background: url('../../assets/images/footer-bg.svg'), #02618D 50% / cover no-repeat;
+
+      ul {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+        list-style: none;
+
+        li {
+
+          h3 {
+            color: var(--sea-blue-primary-blue-tone-80, #1181AE);
+
+            /* Typography/EN/Title/EN | (Desktop) Title 22px Bold */
+            font-family: 'Cairo', sans-serif; /* Apply Cairo font to the body */
+            font-size: 1.375rem;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 2rem;
+            /* 145.455% */
+          }
+
+          a {
+            text-decoration: none;
+            color: var(--noble-black-secondary-noble-black-tone-20, #7C8589);
+            /* Typography/EN/Body/EN | (Desktop) Body 16px Regular */
+            font-family: 'Cairo', sans-serif; /* Apply Cairo font to the body */
+            font-size: 1rem;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 1.5rem;
+            /* 150% */
+            letter-spacing: 0.05rem;
+          }
+        }
+
+        li:not(:first-child) {
+          // list-style-image: url('../../assets/images/arrow.svg');
+          margin-inline-start: 0.6rem;
+        }
+      }
+
+      .store-icons {
+        display: flex;
+        max-width: 13.3125rem;
+        padding: 0.75rem 2rem;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        border-radius: 3rem;
+        // background: var(--sea-blue-primary-normal-blue-hover, #03486D);
+      }
+    }
+
+    .arabic {
+      ul {
+        li:not(:first-child) {
+          // list-style-image: url('../../assets/images/ar-arrow.svg');
+          margin-inline-start: 0.6rem;
+        }
+      }
+    }
+
+  }
+
+  .copy-rights {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 1.5rem 9rem;
+    // justify-content: space-between;
+    justify-content: center;
+    align-items: center;
+    // background: var(--sea-blue-primary-normal-blue-hover, #03486D);
+
+    ul {
+      display: flex;
+      height: 1.66669rem;
+      // justify-content: flex-end;
+      align-items: center;
+      gap: 1rem;
+      // list-style: none;
+
+      li {
+        color: var(--Noble-Black-Light-Noble-Black-Background, #F6FBFD);
+        /* Typography/AR/Labels/AR | (Desktop) Label 14px Medium */
+        font-family: 'Cairo', sans-serif; /* Apply Cairo font to the body */
+        font-size: 0.875rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 1.25rem;
+        /* 142.857% */
+        text-transform: capitalize;
+        padding: 1rem;
+
+      }
+
+      li::marker {
+        color: #02618D;
+      }
+
+    }
+
+    p {
+      // color: var(--Noble-Black-Light-Noble-Black-Background, #F6FBFD);
+
+      /* Typography/AR/Labels/AR | (Desktop) Label 14px Bold */
+      font-family: 'Cairo', sans-serif; /* Apply Cairo font to the body */
+      font-size: 0.875rem;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 1.25rem;
+      /* 142.857% */
+      text-transform: capitalize;
+    }
+  }
+}
+
+
+// dark styles 
+.footer-external-parent--dark {
+  .footer-external-wrapper {
+    background: var(--noble-black-secondary-noble-black-tone-80, #3F4244);
+
+    .footer-content {
+      background: var(--noble-black-secondary-noble-black-tone-80, #3F4244);
+
+      ul {
+        li {
+          h3 {
+            color: var(--sea-blue-primary-blue-tone-80, #5FCAE6);
+          }
+        }
+
+        .store-icons {
+          background: var(--noble-black-secondary-noble-black-tone-70, #5E6163);
+        }
+      }
+    }
+
+    .copy-rights {
+      background: var(--noble-black-secondary-noble-black-tone-70, #5E6163);
+
+      ul {
+        li {
+          color: var(--noble-black-secondary-noble-black-tone-20, #7C8589);
+        }
+
+        li::marker {
+          color: #9A9EA1;
+        }
+      }
+
+      p {
+        // color: var(--noble-black-secondary-noble-black-tone-20, #EAEEF1);
+        color:black;
+      }
+    }
+  }
+}
+
+.logo img {
+  height: 50px;
+}
+
+.pi.pi-apple {
+  background-color: #0C375A;
+  /* Set the background color */
+  color: white;
+  /* Set the text color to white */
+  padding: 5px;
+  /* Optional: Add some padding for better appearance */
+  border-radius: 0.5rem;
+  /* Optional: Add rounded corners */
+}
+
+.pi.pi-android {
+  background-color: #0C375A;
+  /* Set the background color */
+  color: white;
+  /* Set the text color to white */
+  padding: 5px;
+  /* Optional: Add some padding for better appearance */
+  border-radius: 0.5rem;
+  /* Optional: Add rounded corners */
+}
+
+// .social-icons {
+//   display: flex;
+//   justify-content: center;
+//   /* Center the div horizontally */
+//   gap: 10px;
+//   /* Space between icons */
+//   /* Optional: Full height for vertical centering */
+//   // display: flex;
+//   // max-width: 13.3125rem;
+//   // padding: 0.75rem 2rem;
+//   // justify-content: center;
+//   // align-items: center;
+//   // gap: 1rem;
+//   // border-radius: 3rem;
+//   // background: var(--sea-blue-primary-normal-blue-hover, #03486D);
+// }
+
+.social-icons-container { /* Parent container */
+  display: flex;
+  justify-content: center; /* Centers horizontally */
+  width: 100%;
+}
+.social-icons { /* Or whatever your icon elements are */
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  margin: 5px;
+  background-color: #0C375A;
+  color: white;
+  padding: 7px;
+  border-radius: 0.5rem;
+  border-radius: 50%;
+}
+// button1
+.button1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: var(--sea-blue-primary-normal-blue, #02618d);
+  color: var(--white-100, #fff);
+  border-color: transparent;
+  width: 17.375rem !important;
+  padding: 8px 32px 8px 32px;
+  /*width: 152px;*/
+  /*height: 40px;*/
+  border-radius: 0.5rem;
+  cursor: pointer;
+
+  &.button--ending {
+    flex-direction: row-reverse;
+  }
+}
+.button1:hover{
+  background: #1d6a8b;
+  color: white;
+}
+.button1:active{
+  background: var(--sea-blue-primary-normal-blue, #02618d);
+  color: white;
+}
+
+
+// outline
+.button2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: transparent;
+  width: 17.375rem !important;
+  border: 1px solid var(--sea-blue-primary-normal-blue-hover, #03486d);
+  color: var(--sea-blue-primary-normal-blue-click, #003557);
+  padding: 8px 32px 8px 32px;
+  /*width: 152px;*/
+  /*height: 40px;*/
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+.button2:hover{
+  background: #1d6a8b;
+  color: white;
+}
+.button2:active{
+  background: var(--sea-blue-primary-normal-blue, #02618d);
+  color: white;
+}
