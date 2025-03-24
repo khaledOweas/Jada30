@@ -1,0 +1,12 @@
+{
+  "Statements": {
+    "Endpoint1": "SELECT * FROM sys.tables",
+    "Endpoint2": "SELECT TOP 5 * FROM Branches",
+    "Endpoint3": "SELECT * FROM sys.tables"
+  },
+  "endPointNames": {
+    "Endpoint1": "GetAllTables",
+    "Endpoint2": "GetTop5Branches",
+    "Endpoint3": "GetAllTables"
+  }
+}
