@@ -1,0 +1,76 @@
+{
+  "template": "app",
+  "imports": {
+    "Volo.Abp.BasicTheme": {
+      "version": "9.1.0",
+      "isInstalled": true
+    },
+    "Volo.Abp.Account": {
+      "version": "9.1.0",
+      "isInstalled": true
+    },
+    "Volo.Abp.OpenIddict": {
+      "version": "9.1.0",
+      "isInstalled": true
+    },
+    "Volo.Abp.Identity": {
+      "version": "9.1.0",
+      "isInstalled": true
+    },
+    "Volo.Abp.SettingManagement": {
+      "version": "9.1.0",
+      "isInstalled": true
+    },
+    "Volo.Abp.PermissionManagement": {
+      "version": "9.1.0",
+      "isInstalled": true
+    },
+    "Volo.Abp.FeatureManagement": {
+      "version": "9.1.0",
+      "isInstalled": true
+    }
+  },
+  "folders": {
+    "items": {
+      "src": {}
+    }
+  },
+  "packages": {
+    "WSMAPI.Application": {
+      "path": "src/WSMAPI.Application/WSMAPI.Application.abppkg",
+      "folder": "src"
+    },
+    "WSMAPI.Domain.Shared": {
+      "path": "src/WSMAPI.Domain.Shared/WSMAPI.Domain.Shared.abppkg",
+      "folder": "src"
+    },
+    "WSMAPI.Application.Contracts": {
+      "path": "src/WSMAPI.Application.Contracts/WSMAPI.Application.Contracts.abppkg",
+      "folder": "src"
+    },
+    "WSMAPI.HttpApi": {
+      "path": "src/WSMAPI.HttpApi/WSMAPI.HttpApi.abppkg",
+      "folder": "src"
+    },
+    "WSMAPI.HttpApi.Client": {
+      "path": "src/WSMAPI.HttpApi.Client/WSMAPI.HttpApi.Client.abppkg",
+      "folder": "src"
+    },
+    "WSMAPI.EntityFrameworkCore": {
+      "path": "src/WSMAPI.EntityFrameworkCore/WSMAPI.EntityFrameworkCore.abppkg",
+      "folder": "src"
+    },
+    "WSMAPI.DbMigrator": {
+      "path": "src/WSMAPI.DbMigrator/WSMAPI.DbMigrator.abppkg",
+      "folder": "src"
+    },
+    "WSMAPI.HttpApi.Host": {
+      "path": "src/WSMAPI.HttpApi.Host/WSMAPI.HttpApi.Host.abppkg",
+      "folder": "src"
+    },
+    "WSMAPI.Domain": {
+      "path": "src/WSMAPI.Domain/WSMAPI.Domain.abppkg",
+      "folder": "src"
+    }
+  }
+}
