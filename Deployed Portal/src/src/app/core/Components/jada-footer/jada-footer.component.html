@@ -1,0 +1,94 @@
+<div class="footer-external-parent footer-external-parent--{{ mode }}"
+  [attr.dir]="language === 'english' ? 'ltr' : 'rtl'">
+
+  <div class="footer-external-wrapper">
+    <div ngClass="footer-content arabic">
+      <ul>
+        <li class="footer-content-logo">
+          <div class="logo">
+            <img src="assets\media\logos\logo.png" />
+          </div>
+        </li>
+        <li>
+          <button (click)="handleClick()"
+            class="button1">
+            <div [ngClass]="['button--container', 'button--ending']">
+              <div>
+                <span class="pi pi-bell"></span>
+              </div>
+              <div class="button--label">
+                الاشتراك في القائمة البريدية
+              </div>
+            </div>
+          </button>
+        </li>
+
+        <li>
+          <button (click)="handleClick()"
+            class="button2">
+            <div [ngClass]="['button--container', 'button--ending']">
+              <div>
+                <span class="pi pi-star"></span>
+              </div>
+              <div class="button--label">
+                الدعم الفني بلغة الإشارة
+              </div>
+            </div>
+          </button>
+        </li>
+      </ul>
+      <ul>
+        <li>
+          <h3>{{ language === 'arabic' ? 'خدمات عامة' : 'Main Services' }}</h3>
+        </li>
+        <li><a href="#">{{ language === 'arabic' ? 'البيانات المفتوحة' : 'Open Data' }}</a></li>
+        <li><a href="#">{{ language === 'arabic' ? 'جهات ذات العلاقة' : 'Related Parties' }}</a></li>
+        <li><a href="#">{{ language === 'arabic' ? 'بوابة التوظيف' : 'Employment Portal' }}</a></li>
+        <li><a href="#">{{ language === 'arabic' ? 'المنصة الوطنية الموحدة' : 'The Unified National Platform' }}</a>
+        </li>
+      </ul>
+      <ul>
+        <li>
+          <h3>{{ language === 'arabic' ? 'التواصل الإلكتروني' : 'Contact Us' }}</h3>
+        </li>
+        <li><a href="#">{{ language === 'arabic' ? 'اتصل بنا' : 'Contact us' }}</a></li>
+        <li><a href="#">{{ language === 'arabic' ? 'الأسئلة الشائعة' : 'FAQ’s' }}</a></li>
+        <li><a href="#">{{ language === 'arabic' ? 'الإبلاغ عن الفساد' : 'Report Corruption' }}</a></li>
+      </ul>
+      <ul>
+        <li>
+          <h3>{{ language === 'arabic' ? 'تحميل تطبيقات الجوال' : 'Contact Us' }}</h3>
+        </li>
+        <li class="store-icons">
+          <a href="#"><span class="pi pi-apple"></span></a>
+          <a href="#"><span class="pi pi-android"></span></a>
+        </li>
+      </ul>
+
+    </div>
+    <div class="social-icons-container">
+      <a href="#"><span class="pi pi-youtube social-icons"></span></a>
+      <a href="#"><span class="pi pi-facebook social-icons"></span></a>
+      <a href="#"><span class="pi pi-twitter social-icons"></span></a>
+      <a href="#"><span class="pi pi-instagram social-icons"></span></a>
+    </div>
+    <div class="copy-rights">
+      <!-- <ul>
+        <li *ngIf="language === 'arabic'">إمكانية الوصول</li>
+        <li *ngIf="language === 'arabic'">إتفاقية الإستخدام</li>
+        <li *ngIf="language === 'arabic'">المسؤولية</li>
+        <li *ngIf="language === 'arabic'">ملفات تعريف الإرتباط</li>
+        <li *ngIf="language === 'arabic'">خريطة الموقع</li>
+        <li *ngIf="language === 'english'">Accessibility</li>
+        <li *ngIf="language === 'english'">User Agreement</li>
+        <li *ngIf="language === 'english'">Responsibilities</li>
+        <li *ngIf="language === 'english'">Cookies</li>
+        <li *ngIf="language === 'english'">Sitemap</li>
+      </ul> -->
+      <p>
+        {{ language === 'arabic' ? 'جميع الحقوق محفوظة لمنصة جادة 30 &copy; 2025' : 'All rights reserved &copy; 2025
+        the Ministry of Energy' }}
+      </p>
+    </div>
+  </div>
+</div>

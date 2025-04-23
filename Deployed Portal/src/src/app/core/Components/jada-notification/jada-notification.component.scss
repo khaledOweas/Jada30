@@ -1,0 +1,296 @@
+
+/* my-range-input.css */
+:host {
+  display: block;
+  width: 100%;
+}
+
+/* toaser-notification wrapper*/
+.toaser-notification-wrapper {
+  display: flex;
+  padding: 1rem;
+  gap: 0.5rem;
+  border-radius: 0.5rem;
+  // border: 1px solid var(--sea-blue-primary-light-blue, #C8ECF4);
+  background: var(--sea-blue-primary-light-blue-background, #E2F6FA);
+
+  /* Define styles for the toaser-notification-header */
+  .toaser-notification-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    align-self: stretch;
+    justify-content: space-between;
+
+    span {
+      width: 2rem;
+      height: 2rem;
+    }
+  }
+
+  .header-title {
+    display: flex;
+    align-items: anchor-center;
+    gap: .5rem;
+  }
+
+  .close-button {
+    cursor: pointer;
+    border: none;
+  }
+
+  .toaser-notification-text {
+    font-family: 'Cairo', sans-serif; /* Apply Cairo font to the body */
+    color: var(--sea-blue-primary-normal-blue, #02618D);
+    /* AR/Labels/AR | (Desktop) Label 14px Medium */
+    // font-family: "Noto Kufi Arabic", sans-serif;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.25rem;
+    /* 142.857% */
+    text-transform: capitalize;
+    margin: 0;
+  }
+}
+
+/* primary light */
+.toaser-notification-wrapper--light.toaser-notification-wrapper--critical {
+  // border: 1px solid var(--sea-blue-primary-light-blue, #C8ECF4);
+  background: var(--sea-blue-primary-light-blue-background, #F2693F);
+
+  /* Define styles for the toaser-notification-header */
+  .toaser-notification-header {
+    span {
+      color: #FFFFFF;
+    }
+  }
+
+  .toaser-notification-text {
+    color: var(--sea-blue-primary-blue-tone-80, #FFFFFF);
+  }
+}
+
+/* Secondary light */
+.toaser-notification-wrapper--light.toaser-notification-wrapper--secondary {
+  border: 1px solid var(--noble-black-secondary-noble-black-tone-20, #EAEEF1);
+  background: var(--noble-black-secondary-light-noble-black-background, #F6FBFD);
+
+  /* Define styles for the toaser-notification-header */
+  .toaser-notification-header {
+    span {
+      color: #717577;
+    }
+  }
+
+  .toaser-notification-text {
+    color: var(--noble-black-secondary-noble-black-tone-60, #717577);
+  }
+}
+
+/* information light */
+.toaser-notification-wrapper--light.toaser-notification-wrapper--information {
+  // border: 1px solid var(--pine-green-information-light-pine-green-hover, #CBFAF4);
+  background: var(--pine-green-information-hard-light-pine-green, #DCF2F6);
+
+  /* Define styles for the toaser-notification-header */
+  .toaser-notification-header {
+    span {
+      color: #12A8C0;
+    }
+  }
+
+  .toaser-notification-text {
+    color: var(--noble-black-secondary-noble-black-tone-60, #12A8C0);
+  }
+}
+
+/* alert light */
+.toaser-notification-wrapper--light.toaser-notification-wrapper--alert {
+  // border: 1px solid var(--golden-poppy-alert-light-golden-poppy, #FFEBAF);
+  background: var(--golden-poppy-alert-hard-light-golden-poppy, #FEF4E1);
+
+  /* Define styles for the toaser-notification-header */
+  .toaser-notification-header {
+    span {
+      color: #F4B333;
+    }
+  }
+
+  .toaser-notification-text {
+    color: var(--noble-black-secondary-noble-black-tone-60, #F4B333);
+  }
+}
+
+/* success light */
+.toaser-notification-wrapper--light.toaser-notification-wrapper--success {
+  // border: 1px solid var(--pigment-green-success-light-pigment-green, #C5E8C6);
+  background: var(--pigment-green-success-hard-light-pigment-green, #E0F5EE);
+
+  /* Define styles for the toaser-notification-header */
+  .toaser-notification-header {
+    span {
+      color: #2DB889;
+    }
+  }
+
+  .toaser-notification-text {
+    color: var(--noble-black-secondary-noble-black-tone-60, #2DB889);
+  }
+}
+
+/* danger light */
+.toaser-notification-wrapper--light.toaser-notification-wrapper--danger {
+  border: 1px solid var(--safety-red-danger-light-safety-red, #FDE9E2);
+  background: var(--safety-red-danger-hard-light-safety-red, #FDE9E2);
+
+  /* Define styles for the toaser-notification-header */
+  .toaser-notification-header {
+    span {
+      color: #F2693F;
+    }
+  }
+
+
+  .toaser-notification-text {
+    color: var(--noble-black-secondary-noble-black-tone-60, #F2693F);
+  }
+}
+
+/////////dark ///////////
+/* primary dark */
+.toaser-notification-wrapper--dark.toaser-notification-wrapper {
+  .close-button {
+    color: #717577;
+  }
+
+  .alert-icon {
+    span {
+      color: #5E6163;
+    }
+  }
+}
+
+.toaser-notification-wrapper--dark.toaser-notification-wrapper--critical {
+  // border: 1px solid var(--noble-black-secondary-noble-black-tone-85, #2E3133);
+  background: var(--noble-black-secondary-noble-black-tone-85, #2E3133);
+
+  /* Define styles for the toaser-notification-header */
+  .toaser-notification-header {
+
+    .alert-icon {
+      span {
+        color: #5FCAE6;
+      }
+    }
+  }
+
+  .toaser-notification-text {
+    color: var(--noble-black-secondary-noble-black-tone-40, #B9BDC0);
+  }
+}
+
+/* Secondary dark */
+.toaser-notification-wrapper--dark.toaser-notification-wrapper--secondary {
+  border: 1px solid var(--noble-black-secondary-noble-black-tone-85, #2E3133);
+  background: var(--noble-black-secondary-noble-black-tone-85, #2E3133);
+
+  /* Define styles for the toaser-notification-header */
+  .toaser-notification-header {
+    .alert-icon {
+      span {
+        color: var(--noble-black-secondary-noble-black-tone-50, #9A9EA1);
+      }
+    }
+  }
+
+  .toaser-notification-text {
+    color: var(--noble-black-secondary-noble-black-tone-40, #B9BDC0);
+  }
+}
+
+/* information dark */
+.toaser-notification-wrapper--dark.toaser-notification-wrapper--information {
+  border: 1px solid var(--noble-black-secondary-noble-black-tone-85, #2E3133);
+  background: var(--noble-black-secondary-noble-black-tone-85, #2E3133);
+
+  /* Define styles for the toaser-notification-header */
+  .toaser-notification-header {
+    .alert-icon {
+      span {
+        color: #2ABFB0;
+      }
+    }
+  }
+
+  .toaser-notification-text {
+    color: var(--noble-black-secondary-noble-black-tone-40, #B9BDC0);
+  }
+}
+
+/* alert dark */
+.toaser-notification-wrapper--dark.toaser-notification-wrapper--alert {
+  border: 1px solid var(--noble-black-secondary-noble-black-tone-85, #2E3133);
+  background: var(--noble-black-secondary-noble-black-tone-85, #2E3133);
+
+  /* Define styles for the toaser-notification-header */
+  .toaser-notification-header {
+    .alert-icon {
+      span {
+        color: #FDC600;
+      }
+    }
+  }
+
+  .toaser-notification-text {
+    color: var(--noble-black-secondary-noble-black-tone-40, #B9BDC0);
+  }
+}
+
+/* success dark */
+.toaser-notification-wrapper--dark.toaser-notification-wrapper--success {
+  border: 1px solid var(--noble-black-secondary-noble-black-tone-85, #2E3133);
+  background: var(--noble-black-secondary-noble-black-tone-85, #2E3133);
+
+
+  /* Define styles for the toaser-notification-header */
+  .toaser-notification-header {
+    .alert-icon {
+      span {
+        color: #55C15E;
+      }
+    }
+  }
+
+  .toaser-notification-text {
+    color: var(--noble-black-secondary-noble-black-tone-40, #B9BDC0);
+  }
+}
+
+/* danger dark */
+.toaser-notification-wrapper--dark.toaser-notification-wrapper--danger {
+  border: 1px solid var(--noble-black-secondary-nole-black-tone-85, #2E3133);
+  background: var(--noble-black-secondary-nole-black-tone-85, #2E3133);
+
+
+  /* Define styles for the toaser-notification-header */
+  .toaser-notification-header {
+    .alert-icon {
+      span {
+        color: #FF544F;
+      }
+    }
+  }
+
+  .toaser-notification-text {
+    color: var(--noble-black-secondary-noble-black-tone-40, #B9BDC0);
+  }
+}
+
+.toaser-notification-wrapper--inside {
+  border-radius: 0.5rem;
+}
+
+.toaser-notification-wrapper--outside {
+  border-radius: 0%;
+}

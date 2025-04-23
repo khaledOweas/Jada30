@@ -1,0 +1,17 @@
+<div [attr.dir]="language === 'english' ? 'ltr' : 'rtl'" [ngClass]="[
+      'toaser-notification-wrapper', 
+     'toaser-notification-wrapper--' + status, 
+     'toaser-notification-wrapper--' + mode, 
+     'toaser-notification-wrapper--' + gridview]">
+  <div class="toaser-notification-header">
+    <div class="header-title">
+
+      <p class="toaser-notification-text">{{ label }}</p>
+      <span class="alert-icon" *ngIf="hasicon">
+        <span [class]="iconname"></span>
+      </span>
+      <ng-container *ngIf="closebutton === 'true'">
+      </ng-container>
+    </div>
+  </div>
+</div>

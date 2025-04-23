@@ -1,0 +1,20 @@
+<div class="stories-gallery">
+  <div class="carousel-view">
+    <div class="story-card" *ngFor="let story of stories; let i = index" [class.active]="i === currentIndex">
+      <div class="story-image">
+        <img [src]="story.image" [alt]="story.title">
+
+        <div class="title-overlay">
+          <p class="story-description">{{story.description}}</p>
+        </div>
+      </div>
+      <div class="gallery-controls">
+        <button class="prev-btn" (click)="prev()">‹</button>
+        <div class="gallery-pagination">
+          <span *ngFor="let story of stories; let i = index" [class.active]="i === currentIndex"
+            (click)="goTo(i)"></span>
+        </div>
+        <button class="next-btn" (click)="next()">›</button>
+      </div>
+    </div>
+  </div>

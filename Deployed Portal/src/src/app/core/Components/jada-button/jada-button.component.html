@@ -1,0 +1,41 @@
+<button
+  (click)="handleClick()"
+  [disabled]="state === 'disabled'"
+  [dir]="language === 'arabic' ? 'rtl' : 'ltr'"
+  [ngClass]="[
+    'button--container',
+    'button--' + language,
+    'button--' + mode,
+    'button--' + size,
+    'button--' + background,
+    'button--' + state,
+    'button--' + type,
+    'button--' + radius,
+    'button--' + width,
+    'button--' + status
+  ]"
+>
+  <div [ngClass]="['button--container', 'button--' + iconposition]">
+    <div *ngIf="type === 'text-icon' || type === 'icon'">
+      <!-- <moe-icon 
+        [name]="iconname"
+        [color]="icolor === 'undefined' ? iconcolor : icolor"
+        [variant]="iconvariant"
+        [size]="iconsize"
+      ></moe-icon> -->
+    </div>
+    <div *ngIf="type === 'text' || type === 'text-icon'" class="button--label">
+      {{ label }}
+    </div>
+    <div *ngIf="badge === 'true'" [ngClass]="['button--badge', 'button--' + language]">
+      <!-- <moe-badge
+        [mode]="mode"
+        [radius]="badgeradius"
+        [background]="badgebackground"
+        [size]="badgesize"
+        [status]="badgestatus"
+        [label]="badgelabel"
+      ></moe-badge> -->
+    </div>
+  </div>
+</button>

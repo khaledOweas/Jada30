@@ -1,0 +1,7 @@
+{
+  "apiUrl": "http://localhost:5000",
+  "authEndpoint": "https://localhost:5000/connect/token",
+  "featureFlags": {
+    "enableNewFeature": true
+  }
+}

@@ -1,0 +1,46 @@
+<div class="stories-gallery">
+  <!-- Desktop Grid View -->
+  <!-- <div class="grid-view" >
+    <div class="story-card" *ngFor="let story of stories">
+      <div class="story-image">
+        <img [src]="story.image" [alt]="story.title">
+      </div>
+      <div class="story-content">
+        <div class="story-date">{{story.date}}</div>
+        <h3 class="story-title">{{story.title}}</h3>
+        <p class="story-description">{{story.description}}</p>
+        <div class="story-author">{{story.author}}</div>
+        <button class="view-btn">رؤية التفاصيل</button>
+      </div>
+    </div>
+  </div>
+  -->
+  <!-- Mobile Carousel View -->
+  <div class="carousel-view">
+    <div class="story-card" *ngFor="let story of stories; let i = index" [class.active]="i === currentIndex">
+      <div class="story-image">
+        <img [src]="story.image" [alt]="story.title">
+      </div>
+      <div class="story-content">
+        <div class="story-date">{{story.date}}</div>
+        <h3 class="story-title">{{story.title}}</h3>
+        <p class="story-description">{{story.description | slice:0:30 }} ...</p>
+        <div class="story-author">{{story.author}}</div>
+        <!-- <button class="view-btn">رؤية التفاصيل</button> -->
+        <div class="more-details">
+          <p-button icon="pi pi-chevron-left" iconPos="right" label="رؤية التفاصيل" [rounded]="true" [text]="true"
+            severity="secondary" />
+        </div>
+        <!-- (click)="toggleLanguage()"  -->
+      </div>
+    </div>
+
+    <div class="gallery-controls">
+      <button class="prev-btn" (click)="prev()">‹</button>
+      <div class="gallery-pagination">
+        <span *ngFor="let story of stories; let i = index" [class.active]="i === currentIndex" (click)="goTo(i)"></span>
+      </div>
+      <button class="next-btn" (click)="next()">›</button>
+    </div>
+  </div>
+</div>

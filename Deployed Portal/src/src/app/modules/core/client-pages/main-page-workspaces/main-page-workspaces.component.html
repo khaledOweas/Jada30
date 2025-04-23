@@ -1,0 +1,15 @@
+<div dir="rtl">
+
+  <div class="container">
+    <h1 class="h1blue">تنتقل بين مساحات العمل المختلفة لتتمكن بـ</h1>
+    <h2>سهولة إيجاد مساحة عمل لبدء مهامك</h2>
+    <div class="card-container">
+      <div *ngFor="let worksapace of data">
+        <app-main-page-workspace name={{worksapace.name}} details={{worksapace.details}}/>
+      </div>
+    </div>
+
+
+    </div>
+
+  </div>

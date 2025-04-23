@@ -1,0 +1,218 @@
+:root {
+  --safety-orange: #F2693F; /* Define the color variable */
+}
+:host {
+  width: -webkit-fill-available;
+}
+.input-internal--original {
+  width: -webkit-fill-available;
+}
+.input-internal--original.input-internal--light {
+  border-radius: 0.5rem;
+  border: 1px solid var(--noble-black-secondary-noble-black-tone-20, #eaeef1);
+  background: var(--white-100, #fff);
+  padding: 0.5rem;
+  color: var(--sea-blue-primary-normal-blue, #02618d);
+}
+.input-internal--original.input-internal--dark {
+  border-radius: 0.5rem;
+  border: 1px solid var(--noble-black-secondary-noble-black-tone-80, #3f4244);
+  background: var(--noble-black-secondary-noble-black-tone-85, #2e3133);
+  padding: 1rem;
+  color: var(--sea-blue-primary-light-blue-onclick, #5fcae6);
+}
+
+.input-internal--original.input-internal--english {
+  font-family: "Noto Kufi Arabic", sans-serif;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.5rem; /* 150% */
+  letter-spacing: 0.05rem;
+  height: 100%;
+}
+.input-internal--original.input-internal--arabic {
+  font-family: "Noto Kufi Arabic", sans-serif;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.5rem; /* 150% */
+  letter-spacing: 0.05rem;
+  height: 100%;
+}
+.input-internal--original.input-internal--light::placeholder {
+  color: var(--noble-black-secondary-noble-black-tone-30, #dce0e3);
+}
+.input-internal--original.input-internal--dark::placeholder {
+  color: var(--noble-black-secondary-noble-black-tone-70, #5e6163);
+}
+.input-internal--original.input-internal--english::placeholder {
+  font-family: "Noto Kufi Arabic", sans-serif;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.5rem; /* 150% */
+  letter-spacing: 0.05rem;
+}
+.input-internal--original.input-internal--arabic::placeholder {
+  font-family: "Noto Kufi Arabic", sans-serif;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.5rem; /* 150% */
+}
+.input-internal--original.input-internal--light:focus {
+  outline: none !important;
+  border: 1px solid var(--noble-black-secondary-noble-black-tone-40, #b9bdc0);
+}
+.input-internal--original.input-internal--dark:focus {
+  outline: none !important;
+  border: 1px solid var(--noble-black-secondary-noble-black-tone-85, #2e3133);
+}
+
+.input-internal--header.input-internal--light {
+  color: var(--sea-blue-primary-normal-blue, #02618d);
+}
+.input-internal--header.input-internal--dark {
+  color: var(--sea-blue-primary-light-blue-onclick, #5fcae6);
+}
+.input-internal--header.input-internal--english {
+  font-family: "Noto Kufi Arabic", sans-serif;
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1rem; /* 133.333% */
+  letter-spacing: 0.0375rem;
+
+  margin-bottom: 0.5rem;
+}
+.input-internal--header.input-internal--arabic {
+  font-family: "Noto Kufi Arabic", sans-serif;
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.125rem; /* 150% */
+  margin-bottom: 0.5rem;
+}
+.input-internal--header.input-internal--required:after {
+  content: "*";
+  // color: var(--safety-red-danger-normal-safety-red, #c00019);
+  color: var(--safety-orange, #F2693F);
+}
+.input-internal--caption.input-internal--light {
+  color: var(--noble-black-secondary-noble-black-tone-50, #9a9ea1);
+}
+.input-internal--caption.input-internal--dark {
+  color: var(--noble-black-secondary-noble-black-tone-30, #dce0e3);
+}
+.input-internal--caption.input-internal--english {
+  font-family: "Noto Kufi Arabic", sans-serif;
+  font-size: 0.6875rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1rem; /* 145.455% */
+  letter-spacing: 0.03438rem;
+  color: var(--noble-black-secondary-noble-black-tone-50, #9a9ea1);
+  margin-top: 0.25rem;
+}
+.input-internal--caption.input-internal--arabic {
+  font-family: "Noto Kufi Arabic", sans-serif;
+  font-size: 0.6875rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1rem; /* 145.455% */
+  color: var(--noble-black-secondary-noble-black-tone-50, #9a9ea1);
+  margin-top: -0.25rem;
+}
+.input-internal--caption.input-internal--success.input-internal--light {
+  color: var(--pigment-green-success-normal-pigment-green, #26a637);
+}
+.input-internal--caption.input-internal--error.input-internal--light {
+  // color: var(--safety-red-danger-normal-safety-red, #c00019);
+  color: var(--safety-orange, #F2693F);
+}
+.input-internal--caption.input-internal--success.input-internal--dark {
+  color: var(--pigment-green-success-pigment-green-tone-40, #55c15e);
+}
+.input-internal--caption.input-internal--error.input-internal--dark {
+  color: var(--safety-red-danger-safety-red-tone-40, #ff544f);
+}
+.input-internal--original.input-internal--light.input-internal--success {
+  border: 1px solid var(--pigment-green-success-normal-pigment-green, #26a637);
+  color: var(--noble-black-secondary-noble-black-tone-60, #717577);
+}
+.input-internal--original.input-internal--light.input-internal--error {
+  border: 1px solid var(--safety-red-danger-normal-safety-red, #c00019);
+  color: var(--noble-black-secondary-noble-black-tone-60, #717577);
+}
+.input-internal--original.input-internal--light.input-internal--focus {
+  border: 1px solid var(--sea-blue-primary-normal-blue, #02618D);
+  color: var(--sea-blue-primary-normal-blue, #02618D);
+}
+.input-internal--original.input-internal--light.input-internal--value {
+  border: 1px solid var(--noble-black-secondary-noble-black-tone-30, #DCE0E3);
+  color: var(--sea-blue-primary-normal-blue, #02618D);
+}
+.input-internal--original.input-internal--dark.input-internal--success {
+  border: 1px solid var(--pigment-green-success-pigment-green-tone-40, #55c15e);
+
+  color: var(--noble-black-secondary-noble-black-tone-30, #dce0e3);
+}
+.input-internal--original.input-internal--dark.input-internal--error {
+  border: 1px solid var(--safety-red-danger-safety-red-tone-40, #ff544f);
+
+  color: var(--noble-black-secondary-noble-black-tone-30, #dce0e3);
+}
+
+
+.input-wrapper{
+  position: relative;
+  width: 100%;
+  height: fit-content;
+  input{
+    max-width: 100%;
+    display: block;
+    padding: .5rem 1rem;
+    padding-inline-end: 2rem !important;
+    padding-inline-start: 2.75rem !important;
+  }
+  .close-icon{
+    position: absolute;
+    inset-inline-end: 0.65rem;
+    top:0;
+    bottom:0;
+    margin:auto;
+    height: fit-content;
+    z-index: 1;
+    cursor: pointer;
+  }
+  .close-icon--invisibled{
+    display: none;
+  }
+  .close-icon--visibled{
+    display:block;
+  }
+  .circle-icon{
+    position: absolute;
+    inset-inline-start: 0.65rem;
+    top:0;
+    bottom:0;
+    margin:auto;
+    height: fit-content;
+    z-index: 1;
+  }
+  .phone-button, .currency-button{
+    position: absolute;
+    inset-inline-start: 0.65rem;
+    top:0;
+    bottom:0;
+    margin:auto;
+    height: fit-content;
+    z-index: 1;
+  }
+
+  .input-internal--currency,.input-internal--phone{
+    padding-inline-start: 6rem !important;
+  }
+}
+

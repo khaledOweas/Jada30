@@ -1,0 +1,49 @@
+<!-- <div class="row">
+  <div class="card-toolbar">
+    <a class="btn btn-success float-end" routerLink="/branch/branch-create">
+      <i class="ki-duotone ki-plus fs-2"></i>
+      <span translate="Branches.Create"></span> </a>
+  </div>
+</div>
+<app-shared-datatable [cols]="Cols" [rowsPageNumbers]="10" [pagination]="true" [scrollable]="false" [data]="Data!"
+  [chooseColomns]="true" [FirstBtn]="true" [contentFirstBtn]="'edit'" [classFirstBtn]="'light-warning'"
+  (firstButtonEvent)="edit($event.id)" [SecondBtn]="true" [contentSecondBtn]="'delete'"
+  [classSecondBtn]="'light-danger'" (secondButtonEvent)="delete($event.id)"></app-shared-datatable> -->
+
+
+<ng-container *ngFor="let item of DataBranches">
+  <!-- <Jada-card-system-service></Jada-card-system-service> -->
+  <!-- <jada-card-data/>
+  <jada-card-data/> -->
+  <!-- <Jada-card-system-service/> -->
+  <p-card [style]="{ width: '25rem', overflow: 'hidden'  }" >
+    <h1 #title> {{item.name}} </h1>
+    <h3 #subtitle> {{item.nameAr}} </h3>
+    <p>
+      {{item.administrativeRegion}}
+    </p>
+    <p>
+      {{item.categoryBranchAr}}
+    </p>
+    <p> 
+      {{item.workingDays}}
+    </p>
+    <p>
+      {{item.startTime | date: 'dd/MM/yyyy'}}- {{item.endTime | date: 'dd/MM/yyyy'}}
+    </p>
+    <p>
+      {{item.websiteBranchAr}}
+    </p>
+  
+    <!-- <ng-template #footer> -->
+      <div class="flex gap-4 mt-1">
+        <p-button label="التفاصيل" severity="secondary" class="w-full" [outlined]="true" styleClass="w-full" (onClick)="details(item.id!)" />
+        <!-- <p-button label="Save" class="w-full" styleClass="w-full" /> -->
+      </div>
+    <!-- </ng-template> -->
+  </p-card>
+</ng-container>
+
+<!-- <ng-container *ngFor="let item of Data">
+  <jada-card-data [cardtitle]="item.name!" subtitle="المنطقة الإدارية" [cardnote]="item.roleNameAr!"/>
+</ng-container> -->

@@ -1,0 +1,64 @@
+
+    
+    <div class="containers">
+      <h1 class="h1Basic">الباقات المتاحة للاشتراك</h1>
+      <p class="intro-text">هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليده هذا النص من مولمن مولد
+        النص العربي، حيث
+        يمكن لهذا النص</p>
+
+      <div class="packages-container">
+        <div *ngFor="let package of data">
+          <app-main-page-available-package [name]="package.name" [price]="package.price"/>        
+        </div>
+        
+        <!-- <div class="package">
+          <h2 class="h2Basic">الباقة الأساسية</h2>
+          <div class="price"> 450 ر/س شهرياً</div>
+          <ul class="features">
+            <li>مكاتب فردية</li>
+            <li>قاعات الاجتماعات بشكل أسبوعي</li>
+            <li>عدد غير محدود من المكتبة الرقمية</li>
+            <li>طلب جولات افتراضية في الفروع</li>
+            <li>دراسة جدوى</li>
+          </ul>
+          <div class="action-buttons">
+            <a href="#" class="btn-action btn-outline"> تصفح الباقة</a>
+            <a href="#" class="btn-action btn-primary">اشترك الآن</a>
+          </div>
+
+        </div>
+        <div class="package">
+          <h2 class="h2Basic">الباقة المتوسطة</h2>
+          <div class="price"> 650 ر/س شهرياً</div>
+          <ul class="features">
+            <li>مكاتب فردية</li>
+            <li>قاعات الاجتماعات بشكل أسبوعي</li>
+            <li>عدد غير محدود من المكتبة الرقمية</li>
+            <li>طلب جولات افتراضية في الفروع</li>
+            <li>دراسة جدوى</li>
+          </ul>
+          <div class="action-buttons">
+            <a href="#" class="btn-action btn-outline"> تصفح الباقة</a>
+            <a href="#" class="btn-action btn-primary">اشترك الآن</a>
+          </div>
+
+        </div>
+        <div class="package">
+          <h2 class="h2Basic">الباقة الشاملة</h2>
+          <div class="price"> 550 ر/س شهرياً</div>
+          <ul class="features">
+            <li>مكاتب فردية</li>
+            <li>قاعات الاجتماعات بشكل أسبوعي</li>
+            <li>عدد غير محدود من المكتبة الرقمية</li>
+            <li>طلب جولات افتراضية في الفروع</li>
+            <li>دراسة جدوى</li>
+          </ul>
+          <div class="action-buttons">
+            <a href="#" class="btn-action btn-outline"> تصفح الباقة</a>
+            <a href="#" class="btn-action btn-primary">اشترك الآن</a>
+          </div>
+
+        </div> -->
+      </div>
+
+    </div>

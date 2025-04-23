@@ -1,0 +1,23 @@
+<div class="sub-package">
+  <div class="package-header">
+    <h3>{{name}}</h3>
+    <!-- <div class="icon" *ngIf="isDetailsVisible"> -->
+    <p-button *ngIf="isDetailsVisible" icon="pi pi-arrow-circle-up" [rounded]="true" [text]="true" severity="secondary"
+      (click)="toggleDetails()" />
+    <p-button *ngIf="!isDetailsVisible" icon="pi pi-arrow-circle-down" [rounded]="true" [text]="true"
+      severity="secondary" (click)="toggleDetails()" />
+    <!-- </div> -->
+  </div>
+  <!-- <div class="icon" *ngIf="!isDetailsVisible"> -->
+
+  <!-- </div> -->
+</div>
+<div class="package-details" *ngIf="isDetailsVisible">
+  <div *ngFor="let cityOption of cityOptions">
+    <div class="city-option">
+      <span class="city-name">{{cityOption.cityName}}</span>
+      <span class="city-price">{{cityOption.price}} ر.س / شهرياً</span>
+    </div>
+  </div>
+
+</div>

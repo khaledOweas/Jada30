@@ -1,0 +1,68 @@
+<!-- Blogs Container on Left -->
+<div class="blogs-container">
+  <div class="blogs-header">
+    <h2 class="card-title">أحدث الفعاليات</h2>
+    <div class="more-details">
+      <p-button icon="pi pi-chevron-left" iconPos="right" label="عرض المزيد" [rounded]="true" [text]="true"
+        severity="secondary" />
+    </div>
+  </div>
+
+</div>
+
+<div class="stories-gallery">
+  
+  <!-- Mobile Carousel View -->
+  <div class="carousel-view">
+    <div class="story-card" *ngFor="let blog of visibleEvents; let i = index" [class.active]="i === currentIndex">
+      <div class="cards-blog-container">
+        <!-- Card 2 -->
+        <div class="card-blog">
+          <div class="card-img">
+            <img [src]="blog[0].image" [alt]="blog[0].title">
+          </div>
+          <div class="card-header">
+            <h2 class="card-title">{{blog[0].title}}</h2>
+            <span class="card-date">{{blog[0].date}}</span>
+          </div>
+          <div class="card-content">
+            <p>{{blog[0].description | slice:0:30 }} ...</p>
+          </div>
+          <div class="card-author">{{blog[0].author}}</div>
+          <div class="more-details">
+            <p-button icon="pi pi-chevron-left" iconPos="right" label="رؤية التفاصيل" [rounded]="true" [text]="true"
+              severity="secondary" />
+          </div>
+        </div>
+    
+        <!-- Card 3 -->
+        <div class="card-blog" *ngIf="blog[1]">
+          <div class="card-img">
+            <img [src]="blog[1].image" [alt]="blog[1].title">
+          </div>
+          <div class="card-header">
+            <h2 class="card-title">{{blog[1].title}}</h2>
+            <span class="card-date">{{blog[1].date}}</span>
+          </div>
+          <div class="card-content">
+            <p>{{blog[1].description | slice:0:30 }} ...</p>
+          </div>
+          <div class="card-author">{{blog[1].author}}</div>
+          <div class="more-details">
+            <p-button icon="pi pi-chevron-left" iconPos="right" label="رؤية التفاصيل" [rounded]="true" [text]="true"
+              severity="secondary" />
+          </div>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="gallery-controls">
+      <button class="prev-btn" (click)="prev()">‹</button>
+      <div class="gallery-pagination">
+        <span *ngFor="let blog of visibleEvents; let i = index" [class.active]="i === currentIndex" (click)="goTo(i)"></span>
+      </div>
+      <button class="next-btn" (click)="next()">›</button>
+    </div>
+  </div>
+</div>

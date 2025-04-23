@@ -1,0 +1,36 @@
+  <ng-container *ngFor="let item of DataEvents">
+    <p-card [style]="{ width: '25rem', overflow: 'hidden' }">
+      <h1 #title> {{item.title}} </h1>
+      <h3 #subtitle> {{item.titleAr}} </h3>
+      
+      <p>
+        {{item.speakersNames}}
+      </p>
+      <p>
+        {{item.startDate | date: 'dd/MM/yyyy'}}- {{item.endDate | date: 'dd/MM/yyyy'}}
+      </p>
+      <p>
+        {{item.socialMediaLinks}}
+      </p>
+      <!-- <ng-template #footer> -->
+        <!-- <div class="flex gap-4 mt-1">
+          <p-button label="التفاصيل" severity="secondary" class="w-full" [outlined]="true" styleClass="w-full" (onClick)="details(item.id!)" />
+        </div> -->
+      <!-- </ng-template> -->
+    </p-card>
+  </ng-container>
+  
+
+<ng-container *ngIf="!isLoading && products  == null">
+    <p style="font-size: 18px; 
+  font-weight: bold; 
+  color: #ff0000; 
+  text-align: center;
+  padding: 20px; 
+  background-color: #f8f9fa; 
+  border: 1px solid #ddd; 
+  border-radius: 8px; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+  margin: 20px auto; 
+  max-width: 300px;">No Data</p>
+</ng-container>

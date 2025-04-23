@@ -1,0 +1,32 @@
+<div dir="rtl" 
+     [ngClass]="['card--container', 'card--' + mode, 'card--' + profile]">
+  <div class="card--up--info">
+    <ng-container>
+      
+    </ng-container>
+    <div class="card--up--container">
+      <div class="card--up">
+        <div [ngClass]="['card--title', 'card--arabic', 'card--' + mode, 'card--' + profile]">{{ cardtitle }}</div>
+        <ng-container *ngIf="hassubtitle &&  profile === 'fullinfo'">
+          <div [ngClass]="['card--date', 'card--' + mode, 'card--' + profile]">{{ subtitle }}</div>
+        </ng-container>
+        <!-- <ng-container *ngIf="restoremoreinformation === 'true'">
+          <span [class]="iconname"></span>
+        </ng-container> -->
+      </div>
+      <ng-container *ngIf="details === 'true'">
+        <div class="card--sub">
+          <!-- <div [ngClass]="['card--label', 'card--arabic', 'card--' + mode, 'card--' + profile]">{{ cardlabel }}</div> -->
+          <ng-container *ngIf="hasnote &&  profile === 'fullinfo'">
+            <div [ngClass]="['card--note', 'card--arabic', 'card--' + mode, 'card--' + profile]">{{ cardnote }}</div>
+          </ng-container>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+  <ng-container>
+    <ng-container>
+      <div [ngClass]="['card--mid--container', 'card--arabic', 'card--' + profile, 'card--' + mode]">{{ carddescription }}</div>
+    </ng-container>
+  </ng-container>
+</div>

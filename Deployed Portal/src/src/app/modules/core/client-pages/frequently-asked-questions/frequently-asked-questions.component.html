@@ -1,0 +1,37 @@
+<div class="faq-container" dir="rtl">
+  <div class="faq-grid">
+    <!-- Groups Column -->
+    <div class="faq-groups-column">
+      <div *ngFor="let group of faqGroups">
+        <div class="faq-group-title">
+          <!-- [class.active]="isGroupActive(group)" -->
+          {{group.title}}
+        </div>
+        <div class="faq-group-description">
+          {{group.description}}
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Questions Column -->
+    <div class="faq-questions-column">
+      <div *ngFor="let group of faqGroups">
+        <div class="faq-item" *ngFor="let item of group.items">
+          <div class="faq-question" (click)="toggleItem(item)">
+            <h2>{{item.question}}</h2>
+            <!-- <span class="toggle-icon">{{item.isExpanded ? '-' : '+'}}</span> -->
+             <span *ngIf="item.isExpanded" class="pi pi-arrow-circle-up toggle-icon"></span>
+             <span *ngIf="!item.isExpanded" class="pi pi-arrow-circle-down toggle-icon"></span>
+            <!-- <p-button *ngIf="item.isExpanded" class="toggle-icon" icon="pi pi-arrow-circle-up" [rounded]="true" [text]="true" severity="secondary" />
+            <p-button *ngIf="!item.isExpanded" class="toggle-icon" icon="pi pi-arrow-circle-down" [rounded]="true" [text]="true" severity="secondary" /> -->
+          </div>
+
+          <div class="faq-answer" [class.expanded]="item.isExpanded">
+            <p>{{item.answer}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

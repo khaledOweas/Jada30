@@ -1,0 +1,29 @@
+<div
+  [dir]="language === 'english' ? 'ltr' : 'rtl'"
+  [ngClass]="['card--container', 'card--' + mode, 'card--' + state, 'card--' + size]"
+>
+  <ng-container *ngIf="icon === 'true'">
+    <!-- <moe-icon
+      [size]="iconsize"
+      [name]="iconname"
+      [variant]="iconvariant"
+      [color]="iconcolor"
+    ></moe-icon> -->
+  </ng-container>
+
+  <ng-container *ngIf="counter === 'true'">
+    <div [ngClass]="['card--number', 'card--' + mode, 'card--' + size]">
+      {{ cardnumber }}
+    </div>
+  </ng-container>
+
+  <div [ngClass]="['card--title', 'card--' + mode, 'card--' + size, 'card--' + language]">
+    {{ cardtitle }}
+  </div>
+
+  <ng-container *ngIf="subtitle === 'true'">
+    <div [ngClass]="['card--details', 'card--' + mode, 'card--' + size, 'card--' + language]">
+      {{ cardsubtitle }}
+    </div>
+  </ng-container>
+</div>

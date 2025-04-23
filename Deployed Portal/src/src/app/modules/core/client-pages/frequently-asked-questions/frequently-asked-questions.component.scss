@@ -1,0 +1,124 @@
+.faq-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 30px;
+  background: #f5f7fa;
+}
+ 
+.faq-grid {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  gap: 30px;
+}
+ 
+.faq-groups-column {
+  position: sticky;
+  top: 20px;
+  height: fit-content;
+ 
+  .faq-group-title {
+    padding: 15px 20px;
+    margin-bottom: 10px;
+    background: #f5f7fa;
+    border-right: 3px solid transparent;
+    cursor: pointer;
+    transition: all 0.3s;
+    border-radius: 5px;
+    font-weight: bold;
+    color: #2c3e50;
+ 
+    &:hover {
+      background: #eef2f7;
+    }
+ 
+    &.active {
+      border-right-color: #3498db;
+      background: #e3f0ff;
+    }
+  }
+}
+ 
+.faq-questions-column {
+  .faq-item {
+    margin-bottom: 20px;
+    border: 1px solid #eaeaea;
+    border-radius: 8px;
+    overflow: hidden;
+ 
+    .faq-question {
+      padding: 18px 25px;
+      background: #f9f9f9;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+     
+      h2 {
+        margin: 0;
+        font-size: 18px;
+        color: #0C375A;
+      }
+ 
+      .toggle-icon {
+        font-size: 20px;
+        font-weight: normal;
+        color: #3498db;
+      }
+    }
+ 
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      background: white;
+     
+      p {
+        padding: 0 25px;
+        margin: 0;
+        line-height: 1.8;
+        color: #555;
+      }
+ 
+      &.expanded {
+        max-height: 500px;
+        padding: 20px 0;
+      }
+    }
+  }
+}
+ 
+/* Responsive Design */
+@media (max-width: 768px) {
+  .faq-grid {
+    grid-template-columns: 1fr;
+  }
+ 
+  .faq-groups-column {
+    display: flex;
+    overflow-x: auto;
+    padding-bottom: 15px;
+    position: static;
+   
+    .faq-group-title {
+      white-space: nowrap;
+      margin-right: 10px;
+      margin-bottom: 0;
+     
+      &.active {
+        border-right: none;
+        border-bottom: 3px solid #3498db;
+      }
+    }
+    .faq-group-description {
+      white-space: nowrap;
+      margin-right: 10px;
+      margin-bottom: 0;
+      font-style: italic;
+     
+      &.active {
+        border-right: none;
+        border-bottom: 3px solid #3498db;
+      }
+    }
+  }
+}

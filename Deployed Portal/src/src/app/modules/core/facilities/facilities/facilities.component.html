@@ -1,0 +1,53 @@
+<ng-container *ngFor="let item of Data">
+  <p-card [style]="{ width: '25rem', overflow: 'hidden' }">
+    <h1 #title> {{item.name}} </h1>
+    <h3 #subtitle> {{item.nameAr}} </h3>
+    
+    <p>
+      {{item.typeName}}
+    </p>
+    <p>
+      {{item.subscriptionName}}
+    </p>
+    <p>
+      {{item.destinationName}}
+    </p>
+    <!-- <ng-template #footer> -->
+      <!-- <div class="flex gap-4 mt-1">
+        <p-button label="التفاصيل" severity="secondary" class="w-full" [outlined]="true" styleClass="w-full" (onClick)="details(item.id!)" />
+      </div> -->
+    <!-- </ng-template> -->
+  </p-card>
+</ng-container>
+
+<!-- 
+<ng-container *ngIf="!isLoading && products  == null">
+  <p style="font-size: 18px; 
+font-weight: bold; 
+color: #ff0000; 
+text-align: center;
+padding: 20px; 
+background-color: #f8f9fa; 
+border: 1px solid #ddd; 
+border-radius: 8px; 
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+margin: 20px auto; 
+max-width: 300px;">No Data</p>
+</ng-container>
+ -->
+
+
+
+<!-- <div class="row">
+  <div class="card-toolbar">
+    <a class="btn btn-success float-end" routerLink="/facility/facility-create">
+      <i class="ki-duotone ki-plus fs-2"></i>
+      <span translate="Facility.CreateTitle"></span> </a>
+  </div>
+</div>
+<app-shared-datatable [cols]="Cols" [rowsPageNumbers]="10" [pagination]="true" [scrollable]="false" [data]="Data!"
+  [chooseColomns]="true"
+
+  [FirstBtn]="true" [contentFirstBtn]="'edit'" [classFirstBtn]="'light-warning'"
+  (firstButtonEvent)="edit($event.id)" [SecondBtn]="true" [contentSecondBtn]="'delete'"
+  [classSecondBtn]="'light-danger'" (secondButtonEvent)="delete($event.id)"></app-shared-datatable> -->

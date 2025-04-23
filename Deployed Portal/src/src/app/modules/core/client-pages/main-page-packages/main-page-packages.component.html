@@ -1,0 +1,68 @@
+<div dir="rtl">
+
+
+  <div class="containers">
+    <h2 class="h2Basic">الباقات و فروعها</h2>
+    <h1 class="h1Basic">اكتشف باقاتنا المميزة و مناطق توفرها في المملكة</h1>
+
+    <div class="container2">
+
+      <div class="content-container">
+        <div class="sub-containers">
+          <h1>الباقات الأكثر مبيعاً و عروضها</h1>
+          <div class="packages">
+            <div *ngFor="let package of packages">
+              <app-main-page-package name={{package.name}} [cityOptions]="package.cityOptions"/>
+            </div>
+
+            <!-- <div class="sub-package">
+              <div class="package-header" (click)="toggleDetails()">
+                <h3>باقة أسُس</h3>
+                <div class="icon">&#9660;</div>
+              </div>
+              <div class="package-details" *ngIf="isDetailsVisible">
+                <div class="city-option">
+                  <span class="city-name">فرع الرياض</span>
+                  <span class="city-price">300 ر.س / شهرياً</span>
+                </div>
+                <div class="city-option">
+                  <span class="city-name">فرع جدة</span>
+                  <span class="city-price">300 ر.س / شهرياً</span>
+                </div>
+                <div class="city-option">
+                  <span class="city-name">فرع الدمام</span>
+                  <span class="city-price">300 ر.س / شهرياً</span>
+                </div>
+              </div>
+
+            </div> -->
+
+            <!-- <div class="sub-package">
+              <h3> باقة فكرة</h3>
+              <div class="city-option">
+                <span class="city-name">فرع الرياض</span>
+                <span class="city-price">300 ر.س / شهرياً</span>
+              </div>
+              <div class="city-option">
+                <span class="city-name">فرع جدة</span>
+                <span class="city-price">300 ر.س / شهرياً</span>
+              </div>
+              <div class="city-option">
+                <span class="city-name">فرع الدمام</span>
+                <span class="city-price">300 ر.س / شهرياً</span>
+              </div>
+            </div>
+            <h3 class="sub-package">الباقة الأساسية</h3> -->
+          </div>
+
+
+
+        </div>
+      </div>
+      <div class="image-container">
+        <img src="assets/media/logos/KSA.png" />
+      </div>
+    </div>
+  </div>
+
+</div>
