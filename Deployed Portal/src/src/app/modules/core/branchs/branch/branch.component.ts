@@ -21,8 +21,8 @@ import { HttpClient } from "@angular/common/http";
 @Component({
   selector: "app-branch",
   standalone: true,
-  imports: [ JadaCardSystemServiceComponent, TranslateDirective, SharedDatatableComponent, RouterLink, RouterLinkActive, JadaCardDataComponent, CommonModule,
-    // JadaCardSystemServiceComponent, 
+  imports: [RouterLink, JadaCardSystemServiceComponent, TranslateDirective, SharedDatatableComponent, RouterLinkActive, JadaCardDataComponent, CommonModule,
+    // JadaCardSystemServiceComponent,
     CardModule, ButtonModule],
   templateUrl: "./branch.component.html",
   styleUrl: "./branch.component.scss",
@@ -35,6 +35,7 @@ export class BranchComponent extends BaseComponent implements OnInit {
 
   apiurl= 'http://localhost:5000/api/Data/Endpoint2'
 
+  branches:number [] = [1, 2, 3, 4, 5];
 
   constructor(private injector: Injector, private service: CoreService, private http: HttpClient) {
     super(injector);

@@ -20,5 +20,5 @@ export class JadaFooterComponent {
     handleClick() {
         this.buttonClick.emit();
     }
-    
+
 }

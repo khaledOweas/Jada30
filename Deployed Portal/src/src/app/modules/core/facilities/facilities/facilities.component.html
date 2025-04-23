@@ -1,53 +1,147 @@
-<ng-container *ngFor="let item of Data">
-  <p-card [style]="{ width: '25rem', overflow: 'hidden' }">
-    <h1 #title> {{item.name}} </h1>
-    <h3 #subtitle> {{item.nameAr}} </h3>
-    
-    <p>
-      {{item.typeName}}
-    </p>
-    <p>
-      {{item.subscriptionName}}
-    </p>
-    <p>
-      {{item.destinationName}}
-    </p>
-    <!-- <ng-template #footer> -->
-      <!-- <div class="flex gap-4 mt-1">
-        <p-button label="التفاصيل" severity="secondary" class="w-full" [outlined]="true" styleClass="w-full" (onClick)="details(item.id!)" />
-      </div> -->
-    <!-- </ng-template> -->
-  </p-card>
-</ng-container>
-
-<!-- 
-<ng-container *ngIf="!isLoading && products  == null">
-  <p style="font-size: 18px; 
-font-weight: bold; 
-color: #ff0000; 
-text-align: center;
-padding: 20px; 
-background-color: #f8f9fa; 
-border: 1px solid #ddd; 
-border-radius: 8px; 
-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
-margin: 20px auto; 
-max-width: 300px;">No Data</p>
-</ng-container>
- -->
-
-
-
-<!-- <div class="row">
-  <div class="card-toolbar">
-    <a class="btn btn-success float-end" routerLink="/facility/facility-create">
-      <i class="ki-duotone ki-plus fs-2"></i>
-      <span translate="Facility.CreateTitle"></span> </a>
+<div class="container mt-5">
+  <div class="row" style="text-align: right;">
+    <div class="col-md-6">
+      <p>البحث</p>
+      <input type="text" class="form-control" placeholder="البحث">
+    </div>
+    <div class="col-md-2">
+      <p>المنطقة</p>
+      <select class="form-select" aria-label="Default select example" style="text-align: right;">
+        <option selected>اختر</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+      </select>
+    </div>
+    <div class="col-md-2">
+      <p>مدة الاشتراك</p>
+      <input type="number" class="form-control" placeholder="مدة الاشتراك" style="text-align: right;">
+    </div>
+    <div class="col-md-2">
+      <p>الفئه السعرية</p>
+      <select class="form-select" aria-label="Default select example" style="text-align: right;">
+        <option selected>اختر</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+      </select>
+    </div>
+  </div>
+  <br>
+  <br>
+  <div class="container">
+    <!-- big card -->
+    <div class="card">
+      <h1 style="text-align: center;margin-top: 40px">الباقات المتاحة للاشتراك</h1>
+      <p style="text-align: center;margin-top:20px ;">هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة. لقد تم توليد
+        هذا النص من مولد النص العربي، حيث يمكن لهذا النص</p>
+      <div class="row p-10 " style="min-height: 440px; display: flex;align-items: flex-end;">
+        <!-- card 1  -->
+        <div class=" card  m-3" style="width: 31%;max-height: 450px;border-radius: 30px; ">
+          <h1 style="margin-top: 40px;">الباقة الأساسية</h1>
+          <div style="display: inline-flex; flex-direction: column; line-height: 1;margin-top: 10px">
+            <span style="font-size: 15px; font-weight: bold; color: #1b2e4b;margin-right: 100px;margin-bottom: -10px;">/
+              شهريًا</span>
+            <span style="font-size: 24px; font-weight: bold; color: #006ead;">450 ر.س</span>
+          </div>
+          <ul style="list-style: none; padding: 0; margin: 2;margin-top: 40px;">
+            <li style="display: flex; align-items: center; margin-bottom: 20px;">
+              <i style="color: #006ead; font-size: 14px; margin-left: 8px;"> ✔️ </i>
+              مكاتب فردية
+            </li>
+            <li style="display: flex; align-items: center; margin-bottom: 20px;">
+              <i style="color: #006ead; font-size: 14px; margin-left: 8px;"> ✔️ </i>
+              قاعات الاجتماعات بشكل اسبوعي
+            </li>
+            <li style="display: flex; align-items: center; margin-bottom: 20px;">
+              <i style="color: #006ead; font-size: 14px; margin-left: 8px;"> ✔️</i>
+              عدد غير محدود من المكتبة الرقمية
+            </li>
+            <li style="display: flex; align-items: center; margin-bottom: 20px;">
+              <i style="color: #006ead; font-size: 14px; margin-left: 8px;"> ✔️</i>
+              طلب جولات افتراضية في الفروع
+            </li>
+            <li style="display: flex; align-items: center;">
+              <i style="color: #006ead; font-size: 14px; margin-left: 8px;"> ✔️</i>
+              دراسة جدوى
+            </li>
+          </ul>
+          <div style="display: flex; justify-content: space-between;margin: 22px 11px 34px 41px;">
+            <button class="btn">تصفح الباقة</button>
+            <button class="btn btn-primary" style="background-color:#0c3759">الاشتراك الان</button>
+          </div>
+        </div>
+        <!-- card 2  -->
+        <div class="  card m-3" style="width: 31%;min-height: 530px;background-color: #006ead;border-radius: 30px ">
+          <h1 style="margin-top: 40px;color: white;">الباقة الأساسية</h1>
+          <div style="display: inline-flex; flex-direction: column; line-height: 1;margin-top: 10px">
+            <span style="font-size: 15px; font-weight: bold; color:#12a7bf;margin-right: 100px;margin-bottom: -10px;">/
+              شهريًا</span>
+            <span style="font-size: 24px; font-weight: bold; color: #ffffff;">450 ر.س</span>
+          </div>
+          <ul style="list-style: none; padding: 0; margin: 2;margin-top: 80px;">
+            <li style="display: flex; align-items: center;color: #12a7bf; margin-bottom: 20px;">
+              <i style=" font-size: 14px; margin-left: 8px;"> ✔️ </i>
+              مكاتب فردية
+            </li>
+            <li style="display: flex; align-items: center;color: #12a7bf; margin-bottom: 20px;">
+              <i style=" font-size: 14px; margin-left: 8px;"> ✔️ </i>
+              قاعات الاجتماعات بشكل اسبوعي
+            </li>
+            <li style="display: flex; align-items: center;color: #12a7bf; margin-bottom: 20px;">
+              <i style=" font-size: 14px; margin-left: 8px;"> ✔️</i>
+              عدد غير محدود من المكتبة الرقمية
+            </li>
+            <li style="display: flex; align-items: center;color: #12a7bf; margin-bottom: 20px;">
+              <i style=" font-size: 14px; margin-left: 8px;"> ✔️</i>
+              طلب جولات افتراضية في الفروع
+            </li>
+            <li style="display: flex; align-items: center;color: #12a7bf;">
+              <i style=" font-size: 14px; margin-left: 8px;"> ✔️</i>
+              دراسة جدوى
+            </li>
+          </ul>
+          <div style="display: flex; justify-content: space-between;margin: 63px  11px 34px 41px;">
+            <button class="btn" style="color: white;">تصفح الباقة</button>
+            <button class="btn btn-primary" style="background-color:#ffffff;color: #0c3759;">الاشتراك الان</button>
+          </div>
+        </div>
+        <!-- card 3  -->
+        <div class=" card  m-3" style="width: 31%;max-height: 450px;border-radius: 30px; ">
+          <h1 style="margin-top: 40px;">الباقة الأساسية</h1>
+          <div style="display: inline-flex; flex-direction: column; line-height: 1;margin-top: 10px">
+            <span style="font-size: 15px; font-weight: bold; color: #1b2e4b;margin-right: 100px;margin-bottom: -10px;">/
+              شهريًا</span>
+            <span style="font-size: 24px; font-weight: bold; color: #006ead;">450 ر.س</span>
+          </div>
+          <ul style="list-style: none; padding: 0; margin: 2;margin-top: 40px;">
+            <li style="display: flex; align-items: center; margin-bottom: 20px;">
+              <i style="color: #006ead; font-size: 14px; margin-left: 8px;"> ✔️ </i>
+              مكاتب فردية
+            </li>
+            <li style="display: flex; align-items: center; margin-bottom: 20px;">
+              <i style="color: #006ead; font-size: 14px; margin-left: 8px;"> ✔️ </i>
+              قاعات الاجتماعات بشكل اسبوعي
+            </li>
+            <li style="display: flex; align-items: center; margin-bottom: 20px;">
+              <i style="color: #006ead; font-size: 14px; margin-left: 8px;"> ✔️</i>
+              عدد غير محدود من المكتبة الرقمية
+            </li>
+            <li style="display: flex; align-items: center; margin-bottom: 20px;">
+              <i style="color: #006ead; font-size: 14px; margin-left: 8px;"> ✔️</i>
+              طلب جولات افتراضية في الفروع
+            </li>
+            <li style="display: flex; align-items: center;">
+              <i style="color: #006ead; font-size: 14px; margin-left: 8px;"> ✔️</i>
+              دراسة جدوى
+            </li>
+          </ul>
+          <div style="display: flex; justify-content: space-between;margin: 22px 11px 34px 41px;">
+            <button class="btn">تصفح الباقة</button>
+            <button class="btn btn-primary" style="background-color:#0c3759">الاشتراك الان</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
-<app-shared-datatable [cols]="Cols" [rowsPageNumbers]="10" [pagination]="true" [scrollable]="false" [data]="Data!"
-  [chooseColomns]="true"
-
-  [FirstBtn]="true" [contentFirstBtn]="'edit'" [classFirstBtn]="'light-warning'"
-  (firstButtonEvent)="edit($event.id)" [SecondBtn]="true" [contentSecondBtn]="'delete'"
-  [classSecondBtn]="'light-danger'" (secondButtonEvent)="delete($event.id)"></app-shared-datatable> -->

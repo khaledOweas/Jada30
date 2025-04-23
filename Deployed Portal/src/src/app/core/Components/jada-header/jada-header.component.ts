@@ -30,7 +30,7 @@ export class JadaHeaderComponent implements OnInit {
     @Input() avatarusername: string = "";
 
     languagelabel: string = "Arabic";
-    
+
 
     items: MenuItem[] | undefined;
     // treeitems!: TreeNode[];
@@ -118,7 +118,7 @@ export class JadaHeaderComponent implements OnInit {
             //                 this.messageService.add({ severity: 'info', summary: 'Shared', detail: 'Exported to cloud', life: 3000 });
             //             }
             //         }
-                    
+
             //     ]
             // },
             {
@@ -197,13 +197,13 @@ export class JadaHeaderComponent implements OnInit {
         }
     }
     getAvatarUserName(): void {
-        if (typeof localStorage !== "undefined") {
-            const user = localStorage.getItem("user");
-            if (user) {
-                this.avatarusername = JSON.parse(user).nameEn.substring(0, 2);
-            }
+        // if (typeof localStorage !== "undefined") {
+        //     const user = localStorage.getItem("user");
+        //     if (user) {
+        //         this.avatarusername = JSON.parse(user).nameEn.substring(0, 2);
+        //     }
 
-        }
+        // }
     }
     logout() {
         this.auth.logout();

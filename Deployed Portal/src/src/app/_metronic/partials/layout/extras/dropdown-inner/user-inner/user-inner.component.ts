@@ -45,7 +45,7 @@ export class UserInnerComponent implements OnInit, OnDestroy {
     this.setLanguage(this.translationService.getSelectedLanguage());
     this.lang = localStorage.getItem("language")!;
     if (!this.lang) {
-      localStorage.setItem("language", "ar");
+      localStorage.setItem("language", "en");
     }
     this.getUserName();
   }

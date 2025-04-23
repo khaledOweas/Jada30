@@ -1,49 +1,86 @@
-<!-- <div class="row">
-  <div class="card-toolbar">
-    <a class="btn btn-success float-end" routerLink="/branch/branch-create">
-      <i class="ki-duotone ki-plus fs-2"></i>
-      <span translate="Branches.Create"></span> </a>
+<div class="container" style="text-align:center;background-color:#dcf2f6;height: 40px;line-height: 35px;">
+<p>
+  <strong>
+    اكتشف الباقة التي تناسبك واطلع على خيارات الاشتراك المتاحة في جادة 30
+    <a routerLink="/facility/facility-list">أعرف المزيد</a>
+  </strong>
+</p>
+
+</div>
+
+<div class="container mt-5" >
+  <div class="row" style="text-align: right;">
+    <div class="col-12 mb-5">
+      <h1>الفروع</h1>
+    </div>
+    <div class="col-md-3">
+      <p>تحديد نطاق البحث</p>
+      <select class="form-select" aria-label="Default select example" style="text-align: right;">
+        <option selected>اختر</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+      </select>
+    </div>
+    <div class="col-md-3">
+      <p>البحث</p>
+<input type="text" class="form-control" placeholder="البحث">
+     </div>
+    <div class="col-md-3">
+      <p>المنطقة</p>
+      <select class="form-select" aria-label="Default select example" style="text-align: right;">
+        <option selected>اختر</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+      </select>
+    </div>
+    <div class="col-md-3">
+      <p>المرافق</p>
+      <select class="form-select" aria-label="Default select example" style="text-align: right;">
+        <option selected>اختر</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+      </select>
+    </div>
   </div>
 </div>
-<app-shared-datatable [cols]="Cols" [rowsPageNumbers]="10" [pagination]="true" [scrollable]="false" [data]="Data!"
-  [chooseColomns]="true" [FirstBtn]="true" [contentFirstBtn]="'edit'" [classFirstBtn]="'light-warning'"
-  (firstButtonEvent)="edit($event.id)" [SecondBtn]="true" [contentSecondBtn]="'delete'"
-  [classSecondBtn]="'light-danger'" (secondButtonEvent)="delete($event.id)"></app-shared-datatable> -->
-
-
-<ng-container *ngFor="let item of DataBranches">
-  <!-- <Jada-card-system-service></Jada-card-system-service> -->
-  <!-- <jada-card-data/>
-  <jada-card-data/> -->
-  <!-- <Jada-card-system-service/> -->
-  <p-card [style]="{ width: '25rem', overflow: 'hidden'  }" >
-    <h1 #title> {{item.name}} </h1>
-    <h3 #subtitle> {{item.nameAr}} </h3>
-    <p>
-      {{item.administrativeRegion}}
-    </p>
-    <p>
-      {{item.categoryBranchAr}}
-    </p>
-    <p> 
-      {{item.workingDays}}
-    </p>
-    <p>
-      {{item.startTime | date: 'dd/MM/yyyy'}}- {{item.endTime | date: 'dd/MM/yyyy'}}
-    </p>
-    <p>
-      {{item.websiteBranchAr}}
-    </p>
-  
-    <!-- <ng-template #footer> -->
-      <div class="flex gap-4 mt-1">
-        <p-button label="التفاصيل" severity="secondary" class="w-full" [outlined]="true" styleClass="w-full" (onClick)="details(item.id!)" />
-        <!-- <p-button label="Save" class="w-full" styleClass="w-full" /> -->
+<br>
+<div class="container">
+  <hr>
+</div>
+<br>
+<div class="container">
+  @for( item of branches ; track item){
+  <div class="card mt-4" style="background-color: white;">
+    <div class="row" style="margin: 5px;">
+      <div class="col-md-3" style="text-align: right;">
+        <img src="../../../../../assets/media/branch.png" alt="">
       </div>
-    <!-- </ng-template> -->
-  </p-card>
-</ng-container>
-
-<!-- <ng-container *ngFor="let item of Data">
-  <jada-card-data [cardtitle]="item.name!" subtitle="المنطقة الإدارية" [cardnote]="item.roleNameAr!"/>
-</ng-container> -->
+      <div class="col-md-6">
+        <h1>أسم الفرع</h1>
+        <div class="mt-7">
+          <img src="../../../../../assets/media/location.png" alt="" style="width: 20px;">
+          <span style="margin-right: 5px;">مكاتب فردية</span>
+        </div>
+        <div class="mt-5">
+          <img src="../../../../../assets/media/building.png" alt="" style="width: 20px;">
+          <span style="margin-right: 5px;">قاعات الاجتماعات بشكل اسبوعي</span>
+        </div>
+        <div class="mt-5">
+          <img src="../../../../../assets/media/calendar.png" alt="" style="width: 20px;">
+          <span style="margin-right: 5px;">عدد غير محدود من المكتبة الرقمية</span>
+        </div>
+        <div class="mt-5">
+          <img src="../../../../../assets/media/clock.png" alt="" style="width: 20px;">
+          <span style="margin-right: 5px;">طلب جولات افتراضية في الفروع</span>
+        </div>
+      </div>
+      <div class="col-md-3" style="text-align: left;">
+        <button class="btn btn-primary" style="background-color: #0c3759;width: 100%;">تفاصيل الفرع</button>
+      </div>
+    </div>
+  </div>
+  }
+</div>
